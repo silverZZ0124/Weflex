@@ -75,7 +75,7 @@
 		= servlet-context에서 등록한 @Controller 제외 전부 스캔하여 등록
 		= @Repository , @Service , @Component 등이 등록
 	 -->
-	<context:component-scan base-package="top-level package 경로 작성">
+	<context:component-scan base-package="com.kh.finalteam1">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
