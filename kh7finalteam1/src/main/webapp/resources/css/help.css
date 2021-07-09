@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+body{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+@media (min-width: 600px){
+	.custom-top-container{
+		height: 212px;
+		margin: 0 !important;
+		padding: 0 !important;
+	    background: url(https://help.nflxext.com/helpcenter/8a24fa196ad2c8ad38e1c8c359406dd6.jpg) no-repeat 50% #000;
+	    background-size: cover;
+	}
+}
+
+@media (max-width: 599px){
+	.custom-top-container{
+		height: 212px;
+		margin: 0 !important;
+		padding: 0 !important;
+	    background-color: black;
+	}
+}
+
+@media (min-width: 600px){
+	.overlay{
+	   	position: absolute;
+	    z-index: 0;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    background: linear-gradient(90deg,#000 18.06%,transparent 58.65%),rgba(0,0,0,.25)/*!rtl:end:ignore*/;
+	}
+}
+
+.custom-inner-container{
+	max-width: 1300px;
+	width: 100%;
+	margin: auto;
+}
+
+.custom-inner-container .custom-a-tag{
+	text-decoration: none;
+}
+
+.custom-inner-container .custom-a-tag:hover{
+	text-decoration: underline;
+}
+
+@media (min-width: 1200px){
+	.custom-inner-container{
+		padding: 6px 34px 0 34px;
+	}
+}
+
+@media (min-width: 601px) and (max-width: 1199px){
+	.custom-inner-container{
+		padding: 6px 18px 0 18px;
+	}
+}
+
+.mainLogo{
+	display: inline;
+}
+
+.subLogo{
+	display: none;
+}
+
+.logo-wrapper{
+	text-align: center;
+	padding: 0px 0 10px 5px;
+}
+
+.logo-wrapper a{
+	color: white;
+	text-decoration: none;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.search-wrapper{
+	text-align: center;
+}
+
+.input-group{
+    margin: auto;
+	width: 65% !important;
+	height: 48px;
+}
+
+@media (max-width: 600px){
+	.custom-inner-container{
+		padding: 22px 8px 0 8px;
+	}
+	
+	.mainLogo{
+		display: none;
+	}	
+	
+	.overlay{
+		display: none;
+	}
+	
+	.subLogo{
+		display: inline;
+	}
+	
+	.logo-wrapper{
+		text-align: left;
+	}	
+	
+	.input-group{
+		width: 100% !important;
+	}
+}
+
+.cumstom-help-dropdown{
+	margin: 15px 0 0 0 !important;
+    padding: 10px 18px 10px 0px;
+}
+
+.cumstom-help-dropdown li:hover{
+	background-color: white;
+}
+
+.cumstom-help-dropdown a:after {
+    background: url(https://help.nflxext.com/helpcenter/5177e9cd4c72a1773b001f7bfa929ffb.svg);
+    background-position: 50%;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+}
+
+input[type="text"]:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;    
+}
+
+.input-group-text, #form-control-search{
+	outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
