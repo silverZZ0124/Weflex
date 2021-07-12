@@ -1,0 +1,848 @@
+@charset "UTF-8";
+html, body{
+	height: 100% !important;
+}
+
+body{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+@media (min-width: 600px){
+	.custom-top-container{
+		height: 212px;
+		margin: 0 !important;
+		padding: 0 !important;
+	    background: url(https://help.nflxext.com/helpcenter/8a24fa196ad2c8ad38e1c8c359406dd6.jpg) no-repeat 50% #000;
+	    background-size: cover;
+	}
+}
+
+@media (max-width: 599px){
+	.custom-top-container{
+		height: 186px;
+		margin: 0 !important;
+		padding: 0 !important;
+	    background-color: black;
+	}
+}
+
+@media (min-width: 600px){
+	.overlay{
+	   	position: absolute;
+	    z-index: 0;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    background: linear-gradient(90deg,#000 18.06%,transparent 58.65%),rgba(0,0,0,.25)/*!rtl:end:ignore*/;
+	}
+}
+
+.global-div{
+	min-height: 100%;
+	margin-bottom: -256px;
+}
+
+.custom-inner-container{
+	max-width: 1300px;
+	width: 100%;
+	margin: auto;
+}
+
+.custom-a-tag{
+	text-decoration: none;
+}
+
+.cumstom-help-dropdown a:hover{
+	text-decoration: underline !important;
+}
+
+
+
+.custom-middle-container{
+	background-color: #fafafa;
+	border-bottom: 1px solid #dedede;
+	padding: 32px 48px 0px 48px;	
+}
+
+.mainLogo{
+	display: inline;
+}
+
+.subLogo{
+	display: none;
+}
+
+.logo-wrapper{
+	text-align: center;
+	padding: 0px 0 10px 5px;
+}
+
+.logo-wrapper a{
+	color: white;
+	text-decoration: none;
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.search-wrapper{
+	text-align: center;
+}
+
+.input-group{
+    margin: auto;
+	width: 65% !important;
+	height: 48px;
+}
+
+.cumstom-help-dropdown{
+	margin: 15px 0 0 0 !important;
+    padding: 10px 18px 10px 0px;
+}
+
+.cumstom-help-dropdown a:hover{
+	background-color: inherit;
+	text-decoration: underline;
+}
+
+.cumstom-help-dropdown li:hover{
+	background-color: white;
+}
+
+.cumstom-help-dropdown a:after {
+    background: url(https://help.nflxext.com/helpcenter/5177e9cd4c72a1773b001f7bfa929ffb.svg);
+    background-position: 50%;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+}
+
+.cumstom-help-dropdown a:hover:after{
+	animation-name: slideRight;
+	animation-duration: .3s;	
+}
+
+input[type="text"]:focus {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;    
+}
+
+.input-group-text, #form-control-search{
+	outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.help-card-wrapper{
+	padding: 0;	
+	margin: 0 -8px;
+}
+
+.help-card{
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 16px rgb(0 0 0 / 10%);	    
+    margin: 0 8px 0px 8px;
+    padding: 16px;
+    
+    display: flex;
+}
+
+.help-card a{
+	text-decoration: none;
+	color: black;	
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.help-card span{
+	margin-left: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.help-card span:hover{
+	text-decoration: underline;
+	color: #e50914;
+}
+
+.help-card i{
+	font-size: 20px;
+}
+
+.custom-middle-second-container{
+	padding-bottom: 40px;
+}
+
+.categories{
+	width: 80%;
+}
+
+.category{
+	width: 25%;
+	margin: 0 12px;
+}
+
+.category:first-child{
+	margin-left: 0 !important;
+}
+
+.quick-links{
+	width: 20%;
+}
+
+.custom-bottom-container{
+	padding: 48px 48px 32px 48px;	
+	margin: 0 0 34px 0 !important;
+	min-height: 659px;	
+	display: block !important;
+}
+
+.custom-bottom-container ul{
+	list-style: none;
+	padding: 0;
+}
+
+.custom-bottom-container li{
+	margin: 0 0 16px;
+}
+
+.custom-bottom-container a{
+	text-decoration: none;
+	color: #4c4948;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 24px;
+	padding-right: 24px;
+	word-break: keep-all;
+	display: block;
+	text-overflow: ellipsis;
+}
+
+.custom-bottom-container a:hover{
+	text-decoration: underline;
+	color: #e70914;
+}
+
+.category h2, .quick-links h2{
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 32px;
+	margin: 0 0 24px 0;
+}
+
+.quick-links li{
+	position: relative;
+}
+
+.quick-links a:after {
+	display: block;
+    background: url(https://help.nflxext.com/helpcenter/5177e9cd4c72a1773b001f7bfa929ffb.svg);
+    background-position: 50%;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+    right: 0;
+    top: 0;
+}
+
+.quick-links a:hover:after{
+	animation-name: slideRight;
+	animation-duration: .3s;
+}
+
+
+@keyframes slideRight{
+	0%{
+		transform: translateX(0px);
+	}
+	50%{
+		transform: translateX(4px);
+	}
+	100%{
+		transform: translateX(0px);
+	}
+}
+
+.custom-bottom-container .custom-inner-container{
+	padding: 0;	
+}
+
+.help-footer{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    background: #221f1f;
+    display: block;
+    height: 256px;
+    padding: 0px !important;
+}
+
+.custom-contactbar{
+    background: #eaeae6;
+    border-top: 1px solid #d5d4d1;
+    box-sizing: border-box;
+    height: 96px;
+    padding: 24px 48px;
+}
+
+.custom-contactbar h3{
+	font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    float: left;
+    line-height: 48px;
+    margin: 0;
+    text-align: left;
+}
+
+.contact-channels{
+	align-items: center;
+    flex-wrap: wrap;
+}
+
+.call-btn-div span, .chat-btn span{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: inline-block;
+    letter-spacing: .01em;
+    min-width: 96px;
+    padding: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: color .15s ease,background-color .15s ease;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    background: #fff;
+    border-color: #8b8a88;
+    color: #4c4948;
+}
+
+.chat-btn{
+    margin-left: 24px;
+}
+
+.phone-popover, .chat-popover{
+	position: absolute;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    background: #f5f5f1;
+    border-radius: 4px;
+    box-shadow: 0 0 16px rgb(0 0 0 / 14%), inset 0 0 0 1px rgb(0 0 0 / 10%);
+    right: 67%;
+    padding: 24px;
+    text-align: center;
+    bottom: 130%;
+    word-wrap: break-word;
+    z-index: 400/*!rtl:begin:ignore*//*!rtl:end:ignore*/;
+}
+
+.popover-content{
+	max-width: 280px;
+    min-width: 280px;
+}
+
+.popover-title{
+	font-size: 22px;
+    font-weight: 700;
+    line-height: 32px;
+    margin: 0 0 16px;
+    color: black !important;
+    text-align: left;
+}
+
+.popover-btn-div{
+	width: 100%;
+}
+
+.popover-desc{
+	font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    color: black;
+    text-align: left;
+    word-break: keep-all;
+    margin: 16px 0;
+}
+
+.popover-service-code{
+	font-size: 17px;
+    font-weight: 300;
+    line-height: 28px;
+    word-break: keep-all;
+    color: black;
+    text-align: left;
+}
+
+.call-btn{
+	width: 100%;
+    background: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #fff !important;    
+}
+
+.call-btn:hover{
+	background: #d30206 !important;
+}
+
+.channels .active {
+	background: #b6b5b2;
+    border-color: #b6b5b2;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+}
+
+.channels .no-hover:hover{
+	background: #f5f5f1 !important;
+	background-color: #f5f5f1 !important;
+	border-color: #5d5d5c;
+}
+
+.popover-btn-div .call-btn{
+	font-size: 16px;
+    font-weight: 700;
+    padding: 16px;
+}
+
+.service-code{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    color: #221f1f;
+    display: block;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-top: 24px;
+    text-transform: uppercase;
+    white-space: nowrap;	
+}
+
+.popover-close-btn{
+	background: url(https://help.nflxext.com/helpcenter/180ec25d4b77ea6a104260141e8b42c7.svg) 50% no-repeat;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    height: 24px;
+    overflow: hidden;
+    position: absolute;
+    right: 8px;
+    text-indent: -9999em;
+    top: 8px;
+    width: 24px;
+}
+
+.chat-popover{
+	right: 0;
+	text-align: left;
+}
+
+.chat-popover .popover-title{
+	font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    margin: 0 0 8px;
+}
+
+.chat-popover .chat-middle-content{
+	font-size: 17px;
+    font-weight: 300;
+    line-height: 28px;
+    margin: 0 0 16px;
+}
+
+.selfhelp-options{
+    list-style: none;
+    border-top: 1px solid #d5d4d1;
+    margin: 0 -23px 16px;
+    padding: 0;
+}
+
+.help-option{
+	background: #fff;
+    border-bottom: 1px solid #d5d4d1;
+    margin: 0;
+    padding: 0!important;
+}
+
+.help-option a{
+	text-decoration: none;	
+	font-weight: 400;
+	color: #4c4948;
+    display: inline-block;
+    display: block;
+    padding: 8px 24px 8px 16px;
+    position: relative;
+}
+
+.help-option a:hover{
+	text-decoration: underline;	
+	color: #e70914;
+}
+
+.help-option a:after {
+	display: block;
+    background: url(https://help.nflxext.com/helpcenter/5177e9cd4c72a1773b001f7bfa929ffb.svg);
+    background-position: 50%;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+    right: 4px;
+    top: 18%;
+}
+
+.help-option a:hover:after{
+	animation-name: slideRight;
+	animation-duration: .3s;
+}
+
+.chat-popover-footer{
+	border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-popover-footer p{
+	font-size: 17px;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0;
+}
+
+.show{
+	display: block;
+}
+
+.hide{
+	display: none;
+}
+
+.bar-title{
+	margin: 0;
+}
+
+.dark-area{
+	padding: 40px 48px 72px 48px;
+}
+
+.footer-links{
+	float: right;
+	list-style-type: none;
+	margin: 0;	
+}
+
+.legalese-item{
+	float: left;
+	margin-left: 32px;
+}
+
+.footer-links a{
+	color: #8b8a88;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+.footer-links a:hover{	
+	text-decoration: underline;
+	color: lightgray;
+}
+
+@media (max-width: 1344px){
+	.categories{
+		width: 66.66%;
+		flex-wrap: wrap;
+	}
+	
+	.quick-links {
+	    width: 33.33%;
+	}
+	
+	.category{
+		margin: 0 20px 40px 20px;
+		flex:0 0 44%;
+	}
+	
+	.category:nth-child(1), .category:nth-child(3) {
+		margin-left: 0 !important;
+	}
+	
+	.custom-bottom-container{
+		min-height: 874px;
+	}
+}
+
+@media (max-width: 1200px){
+	.custom-bottom-container{
+		padding: 48px 32px 32px 32px;	
+	}
+	
+	.custom-contactbar{
+		padding: 24px 32px;
+	}
+	
+	.dark-area{
+		padding: 40px 32px 72px 32px;
+	}
+}
+
+@media (max-width: 900px){
+	.custom-inner-container{
+		flex-wrap: wrap;
+	}
+	.categories{
+		width: 100%;
+		justify-content: space-between;
+	}
+	
+	.quick-links {
+	    flex:0 0 46%;
+	}
+	
+	.category{
+		flex:0 0 46%;
+	}
+	
+	.category:nth-child(2), .category:nth-child(4) {
+		margin-right: 0 !important;
+	}
+		
+	.category li{
+		position: relative;
+	}
+	
+	.category a:after {
+		display: block;
+	    background: url(https://help.nflxext.com/helpcenter/5177e9cd4c72a1773b001f7bfa929ffb.svg);
+	    background-position: 50%;
+	    content: "";
+	    height: 24px;
+	    position: absolute;
+	    width: 24px;
+	    right: 0;
+	    top: 0;
+	}
+	
+	.category a:hover:after{
+		animation-name: slideRight;
+		animation-duration: 0.3s;
+	}
+	
+	.custom-bottom-container a{
+		font-size: 17px;
+		line-height: 28px;
+	}
+	
+	.global-div{
+		margin-bottom: -50px;
+	}
+	
+	.category h2, .quick-links h2{
+		font-size: 24px;
+	}
+	
+	.custom-contactbar{
+		height: auto;
+		padding: 24px 32px 0px 32px;
+	}
+	
+	.custom-contactbar .custom-inner-container{
+		flex-direction: column !important;
+	}
+	
+	.channels{
+		flex: 0 0 49%;
+	}
+	
+	.chat-btn{
+	    margin-left: 8px;
+	}
+	
+	.phone-popover, .chat-popover{
+		left: -8px;
+		right: 50%;
+		max-width: 50%;		
+		bottom: 90%;
+		font-size: 17px;
+		line-height: 28px;
+	}
+	
+	.chat-popover{
+		left: auto;
+		right: 0;
+	}
+	
+	.popover-content{
+		max-width: 100%;
+		min-width: 0;
+	}
+	
+	.popover-title{
+		font-size: 24px;
+	}
+	
+	.popover-desc{
+		font-size: 17px;
+		line-height: 28px;
+	}
+	
+	.popover-service-code, .chat-middle-content, .chat-popover-footer p{
+		font-size: 18px !important;
+    	line-height: 32px !important;
+	}
+	
+	.dark-area{
+		padding: 40px 32px 32px 32px;
+	}
+	
+	.legalese-item{
+		float: none;
+		margin: 0 0 16px;
+		text-align: right;
+	}
+	
+	.help-footer{
+		height: auto;
+	}
+	
+	.dark-area > .custom-inner-container{
+		display: inline-block;
+	}
+}
+
+@media (min-width: 1200px){
+	.custom-top-container .custom-inner-container{
+		padding: 6px 34px 0 34px;
+	}
+}
+
+@media (min-width: 601px) and (max-width: 1199px){
+	.custom-top-container .custom-inner-container{
+		padding: 6px 18px 0 18px;
+	}
+	
+	.custom-middle-container{
+		padding: 32px 32px 0px 32px; 
+	}	
+	
+	.help-card{
+		width: 33.33%;
+	}
+}
+
+@media (max-width: 750px){
+	.help-card{
+		width: 100%;
+	    flex-shrink: 0;
+    	margin-right: 0;
+	}
+	
+	.help-card-wrapper{
+		flex-wrap: wrap !important;
+	}
+	
+	.help-card{	    
+	    margin: 0 8px 16px 8px;
+	}
+}
+
+@media (max-width: 700px){
+	.contact-channels{
+		flex-direction: column;
+	}
+	
+	.bar-title{
+		margin-bottom: 24px;
+	}
+	
+	.channels{
+		width: 100%;
+		margin: 0 0 16px 0;
+	}
+	
+	.chat-btn{
+		margin-bottom: 24px;
+	}
+	
+	.custom-popover{
+		width: 100%;
+		left: 0;
+		max-width: 100%;
+		bottom: 113%;
+	}
+}
+
+@media (max-width: 600px){
+	.global-div{
+		margin-bottom: -90px;
+	}
+	
+	.custom-top-container .custom-inner-container{
+		padding: 22px 8px 0 8px;
+	}
+	
+	.mainLogo{
+		display: none;
+	}	
+	
+	.overlay{
+		display: none;
+	}
+	
+	.subLogo{
+		display: inline;
+	}
+	
+	.logo-wrapper{
+		text-align: left;
+	}	
+	
+	.input-group{
+		width: 100% !important;
+	}
+	
+	.custom-middle-container{
+		padding: 24px 16px 0px 16px;
+	}
+		
+	.custom-middle-second-container{
+		padding-bottom: 16px;
+	}
+	
+	.category{
+		flex:0 0 100%;
+		margin: 0 0 40px 0;
+	}
+	
+	.quick-links{
+		flex:0 0 100%;
+		margin: 0 0 40px 0;
+	}
+	
+	.dark-area{
+		padding: 40px 16px 32px 16px;
+	}
+	
+	.footer-links{
+		float: left;
+		padding: 0;
+	}
+	
+	.legalese-item{
+		text-align: left;
+	}
+}
+
+
