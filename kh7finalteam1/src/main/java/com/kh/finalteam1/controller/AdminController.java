@@ -10,8 +10,7 @@ import com.kh.finalteam1.repository.GenreDao;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminViewController {
-	
+public class AdminController {
 	
 	@RequestMapping("/")
 	public String index() {
