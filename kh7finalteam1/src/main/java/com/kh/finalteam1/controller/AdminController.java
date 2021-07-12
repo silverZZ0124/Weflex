@@ -28,6 +28,6 @@ public class AdminController {
 	@GetMapping("/insertGenre")
 	public String insertGenre(@RequestParam String genreName) {
 		genreDao.insert(genreName);
-		return "redirect:admin/index";
+		return "redirect:/";
 	}
 }
