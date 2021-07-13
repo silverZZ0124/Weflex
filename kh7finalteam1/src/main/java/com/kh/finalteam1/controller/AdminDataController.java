@@ -19,8 +19,8 @@ public class AdminDataController {
 	private GenreDao genreDao;
 	
 	@GetMapping("/admin/searchGenre")
-	public List<GenreDto> searchGenre(@RequestParam String searchGenreName) {
-		return genreDao.get(searchGenreName);
+	public List<GenreDto> searchGenre(@RequestParam String genreName) {
+		return genreDao.get(genreName);
 		
 	}
 }
