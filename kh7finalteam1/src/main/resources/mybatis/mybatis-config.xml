@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	
 	<typeAliases>
-<!--		<package name="com.kh.spring09.entity"/>	-->
+		<package name="com.kh.finalteam1.entity"/>
 	</typeAliases>
 	
 	<!-- <environments default="development">

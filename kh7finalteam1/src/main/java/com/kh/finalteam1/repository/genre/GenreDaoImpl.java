@@ -1,8 +1,12 @@
-package com.kh.finalteam1.repository;
+package com.kh.finalteam1.repository.genre;
+
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.finalteam1.entity.genre.GenreDto;
 
 @Repository
 public class GenreDaoImpl implements GenreDao{
@@ -13,6 +17,16 @@ public class GenreDaoImpl implements GenreDao{
 	@Override
 	public void insert(String genreName) {
 		sqlSession.insert("genre.insert", genreName);
+	}
+
+	@Override
+	public List<GenreDto> list() {
+		return sqlSession.selectList("genre.list");
+	}
+
+	@Override
+	public List<GenreDto> get(String genreName) {
+		return sqlSession.selectList("genre.search", genreName);
 	}
 
 }

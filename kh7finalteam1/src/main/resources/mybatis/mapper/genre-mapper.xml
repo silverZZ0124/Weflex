@@ -7,8 +7,16 @@
 <mapper namespace="genre">
 
 	<insert id="insert" parameterType="string">
-		insert into genre values(genre_seq.nextval, ${genreName})
+		insert into genre values(genre_seq.nextval, #{genreName})
 	</insert>
+	
+	<select id="list" resultType="GenreDto">
+		select * from genre order by genre_name asc
+	</select>
+	
+	<select id="search" resultType="GenreDto">
+		select * from genre where instr(genre_name,#{genreName})>0
+	</select>
 	 
 </mapper>
 
