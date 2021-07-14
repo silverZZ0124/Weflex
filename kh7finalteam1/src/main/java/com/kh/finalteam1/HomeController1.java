@@ -10,6 +10,6 @@ public class HomeController1{
 	@RequestMapping("/")
 	public String home() {
 		//return "/WEB-INF/views/home.jsp";
-		return "home1";
+		return "home1"; 
 	}
 }
