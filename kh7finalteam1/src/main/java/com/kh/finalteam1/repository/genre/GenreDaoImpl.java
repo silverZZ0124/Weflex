@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.finalteam1.entity.genre.GenreDto;
+import com.kh.finalteam1.entity.content.GenreDto;
 
 @Repository
 public class GenreDaoImpl implements GenreDao{

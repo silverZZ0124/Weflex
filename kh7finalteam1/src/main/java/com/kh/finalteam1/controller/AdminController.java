@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalteam1.entity.genre.GenreDto;
+import com.kh.finalteam1.entity.content.GenreDto;
 import com.kh.finalteam1.repository.genre.GenreDao;
-
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/admin")
