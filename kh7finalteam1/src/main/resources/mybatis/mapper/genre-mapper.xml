@@ -17,6 +17,10 @@
 	<select id="search" resultType="GenreDto">
 		select * from genre where instr(genre_name,#{genreName})>0
 	</select>
+	
+	<delete id="delete" parameterType="string">
+		delete from genre where genre_name=#{genreName}
+	</delete>
 	 
 </mapper>
 

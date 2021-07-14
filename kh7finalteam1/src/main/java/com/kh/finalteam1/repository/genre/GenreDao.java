@@ -8,4 +8,5 @@ public interface GenreDao {
 	void insert(String genreName);
 	List<GenreDto> list();
 	List<GenreDto> get(String genreName);
+	boolean delete(String genreName);
 }

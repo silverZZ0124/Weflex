@@ -29,4 +29,10 @@ public class GenreDaoImpl implements GenreDao{
 		return sqlSession.selectList("genre.search", genreName);
 	}
 
+	@Override
+	public boolean delete(String genreName) {
+		int count = sqlSession.delete("genre.delete", genreName);
+		return count>0;
+	}
+
 }

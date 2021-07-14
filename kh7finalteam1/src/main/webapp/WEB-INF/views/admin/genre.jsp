@@ -5,11 +5,32 @@
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+	#linkeGenreEdit:hover{
+		background-color:lightgray;
+	}
+	#linkA:hover{
+		text-decoration:none;
+		
+	}
+	#linkA{
+		display:block;
+	}
+	
+</style>
+
     <!-- Begin Page Content -->
      <div class="container-fluid">
 
          <!-- Page Heading -->
-         <h1 class="h3 mb-4 text-gray-800">새로운 장르 입력</h1>
+         <div class="row">
+         	<div class="col-md-10">
+		        <h1 class="h3 mb-4 text-gray-800">새로운 장르 입력</h1>
+         	</div>
+         	<div class="col-md-2 text-right">
+		        <a href="genreEdit" class="btn btn-success">수정</a>
+         	</div>
+         </div>
 
          <div class="row mt-3">
 
@@ -41,7 +62,7 @@
                      <div class="card-body mt-3 text-center">
                     	<form class="form row" id="genre-search-form">
                     		<div class="form-group col-lg-9 col-sm-12">
-                          		<input type="text" name="genreName" class="form-control" id="genreName">
+                          		<input type="text" name="genreName" class="form-control" id="genreName" placeholder="검색어를 입력하세요">
                         	</div>
 	                         <div class="form-group col-lg-3 col-md-12 ">
 	                         	<input type="submit" value="검색" class="btn btn-success">
@@ -67,7 +88,9 @@
 	             	<div class="card-body" id="list-result">
 	             		<ul class="genrelist">
 	               		<c:forEach var="genreDto" items="${genreList}">
-				    	<li>${genreDto.genreName}</li>
+				    		<li id="linkeGenreEdit">
+				    			<a href="genreEdit?genreName=${genreDto.genreName}" id="linkA">${genreDto.genreName}</a>
+				    		</li>
 						</c:forEach>
 						</ul>
 	             	</div>
@@ -94,13 +117,12 @@
 				<c:forEach var="genreDto" items="${genreList}">
 					if(genre == "${genreDto.genreName}"){
 						window.alert("중복된 값이 존재합니다.");
-						document.querySelector("#insertGenreName").value = "";
-						event.preventDefault();
-					}
-					else if(genre == ""){
 						event.preventDefault();
 					}
 				</c:forEach>
+				if(genre.trim() == ""){
+					event.preventDefault();
+				}
 				
 			});
 			
