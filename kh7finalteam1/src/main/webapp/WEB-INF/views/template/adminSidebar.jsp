@@ -51,15 +51,27 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">	
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-bullhorn"></i>
                     <span>공지사항</span></a>
                     
-                    <a class="nav-link" href="index.html">
-                   <i class="fas fa-fw fa-list-alt"></i>
-                    <span>컨텐츠 관리</span></a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContent"
+                    	aria-expanded="true" aria-controls="collapseContent">
+                   		<i class="fas fa-fw fa-list-alt"></i>
+                   		 <span>컨텐츠 관리</span>
+                    </a>
+                    <div id="collapseContent" class="collapse" aria-labelledby="headingContent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Content:</h6>
+                        <a class="collapse-item" href="#">컨텐츠 리스트</a>
+                        <a class="collapse-item" href="register.html">컨텐츠 추가</a>
+                        <a class="collapse-item" href="#">장르 추가</a>
+                        <a class="collapse-item" href="#">특징 추가</a>
+                        <a class="collapse-item" href="forgot-password.html">배우 추가</a>
+                    </div>
+                </div>
                     
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="#">
                    <i class="fas fa-fw fa-user"></i>
                     <span>고객센터 관리</span></a>
             </li>
@@ -149,6 +161,7 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
