@@ -71,7 +71,7 @@ element.style {
     bottom: 0;
     height: 5rem;
     z-index: 10;
-}
+} 
 .lang-selector-test .our-story-header {
     display: -webkit-box;
     display: -webkit-flex;
