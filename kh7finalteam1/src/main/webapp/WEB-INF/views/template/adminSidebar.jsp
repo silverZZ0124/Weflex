@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NetFlix</title>
+    <title>NetFlix Setting</title>
 
     <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/res/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -52,16 +52,16 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">	
                 <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-chart-bar"></i>
-                    <span>관리자1</span></a>
+                    <i class="fas fa-fw fa-bullhorn"></i>
+                    <span>공지사항</span></a>
                     
                     <a class="nav-link" href="index.html">
-                   <i class="fas fa-fw fa-wrench"></i>
-                    <span>관리자2</span></a>
+                   <i class="fas fa-fw fa-list-alt"></i>
+                    <span>컨텐츠 관리</span></a>
                     
                     <a class="nav-link" href="index.html">
                    <i class="fas fa-fw fa-user"></i>
-                    <span>관리자3</span></a>
+                    <span>고객센터 관리</span></a>
             </li>
 
             <!-- Divider -->
