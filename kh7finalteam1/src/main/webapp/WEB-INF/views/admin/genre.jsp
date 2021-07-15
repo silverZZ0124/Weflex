@@ -5,15 +5,19 @@
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
 <style>
 	#linkeGenreEdit:hover{
 		background-color:lightgray;
 	}
-	#linkA:hover{
+	.link-genre:hover{
 		text-decoration:none;
 		
 	}
-	#linkA{
+	.link-genre{
 		display:block;
 	}
 	
@@ -28,7 +32,7 @@
 		        <h1 class="h3 mb-4 text-gray-800">새로운 장르 입력</h1>
          	</div>
          	<div class="col-md-2 text-right">
-		        <a href="genreEdit" class="btn btn-success">수정</a>
+		        <!-- <a href="genreEdit" class="btn btn-success">수정</a> -->
          	</div>
          </div>
 
@@ -44,10 +48,11 @@
                      
                      <div class="card-body">
                      
+                     	<!-- 신규 장르 입력 폼 -->
                     	<form action="insertGenre" method="get" class="form" id="genreForm">
                     		<div class="form-group">
                       			<label for="genreName">장르 이름 :</label> 
-                          		<input type="text" name="genreName" id="insertGenreName" class="form-control input-sm">
+                          		<input type="text" name="genreName" id="insert-genreName" class="form-control input-sm">
                         	</div>
 	                         <div class="text-center">
 	                         	<button class="btn btn-block btn-success">확인</button>
@@ -89,7 +94,8 @@
 	             		<ul class="genrelist">
 	               		<c:forEach var="genreDto" items="${genreList}">
 				    		<li id="linkeGenreEdit">
-				    			<a href="genreEdit?genreName=${genreDto.genreName}" id="linkA">${genreDto.genreName}</a>
+				    			<!-- 스크립트에서 href 경로 변경 -->
+				    			<a href="#" class="link-genre">${genreDto.genreName}</a>
 				    		</li>
 						</c:forEach>
 						</ul>
@@ -102,9 +108,7 @@
      </div>
      <!-- /.container-fluid -->
      
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    
     
     <script>
 		//중복된 값이 입력될 때 띄우는 경고창 (모달로 수정 예정)
@@ -112,7 +116,7 @@
 			var genreForm = document.querySelector("#genreForm");
 			genreForm.addEventListener("submit",function(event){
 				
-				var genre = document.querySelector("#insertGenreName").value;
+				var genre = document.querySelector("#insert-genreName").value;
 				console.log(genre);
 				<c:forEach var="genreDto" items="${genreList}">
 					if(genre == "${genreDto.genreName}"){
@@ -132,6 +136,8 @@
     
     <script>
     	$(function(){
+    		
+    		$("#insert-genreName").focus();
     		
     		//검색 내용 출력하는 ajax
     		$("#genre-search-form").submit(function(e){
@@ -175,5 +181,18 @@
     		});
     	});
     </script>
+    
+    <script>
+    	$(function(){
+    		$(".link-genre").click(function(){
+    			var param = $(this).text();
+    			console.log(param);
+    			var encodeParam = encodeURIComponent(param);
+    			console.log(encodeParam); 
+    			$(this).attr("href", "genreEdit?genreName="+encodeParam);
+    		});
+    	});
+    </script>
+
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
