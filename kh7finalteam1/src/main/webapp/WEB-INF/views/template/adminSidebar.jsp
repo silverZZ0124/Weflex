@@ -63,10 +63,10 @@
                     <div id="collapseContent" class="collapse" aria-labelledby="headingContent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Content:</h6>
-                        <a class="collapse-item" href="#">컨텐츠 리스트</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/content">컨텐츠 리스트</a>
                         <a class="collapse-item" href="register.html">컨텐츠 추가</a>
-                        <a class="collapse-item" href="#">장르 추가</a>
-                        <a class="collapse-item" href="#">특징 추가</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/genre">장르 추가</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/feature">특징 추가</a>
                         <a class="collapse-item" href="forgot-password.html">배우 추가</a>
                     </div>
                 </div>

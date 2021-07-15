@@ -87,11 +87,11 @@ public class AdminController {
 	public String featureDelete(@RequestParam String featureName, Model model) {
 		boolean isDelete = programFeatureDao.delete(featureName);
 		if(isDelete) {
-			return "redirect:/admin/programFeature";
+			return "redirect:/admin/feature";
 		}
 		else {
 			model.addAttribute("featureName", featureName);
-			return "programFeatureEdit";
+			return "admin/programFeatureEdit";
 		}
 	}
 
