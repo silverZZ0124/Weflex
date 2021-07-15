@@ -1,0 +1,383 @@
+@charset "UTF-8";
+
+html, body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body{
+    word-break: keep-all;
+    background: #fff;
+    color: #221f1f;
+    -webkit-text-size-adjust: 100%;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 28px;
+}
+
+.global-container{
+    margin-bottom: -256px;
+    min-height: 100%;
+    padding: 0;
+}
+
+.global-header{
+    position: relative;
+    background: #000;
+    padding: 16px 48px 0px 48px;
+    width: 100%;
+}
+
+.inner-container{
+	width: 100%;
+	max-width: 1248px;
+	margin: auto;
+	padding: 0;
+}
+
+.global-header > .inner-container{
+	position: relative;
+	justify-content: space-between;
+}
+
+.mainLogo{
+    width: 115px;
+    display: block;
+    position: relative;
+    height: 48px;
+    top: -9px;
+}
+
+.helpcenter-logo{
+    margin: 0;
+    font-size: 18px;
+    line-height: 28px;
+    white-space: nowrap;
+    color: #f5f5f1;
+}
+
+.custom-a-tag{
+	text-decoration: none;
+	color: #f5f5f1;
+	font-weight: 400;
+}
+
+.custom-a-tag:hover{
+	color: #f5f5f1; 
+	text-decoration: underline;
+}
+
+.account-dropdown:after{
+	background: url(https://help.nflxext.com/helpcenter/d8b50ece09e6271eb5688c85a1d7eab5.svg) 50%;
+    content: "";
+    display: block;
+    margin-top: -10px;
+    height: 24px;
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: rotate(180deg);
+    width: 24px;
+}
+
+.account-dropdown{
+    border-radius: 2px;
+    color: #f5f5f1;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    overflow: hidden;
+    padding-right: 32px;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    text-transform: none;
+    white-space: nowrap;
+    border: none;
+}
+
+.cumstom-help-dropdown{
+	margin: 18px 0 0 0 !important;
+    padding: 16px 16px 16px 16px;
+    background: #f5f5f1;
+    border-radius: 4px;
+    box-shadow: 0 0 16px rgb(0 0 0 / 14%), inset 0 0 0 1px #b6b5b2;
+}
+
+.cumstom-help-dropdown li{
+    display: block;
+    margin: 0 0 8px;
+}
+
+.cumstom-help-dropdown li:last-of-type{
+	margin: 0;
+}
+
+.cumstom-help-dropdown a {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 28px;
+    color: #221f1f;
+    display: inline-block;
+    padding: 0 24px 0 0;
+    position: relative;
+    white-space: nowrap;
+}
+
+.cumstom-help-dropdown a:after {
+    background: url(https://help.nflxext.com/helpcenter/5177e9cd4c72a1773b001f7bfa929ffb.svg);
+    background-position: 50%;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+    top: 2px;
+}
+
+.cumstom-help-dropdown a:hover{
+	background: #f5f5f1;
+}
+
+.cumstom-help-dropdown a:hover:after{
+	animation-name: slideRight;
+	animation-duration: .3s;	
+}
+
+.global-content{
+    padding: 24px 0 32px;
+    min-height: 360px;
+    width: 100%;
+}
+
+.global-content > .inner-container{
+	padding: 0 48px;
+}
+
+.help-center-breadcrumb{
+	margin: 0 0 24px;
+	list-style: none;
+	padding: 0;
+}
+
+.help-center-breadcrumb a{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    display: inline-block;
+    color: #e50914;
+    text-decoration: none;
+}
+
+.help-board-title{
+	width: 68%;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 40px;
+}
+
+.pane-wrapper{
+	width:100%;
+}
+
+.left-pane{
+	width: 68%;
+	display: inline-block;
+}
+
+.right-pane{
+	width: 32%;
+	float: right;
+}
+
+.right-pane:after{
+	clear: both;
+	content: "";
+	display: block;
+}
+
+.footer-push{
+	height: 256px;
+}
+
+.article-feedback {
+    border-top: 1px solid #d5d4d1;
+    margin-top: 80px;
+    padding: 24px 0;
+}
+
+.article-feedback .feedback-prompt .feedback-header {
+    float: left;
+    line-height: 48px;
+    margin: 0 16px 0 0;
+}
+
+.btn, .select {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: Netflix Sans,Helvetica,Arial,sans-serif;
+    height: 48px;
+    letter-spacing: .01em;
+    min-width: 96px;
+    padding: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: color .15s ease,background-color .15s ease;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.article-feedback .feedback-prompt .prompt-buttons .btn, .article-feedback .feedback-prompt .prompt-buttons .select {
+    margin: 0 16px 0 0;
+}
+
+.btn-secondary.select, .btn.btn-secondary {
+    background: #fff;
+    border-color: #e50914;
+    color: #e50914;
+}
+
+.btn-secondary:hover{
+	background: #e50914;
+    color: #fff;
+}
+
+.subLogo{
+	display: none;
+	position:relative;
+	left: -8px;
+}
+
+.logo-wrapper{
+	display: none;
+	padding: 0 0 16px;
+    line-height: 18px;
+}
+
+.logo-wrapper > .custom-a-tag{
+	margin: 0;
+    color: #f5f5f1;
+    line-height: 18px;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.right-pane > .wrapper {
+    padding-left: 80px;
+}
+
+.right-pane h3 {
+    margin: 0;
+    font-size: 17px;
+    line-height: 28px;
+    font-weight: 700;
+}
+
+.related-articles {
+    margin: 24px 0;
+    padding-left: 24px;
+}
+
+.related-articles a{
+    color: #4c4948;
+    display: inline;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.related-articles a:hover{
+	color: #e50914; 
+	text-decoration: underline;
+}
+
+.related-article{
+	margin: 0 0 8px;
+    padding: 0;
+    position: relative;
+}
+
+@media (max-width: 1200px){
+	.global-header{
+	    padding: 16px 32px 0px 32px;
+	}
+}
+
+@media (max-width: 1039px){
+	.right-pane {
+	    display: none;
+	}
+	
+	.left-pane {
+	    width: 100%;
+	}
+}
+
+@media (max-width: 600px){
+	.article-feedback .feedback-prompt .feedback-header {
+	    font-size: 18px;
+	    font-weight: 300;
+	    line-height: 32px;
+	    display: block;
+	    float: none;
+	    margin: 0 0 16px;
+	}
+	
+	.mainLogo, .helpcenter-logo{
+		display: none;
+	}
+	
+	.subLogo, .logo-wrapper{
+		display: block;
+	}
+	
+	.global-header{
+		padding: 16px 16px 0px 16px; 
+	}
+	
+	.global-header > .inner-container{
+		padding-bottom: 16px;
+	}
+}
+
+@media (min-width: 600px){
+	.global-header .branding .logo{
+		position: relative;
+    	margin-right: 20px;
+	}
+	
+	.global-header .branding .logo:after {
+	    background: #f5f5f1;
+	    content: "";
+	    height: 24px;
+	    left: 100%;
+	    margin-left: 3px;
+	    position: absolute;
+	    top: 4px;
+	    width: 1px;
+    }
+    
+    .global-header .branding .helpcenter-logo {
+	    display: block;
+	    padding: 0;
+	}
+}
+
+@keyframes slideRight{
+	0%{
+		transform: translateX(0px);
+	}
+	50%{
+		transform: translateX(4px);
+	}
+	100%{
+		transform: translateX(0px);
+	}
+}

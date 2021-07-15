@@ -5,14 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GenreDaoImpl implements GenreDao{
-
-	@Autowired
-	private SqlSession sqlSession;
-	
-	@Override
-	public void insert(String genreName) {
-		sqlSession.insert("genre.insert", genreName);
-	}
+public class LoginDaoImpl implements LoginDao{
+@Autowired
+private SqlSession sqlSession;
 
 }
