@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalteam1.entity.content.GenreDto;
+import com.kh.finalteam1.entity.content.ProgramFeatureDto;
 import com.kh.finalteam1.repository.genre.GenreDao;
+import com.kh.finalteam1.repository.programfeature.ProgramFeatureDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -57,4 +59,40 @@ public class AdminController {
 		}
 	}
 	
+	@Autowired
+	private ProgramFeatureDao programFeatureDao;
+	
+	@GetMapping("/feature")
+	public String feature(Model model) {
+		List<ProgramFeatureDto> featureList = programFeatureDao.list();
+		model.addAttribute("featureList", featureList);
+		return "admin/programFeature";
+	}
+	
+	@GetMapping("/insertFeature")
+	public String insertfeature(@RequestParam String featureName) {
+		programFeatureDao.insert(featureName);
+		return "redirect:/admin/feature";
+	}
+	
+	@GetMapping("/featureEdit")
+	public String featureEdit(@RequestParam String featureName, Model model) {
+		List<ProgramFeatureDto> featureList = programFeatureDao.list();
+		model.addAttribute("featureList", featureList);
+		model.addAttribute("editFeatureName", featureName);
+		return "admin/programFeatureEdit";
+	}
+	
+	@GetMapping("/featureDelete")
+	public String featureDelete(@RequestParam String featureName, Model model) {
+		boolean isDelete = programFeatureDao.delete(featureName);
+		if(isDelete) {
+			return "redirect:/admin/programFeature";
+		}
+		else {
+			model.addAttribute("featureName", featureName);
+			return "programFeatureEdit";
+		}
+	}
+
 }
