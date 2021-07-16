@@ -22,10 +22,11 @@
                      
                      <div class="card-body ">
                      
-                     	<form class="form" action ="editGenre" method="get" id="genreForm">
+                     	<form class="form" action ="genreEditComplete" method="post" id="genreForm" >
                     		<div class="form-group">
                     			<p id="change-input"></p>
-                          		<input type="text" name="genreName" class="form-control" id="genre-input">
+                    			<input type="hidden" name="genreName" class="form-control" id="genre-input">
+                          		<input type="text" name="newGenreName" class="form-control" id="new-genre-input">
                         	</div>
 	                         <div class="form-group">
 	                         	<input type="submit" value="수정" class="btn btn-block btn-success">
@@ -60,6 +61,7 @@
         	 console.log(change);
         	 
         	 $("#genre-input").val(change);
+        	 $("#new-genre-input").val(change);
         	
         	//삭제 버튼 눌렀을 때, 기존 값과 비교 후 진행
            $("#delete-btn").click(function(){
@@ -83,13 +85,13 @@
 	   // (모달로 수정 예정)
 		window.onload = function () {
 		   
-     		console.log($("#genre-input").val());
+     		console.log($("#new-genre-input").val());
 		   
      		//중복된 값이 입력될 때 띄우는 경고창
 			var genreForm = document.querySelector("#genreForm");
 			genreForm.addEventListener("submit",function(event){
 				
-				var genre = document.querySelector("#genre-input").value;
+				var genre = document.querySelector("#new-genre-input").value;
 				console.log(genre);
 				<c:forEach var="genreDto" items="${genreList}">
 					if(genre == "${genreDto.genreName}"){

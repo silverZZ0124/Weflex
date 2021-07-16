@@ -1,5 +1,7 @@
 package com.kh.finalteam1.repository.content;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,4 +29,9 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.selectOne("content.get", contentNo);
 	}
 
+	@Override
+	public List<ContentDto> list() {
+		return sqlSession.selectList("content.list");
+	}
+	
 }

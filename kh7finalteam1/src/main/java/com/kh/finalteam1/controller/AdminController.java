@@ -55,6 +55,17 @@ public class AdminController {
 		return "admin/genreEdit";
 	}
 	
+	@PostMapping("/genreEditComplete")
+	public String genreEditComplete(@ModelAttribute GenreDto genreDto) {
+		boolean isChange = genreDao.edit(genreDto);
+		if(isChange) {
+			return "redirect:/admin/genre";
+		}
+		else {
+			return "admin/genreEdit?genreName="+genreDto.getGenreName();
+		}
+	}
+	
 	@GetMapping("/genreDelete")
 	public String genreDelete(@RequestParam String genreName, Model model) {
 		boolean isDelete = genreDao.delete(genreName);
@@ -91,15 +102,26 @@ public class AdminController {
 		return "admin/programFeatureEdit";
 	}
 	
+	@PostMapping("/featureEditComplete")
+	public String featureEditComplete(@ModelAttribute ProgramFeatureDto programFeatureDto) {
+		boolean isChange = programFeatureDao.edit(programFeatureDto);
+		if(isChange) {
+			return "redirect:/admin/feature";
+		}
+		else {
+			return "admin/featureEdit?featureName="+programFeatureDto.getFeatureName();
+		}
+	}
+	
 	@GetMapping("/featureDelete")
 	public String featureDelete(@RequestParam String featureName, Model model) {
 		boolean isDelete = programFeatureDao.delete(featureName);
 		if(isDelete) {
-			return "redirect:/admin/programFeature";
+			return "redirect:/admin/feature";
 		}
 		else {
 			model.addAttribute("featureName", featureName);
-			return "programFeatureEdit";
+			return "admin/programFeatureEdit";
 		}
 	}
 	
