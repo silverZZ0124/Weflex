@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class NoSeriesDto {
 	private int contentNo;
-	private Date contentPlaytime;
+	private int contentPlaytime;
 	private String seriesPath;
 
 }

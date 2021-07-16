@@ -9,14 +9,29 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalteam1.entity.content.ContentDto;
 
 @Repository
-public class ContentDaoImpl implements ContentDao{
-
+public class ContentDaoImpl implements ContentDao {
+	
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
+	public int sequence() {
+		return sqlSession.selectOne("content.sequence");
+	}
+	
+	@Override
+	public void insert(ContentDto contentDto) {
+		sqlSession.insert("content.insert", contentDto);
+	}
+
+	@Override
+	public ContentDto get(int contentNo) {
+		return sqlSession.selectOne("content.get", contentNo);
+	}
+
+	@Override
 	public List<ContentDto> list() {
 		return sqlSession.selectList("content.list");
 	}
-
+	
 }

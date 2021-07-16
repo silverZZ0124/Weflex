@@ -5,19 +5,29 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
  
 <mapper namespace="content">
+
+	<!-- contentNo 뽑기 (시퀀스번호 미리 추출) -->
+	 <select id="sequence" resultType="int">
+		select content_seq.nextval from dual
+	</select>
+	 
+	 <!-- 컨텐츠 테이블 등록 -->
+	<insert id="insert" parameterType="ContentDto">
+		insert into content values(
+		#{contentNo} , #{contentName}, #{contentInfo}, #{contentLimit},  #{contentSeries}, 
+		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}
+		)
+	</insert>
 	
+	<!-- 단일 조회 -->
+	<select id="get" parameterType="int" resultType="ContentDto">
+		select * from content where content_no = #{contentNo}
+	</select>
+	
+	<!-- 컨텐츠 리스트 -->
 	<select id="list" resultType="ContentDto">
 		select * from content order by content_no desc
 	</select>
 	
 	 
 </mapper>
-
-
-
-
-
-
-
-
-

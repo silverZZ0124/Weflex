@@ -22,6 +22,9 @@
 
     <!-- Custom styles for this template-->
     <link href="${pageContext.request.contextPath}/res/css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap core JavaScript(jQuery)-->
+  	<script src="${pageContext.request.contextPath}/res/vendor/jquery/jquery.min.js"></script>
 
 </head>
 
@@ -63,10 +66,17 @@
                     <div id="collapseContent" class="collapse" aria-labelledby="headingContent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Content:</h6>
+<<<<<<< HEAD
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/content/">컨텐츠 리스트</a>
                         <a class="collapse-item" href="register.html">컨텐츠 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/genre">장르 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/feature">특징 추가</a>
+=======
+                        <a class="collapse-item" href="#">컨텐츠 리스트</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/contentRegist">컨텐츠 추가</a>
+                        <a class="collapse-item" href="#">장르 추가</a>
+                        <a class="collapse-item" href="#">특징 추가</a>
+>>>>>>> branch 'main' of https://github.com/Seiyun0809/kh7final.git
                         <a class="collapse-item" href="forgot-password.html">배우 추가</a>
                     </div>
                 </div>
@@ -171,12 +181,13 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
+            <!-- Sidebar Message   -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="${pageContext.request.contextPath}/res/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+                <img class="sidebar-card-illustration mb-2" src="${pageContext.request.contextPath}/res/img/Netflix_Logo_RGB.png" alt="...">
+                <p class="text-center mb-2"><strong>넷플릭스</strong>는 TV 프로그램과 영화를 인터넷 연결 지원 디바이스에서 광고 없이 시청할 수 있는 멤버십 기반 스트리밍 서비스입니다.</p>
+                <a class="btn btn-success btn-sm" href="https://www.netflix.com/browse">Go! Netflix</a>
             </div>
+         
 
         </ul>
         <!-- End of Sidebar -->
