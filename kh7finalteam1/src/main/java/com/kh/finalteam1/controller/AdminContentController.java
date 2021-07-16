@@ -24,4 +24,9 @@ public class AdminContentController {
 		model.addAttribute("contentList", contentList);
 		return "admin/content";
 	}
+	
+	@GetMapping("/contentDetail")
+	public String contentEdit(Model model) {
+		return "admin/contentDetail";
+	}
 }
