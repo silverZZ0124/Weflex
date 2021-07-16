@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+.netflix-sans-font-loaded {
+    font-family: 'Netflix Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+.basicLayout.simplicity {
+    min-height: 100vh;   
+    display: flex;    
+    flex-direction: column;
+    padding-bottom: 0;
+}
+
+.svg-nfLogo.signupBasicHeader {
+    margin-left: -0.5%;
+    margin-top: -0.5%;
+}
+
+.svg-nfLogo {
+    text-decoration: none;
+    vertical-align: middle;
+    fill: #e50914;
+    display: inline-block;
+    line-height: 90px;
+}
+
+.authLinks.signupBasicHeader {
+    margin: 0 3%;
+}
+
+.authLinks {
+    float: right;
+    color: #333;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 90px;
+    text-decoration: none;
+    position: relative;
+    top: -4px;
+}
+
+.authLinks:hover{
+	text-decoration: underline;	
+}
+
+div.basicLayout .nfHeader {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
+    background-color: #fff;
+}
+
+.nfHeader.signupBasicHeader {
+    height: 90px;
+}
+
+.noBorderHeader {
+    background-color: transparent;
+    border-bottom: 0;
+    position: relative;
+}
+
+.nfHeader {
+    background-color: #f3f3f3;
+    border-bottom: solid 1px #ccc;
+    height: 90px;
+}
+
+#appMountPoint .simpleContainer {
+    padding-bottom: 95px;
+}
+
+.basicLayout.simplicity .simpleContainer {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -moz-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
+    background-color: #fff;
+}
+
+.simpleContainer {
+    width: 100%;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+div.basicLayout .centerContainer {
+    --layout-container-side-padding: 32px;
+    padding: 20px 32px 60px;
+    padding: 20px var(--layout-container-side-padding) 60px;
+}
+
+.centerContainer.firstLoad {
+    display: block;
+}
+
+.centerContainer {
+    overflow: hidden;
+    display: none;
+}
+
+.centerContainer {
+    margin: 0 auto 15px;
+    padding: 20px 3% 60px;
+    max-width: 978px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div.basicLayout .planContainer, div.basicLayout .regContainer, div.basicLayout .verifyCardContainer {
+    max-width: 340px;
+}
+
+.planContainer, .regContainer, .verifyCardContainer, .verifyCardPageContainer {
+    text-align: center;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+div.basicLayout .stepLogoContainer {
+    display: inline-block;
+}
+
+div.basicLayout .stepLogoContainer .stepLogo {
+    margin: 100px 0 20px;
+}
+
+div.basicLayout .regStepLogo {
+    width: 260px;
+}
+
+.planContainer .stepLogo, .regContainer .stepLogo, .verifyCardContainer .stepLogo, .verifyCardPageContainer .stepLogo {
+    display: block;
+    margin: 10% 0 10%;
+}
+
+.regStepLogo {
+    background: url(https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Devices.png) no-repeat 50% 50%;
+    height: 90px;
+    -webkit-background-size: 260px 260px;
+    -moz-background-size: 260px;
+    background-size: 260px;
+}
+
+@media screen and (max-width: 740px){
+	.svg-nfLogo {
+	    line-height: 75px;
+	}
+	.authLinks {
+	    font-size: 16px;
+	    line-height: 75px;
+	}
+	.nfHeader.signupBasicHeader {
+	    height: 75px;
+	}
+}
+
+@media only screen and (max-width: 600px){
+	div.basicLayout .paymentContainer, div.basicLayout .planContainer, div.basicLayout .regContainer, div.basicLayout .verifyCardContainer {
+	    text-align: left;
+	}
+	.regContainer .stepLogoContainer {
+	    margin-top: 30%;
+	}
+	div.basicLayout .planContainer .stepLogoContainer .stepLogo, div.basicLayout .regContainer .stepLogoContainer .stepLogo {
+	    margin-top: 0;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.svg-nfLogo {
+	    line-height: 45px;
+	}
+	.svg-nfLogo .svg-icon-netflix-logo {	    
+	    width: 89px;
+	}
+	.authLinks.signupBasicHeader {
+	    margin: 0 10px;
+	}
+	.authLinks {
+	    font-size: 14px;
+	    line-height: 45px;
+	}
+	.nfHeader.signupBasicHeader {
+	    height: 45px;
+	}
+}
+
+@media screen and (max-width: 500px), screen and (orientation: landscape) and (max-width: 740px){
+	div.basicLayout .svg-icon-netflix-logo {
+	    padding-top: 0;
+	}
+}
+
+
+
