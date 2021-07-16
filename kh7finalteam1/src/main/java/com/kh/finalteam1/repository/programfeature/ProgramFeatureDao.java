@@ -9,5 +9,5 @@ public interface ProgramFeatureDao {
 	List<ProgramFeatureDto> list();
 	List<ProgramFeatureDto> get(String featureName);
 	boolean delete(String featureName);
-
+	boolean edit(ProgramFeatureDto programFeatureDto);
 }

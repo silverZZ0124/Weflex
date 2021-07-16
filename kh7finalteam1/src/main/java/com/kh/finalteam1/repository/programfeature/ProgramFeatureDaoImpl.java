@@ -35,4 +35,10 @@ public class ProgramFeatureDaoImpl implements ProgramFeatureDao{
 		return count>0;
 	}
 
+	@Override
+	public boolean edit(ProgramFeatureDto programFeatureDto) {
+		int count = sqlSession.update("program-feature.edit", programFeatureDto);
+		return count>0;
+	}
+
 }

@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 public class GenreDto {
 	private int genreNo;
 	private String genreName;
+	
+	private String newGenreName;
 }
