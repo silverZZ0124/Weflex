@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	 <!-- contentNo 뽑기 (시퀀스번호 미리 추출) -->
 	 <select id="sequence" resultType="int">
-		select student_seq.nextval from dual
+		select content_seq.nextval from dual
 	</select>
 	 
 	 <!-- 컨텐츠 테이블 등록 -->

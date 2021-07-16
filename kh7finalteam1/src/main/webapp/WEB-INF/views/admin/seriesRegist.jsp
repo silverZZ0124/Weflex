@@ -9,12 +9,12 @@
 <div class="container-fluid">
         <div class="row mt-3">
             <div class="col-md-4 offset-sm-4">
-                <div class="text-center mb-3">
-                    <h1> 연작 컨텐츠 정보 입력</h1>
+                <div class="text-center mb-4">
+                    <h2> 연작 컨텐츠 정보 입력</h2>
                 </div>
             <form class="form" action="yes" method="post">
 
-               		 <input type="text" name="contentNo" value="${contentDto.contentNo}">
+               		 <input type="hidden" name="contentNo" value="${contentDto.contentNo}">
 
                 <div class="form-group">
                     <label>시즌</label>
@@ -57,13 +57,13 @@
 	<div class="container-fluid">
 	    <div class="row mt-3">
 	        <div class="col-md-4 offset-sm-4">
-	            <div class="text-center mb-3">
-	                <h1>비 연작 컨텐츠 정보 입력</h1>
+	            <div class="text-center mb-4">
+	                <h2>비 연작 컨텐츠 정보 입력</h2>
 	            </div>
 	           
 	            <form class="form" action="no" method="post">
 	
-		            	<input type="text" name="contentNo" value="${contentDto.contentNo}">
+		            	<input type="hidden" name="contentNo" value="${contentDto.contentNo}">
 		
 		            <div class="form-group">
 		                <label>영상길이</label>
