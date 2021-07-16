@@ -13,6 +13,6 @@ public class YesSeriesDto {
 	private int contentSeason;
 	private int contentEpisode;
 	private String episodeInfo;
-	private Date contentPlaytime;
+	private int contentPlaytime;
 	private String seriesPath;
 }
