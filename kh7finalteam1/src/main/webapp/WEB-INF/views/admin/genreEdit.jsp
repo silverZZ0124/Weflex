@@ -43,6 +43,35 @@
 		         </div>
              </div>
          </div>
+         
+         <!-- 중복된 값이거나 값이 없을때 입력될 때 띄우는 모달창 -->
+        <div class="modal fade" id="insert-genre-modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <h4 class="modal-title">입력 오류</h4>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <div class="conatiner-fluid">
+                            <div class="row">
+                                <div class="col" id="input-modal-content">#</div>
+                            </div>
+                        </div>                    
+                    </div>
+
+                    <div class="modal-footer row"> 
+                        <div class="col-md-3 offset-md-9">   
+                        <button class="btn btn-secondary btn-block" data-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
      </div>
      <!-- /.container-fluid -->
      
@@ -65,7 +94,7 @@
         	
         	//삭제 버튼 눌렀을 때, 기존 값과 비교 후 진행
            $("#delete-btn").click(function(){
-           		var param = $("#genre-input").val();
+           		var param = $("#new-genre-input").val();
                 console.log(param);
                 
                 var encodeParam = encodeURIComponent(param);
@@ -76,7 +105,8 @@
 						return;
 					}
 				</c:forEach>
-				window.alert("존재하지 않는 값입니다.");
+				$("#input-modal-content").text("존재하지 않는 값입니다.");
+				$('#insert-genre-modal').modal('show');
            });
         });
     </script>
@@ -95,12 +125,14 @@
 				console.log(genre);
 				<c:forEach var="genreDto" items="${genreList}">
 					if(genre == "${genreDto.genreName}"){
-						window.alert("중복된 값이 존재합니다.");
+						$("#input-modal-content").text("중복된 값이 존재합니다.");
+						$('#insert-genre-modal').modal('show');
 						event.preventDefault();
 					}
 				</c:forEach>
 				if(genre.trim() == ""){
-					window.alert("값을 입력하세요.");
+					$("#input-modal-content").text("값을 입력하세요.");
+					$('#insert-genre-modal').modal('show');
 					event.preventDefault();
 				}
 				
