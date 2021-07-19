@@ -5,13 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="series">
-	
+	<!-- 연작('Y')일때 등록 -->
 	<insert id="yesInsert" parameterType="YesSeriesDto">
 		insert into yes_series values(
 			#{contentNo}, #{contentSeason}, #{contentEpisode}, #{episodeInfo}, #{contentPlaytime}, #{seriesPath}
 		)
 	</insert>
 	
+	<!-- 연작('N')일때 등록 -->
 	<insert id="noInsert" parameterType="NoSeriesDto">
 		insert into no_series values(
 			#{contentNo}, #{contentPlaytime}, #{seriesPath}

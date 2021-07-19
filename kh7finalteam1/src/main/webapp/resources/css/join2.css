@@ -51,7 +51,7 @@ div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
 }
 
 .nfHeader.signupBasicHeader {
-    height: 90px;
+    height: 75px;
 }
 
 .noBorderHeader {
@@ -87,12 +87,7 @@ div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
 }
-element.style {
-    display: block;
-    transform: none;
-    opacity: 1;
-    transition-duration: 250ms;
-}
+
 div.basicLayout .centerContainer {
     --layout-container-side-padding: 32px;
     padding: 20px 32px 60px;
@@ -473,10 +468,7 @@ button, input, optgroup, select, textarea {
     font: inherit;
     margin: 0;
 }
-element.style {
-    transition-duration: 250ms;
-    opacity: 1;
-}
+
 .site-footer-wrapper {
     opacity: 1;
     margin-top: 0;
@@ -633,9 +625,7 @@ button, input, optgroup, select, textarea {
 .copy-text a {
     color: #757575;
 }
-	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 180px;
-	}
+
 .nfSelectWrapper .selectArrow.prefix .nfSelectPlacement.globe::before, .nfSelectWrapper.selectArrow.prefix .nfSelectPlacement.globe::before {
   content: '\f0ac';
 }
@@ -685,10 +675,11 @@ button, input, optgroup, select, textarea {
 	font-size: 18px;
 	color: #333;
 }
-element.style {
-    min-width: 340px;
-}	
-
+.svg-nfLogo .svg-icon-netflix-logo {	    
+	 width: 153px;
+	 padding-top: 11px;
+	 padding-left: 28px;
+}
 @media screen and (max-width: 740px){
 	.svg-nfLogo {
 	    line-height: 75px;
@@ -701,10 +692,12 @@ element.style {
 	    height: 75px;
 	}
 	.footer-link-item {
-    width: 32%;
+  	    width: 32%;
 }
 	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 210px;
+	    width: 153px;
+	    padding-top: 11px;
+	    padding-left: 28px;
 	}
 }
 
@@ -713,7 +706,7 @@ element.style {
 	    line-height: 45px;
 	}
 	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 89px;
+	    width: 75px;
 	}
 	.authLinks.signupBasicHeader {
 	    margin: 0 10px;
@@ -727,6 +720,10 @@ element.style {
 	}
 	.footer-link-item {
     width: 49%;
+	}
+  	 div.basicLayout .svg-icon-netflix-logo {
+	 padding-top: 7px;
+     padding-left: 13px;
 	}
 }
 
