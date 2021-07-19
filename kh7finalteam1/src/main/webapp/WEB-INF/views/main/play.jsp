@@ -35,11 +35,126 @@
 
 <title>Weflex</title>
 </head>
+<script>
+ $(function(){
+	 
+	 var video=$("#page-video");
+	 var videoDomObj = video.get(0);
+	 var timer;
+	 
+	 $(document).ready(function() {
+		 videoDomObj.muted=false;
+		 
+		 /* $(document).mousemove(function(event){
+			 $("#go-back").css("display","block");
+		 }); */
+	    });
+	 
+	 $("#playButton").click(function(){
+		 videoDomObj.play();
+		 $("#playButton").css("display","none");
+		 $("#stopButton").css("display","block");
+	 });
+	 
+	 $("#stopButton").click(function(){
+		 videoDomObj.pause();
+		 $("#playButton").css("display","block");
+		 $("#stopButton").css("display","none");
+	 });
+	 
+		//소리 재생 
+		$("#sound-on").click(function(){
+			videoDomObj.muted=true;
+			$("#sound-off").css("display","block");
+			$("#sound-on").css("display","none");
+		});
+		
+		//음소거 
+		$("#sound-off").click(function(){
+			videoDomObj.muted=false;
+			$("#sound-off").css("display","none");
+			$("#sound-on").css("display","block");
+		});
+		
+		 $("#video-top-nav").hover(function(){
+			$("#go-back").css("display","block");
+			$("#video-bottom-nav").css("display","block");
+			
+	
+		},function(){
+			$("#go-back").css("display","none");
+			$("#video-bottom-nav").css("display","none");
+		}); 
+		 
+		$("#video-bottom-nav").hover(function(){
+				$(".video-bottom-nav-box").css("display","block");
+				
+		
+			},function(){
+				$(".video-bottom-nav-box").css("display","none");
+			});  
+		
+		$("#full-screen").click(function(){
+			videoDomObj.webkitRequestFullscreen();
 
-<body class="main-color fade-in">
+		});
+		 
+		
+		$("#go-back").click(function(){
+			window.history.back();
+		});
+		
+		
+ });
+</script>
+
+
+<body class="main-color fade-in no-scroll">
 <div class="main-color play-video-box">
-	<video class="play-video"autoplay loop muted controls>
+		<nav class="navbar navbar-dark navbar-expand-sm video-page-nav-style" id="video-top-nav">
+			<div>
+				<button class="btn play-btn" id="go-back" style="display:none;"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
+			</div>
+		</nav>
+		
+		<video class="play-video"autoplay muted  id="page-video">
     		<source src="res/video/main_trailer1.mp4" type="video/mp4">
 		</video>
+		
+		
+		<nav class="navbar navbar-dark navbar-expand-sm video-nav-style" id="video-bottom-nav">
+            
+            <div class="video-bottom-nav-box">
+            <div style="display:flex;">
+            <button type="button" id="playButton" class="btn play-btn" style="display:none;"><i class="fas fa-play fa-2x" style="color:white;"></i></button>
+           	<button type="button" id="stopButton" class="btn play-btn"><i class="fas fa-pause fa-2x" style="color:white;"></i></button>
+           	<button type="button" id="sound-on" class="btn play-btn"  ><i class="fas fa-volume-up fa-2x" style="color:white;"></i></button>
+           	<button type="button" id="sound-off" class="btn play-btn" style="display:none;"><i class="fas fa-volume-mute fa-2x" style="color:white;"></i></button>
+           	<button type="button" id="full-screen" class="btn play-btn"  ><i class="fas fa-expand fa-2x" style="color:white;"></i></button>
+            </div>
+            </div>
+            
+            <div id="defaultBar">
+                <div id="progressBar"> </div>
+            </div>
+                
+        </nav>
 </div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

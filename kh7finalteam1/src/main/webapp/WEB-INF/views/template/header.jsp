@@ -32,7 +32,8 @@
 
 
 <meta charset="UTF-8">
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weflex</title>
 </head>
 <script>
@@ -60,7 +61,9 @@
 		
 	});
 </script>
+<style>
 
+</style>
 <body>
 		<main>
 		<div class="" >
@@ -68,11 +71,27 @@
 			<ul class="navbar-nav" style="width: 8%; margin-left: 1%;">
 				<li class="nav-item"> <a class="nav-link" href="../finalteam1/"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
 			</ul>
-			<ul class="navbar-nav" style="position: absolute;margin-left: 10%;">
+			<ul class="navbar-nav" style="position: absolute;margin-left: 10%;" id="navbar1-ul">
 				  <li class="nav-item"> <a class="nav-link" href="../finalteam1/">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">NEW! 요즘 대세 콘텐츠</a> </li>
 				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
+			</ul> 
+			<ul class="navbar-nav" style="position: absolute;margin-left: 10%;">
+				  <li class="nav-item dropdown"  id="navbar1-ul-dropdown">
+         		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            	메뉴
+            	</a>       		
+		          
+		          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink1" id="react-dropdown-menu">
+		            <li><a class="dropdown-item" href="../finalteam1/">홈</a></li>
+		            <li><a class="dropdown-item" href="#">TV프로그램</a></li>
+		            <li><a class="dropdown-item" href="#">영화</a></li>
+		            <li><a class="dropdown-item" href="#">NEW! 요즘 대세 콘텐츠</a></li>
+		            <li><a class="dropdown-item" href="#">내가 찜한 콘텐츠</a></li>
+		          </ul>
+		          
+       		 	</li>
 			</ul> 
 			
 			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;">
@@ -82,8 +101,8 @@
 			</div>
 			<ul class="navbar-nav" style="position:absolute; right:50px;">
 				
-			 	<li class="nav-item"> <a class="nav-link" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji"></i></a> </li>
-				<li class="nav-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
+			 	<li class="nav-item nav2-item"> <a class="nav-link" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji"></i></a> </li>
+				<li class="nav-item nav2-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
 				<li class="nav-item dropdown">
          		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             		<img src="res/img/profile.png" width="25px" height="25px" style="border-radius:15%;">
