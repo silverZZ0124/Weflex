@@ -14,12 +14,17 @@ $(function(){
 		infinite : true, 	//무한 반복 옵션	 
 		slidesToShow : 6,		// 한 화면에 보여질 컨텐츠 개수
 		slidesToScroll : 6,		//스크롤 한번에 움직일 컨텐츠 개수
+<<<<<<< HEAD
+		speed : 1000,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+=======
 
 		speed : 1000,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
 
+>>>>>>> branch 'eunzz' of https://github.com/Seiyun0809/kh7final.git
 		arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
+		//centerMode: true,
 		//dots : true, 		// 스크롤바 아래 점으로 페이지네이션 여부
-		pauseOnHover : true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
+		//pauseOnHover : true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
 		vertical : false,		// 세로 방향 슬라이드 옵션
 		//prevArrow : "<button type='button' class='slick-prev slick-btn'>p</button>",		// 이전 화살표 모양 설정
 		prevArrow : "<img src='res/img/arrow_left.png' class='arrow-img arrow-img-left'>",		// 이전 화살표 모양 설정
@@ -32,14 +37,16 @@ $(function(){
 				breakpoint: 960, //화면 사이즈 960px
 				settings: {
 					//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-					slidesToShow:3 
+					slidesToShow:3,
+					slidesToScroll : 3
 				} 
 			},
 			{ 
-				breakpoint: 768, //화면 사이즈 768px
+				breakpoint: 600, //화면 사이즈 768px
 				settings: {	
 					//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
-					slidesToShow:2 
+					slidesToShow:2,
+					slidesToScroll : 2
 				} 
 			}
 		]
@@ -68,6 +75,7 @@ $(function(){
 		//화살표 호버 시 커짐 
 		$(".arrow-img").hover(function(){
 			$(this).addClass("arrow-hover");
+			$(this).css("cursor","pointer");
 		},function(){
 			$(this).removeClass("arrow-hover");
 		});
@@ -106,6 +114,10 @@ $(function(){
 			playBtn.removeClass("show-play-btn");
 			$(this).css("cursor","default");
 		});
+		//시리즈 클릭시 영상 재생 페이지 이동 
+		$(".trailer-series-section-box").click(function(){
+			location.href="play";
+		});
 		
 		//월페이퍼 호버시 재생버튼 
 		$(".similar-contents-detail-box").hover(function(){
@@ -136,9 +148,15 @@ $(function(){
 		});
 		
 		//모달 버튼 누르면 wallpaper 출력
+		$("#detailModal").on("show.bs.modal",function(){
+			var index=$(".similar-contents-box").find("var")
+			if(index>6){
+				$(".similar-contents-detail-box").css("display","none");
+			}
+		});
 		
 		
-		var img=$(this).find(".slider-img");
+		/* var img=$(this).find(".slider-img");
 		$(".test2").hover(function(){
 			var img=$(this).find(".slider-img");
 			$(this).addClass("test");
@@ -148,6 +166,9 @@ $(function(){
 			var img=$(this).find(".slider-img");
 			$(this).removeClass("test");
 			img.removeClass("test1").addClass(".slider-img");
+		}); */
+		$(".slider-img").hover(function(){
+			$(this).css("cursor","pointer");
 		});
 
 	});
@@ -178,8 +199,8 @@ $(function(){
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
 		</div>
 		<div class="main-btn-etc-box">
-			<button class="btn btn-outline-light modal-etc-btn" id="sound-off" style="display:none;"><i class="fas fa-volume-mute"></i></button>
-			<button class="btn btn-outline-light modal-etc-btn"  id="sound-on"><i class="fas fa-volume-up"></i></button>
+			<button class="btn btn-outline-light modal-etc-btn" id="sound-off" style="display:none;"><i class="fas fa-volume-up"></i></button>
+			<button class="btn btn-outline-light modal-etc-btn"  id="sound-on"><i class="fas fa-volume-mute"></i></button>
 		
 		</div>
 	</div>
@@ -284,14 +305,10 @@ $(function(){
 				       
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
-				       		<c:set var="wallpaperNo" value="12" /> <!-- 비슷한 콘텐츠 수 받아오기 -->
+				       		<c:set var="wallpaperNo" value="12" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
 				       		<div style="display:flex; flex-wrap:wrap;">
-				       			<c:set var="loop_flag" value="false" />
+				       			
 				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-
-
-									
 				       				
 											<div class="similar-contents-detail-box">
 					       					<div class="similar-contents-detail-img-box">
@@ -321,7 +338,7 @@ $(function(){
 				       </div>
 				       
 				       <div class="similar-contents-box modal-contents-detail-info" >
-				       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button"><i class="fas fa-chevron-down"></i></button>
+				       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button main-color"><i class="fas fa-chevron-down"></i></button>
 				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
 				       		<div >
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div>
