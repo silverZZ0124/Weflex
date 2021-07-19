@@ -2,6 +2,8 @@ package com.kh.finalteam1.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,36 +48,30 @@ public class AdminContentController {
 			return "admin/contentRegist";
 		}
 	
-	//content 등록
+	@Autowired
+	private SeriesDao seriesDao;
+	
 	@PostMapping("/contentRegist")
-	public String contentRegist(@ModelAttribute ContentDto contentDto) {
+	public String contentRegist(@ModelAttribute ContentDto contentDto, HttpSession session) {
 		int contentNo = contentDao.sequence();
 		contentDto.setContentNo(contentNo);
 		contentDao.insert(contentDto);
-		return "redirect:/admin/content/seriesRegist/"+contentNo;
+		
+		YesSeriesDto yesSeriesDto = (YesSeriesDto)session.getAttribute("yesSeriesDto");
+		NoSeriesDto noSeriesDto = (NoSeriesDto)session.getAttribute("noSeriesDto");
+		
+		if(yesSeriesDto != null) {
+			yesSeriesDto.setContentNo(contentNo);
+			seriesDao.yesInsert(yesSeriesDto);
+			session.removeAttribute("yesSeriesDto");
+		}
+		else if(noSeriesDto != null) {
+			noSeriesDto.setContentNo(contentNo);
+			seriesDao.noInsert(noSeriesDto);
+			session.removeAttribute("noSeriesDto");
+		}
+		return "redirect:/admin/content/";
 	}
 	
-	//series 등록 관련 controller
-		@GetMapping("/seriesRegist/{contentNo}")
-		public String seriesRegist(
-				@PathVariable int contentNo, Model model) {
-				ContentDto contentDto = contentDao.get(contentNo);
-				model.addAttribute("contentDto", contentDto);
-			return "admin/seriesRegist";
-		}
-		
-		@Autowired
-		private SeriesDao seriesDao;
-		
-		@PostMapping("/seriesRegist/yes")
-		public String seriesRegistYes(@ModelAttribute YesSeriesDto yesSeriesDto) {
-			seriesDao.yesInsert(yesSeriesDto);
-			return "redirect:/admin/";
-		}
-		
-		@PostMapping("/seriesRegist/no")
-		public String seriesRegistNo(@ModelAttribute NoSeriesDto noSeriesDto) {
-			seriesDao.noInsert(noSeriesDto);
-			return "redirect:/admin/";
-		}
+	
 }
