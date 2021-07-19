@@ -14,13 +14,9 @@ $(function(){
 		infinite : true, 	//무한 반복 옵션	 
 		slidesToShow : 6,		// 한 화면에 보여질 컨텐츠 개수
 		slidesToScroll : 6,		//스크롤 한번에 움직일 컨텐츠 개수
-<<<<<<< HEAD
+
 		speed : 1000,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-=======
 
-		speed : 100,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-
->>>>>>> branch 'eunzz' of https://github.com/Seiyun0809/kh7final.git
 		arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
 		//centerMode: true,
 		//dots : true, 		// 스크롤바 아래 점으로 페이지네이션 여부
