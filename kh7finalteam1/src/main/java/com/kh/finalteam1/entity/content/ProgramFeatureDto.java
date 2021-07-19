@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 public class ProgramFeatureDto {
 	private int featureNo;
 	private String featureName;
+	
+	private String newFeatureName;
 }

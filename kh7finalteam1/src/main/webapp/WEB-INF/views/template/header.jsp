@@ -33,7 +33,7 @@
 
 <meta charset="UTF-8">
 
-<title>Netflix</title>
+<title>Weflex</title>
 </head>
 <script>
 	$(function(){
@@ -62,17 +62,13 @@
 </script>
 
 <body>
-	
-		
-		
-
 		<main>
 		<div class="" >
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style" id="header">
-			<ul class="navbar-nav">
-				<li class="nav-item"> <a class="nav-link" href="../finalteam1/"><img src="res/img/Netflix_Logo_RGB.png" width="165px" height="70px"></a> </li> 
+			<ul class="navbar-nav" style="width: 8%; margin-left: 1%;">
+				<li class="nav-item"> <a class="nav-link" href="../finalteam1/"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
 			</ul>
-			<ul class="navbar-nav">
+			<ul class="navbar-nav" style="position: absolute;margin-left: 10%;">
 				  <li class="nav-item"> <a class="nav-link" href="../finalteam1/">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">NEW! 요즘 대세 콘텐츠</a> </li>
@@ -95,7 +91,7 @@
 		          
 		          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
 		            <li><a class="dropdown-item" href="#">계정</a></li>
-		            <li><a class="dropdown-item" href="#">고객센터</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/help">고객센터</a></li>
 		            <li><a class="dropdown-item" href="#">로그아웃</a></li>
 		          </ul>
 		          

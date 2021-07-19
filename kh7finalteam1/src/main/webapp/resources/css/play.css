@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.play-video-box{
+	border: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+.play-video{
+	width: 100%;
+    border: none;
+    align-content: center;
+}
+.fade-in{
+	-webkit-animation: fadein 2s;
+}
+@-webkit-keyframes fadein { 
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
