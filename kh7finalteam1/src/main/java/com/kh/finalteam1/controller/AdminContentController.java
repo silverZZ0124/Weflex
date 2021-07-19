@@ -51,6 +51,7 @@ public class AdminContentController {
 	@Autowired
 	private SeriesDao seriesDao;
 	
+	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록
 	@PostMapping("/contentRegist")
 	public String contentRegist(@ModelAttribute ContentDto contentDto, HttpSession session) {
 		int contentNo = contentDao.sequence();
