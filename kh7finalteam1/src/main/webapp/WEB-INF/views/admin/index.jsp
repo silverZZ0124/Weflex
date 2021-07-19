@@ -179,7 +179,7 @@
                         </div>
                     </div>
 
-                    <!-- Content Row -->
+                 <!-- Content Row -->
                     <div class="row">
 
                         <!-- Content Column -->
@@ -337,6 +337,5 @@
 
             </div>
             <!-- End of Main Content -->
-
 
     <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
