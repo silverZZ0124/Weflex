@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
-<<<<<<< HEAD
+
 @GetMapping("/login")
 public String login() {
 	return "login/loginstart"; 
@@ -15,11 +15,7 @@ public class Join1Controller{
 	@GetMapping("/join1")
 	public String login() {
 		return "login/join1";
-=======
-	@GetMapping("/login")
-	public String login() {
-		return "login/login"; 
->>>>>>> refs/remotes/origin/main
+
 	}
 }
 @Controller
