@@ -25,7 +25,7 @@
 	
 <div class="container-fluid">
         <div class="row mt-3">
-            <div class="col-md-4 offset-sm-4">
+             <div class="col-md-6 offset-md-3">
                 <div class="text-center mb-3">
                     <h1>컨텐츠 등록</h1>
                 </div>

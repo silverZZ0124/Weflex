@@ -125,47 +125,6 @@ public class AdminController {
 		}
 	}
 	
-	//contentRegist.jsp 이동
-	@GetMapping("/contentRegist")
-	public String contentRegist() {
-		return "admin/contentRegist";
-	}
-	
-	//content 등록 관련 controller
-	@Autowired
-	private ContentDao contentDao;
-	
-	@PostMapping("/contentRegist")
-	public String contentRegist(@ModelAttribute ContentDto contentDto) {
-		int contentNo = contentDao.sequence();
-		contentDto.setContentNo(contentNo);
-		contentDao.insert(contentDto);
-		return "redirect:/admin/seriesRegist/"+contentNo;
-	}
-	
-	//series 등록 관련 controller
-	@GetMapping("/seriesRegist/{contentNo}")
-	public String seriesRegist(
-			@PathVariable int contentNo, Model model) {
-			ContentDto contentDto = contentDao.get(contentNo);
-			model.addAttribute("contentDto", contentDto);
-		return "admin/seriesRegist";
-	}
-	
-	@Autowired
-	private SeriesDao seriesDao;
-	
-	@PostMapping("/seriesRegist/yes")
-	public String seriesRegistYes(@ModelAttribute YesSeriesDto yesSeriesDto) {
-		seriesDao.yesInsert(yesSeriesDto);
-		return "redirect:/admin/";
-	}
-	
-	@PostMapping("/seriesRegist/no")
-	public String seriesRegistNo(@ModelAttribute NoSeriesDto noSeriesDto) {
-		seriesDao.noInsert(noSeriesDto);
-		return "redirect:/admin/";
-	}
 	
 	//회원 관리
 		@GetMapping("/clientAdmin")
