@@ -166,5 +166,11 @@ public class AdminController {
 		seriesDao.noInsert(noSeriesDto);
 		return "redirect:/admin/";
 	}
+	
+	//회원 관리
+		@GetMapping("/clientAdmin")
+		public String clientAdmin() {
+			return "admin/clientAdmin";
+		}
 
 }
