@@ -38,6 +38,7 @@ public class HelpController {
 	
 	@PostMapping("/editor")
 	public String editor(@RequestParam int categoryNo, @RequestParam String title, @RequestParam String content) {
+		System.out.println("ee");
 		QnaBoardDto qnaBoardDto = QnaBoardDto.builder()
 									.categoryNo(categoryNo)
 									.qnaBoardTitle(title)
