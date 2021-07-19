@@ -680,6 +680,177 @@ img{
     margin-left: auto;
 }
 
+.accordion-button:not(.collapsed)::after {    
+    transform: rotate(45deg);
+}
+
+.faq-card .email-form {
+    margin: 0 auto;
+}
+
+.footer-card {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.our-story-card.our-story-card-no-border {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.site-footer-wrapper {
+    min-width: 190px;
+    width: 100%;
+    margin-top: 0;
+    padding-bottom: 20px;
+    font-size: 1em;
+    color: #757575;
+    position: relative;
+}
+
+.site-footer {
+    margin: 0 auto;
+    padding-top: 0;
+    width: 90%;
+}
+
+.footer-top {
+    padding: 0;
+    margin: 0 0 30px;
+}
+
+.footer-top-a {
+    color: #757575;
+    text-decoration: none;
+}
+
+.footer-top-a:hover {
+    color: #757575;
+    text-decoration: underline;
+}
+
+ul.structural {
+    padding: 0;
+    margin: 0;
+}
+
+ul.structural>li {
+    list-style: none;
+    margin-left: 0;
+}
+
+.footer-link-item {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin-bottom: 16px;
+    display: inline-block;
+    min-width: 100px;
+    width: 24%;
+    padding-right: 12px;
+    vertical-align: top;
+}
+
+.footer-links {
+    max-width: 1000px;
+    font-size: 13px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.footer-link {
+    color: #757575;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+	color: #757575;
+    text-decoration: underline;
+}
+
+.footer-lang-selection-container{
+    margin-top: 20px;
+}
+
+.footer-lang-selection-container .ui-select-wrapper {
+	width: auto;	
+}
+
+.ui-select-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+.ui-select-wrapper .select-arrow {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.ui-select-wrapper .ui-select {
+    background: #fff;
+    font-size: 16px;
+    border: 1px solid #b3b3b3;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    width: 100%;
+}
+
+.ui-select.medium {
+    padding: 12px;
+}
+
+.footer-card .dark .ui-select-wrapper .ui-select {
+    background-color: #000;
+    background-image: none;
+    border: 1px solid #333;
+    color: #999;
+    font-size: 16px;
+}
+
+.ui-select-wrapper .select-arrow.prefix .ui-select.medium {
+    padding-left: 50px;
+    text-indent: 2px;
+    line-height: 1.7;
+}
+
+.footer-lang-selection-container .ui-select-wrapper .select-arrow.prefix .ui-select.medium {
+    text-indent: 0;
+    padding-right: 26px;
+}
+
+.select-arrow.medium:before{
+    top: 0.9rem;
+    left: 1rem;
+    font-size: 17px;
+    color: #999;
+}
+
+.select-arrow.medium:after{
+    top: 0.4rem;
+    left: 6.6rem;
+    font-size: 26px;
+    color: #999;
+}
+
+.footer-country {
+    font-size: 13px;
+    margin-top: 24px;
+}
+
+.copy-text {
+    color: #757575;
+    margin: 20px 0;
+    font-size: .75em;
+    line-height: 1em;
+}
+
 @media only screen and (min-width: 1450px){
 	.hero-card h1, .hero-card h2 {
 	    max-width: 800px;
@@ -810,6 +981,10 @@ only screen and (min-width: 1450px){
 	.watchOnDevice .our-story-card-animation-container{
 		left: -2%;
 	}
+	.faq-card .faq-list {
+	    width: 75%;
+	    margin: 2em auto;
+	}
 }
 
 @media screen and (min-width: 740px){
@@ -826,6 +1001,13 @@ only screen and (min-width: 1450px){
 	}
 	
 }
+
+@media screen and (max-width: 740px){
+	.footer-link-item {
+	    width: 32%;
+	}
+}
+	
 
 @media screen and (min-width: 740px) and (max-width: 949px){
 	.email-form-title{
@@ -937,6 +1119,12 @@ only screen and (min-width: 1450px){
 	}
 }
 
+@media only screen and (max-width: 500px){
+	.footer-link-item {
+	    width: 49%;
+	}
+}
+
 @media only screen and (min-width: 400px) and (max-width: 549px), only screen and (min-width: 350px) and (max-width: 399px), only screen and (max-width: 349px){
 	.our-story-header {
 	    margin: 0 5%;
@@ -970,6 +1158,9 @@ only screen and (min-width: 1450px){
 	.faq-card .our-story-card-title, .faq-card .our-story-cta-container {
 	    padding-left: 5%;
 	    padding-right: 5%;
+	}
+	.faq-card .email-form {
+	    padding: 0 5%;
 	}
 }
 

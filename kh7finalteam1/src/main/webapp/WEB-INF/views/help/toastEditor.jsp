@@ -11,9 +11,13 @@
     
     <script>
     	$(function(){
-    		$("#insertDB").click(function(e){
-    			$("#category").val($("#temp-category").val()); 
+    		/*$("#insertDB").click(function(e){
+    			console.log("cc");
+    			
+   				$("#category").val($("#temp-category").val()); 
     			$("#title").val($("#temp-title").val());
+    			$("#content").val("")
+    			e.preventDefault();
     			
     			var con = `<div class="accordion" id="accordionExample">
     				  <div class="accordion-item">
@@ -53,8 +57,8 @@
     		    </div>
     		  </div>
     		</div>`
-    			$("#content").val(con);
-    		});
+    			$("#content").val(con); 
+    		});*/
     	});
     </script>
 </head>
@@ -101,6 +105,27 @@
             height: '500px',
             initialValue: content
         }); 
+        
+        $(function(){
+        	viewer.on("change", function(){
+        		console.log("change");
+        	});
+        	
+        	$("#insertDB").click(function(e){
+    			//<button>123</button>
+    			viewer.setMarkdown(editor.getMarkdown());
+    			//viewer.setContent(editor.getHtml());
+    			//viewer.setHtml(editor.getMarkdown());
+    			//$("#viewer").html(editor.getHtml());
+    			viewer.markdownValue = "hi";
+    			console.log(editor.getMarkdown());
+    			console.log(viewer);
+    			e.preventDefault();
+   			});
+        	
+        	
+        });
+        
     </script>
 
 
