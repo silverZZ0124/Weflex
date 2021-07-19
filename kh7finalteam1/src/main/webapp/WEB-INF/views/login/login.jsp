@@ -37,7 +37,7 @@
 									<div class="nfInputPlacement">
 										<div class="nfEmailPhoneControls">
 											<label class="input_id">
-												<input type="text" class="nfTextField hasText" placeholder="이메일 주소 또는 전화번호">
+												<input type="text" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소 또는 전화번호">
 											</label>
 										</div>
 									</div>

@@ -26,7 +26,7 @@ div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
     background-color: #fff;
 }
 .nfHeader.signupBasicHeader {
-    height: 90px;
+    height: 75px;
 }
 .noBorderHeader {
     background-color: transparent;
@@ -511,9 +511,6 @@ ul.structural>li {
     height: 1px;
     overflow: hidden;
 }
-.svg-nfLogo .svg-icon-netflix-logo {	    
-    width: 210px;
-}
 .nfSelectWrapper .selectArrow.prefix .nfSelectPlacement.globe::before, .nfSelectWrapper.selectArrow.prefix .nfSelectPlacement.globe::before {
   content: '\f0ac';
 }
@@ -563,8 +560,10 @@ ul.structural>li {
 	font-size: 18px;
 	color: #333;
 }
-element.style {
-    min-width: 340px;
+.svg-nfLogo .svg-icon-netflix-logo {	    
+	 width: 153px;
+	 padding-top: 11px;
+	 padding-left: 28px;
 }
 @media screen and (max-width: 740px){
 	.nfHeader.signupBasicHeader {
@@ -582,7 +581,9 @@ element.style {
     width: 32%;
 }
 	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 180px;
+	    width: 153px;
+	    padding-top: 11px;
+	    padding-left: 28px;
 	}
 }
 
@@ -612,18 +613,15 @@ div.basicLayout .planContainer .stepLogoContainer .stepLogo, div.basicLayout .re
 	    line-height: 45px;
 	}
 	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 89px;
+	    width: 75px;
 	}
 
 	.footer-link-item {
     width: 49%;
-}
-}
-@media screen and (min-width:340px){
-	.centerContainer
-}
-@media screen and (max-width: 500px), screen and (orientation: landscape) and (max-width: 740px){
-	div.basicLayout .svg-icon-netflix-logo {
-	    padding-top: 0;
 	}
+	div.basicLayout .svg-icon-netflix-logo {
+	padding-top: 7px;
+    padding-left: 13px;
 }
+}
+

@@ -1,5 +1,7 @@
 package com.kh.finalteam1.repository;
 
-public interface LoginDao {
+import com.kh.finalteam1.entity.client.ClientDto;
 
+public interface LoginDao {
+ClientDto regitCheck(String email);
 }
