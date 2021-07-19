@@ -65,7 +65,7 @@
                  <!-- 프로그램 특징 검색 -->
                  <div class="card shadow mb-4">
                      <div class="card-body mt-3 text-center">
-                    	<form class="form row" id="Feature-search-form">
+                    	<form class="form row" id="feature-search-form">
                     		<div class="form-group col-lg-9 col-sm-12">
                           		<input type="text" name="featureName" class="form-control" id="featureName" placeholder="검색어를 입력하세요">
                         	</div>

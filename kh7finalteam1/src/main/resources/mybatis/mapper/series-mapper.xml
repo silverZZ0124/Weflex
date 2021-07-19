@@ -18,4 +18,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{contentNo}, #{contentPlaytime}, #{seriesPath}
 		)
 	</insert>
+	
+	<select id="noGet" parameterType="int" resultType="NoSeriesDto">
+		select * from no_series where content_no = #{contentNo}
+	</select>
+	
+	<!-- no_series 정보 수정 -->
+	<update id="noEdit" parameterType="NoSeriesDto">
+		update no_series set content_playtime=#{contentPlaytime}, series_path=#{seriesPath} where content_no=#{contentNo}
+	</update>
+	
 </mapper>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.finalteam1.entity.content.ContentDto;
 import com.kh.finalteam1.entity.content.NoSeriesDto;
 import com.kh.finalteam1.entity.content.YesSeriesDto;
+
 import com.kh.finalteam1.repository.content.ContentDao;
 import com.kh.finalteam1.repository.series.SeriesDao;
 
@@ -27,6 +28,9 @@ public class AdminContentController {
 	@Autowired
 	private ContentDao contentDao;
 	
+	@Autowired
+	private SeriesDao seriesDao;
+	
 	@GetMapping("/")
 	public String content(Model model) {
 		List<ContentDto> contentList = contentDao.list();
@@ -34,11 +38,31 @@ public class AdminContentController {
 		return "admin/content";
 	}
 	
-	@GetMapping("/contentDetail")
-	public String contentEdit(@ModelAttribute ContentDto contentDto, Model model) {
-		contentDto = contentDao.get(contentDto.getContentNo());
+	@GetMapping("/noContentDetail")
+	public String contentDetail(@RequestParam int contentNo, Model model) {
+		ContentDto contentDto = contentDao.get(contentNo);
+		NoSeriesDto noSeriesDto = seriesDao.noGet(contentNo);
 		model.addAttribute("contentDto", contentDto);
-		return "admin/contentDetail";
+		model.addAttribute("noSeriesDto", noSeriesDto);
+		return "admin/noContentDetail";
+	}
+	
+	@GetMapping("/contentDelete")
+	public String contentDelete(@RequestParam int contentNo, Model model) {
+		contentDao.delete(contentNo);
+		
+		return "redirect:/admin/content/";
+	}
+	
+	@RequestMapping("/noContentEdit")
+	public String noContentEdit(
+			@ModelAttribute ContentDto contentDto,
+			@ModelAttribute NoSeriesDto noSeriesDto) {
+		
+		contentDao.edit(contentDto);
+		seriesDao.noEdit(noSeriesDto);
+		
+		return "redirect:noContentDetail?contentNo="+contentDto.getContentNo();
 	}
 	
 	
@@ -48,8 +72,6 @@ public class AdminContentController {
 			return "admin/contentRegist";
 		}
 	
-	@Autowired
-	private SeriesDao seriesDao;
 	
 	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록
 	@PostMapping("/contentRegist")
