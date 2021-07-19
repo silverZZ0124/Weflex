@@ -41,7 +41,9 @@
                   <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-cogs"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">NetFlix</div>
+                <div class="sidebar-brand-text mx-3">
+                	<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width: 100%;">
+                </div>
             </a>
 
             <!-- Divider -->
@@ -176,9 +178,9 @@
 
             <!-- Sidebar Message   -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="${pageContext.request.contextPath}/res/img/Netflix_Logo_RGB.png" alt="...">
+                <div style="padding:1em 2em 1em 2em"><img class="sidebar-card-illustration mb-2" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" alt="..." style="width: 100%;"></div>
                 <p class="text-center mb-2"><strong>넷플릭스</strong>는 TV 프로그램과 영화를 인터넷 연결 지원 디바이스에서 광고 없이 시청할 수 있는 멤버십 기반 스트리밍 서비스입니다.</p>
-                <a class="btn btn-success btn-sm" href="https://www.netflix.com/browse">Go! Netflix</a>
+                <a class="btn btn-success btn-sm" href="https://www.netflix.com/browse">Go! Weflex</a>
             </div>
          
 

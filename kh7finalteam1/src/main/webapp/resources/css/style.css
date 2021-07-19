@@ -1368,9 +1368,9 @@ pre {
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05); }
 
-.table-hover tbody tr:hover {
-  color: #212529;
-  background-color: rgba(0, 0, 0, 0.075); }
+  .table-hover tbody tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075); }
 
 .table-primary,
 .table-primary > th,
@@ -8116,7 +8116,8 @@ a.text-dark:hover, a.text-dark:focus {
   .table {
     border-collapse: collapse !important; }
     .table td,
-    .table th {
+    .table th,
+    .table tr {
       background-color: #fff !important; }
   .table-bordered th,
   .table-bordered td {
@@ -8134,7 +8135,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.8;
   font-weight: normal;
   background: #f8f9fd;
@@ -8172,7 +8173,7 @@ h1, h2, h3, h4, h5,
 
 .heading-section {
   font-size: 28px;
-  color: #000; }
+  color: #5a5c69; }
 
 .img {
   background-size: cover;
@@ -8191,20 +8192,18 @@ h1, h2, h3, h4, h5,
   .table thead th {
     border: none;
     padding: 30px 12px 30px 12px;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     color: gray; }
   .table thead tr {
     background: #fff;
     border-bottom: 4px solid #eceffa; }
   .table tbody tr {
-  	background: #black;
-  	font-size: 16px;
     margin-bottom: 10px;
     border-bottom: 4px solid #f8f9fd; }
-  .table tbody tr:last-child {
-    border-bottom: 0; }
-  .table tbody th, .table tbody td .table tbody tr{
+    .table tbody tr:last-child {
+      border-bottom: 0; }
+  .table tbody th, .table tbody td  .table tbody tr{
     border: none;
     padding: 30px;
     font-size: 14px;
