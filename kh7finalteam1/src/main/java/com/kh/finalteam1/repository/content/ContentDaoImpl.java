@@ -33,5 +33,17 @@ public class ContentDaoImpl implements ContentDao {
 	public List<ContentDto> list() {
 		return sqlSession.selectList("content.list");
 	}
+
+	@Override
+	public boolean delete(int contentNo) {
+		int count = sqlSession.delete("content.delete",contentNo);
+		return count>0;
+	}
+
+	@Override
+	public boolean edit(ContentDto contentDto) {
+		int count = sqlSession.update("content.edit", contentDto);
+		return count>0;
+	}
 	
 }

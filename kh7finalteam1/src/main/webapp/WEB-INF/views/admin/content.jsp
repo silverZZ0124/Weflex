@@ -35,7 +35,7 @@
                             <tbody>
                             	<c:forEach var="contentDto" items="${contentList}">
                             	<!-- 행 클릭시 해당 컨텐츠 상세보기 페이지로 이동 -->
-                                <tr onClick="location.href='contentDetail?contentNo=${contentDto.contentNo}'" style="cursor:pointer;" class="content-tr">
+                                <tr onClick="location.href='noContentDetail?contentNo=${contentDto.contentNo}'" style="cursor:pointer;" class="content-tr">
                             
                                     <!-- 컨텐츠 번호 들어갈 자리 -->
                                     <td>

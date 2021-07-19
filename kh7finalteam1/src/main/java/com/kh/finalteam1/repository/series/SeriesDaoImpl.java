@@ -15,12 +15,23 @@ public class SeriesDaoImpl implements SeriesDao{
 	
 	@Override
 	public void yesInsert(YesSeriesDto yesSeriesDto) {
-			sqlSession.insert("series.yesInsert", yesSeriesDto);
+		sqlSession.insert("series.yesInsert", yesSeriesDto);
 	}
 
 	@Override
 	public void noInsert(NoSeriesDto noSeriesDto) {
-			sqlSession.insert("series.noInsert", noSeriesDto);
+		sqlSession.insert("series.noInsert", noSeriesDto);
+	}
+
+	@Override
+	public NoSeriesDto noGet(int contentNo) {
+		return sqlSession.selectOne("series.noGet", contentNo);
+	}
+
+	@Override
+	public boolean noEdit(NoSeriesDto noSeriesDto) {
+		int count = sqlSession.update("series.noEdit", noSeriesDto);
+		return count>0;
 	}
 	
 }
