@@ -14,12 +14,12 @@
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registration simplicity">
 				<div class="nfHeader noBorderHeader signupBasicHeader">
 					<a href="/" class="svg-nfLogo signupBasicHeader">
-					<img class="svg-icon svg-icon-netflix-logo" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png">
+					<img class="svg-icon svg-icon-netflix-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 					</a>
 					<a href="/login" class="authLinks signupBasicHeader">로그인</a>
 				</div>
 				<div class="simpleContainer" data-transitioned-child="true">
-					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;">
+					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
 						<form method="POST">
 							<div class="regFormContainer">
 								<div class="stepHeader-container" >
