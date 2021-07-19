@@ -51,7 +51,7 @@ div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
 }
 
 .nfHeader.signupBasicHeader {
-    height: 90px;
+    height: 75px;
 }
 
 .noBorderHeader {
@@ -421,9 +421,7 @@ ul>li {
     height: 1px;
     overflow: hidden;
 }
-	.svg-nfLogo .svg-icon-netflix-logo {
-	    width: 210px;
-	}
+
 .nfSelectWrapper .selectArrow.prefix .nfSelectPlacement.globe::before, .nfSelectWrapper.selectArrow.prefix .nfSelectPlacement.globe::before {
   content: '\f0ac';
 }
@@ -473,8 +471,10 @@ ul>li {
 	font-size: 18px;
 	color: #333;
 }
-element.style {
-    min-width: 340px;
+.svg-nfLogo .svg-icon-netflix-logo {	    
+	 width: 153px;
+	 padding-top: 11px;
+	 padding-left: 28px;
 }
 @media screen and (max-width: 740px){
 	.svg-nfLogo {
@@ -491,7 +491,9 @@ element.style {
     width: 32%;
 	}
 		.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 140px;
+	    width: 153px;
+	    padding-top: 11px;
+	    padding-left: 28px;
 	}
 }
 
@@ -509,28 +511,27 @@ element.style {
 
 @media screen and (max-width: 500px){
 	.svg-nfLogo {
-	    line-height: 45px;
-	}
+	 line-height: 45px;
+	 }
 	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 89px;
-	}
+	  width: 75px;
+	 }
 	.authLinks.signupBasicHeader {
-	    margin: 0 10px;
-	}
+	 margin: 0 10px;
+   	 }
 	.authLinks {
-	    font-size: 14px;
-	    line-height: 45px;
-	}
+	 font-size: 14px;
+	 line-height: 45px;
+	 }
 	.nfHeader.signupBasicHeader {
-	    height: 45px;
-	}
-	.footer-link-item {
-    width: 49%;
-	}
+	 height: 45px;
+	 }
+	 .footer-link-item {
+     width: 49%;
+	 }
+	div.basicLayout .svg-icon-netflix-logo {
+	padding-top: 7px;
+    padding-left: 13px;
+}
 }
 
-@media screen and (max-width: 500px), screen and (orientation: landscape) and (max-width: 740px){
-	div.basicLayout .svg-icon-netflix-logo {
-	    padding-top: 0;
-	}
-}

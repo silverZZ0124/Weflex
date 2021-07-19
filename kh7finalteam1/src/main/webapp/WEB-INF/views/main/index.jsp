@@ -51,7 +51,7 @@
 					<div class="our-story-card-text">
 						<h1 class="our-story-card-title">영화, TV 프로그램을 무제한으로.</h1>
 						<h2 class="our-story-card-subtitle">다양한 디바이스에서 시청하세요. 언제든 해지하실 수 있습니다.</h2>
-						<form class="cta-form email-form">
+						<form action="regitCheck" method="post"class="cta-form email-form" >
 							<h3 class="email-form-title">시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.</h3>
 							<div class="email-form-lockup">
 								<ul class="simpleForm structural ui-grid">
@@ -59,16 +59,17 @@
 										<div class="nfInput nfInputResponsive">
 											<div class="nfInputPlacement">
 												<label class="input_id" placeholder="email">
-													<input type="email" id="id_email_hero_fuji" name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소">													
+													<input  type="email" id="id_email_hero_fuji"  name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소">													
 												</label>
 											</div>
 										</div>
 									</li>
 								</ul>
 								<div class="our-story-cta-container cta-link-wrapper">
-									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom">
-										<span class="cta-btn-txt">시작하기</span>
-										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i></span>									
+									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom"  type="submit">
+										<span class="cta-btn-txt" >시작하기</span>
+										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i>
+										</span>									
 									</button>
 								</div>
 							</div>
