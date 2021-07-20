@@ -64,7 +64,7 @@ public class AdminContentController {
 		return "redirect:/admin/content/";
 	}
 	
-	@RequestMapping("/noContentEdit")
+	@PostMapping("/noContentEdit")
 	public String noContentEdit(
 			@ModelAttribute ContentDto contentDto,
 			@ModelAttribute NoSeriesDto noSeriesDto) {
@@ -75,7 +75,7 @@ public class AdminContentController {
 		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
 	}
 	
-	@RequestMapping("/yesContentEdit")
+	@PostMapping("/yesContentEdit")
 	public String yesContentEdit(
 			@ModelAttribute ContentDto contentDto) {
 		
@@ -83,7 +83,7 @@ public class AdminContentController {
 		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
 	}
 	
-	@RequestMapping("/episodeEdit")
+	@PostMapping("/episodeEdit")
 	public String episodeEdit(@ModelAttribute YesSeriesDto yesSeriesDto) {
 		
 		seriesDao.yesEdit(yesSeriesDto);

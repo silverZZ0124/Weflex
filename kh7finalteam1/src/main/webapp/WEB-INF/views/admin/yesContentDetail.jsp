@@ -216,6 +216,9 @@
                         	
 	                            <form action="episodeEdit" method="post" class="form">	
 									<input type="hidden" name="contentNo" id="contentNo">
+									<input type="hidden" name="contentSeason" id="contentSeason">
+									<input type="hidden" name="contentEpisode" id="contentEpisode">
+									
 					                <div class="form-group">
 					                    <label>시즌</label>
 					                    <p id="modal-contentSeason"></p>
@@ -272,6 +275,9 @@
 			var contentPlaytime = $(this).parents("tr").children("td").eq(3).text();
 			
 			$("#contentNo").val(contentNo);
+			$("#contentSeason").val(contentSeason);
+			$("#contentEpisode").val(contentEpisode);
+			
 			$("#modal-contentSeason").text(contentSeason);
 			$("#modal-contentEpisode").text(contentEpisode+"화");
 			$("#episodeInfo").text(episodeInfo);
