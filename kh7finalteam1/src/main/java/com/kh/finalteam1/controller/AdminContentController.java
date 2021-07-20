@@ -38,13 +38,23 @@ public class AdminContentController {
 		return "admin/content";
 	}
 	
-	@GetMapping("/noContentDetail")
+	@GetMapping("/contentDetail")
 	public String contentDetail(@RequestParam int contentNo, Model model) {
 		ContentDto contentDto = contentDao.get(contentNo);
-		NoSeriesDto noSeriesDto = seriesDao.noGet(contentNo);
 		model.addAttribute("contentDto", contentDto);
-		model.addAttribute("noSeriesDto", noSeriesDto);
-		return "admin/noContentDetail";
+		
+		//연작 없으면 (해당 컨텐츠 영상길이등 단일 전달)
+		if(contentDto.getContentSeries().equals("N")) {
+			NoSeriesDto noSeriesDto = seriesDao.noGet(contentNo);
+			model.addAttribute("noSeriesDto", noSeriesDto);
+			return "admin/noContentDetail";			
+		}
+		//연작 있으면(시리즈 회차등 리스트로 전달)
+		else {
+			List<YesSeriesDto> yesSeriesList = seriesDao.yesList(contentNo);
+			model.addAttribute("yesSeriesList",yesSeriesList);
+			return "admin/yesContentDetail";	
+		}
 	}
 	
 	@GetMapping("/contentDelete")
@@ -62,15 +72,30 @@ public class AdminContentController {
 		contentDao.edit(contentDto);
 		seriesDao.noEdit(noSeriesDto);
 		
-		return "redirect:noContentDetail?contentNo="+contentDto.getContentNo();
+		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
+	}
+	
+	@RequestMapping("/yesContentEdit")
+	public String yesContentEdit(
+			@ModelAttribute ContentDto contentDto) {
+		
+		contentDao.edit(contentDto);
+		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
+	}
+	
+	@RequestMapping("/episodeEdit")
+	public String episodeEdit(@ModelAttribute YesSeriesDto yesSeriesDto) {
+		
+		seriesDao.yesEdit(yesSeriesDto);
+		return "redirect:contentDetail?contentNo="+yesSeriesDto.getContentNo();
 	}
 	
 	
 	//contentRegist.jsp 이동
 	@GetMapping("/contentRegist")
-		public String contentRegist() {
-			return "admin/contentRegist";
-		}
+	public String contentRegist() {
+		return "admin/contentRegist";
+	}
 	
 	
 	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록

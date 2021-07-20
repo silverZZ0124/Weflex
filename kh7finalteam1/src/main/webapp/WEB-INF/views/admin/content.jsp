@@ -19,6 +19,30 @@
                     <h2 class="heading-section">컨텐츠 리스트</h2>
                 </div>
             </div>
+            
+            <!-- 검색창 -->
+            <div class="col-md-4 offset-md-4">
+            	<form class="form">
+            		<div class="row">
+	            		<div class="col-md-5 p-1">
+			            	<select class="form-control">
+			            		<option>선택</option>
+			            		<option>드라마</option>
+			            		<option>영화</option>
+			            		<option>예능</option>
+			            		<option>다큐멘터리</option>
+			            	</select>
+		            	</div>
+		            	<div class="col-md-5 p-1">
+		            		<input type="text" class="form-control">
+		            	</div>
+		            	<div class="col-md-2 p-1">
+		            		<input type="submit" class="btn btn-primary" value="검색">
+		            	</div>
+	            	</div>
+            	</form>
+            </div>
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-wrap">
@@ -35,7 +59,7 @@
                             <tbody>
                             	<c:forEach var="contentDto" items="${contentList}">
                             	<!-- 행 클릭시 해당 컨텐츠 상세보기 페이지로 이동 -->
-                                <tr onClick="location.href='noContentDetail?contentNo=${contentDto.contentNo}'" style="cursor:pointer;" class="content-tr">
+                                <tr onClick="location.href='contentDetail?contentNo=${contentDto.contentNo}'" style="cursor:pointer;" class="content-tr">
                             
                                     <!-- 컨텐츠 번호 들어갈 자리 -->
                                     <td>
