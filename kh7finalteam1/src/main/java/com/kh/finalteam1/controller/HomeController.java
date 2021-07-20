@@ -15,4 +15,10 @@ public class HomeController {
 	public String index() {
 		return "main/index";
 	}
+
+	@GetMapping("/play")
+	public String play() {
+		return "main/play";
+
+	}
 }

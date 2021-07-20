@@ -35,4 +35,10 @@ public class GenreDaoImpl implements GenreDao{
 		return count>0;
 	}
 
+	@Override
+	public boolean edit(GenreDto genreDto) {
+		int count = sqlSession.update("genre.edit", genreDto);
+		return count>0;
+	}
+
 }

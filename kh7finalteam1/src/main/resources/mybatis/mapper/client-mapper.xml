@@ -14,13 +14,8 @@
 	<update id="changePhone" parameterType="ClientDto">
 		update client set client_phone = #{clientPhone} where client_no = #{ clientNo} 
 	</update>
+	<select id="regitCheck" parameterType="string" resultType="ClientDto" >
+		select * from client where client_id=#{email}
+	</select>
 </mapper>
-
-
-
-
-
-
-
-
 
