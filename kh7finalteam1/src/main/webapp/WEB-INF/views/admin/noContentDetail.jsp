@@ -19,7 +19,7 @@
 	        <div class="card shadow mb-4">
 	        
 	            <div class="card-header py-3">
-	                <h6 class="m-0 font-weight-bold text-primary">제목 입력 해야대</h6>
+	                <h6 class="m-0 font-weight-bold text-primary">컨텐츠 상세보기</h6>
 	            </div>
 	            
 	            <div class="card-body row">
@@ -28,12 +28,19 @@
 		            		<img alt="${contentDto.contentName }" src="${contentDto.contentThumbnail }" style="width:100%;"><br>
 		            		<img alt="${contentDto.contentName }" src="${contentDto.contentLogo }" style="width:40%; position:absolute; top:0; left:0; transform:translateY(100%);">
 	            		</div>
+	            		<div class="mt-4">
+	            			url : ${noSeriesDto.seriesPath}
+	            		</div>
+	            		<div>
+	            			
+	            		</div>
 	            	</div>
 	            	
 	            	<div class="col-md-6">
-	            		<div>${contentDto.contentNo }</div>
-	            		<div>${contentDto.contentName }</div>
-	            		<div>
+	            		<div>컨텐츠 번호 : ${contentDto.contentNo }</div>
+	            		<div class="mt-3">컨텐츠명 : ${contentDto.contentName }</div>
+	            		<div class="mt-3">
+	            			컨텐츠 타입 : 
 		            		<c:choose>
 								<c:when test="${contentDto.contentType eq 'km'}"> 한국 영화 </c:when>
 								<c:when test="${contentDto.contentType eq 'fm'}"> 외국 영화 </c:when>
@@ -44,8 +51,12 @@
 								<c:when test="${contentDto.contentType eq 'do'}"> 다큐멘터리 </c:when>
 							</c:choose>
 						</div>
-						<div class="mt-3">${contentDto.contentInfo}</div>
-					   <!-- 클릭시 스크립트에서 주소 변경해줌 -->
+						<div class="mt-3">${contentDto.contentLimit}세 이상</div>
+						<div class="mt-3">연작 여부 : ${contentDto.contentSeries}</div>
+						<div class="mt-3">개봉년도 : ${contentDto.contentRelease}</div>
+						<div class="mt-3">좋아요 : ${contentDto.contentLikes}</div>
+						<div class="mt-3">조회수 : ${contentDto.contentViews}</div>
+					    <div class="mt-3">영상 길이 : ${noSeriesDto.contentPlaytime}</div>
 	            	</div>
 	            	
                     <div class="col-md-6 offset-md-6">
@@ -54,7 +65,7 @@
                                 <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
-                                <a href="#" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
+                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
                             </div>
                         </div>
                     </div>
@@ -81,22 +92,34 @@
                     <div class="conatiner-fluid">
                         <div class="row">
                         	<div class="col-md-12">
-                            <form action="contentRegist" method="post" class="form">	
-								<!--  <input type="text" name="contentNo" value="${contentNo}"> -->
+                        	
+                            <form action="noContentEdit" method="post" class="form">	
+								<input type="hidden" name="contentNo" value="${contentDto.contentNo}">
+								<input type="hidden" name="contentNo" value="${noSeriesDto.contentNo}">
 				                <div class="form-group">
 				                    <label>컨텐츠명</label>
-				                    <input type="text" name="contentName" class="form-control">
+				                    <input type="text" name="contentName" class="form-control" value="${contentDto.contentName}">
 				                </div>
 				
 				                <div class="form-group form-textarea">
 				                    <label>컨텐츠 소개</label>
-				                    <textarea name="contentInfo" class="form-control form-textarea"></textarea>
+				                    <textarea name="contentInfo" class="form-control form-textarea">${contentDto.contentInfo}</textarea>
 				                </div>
 				
+								<div class="form-group">
+				                    <label>url</label>
+				                    <input type="text" name="seriesPath" class="form-control" value="${noSeriesDto.seriesPath}">
+				                </div>
+				                
+								<div class="form-group">
+				                    <label>영상 길이(분)</label>
+				                    <input type="text" name="contentPlaytime" class="form-control" value="${noSeriesDto.contentPlaytime}">
+				                </div>
+								
 				                <div class="form-group">
 				                    <label>연령제한</label>
 				                    <select class="form-control" name="contentLimit" required>
-				                      <option value="" selected>선택하세요</option>
+				                      <option value="" >선택하세요</option>
 				                      <option value="1">전체 이용가</option>
 				                      <option value="12">12세 이용가</option>
 				                      <option value="15">15세 이용가</option>
@@ -107,7 +130,7 @@
 				                  <div class="form-group">
 				                    <label>컨텐츠 타입</label>
 				                    <select class="form-control" name="contentType" required>
-				                   	  <option value="" selected>선택하세요</option>
+				                   	  <option value="" >선택하세요</option>
 				                      <option value="km">국내 영화</option>
 				                      <option value="fm">해외 영화</option>
 				                      <option value="kd">국내 드라마</option>
@@ -117,21 +140,11 @@
 				                      <option value="do">다큐멘터리</option>
 				                    </select>
 				                  </div>
-				
-				                  <div class="form-group">
-				                    <label>연작여부</label>
-				                    <select class="form-control" name="contentSeries" id="season" required>
-				                      <option value="" selected>선택하세요</option>
-				                      <option value="Y">Y(드라마,예능 시즌물등)</option>
-				                      <option value="N">N (영화등)</option>
-				                    </select>
-				                  </div>
-									
-									
+				                  
 								<div class="form-group">
 				                    <label>개봉연도</label>
 				                    <select class="form-control" name="contentRelease" required>
-				                   	  <option value="" selected>선택하세요</option>
+				                   	  <option value="" >선택하세요</option>
 				                      <option>2021</option><option>2020</option><option>2019</option> <option>2018</option><option>2017</option>
 				                      <option>2016</option><option>2015</option><option>2014</option><option>2013</option><option>2012</option> 
 				                      <option>2011</option><option>2010</option><option>2009</option><option>2008</option><option>2007</option>
@@ -143,33 +156,39 @@
 				
 				                 <div class="form-group">
 				                    <label>컨텐츠 로고</label>
-				                    <input type="text" name="contentLogo" class="form-control">
+				                    <input type="text" name="contentLogo" class="form-control" value="${contentDto.contentLogo}">
 				                </div>
 				
 				                <div class="form-group">
 				                    <label>컨텐츠 썸네일</label>
-				                    <input type="text" name="contentThumbnail" class="form-control">
+				                    <input type="text" name="contentThumbnail" class="form-control" value="${contentDto.contentThumbnail}">
+				                </div>
+				                <div class="modal-footer">
+				                    <button type="submit" class="btn btn-primary">확인</button>                        
+				                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
 				                </div>
 				            </form>
+				            
                         </div>
                     </div>                    
                 </div>
 
-                <div class="modal-footer">
-                    <button class="btn btn-primary" onclick="editContent();">확인</button>                        
-                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
-                </div>
 
-            </div>
-        </div>
-    </div>
+            	</div>
+        	</div>
+   	 	</div>
+	</div>
 </div>
 <!-- /.container-fluid -->
 
 <script>
-	function editContent(){
-		location.href="contentDetail?contentNo="+${contentDto.contentNo};
-	}
+	
+	$(function(){
+		$('select[name="contentLimit"]').find('option[value="${contentDto.contentLimit}"]').attr("selected",true);
+		$('select[name="contentType"]').find('option[value="${contentDto.contentType}"]').attr("selected",true);
+		$('select[name="contentRelease"]').find('option:contains("${contentDto.contentRelease}")').attr("selected",true);
+
+	});
 </script>
 
 

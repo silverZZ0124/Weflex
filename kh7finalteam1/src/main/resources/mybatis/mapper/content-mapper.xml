@@ -29,5 +29,18 @@
 		select * from content order by content_no desc
 	</select>
 	
+	<!-- 컨텐츠 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from content where content_no=#{contentNo}
+	</delete>
+	 
+	<!-- 컨텐츠 상세정보 수정 -->
+	<update id="edit" parameterType="ContentDto">
+		update content set 
+			content_name=#{contentName}, content_info=#{contentInfo}, content_limit=#{contentLimit}, 
+			content_type=#{contentType},  content_release=#{contentRelease},
+			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail}
+		where content_no=#{contentNo}
+	</update> 
 	 
 </mapper>
