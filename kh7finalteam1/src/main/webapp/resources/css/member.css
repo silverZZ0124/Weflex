@@ -309,6 +309,10 @@ body .bd {
     margin: 0 auto;
 }
 
+.responsive-account-container-phone{
+	min-height: 300px;	
+}
+
 .responsive-account-container * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -465,8 +469,21 @@ body .bd {
     color: #333;
     display: block;
     width: 100%;
-    padding: 15px 0 5px;
-    border-top: 1px solid #ccc;
+    /* border-top: 1px solid #ccc; */
+    background: transparent;
+    margin: 0;
+    text-align: left;
+    border: none;
+    padding: 0;
+}
+
+.account-section-link:hover{
+	text-decoration: underline;
+}
+
+.account-section-form{
+	border-top: 1px solid #ccc;
+	padding-top: 14px;
 }
 
 .clearfix:after {
@@ -614,6 +631,232 @@ body .bd {
 
 .copy-text .copy-text-block+.copy-text-block {
     margin-top: 4px;
+}
+
+.headline {
+    font-weight: 900;
+    margin: 0;
+}
+
+.secondary {
+    line-height: 22px;
+    margin: 1rem 0;
+}
+
+.change-phone-form{
+	margin-top: 2rem;	
+}
+
+.simpleForm.structural.ui-grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+ul.structural li.phone-number {
+    border: 1px solid #b3b3b3;
+    -webkit-border-radius: 0 2px 2px 0;
+    -moz-border-radius: 0 2px 2px 0;
+    border-radius: 0 2px 2px 0;
+}
+
+.nfInput {
+    max-width: 500px;
+    position: relative;
+}
+
+.nfInput .nfInputPlacement {
+    position: relative;
+}
+
+.nfTextField {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: solid 1px #8c8c8c;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    display: block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    color: #000;
+    padding: 10px 11px;
+    height: 44px;
+    min-width: 300px;
+}
+
+.nfTextField:invalid, .nfTextField:valid {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.nfInput .nfTextField {
+    height: 48px;
+    padding: 10px 10px 0;
+    width: 100%;
+}
+
+.nfInput.externalLabel .nfTextField {
+    padding: 0 10px;
+}
+
+#id_password, #id_phoneNumber {
+    font-size: 18px;
+    padding: 10px;
+}
+
+#id_phoneNumber {
+    border: 0;
+}
+
+.change-phone-buttons{
+	margin-top: 1.5rem;
+}
+
+.nf-btn {
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1rem;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: .025rem;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    position: relative;
+    min-height: 48px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 25%);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.25);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 25%);
+    color: #000;
+}
+
+.nf-btn-retro {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.nf-btn {
+    position: relative;
+    font-size: 1rem;
+    padding: .75rem 1.33333333rem;
+    min-width: 74px;
+    min-height: 48px;
+    width: 100%;
+}
+
+.nf-btn-retro.nf-btn-primary {
+    background-color: #0f84fa;
+    color: #fff;
+    padding: 13px 2rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nf-btn.nf-btn-small {
+    display: block;
+    padding: 0;
+    line-height: 50px;
+}
+
+.nf-btn-solid.nf-btn-secondary, .nf-btn-twotone.nf-btn-secondary {
+    color: #000;
+    background-color: #ccc;
+}
+
+.ui-message-container {
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.ui-message-security-pass {
+    background: #03aefd;
+}
+
+.ui-message-security-pass>.ui-message-svg-icon {
+    padding: 20px 0 20px 20px;
+    margin-right: -13px;
+}
+
+.ui-message-security-pass>.ui-message-svg-icon i {
+    font-size: 20px;
+    color: white;
+}
+
+.ui-message-contents {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 20px 10px 20px 20px;
+    color: #fff;
+}
+
+.nfInput .inputError {
+    font-size: 13px;
+    color: #b92d2b;
+    display: none;
+}
+
+.nf-btn:disabled {
+    cursor: default;
+    opacity: .5;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+ul.structural li.phone-number .inputError {
+    position: absolute;
+}
+
+.modal-btn{
+	flex: 0 0 45%;
+	overflow: hidden;
+	font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 0 !important;
+}
+
+.modal-btn:hover{
+	color: #000 !important;
+}
+
+.modal-body{
+	text-align: center;
+}
+
+.modal-content{
+    background: #f3f3f3;
+}
+
+.modal-content .headline{
+	font-size: 1.5em;
+	overflow: hidden;
 }
 
 @media only screen and (max-width: 1100px){
@@ -773,8 +1016,13 @@ body .bd {
 	    display: inline;
 	    padding-right: 0;
 	    border-top: none;
-	    padding-top: 5px;
+	    padding-top: 0;
+	    text-align: right;
 	}	
+	.account-section-form {
+	    border-top: none;
+	    padding: 0;
+	}
 	.account-subsection~.account-subsection {
 	    padding-top: 15px;
 	}
@@ -795,6 +1043,18 @@ body .bd {
 	}
 	.footer-divider {
 	    border-top: 1px solid #e6e6e6;
+	}
+	.nf-btn.nf-btn-small {
+	    display: inline-block;
+	    font-size: 13px;
+	    padding: .75rem 17.33333333px;
+	    min-width: 98px;
+	    min-height: 37px;
+	    margin-right: .5rem;
+	    padding-left: 1rem;
+	    padding-right: 1rem;
+	    width: auto;
+	    line-height: 1rem;
 	}
 }
 
