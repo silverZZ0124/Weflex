@@ -58,5 +58,11 @@ public class LoginController {
 			return "login/login";
 		}
 	}
-
+	@PostMapping("loginCheck")
+	public String loginCheck(@RequestParam String email,@RequestParam String pw) {
+		System.out.println(email);
+		System.out.println(pw);
+		return "";
+		//ClientDto clientDto = LogPwDao.loginCheck(email,pw);
+	}
 }

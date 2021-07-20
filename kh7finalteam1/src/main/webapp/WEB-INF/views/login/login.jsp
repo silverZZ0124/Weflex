@@ -32,7 +32,7 @@
 					<div class="login-content login-form hybrid-login-form hybrid-login-form-signup">
 						<div class="hybrid-login-form-main">
 							<h1>로그인</h1>
-							<form class="login-form">
+							<form action="loginCheck" method="post" class="login-form">
 								<div class="nfInput nfEmailPhoneInput login-input login-input-email">
 									<div class="nfInputPlacement">
 										<div class="nfEmailPhoneControls">
