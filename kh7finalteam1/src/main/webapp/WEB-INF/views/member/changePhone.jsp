@@ -27,9 +27,49 @@
 				});
 			});
 			
-			$("#profileSelector").click(function(){
-
+			$("#id_phoneNumber").on("propertychange change keyup paste input", function(){				
+				var regex = /^\d{3}-\d{3,4}-\d{4}$/;
+				
+				if(regex.test($(this).val())){
+					$(".inputError").css("display", "none");
+					$("#btn-next").attr('disabled', false);
+				}
+				else{
+					$(".inputError").css("display", "block");
+					$("#btn-next").attr('disabled', true);
+				}
 			});
+			
+			$("#btn-next").click(function(e){
+				$.ajax({
+					url:"${pageContext.request.contextPath}/data/member/changePhone",
+					type:"post",
+					data: {"phoneNumber": $("#id_phoneNumber").val()},
+					success:function(resp){
+						$(".modal").modal("show");
+					},
+					error:function(resp){
+						console.log(resp);
+						window.alert("업로드 실패..");
+					}
+				});
+				
+				e.preventDefault();
+				
+			});
+			
+			$("#btn-cancel").click(function(){
+				window.history.back();
+			});
+			
+			$("#move-main-btn").click(function(){
+				location.replace("/");
+			});
+			
+			$("#move-account-btn").click(function(){
+				console.log("move account");
+			});
+						
 		});
 	</script>
 </head>
@@ -85,147 +125,55 @@
 				
 				<!-- 중단 content 부분 -->
 				<div class="bd">
-					<div class="responsive-account-container">
-						<div>
-							<h1 class="account-header account-header-inline">계정</h1>
-							<div class="account-section-membersince">
-								<div class="account-section-membersince--svg"></div>
-								멤버십 시작: 5월 2021
+					<div class="responsive-account-container responsive-account-container-phone">
+						<form class="change-phone-form">
+							<div class="ui-message-container ui-message-security-pass">
+								<div class="ui-message-svg-icon">
+									<i class="fas fa-user-shield" style="color: white;"></i>
+								</div>
+								<div class="ui-message-contents">
+									확인되었습니다! 본인 확인이 완료되었으므로 이제 계정 정보를 변경하실 수 있습니다.
+								</div>
 							</div>
-							<div class="responsive-account-content">
-								<div class="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
-									<header class="account-section-header collapsable-section-toggle">
-										<h2 class="account-section-heading">멤버십 & 결제 정보
-											<button class="btn account-cancel-button btn-plain btn-small">
-												<span>멤버십 해지</span>
-											</button>
-										</h2>
-									</header>
-									<section class="collapsable-section-content account-section-content">
-										<div class="account-subsection clearfix">
-											<div class="clearfix">
-												<div class="account-section-group">
-													<div class="account-section-item account-section-email">${clientDto.clientId }</div>
-													<div class="account-section-item account-section-item-disabled">비밀번호:********</div>
-													<div class="account-section-item account-section-item-disabled">전화번호: ${clientDto.clientPhone }</div>
-												</div>
-												<div class="account-section-group">
-													<div class="account-section-item">
-														<form class="account-section-form" >
-															<input type="hidden" >
-															<button class="account-section-link" type="submit">																
-																이메일 주소 변경
-															</button>
-														</form>
-													</div>
-													<div class="account-section-item">
-														<form class="account-section-form" >
-															<input type="hidden" >
-															<button class="account-section-link" type="submit">																
-																비밀번호 변경
-															</button>
-														</form>
-													</div>
-													<div class="account-section-item">
-														<form class="account-section-form" action="changePhone">
-															<input type="hidden" name="phoneNumber" value="${clientDto.clientPhone }">
-															<button class="account-section-link" type="submit">																
-																휴대폰 번호 변경
-															</button>
-														</form>
-													</div>
-												</div>
-											</div>
+							<h1 class="headline">전화번호를 변경하세요	</h1>
+							<p class="secondary">등록하신 전화번호는 나중에 접속 문제를 해결하거나 계정을 복구하는 데 사용됩니다.</p>
+							<label for="id_phoneNumber">휴대폰 번호</label>
+							<ul class="simpleForm structural ui-grid">
+								<li class="nfFormSpace phone-number">
+									<div class="nfInput externalLabel">
+										<div class="nfInputPlacement">
+											<input type="text" name="phoneNumber" placeholder="${phoneNumber }" class="nfTextField hasText" id="id_phoneNumber">
+											<div class="inputError">정확한 전화번호를 입력하세요.	</div>
 										</div>
-										<div class="account-subsection clearfix light-divider">
-											<div>
-												<div class="account-subsection-borderless clearfix">
-													<div class="account-section-group payment-details -wide">
-														<div class="account-section-item">
-															<div class="wallet--mop">
-																<span>
-																	<span class="text-payment">신용카드</span>
-																</span>
-																<span class="mopType">
-																	•••• •••• •••• 5007
-																</span>
-															</div>
-														</div>
-														<div class="account-section-item">
-															${nextExpire }
-														</div>
-													</div>
-													<div class="account-section-group -thin">
-														<div class="account-section-item">
-															<form class="account-section-form" >
-																<input type="hidden" >
-																<button class="account-section-link" type="submit">																
-																	결제 정보 관리
-																</button>
-															</form>
-														</div>
-														<div class="account-section-item">
-															<form class="account-section-form" >
-																<input type="hidden" >
-																<button class="account-section-link" type="submit">																
-																	결제 상세 정보
-																</button>
-															</form>
-														</div>
-														<div class="account-section-item">
-															<form class="account-section-form" >
-																<input type="hidden" >
-																<button class="account-section-link" type="submit">																
-																	결제일 변경
-																</button>
-															</form>
-														</div>
-													</div>
-												</div>
-											</div>											
-										</div>
-									</section>
-								</div>
-								
-								<div class="account-section collapsable-panel clearfix">
-									<header class="account-section-header collapsable-section-toggle">
-										<h2 class="account-section-heading">멤버십 상세 정보</h2>
-									</header>
-									<section class="collapsable-section-content account-section-content">
-										<div class="account-subsection clearfix">
-											<div class="clearfix">
-												<div class="account-section-group">
-													<div class="account-section-item">
-														<c:choose>
-															<c:when test="${clientGradeDto.gradeName eq 'standard'}">
-																<b>스탠다드</b>
-															</c:when>	
-															<c:otherwise>
-																<b>등급이 잘못되었습니다.</b>
-															</c:otherwise>														
-														</c:choose>
-													</div>
-												</div>
-												<div class="account-section-group">
-													<div class="account-section-item">
-														<form class="account-section-form" >
-															<input type="hidden" >
-															<button class="account-section-link" type="submit">																
-																멤버십 변경
-															</button>
-														</form>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								
+									</div>
+								</li>
+							</ul>
+							<div class="nf-btn-bar change-phone-buttons">
+								<button id="btn-next" type="submit" disabled class="nf-btn nf-btn-primary nf-btn-retro nf-btn-small">
+									변경
+								</button>
+								<button id="btn-cancel" type="button" class="nf-btn nf-btn-secondary nf-btn-solid nf-btn-small">
+									취소
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- Modal -->
+				<div class="modal fade" id="staticBackdrop"	data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+					<div class="modal-dialog">
+						<div class="modal-content" style="margin-top: 10rem;">
+							<div class="modal-body"><h1 class="headline">전화번호가 변경되었습니다</h1></div>
+							<div class="modal-footer">
+								<button id="move-main-btn" type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">메인페이지로 이동</button>
+								<button id="move-account-btn" type="button" class="btn btn-primary modal-btn">내 계정 보러가기</button>
 							</div>
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- 하단 footer 부분 -->
 				<div class="site-footer-wrapper">
 					<div class="footer-divider"></div>

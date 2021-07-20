@@ -1,9 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?> 
+
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
- <mapper namespace="client">
+ 
+<mapper namespace="client">
+	<select id="findClient" parameterType="int" resultType="ClientDto">
+		select * from client where client_no = #{clientNo}
+	</select> 
+	<select id="getGrade" parameterType="int" resultType="ClientGradeDto">
+		select * from client_grade where grade_no = #{gradeNo}
+	</select>
+	<update id="changePhone" parameterType="ClientDto">
+		update client set client_phone = #{clientPhone} where client_no = #{ clientNo} 
+	</update>
 	<select id="regitCheck" parameterType="string" resultType="ClientDto" >
 		select * from client where client_id=#{email}
 	</select>
 </mapper>
+
