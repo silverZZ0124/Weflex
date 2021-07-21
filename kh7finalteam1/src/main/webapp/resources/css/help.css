@@ -72,6 +72,7 @@ body{
 
 .mainLogo{
 	display: inline;
+	width: 125px;
 }
 
 .subLogo{
@@ -96,7 +97,6 @@ body{
 
 .input-group{
     margin: auto;
-	width: 65% !important;
 	height: 48px;
 }
 
@@ -285,6 +285,10 @@ input[type="text"]:focus {
 	display: none;
 }
 
+.search-wrapper form{
+	padding-bottom: 16px;
+}
+
 @media (max-width: 1344px){
 	.categories{
 		width: 66.66%;
@@ -309,11 +313,14 @@ input[type="text"]:focus {
 	.custom-bottom-container{
 		padding: 48px 32px 32px 32px;	
 	}
+	.custom-top-container > .custom-inner-container{
+		padding: 0 32px;
+	}
 }
 
 @media (max-width: 900px){
 	.custom-inner-container{
-		flex-wrap: wrap;
+		flex-wrap: wrap;	    
 	}
 	.categories{
 		width: 100%;
@@ -361,17 +368,21 @@ input[type="text"]:focus {
 	.category h2, .quick-links h2{
 		font-size: 24px;
 	}
+	
+	.custom-top-container > .custom-inner-container{
+		padding: 0 32px;
+	}
 }
 
 @media (min-width: 1200px){
-	.custom-top-container .custom-inner-container{
-		padding: 6px 34px 0 34px;
+	.custom-top-container > .custom-inner-container{
+		padding: 24px 48px 0 48px;
 	}
 }
 
 @media (min-width: 601px) and (max-width: 1199px){
-	.custom-top-container .custom-inner-container{
-		padding: 6px 18px 0 18px;
+	.custom-top-container > .custom-inner-container{
+		padding-top: 24px;
 	}
 	
 	.custom-middle-container{
@@ -443,4 +454,16 @@ input[type="text"]:focus {
 	}
 }
 
+@media (min-width: 600px) and (max-width: 900px){
+	.search-wrapper form{
+		max-width: 70%;
+	}
+}
 
+@media (min-width: 600px){
+	.search-wrapper form{
+		max-width: 65%;
+	    margin: 0 auto;
+	    padding-bottom: 32px;
+	}
+}

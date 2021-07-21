@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.finalteam1.entity.client.ClientDto;
 import com.kh.finalteam1.entity.client.ClientGradeDto;
+import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 
 @Repository
 public class ClientDaoImpl implements ClientDao {
@@ -25,5 +26,15 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public boolean changePhone(ClientDto clientDto) {
 		return sqlSession.update("client.changePhone", clientDto) > 0;
+	}
+
+	@Override
+	public boolean changeEmail(ClientDto clientDto) {
+		return sqlSession.update("client.changeEmail", clientDto) > 0;
+	}
+
+	@Override
+	public boolean changePassword(ClientUpdatePasswordVO clientVO) {
+		return sqlSession.update("client.changePassword", clientVO) > 0;
 	}
 }

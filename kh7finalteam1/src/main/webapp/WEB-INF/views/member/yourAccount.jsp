@@ -13,7 +13,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-        
+    <script>
+    	var contextPath = "${pageContext.request.contextPath}";
+    </script>    
 <meta charset="UTF-8">
 <title>Netflix</title>
 	<script>
@@ -27,9 +29,14 @@
 				});
 			});
 			
-			$("#profileSelector").click(function(){
-
+			$("#move-account").click(function(){
+				location.replace(contextPath + "/yourAccount");
 			});
+			
+			$("#move-help").click(function(){
+				location.replace(contextPath + "/help");
+			});
+						
 		});
 	</script>
 </head>
@@ -42,8 +49,8 @@
 					<div id="hdPinTarget" class="member-header">
 						<div id="hd">
 							<div>
-								<a href="#" class="svg-nfLogo logo">
-									<img class="logo_img" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png">
+								<a href="${pageContext.request.contextPath }" class="svg-nfLogo logo">
+									<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 								</a>
 							</div>
 							<div class="account-secondary-navigation last">
@@ -54,26 +61,11 @@
 											<span class="profile-arrow"></span>	
 											<span class="trigger collapse triggers" id="trigger-collapse"></span>										
 										</div>
-										<div class="profiles-container collapse triggers" id="profiles-collapse">
-											<div class="profile-selector">
-												<ul class="profiles structural">
-													<li class="profile">
-														<a href="#">
-															<img src="https://occ-0-988-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABf9uIfUy3k75jnjPf-M5wZdrjcXMLe04_P5az0_eAPb3dECf_y_hunxCmOg5febcU6DyIEc1L18SK7t1vmE6s5o.png?r=fcd">
-															<span class="name">키즈</span>															
-														</a>
-													</li>
-												</ul>
-											</div>
-											<ul class="profile-manage structural">
-												<li class="manage">
-													<a href="#">프로필 관리</a>
-												</li>
-											</ul>
+										<div class="profiles-container collapse triggers" id="profiles-collapse">											
 											<ul class="links structural">
-												<li><a href="#">계정</a></li>
-												<li><a href="#">고객 센터</a></li>
-												<li><a href="#">넷플릭스에서 로그아웃</a></li>
+												<li><a id="move-account" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
+												<li><a id="move-help" href="${pageContext.request.contextPath }/help">고객 센터</a></li>
+												<li><a id="move-logout" href="/">넷플릭스에서 로그아웃</a></li>
 											</ul>
 										</div>
 									</div>
@@ -111,15 +103,15 @@
 												</div>
 												<div class="account-section-group">
 													<div class="account-section-item">
-														<form class="account-section-form" >
-															<input type="hidden" >
+														<form class="account-section-form" action="changeEmail">
+															<input type="hidden" name="email" value="${clientDto.clientId }">
 															<button class="account-section-link" type="submit">																
 																이메일 주소 변경
 															</button>
 														</form>
 													</div>
 													<div class="account-section-item">
-														<form class="account-section-form" >
+														<form class="account-section-form" action="changePassword">
 															<input type="hidden" >
 															<button class="account-section-link" type="submit">																
 																비밀번호 변경
@@ -144,10 +136,7 @@
 														<div class="account-section-item">
 															<div class="wallet--mop">
 																<span>
-																	<span class="text-payment">신용카드</span>
-																</span>
-																<span class="mopType">
-																	•••• •••• •••• 5007
+																	<span class="text-payment">카카오페이</span>
 																</span>
 															</div>
 														</div>
@@ -164,7 +153,7 @@
 																</button>
 															</form>
 														</div>
-														<div class="account-section-item">
+														<!-- <div class="account-section-item">
 															<form class="account-section-form" >
 																<input type="hidden" >
 																<button class="account-section-link" type="submit">																
@@ -179,7 +168,7 @@
 																	결제일 변경
 																</button>
 															</form>
-														</div>
+														</div> -->
 													</div>
 												</div>
 											</div>											

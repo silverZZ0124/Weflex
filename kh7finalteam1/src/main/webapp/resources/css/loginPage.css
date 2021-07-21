@@ -123,8 +123,9 @@ ul.structural>li {
 }
 
 .logo_img{
-	width: 210px;
-    left: -20px;
+	width: 166px;
+	left: 0;
+	top: 4px;
     position: relative;
 }
 
@@ -795,9 +796,8 @@ ul.structural>li {
 	    line-height: 45px;
 	}
 	.logo_img {
-	    width: 94px;
-    	left: -11px;
-	    top: 6px;
+	    width: 72px;
+	    top: 8px;
 	}
 }
 
