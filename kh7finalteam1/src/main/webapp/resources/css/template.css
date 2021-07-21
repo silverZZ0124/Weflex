@@ -41,6 +41,9 @@
 	.modal-wallpaper-text{
 		font-size: 1.5vw !important;
 	}
+	.modal-wallpaper-plus-btn {
+		height:36px !important;
+	}
 	h1{
 		font-size:2vw !important;
 	}
@@ -127,6 +130,10 @@
 	}
 }	
 
+body{
+	overflow: scroll !important;
+}
+
 i{
 	font-size:1vw;
 }
@@ -182,6 +189,8 @@ i{
 .main-btn-box{
 	margin-top: 1.5vw;
 	display:flex;
+    height: 44px;
+	
 }
 .main-btn{
 	padding: 0.8rem 1.2rem; 
@@ -398,22 +407,7 @@ i{
     flex: 0 0 32%;
     margin-bottom: 2%;
 }
-.test{
-	transform:scale(1.3);
-	width:120%;
-	height:20em;
-	border-radius:5px;
-	z-index:5;
-	transition-delay:0.5s;
-	transition-duration: 0.3s;
-}
-.test1{
-	transition-delay:0.5s;
-	transition-duration: 0.3s;
-	width:100%;
-	height:10em;
-	z-index:5;
-}
+
 .similar-contents-detail-img-box{
 	width:100%;
 }
@@ -438,15 +432,14 @@ i{
     z-index: 3;
 }
 .wallpaper-more-button{
-	position:absolute;
-	left: 48%;
-    right: 50%;
-    top: -7%;
+
+    top: 0%;
 }
 .modal-contents-detail-info{
-	width:95%;
-    position: absolute;
+	width:100%;
     background-color: #141414;
+    border-top:1px solid #404040;
+	padding:7% 0;
 }
 .modal-contents-detail-info-text{
 	font-size:0.7vw;
@@ -454,4 +447,67 @@ i{
 #react-dropdown-menu > li{
 	font-size:1.5vw;
 }
+.similar-contents-box{
+	height:750px;
+	overflow:hidden;
+}
+.modal-cotents-detail-btn{
+	display:flex;
+	width: 6%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    margin-top: -9%;
+}
+.modal-second-gradation-box {
+    width: 100%;
+    background:linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%, rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 64%,rgba(20,20,20,.80) 84%,rgba(20,20,20,.90) 96%);
+    position: absolute;
+    height: 50px;
+    bottom: 100%;
+}
+.wallpaper-more-button,.wallpaper-less-button{
+	z-index:1;
+}
+.showHoverModal{
+	margin:0 !important;
+}
+.hoverModal{
+	width:350px;
+	height:auto;
+	position:absolute !important;
+}
+.modal-backdrop{
+	display:none;
+}
+.hoverModalBox{
+	box-shadow: 2px 1px 5px 1px rgba(102,102,102,.80);
+}
+.hoverModalVideo{
+	width:120%; 
+	height:100%;
+	margin-left:auto;
+	margin-right:auto;
+}
+.hover-modal-play-btn{
+	background-color:white;
+	color:#141414;
+}
+.hover-modal-more-button{
+	margin-left: auto;
+    margin-right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
