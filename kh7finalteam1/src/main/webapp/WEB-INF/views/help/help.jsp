@@ -30,7 +30,7 @@
 			<div class="d-flex align-items-center" >
 				<div class="me-auto">
 					<a href="${pageContext.request.contextPath }">
-						<img class="mainLogo" src="res/img/Netflix_Logo_RGB.png" width="165px" height="70px">
+						<img class="mainLogo" src="res/img/weflex_logo.png" >
 						<img class="subLogo" src="res/img/n_logo.png" width="36px" height="32px">
 					</a>
 				</div>
@@ -41,7 +41,7 @@
 						<span style="padding-left: 10px;"><i class="fas fa-caret-down" style="color:red; font-size:1.5rem;"></i></span>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-end cumstom-help-dropdown" aria-labelledby="navbarDarkDropdownMenuLink" >
-						<li><a class="dropdown-item" href="#">계정</a></li>
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
 						<li><a class="dropdown-item" href="#">넷플릭스에서 로그아웃</a></li>						
 					</ul>
 				</div>

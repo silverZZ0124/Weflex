@@ -24,7 +24,7 @@ public class MemberController {
 		ClientDto clientDto = clientDao.findClient(clientNo);
 		ClientGradeDto clientGradeDto = clientDao.getGrade(clientDto.getGradeNo());
 		
-		SimpleDateFormat format = new SimpleDateFormat("다음 결제일은 yyyy년 MM월 dd일입니다.");
+		SimpleDateFormat format = new SimpleDateFormat("결제 만료일은 yyyy년 MM월 dd일입니다.");
 		String nextExpire = format.format(clientDto.getClientExpire());
 				
 		model.addAttribute("clientDto", clientDto);
@@ -43,5 +43,17 @@ public class MemberController {
 	public String changePhone(@RequestParam String phoneNumber, Model model) {
 		model.addAttribute("phoneNumber", phoneNumber);
 		return "member/changePhone";
+	}
+	
+	@RequestMapping("/changeEmail")
+	public String changeEmail(@RequestParam String email, Model model) {
+		model.addAttribute("email", email);
+		return "member/changeEmail";
+	}
+	
+	@RequestMapping("/changePassword")
+	public String changePassword() {	
+		
+		return "member/changePassword";
 	}
 }

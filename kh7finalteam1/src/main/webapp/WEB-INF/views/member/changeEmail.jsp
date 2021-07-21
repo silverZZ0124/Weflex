@@ -30,14 +30,16 @@
 				});
 			});
 			
-			$("#id_phoneNumber").on("propertychange change keyup paste input", function(){				
-				var regex = /^\d{3}-\d{3,4}-\d{4}$/;
+			$("#id_newEmail").on("propertychange change keyup paste input", function(){				
+				var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 				
 				if(regex.test($(this).val())){
+					$(this).css("border-color", "#5fa53f");					
 					$(".inputError").css("display", "none");
 					$("#btn-next").attr('disabled', false);
 				}
 				else{
+					$(this).css("border-color", "#b92d2b");
 					$(".inputError").css("display", "block");
 					$("#btn-next").attr('disabled', true);
 				}
@@ -46,9 +48,9 @@
 			$("#btn-next").click(function(e){
 				$.ajax({
 					//url:"${pageContext.request.contextPath}/data/member/changePhone",
-					url:contextPath+"/data/member/changePhone",
+					url:contextPath+"/data/member/changeEmail",
 					type:"post",
-					data: {"phoneNumber": $("#id_phoneNumber").val()},
+					data: {"email": $("#id_newEmail").val()},
 					success:function(resp){
 						$(".success-modal").modal("show");
 					},
@@ -141,19 +143,32 @@
 									확인되었습니다! 본인 확인이 완료되었으므로 이제 계정 정보를 변경하실 수 있습니다.
 								</div>
 							</div>
-							<h1 class="headline">전화번호를 변경하세요	</h1>
-							<p class="secondary">등록하신 전화번호는 나중에 접속 문제를 해결하거나 계정을 복구하는 데 사용됩니다.</p>
-							<label for="id_phoneNumber">휴대폰 번호</label>
-							<ul class="simpleForm structural ui-grid">
-								<li class="nfFormSpace phone-number">
-									<div class="nfInput externalLabel">
+							<h1 class="headline email-headLine">이메일을 변경하세요	</h1>
+							<ul class="simpleEmailForm structural ui-grid">
+								<li class="nfFormSpace">
+									<div class="nfInput">
 										<div class="nfInputPlacement">
-											<input type="text" name="phoneNumber" placeholder="${phoneNumber }" class="nfTextField hasText" id="id_phoneNumber">
-											<div class="inputError">정확한 전화번호를 입력하세요.	예: 010-0000-0000</div>
+											<label class="input_id">
+												<input type="text" id="id_currentEmail" class="nfTextField hasText" value="${email }" disabled>
+												<label for="id_currentEmail" class="placeLabel">현재 이메일</label>
+											</label>
 										</div>
 									</div>
 								</li>
+								<li class="nfFormSpace">
+									<div class="nfInput">
+										<div class="nfInputPlacement">
+											<label class="input_id">
+												<input type="text" name="newEmail" class="nfTextField error hasText" id="id_newEmail">
+												<label for="id_newEmail" class="placeLabel">새 이메일</label>
+											</label>
+										</div>
+										<div class="inputError">정확한 이메일 주소를 입력하세요. 예: name@example.com</div>
+									</div>
+								</li>
 							</ul>
+							<%-- <input type="text" name="phoneNumber" placeholder="${email }">											
+							<div class="inputError">정확한 전화번호를 입력하세요.	</div> --%>
 							<div class="nf-btn-bar change-phone-buttons">
 								<button id="btn-next" type="submit" disabled class="nf-btn nf-btn-primary nf-btn-retro nf-btn-small">
 									변경
@@ -171,7 +186,7 @@
 					aria-labelledby="staticBackdropLabel" aria-hidden="true" >
 					<div class="modal-dialog">
 						<div class="modal-content" style="margin-top: 10rem;">
-							<div class="modal-body"><h1 class="headline">전화번호가 변경되었습니다</h1></div>
+							<div class="modal-body"><h1 class="headline">이메일이 변경되었습니다</h1></div>
 							<div class="modal-footer">
 								<button id="move-main-btn" type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">메인페이지로 이동</button>
 								<button type="button" class="move-account-btn btn btn-primary modal-btn">내 계정 보러가기</button>
@@ -186,7 +201,7 @@
 					<div class="modal-dialog">
 						<div class="modal-content" style="margin-top: 10rem;">
 							<div class="modal-header">
-								<h1 class="modal-title fail-modal-title" id="exampleModalLabel">전화번호가 변경 실패</h1>		
+								<h1 class="modal-title fail-modal-title" id="exampleModalLabel">이메일 변경 실패</h1>		
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>						
 							</div>
 							<div class="modal-body"><h5 class="headline">고객센터에 문의해주세요</h5></div>

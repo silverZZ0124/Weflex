@@ -106,15 +106,14 @@ body .member-header {
 
 #hd .logo {
     position: absolute;
-    left: 29px;
-    top: -14px;
+    top: -7px;
     text-decoration: none;
     padding: 18px 0;
     font-size: 32px;
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
-    width: 151px;
+    width: 115px;
 }
 
 .logo_img{
@@ -859,6 +858,76 @@ ul.structural li.phone-number .inputError {
 	overflow: hidden;
 }
 
+.fail-modal-title{
+	font-size: 1.1em;
+}
+
+.nfTextField:disabled {
+    color: #a6a6a6;
+    border-color: #ccc;
+}
+
+.nfInput .placeLabel {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: #8c8c8c;
+    font-size: 14px;
+    -webkit-transition: font .1s ease,top .1s ease,-webkit-transform .1s ease;
+    transition: font .1s ease,top .1s ease,-webkit-transform .1s ease;
+    -o-transition: font .1s ease,top .1s ease,-o-transform .1s ease;
+    -moz-transition: font .1s ease,top .1s ease,transform .1s ease,-moz-transform .1s ease;
+    transition: font .1s ease,top .1s ease,transform .1s ease;
+    transition: font .1s ease,top .1s ease,transform .1s ease,-webkit-transform .1s ease,-moz-transform .1s ease,-o-transform .1s ease;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.nfInput .hasText+.placeLabel, .nfInput .nfTextField:focus+.placeLabel {
+    top: 4px;
+    font-size: 11px;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.email-headLine{
+    margin: 0 0 .55em;
+}
+
+.simpleEmailForm .input_id{
+	width: 100%;
+}
+
+.simpleEmailForm li:last-of-type {
+	margin-top: 2em;
+}
+
+.change-password-form .nfFormSpace {
+    margin-bottom: 5%;
+}
+
+.change-password-form .nfFormSpace:first-child {
+    margin-bottom: 4%;
+}
+
+.change-password-form ul{
+	display: block !important;
+}
+
+.change-password-form label {
+	width: 100%;
+}
+
+.nfTextField:focus{
+	outline: none;
+}
+
 @media only screen and (max-width: 1100px){
 	#account-tools .current-profile>.profile-arrow {
 	    left: 38px;
@@ -883,8 +952,8 @@ ul.structural li.phone-number .inputError {
 	    padding-left: 100px;
 	}
 	#hd .logo {
-	    top: -16px;
-	    left: -8px;
+	    top: -12px;
+	    left: 9px;
 	    padding: 12px 0;
 	}
 	#hd .account-secondary-navigation {
@@ -961,6 +1030,9 @@ ul.structural li.phone-number .inputError {
 	}
 	.account-section-item {
 	    margin-bottom: 10px;
+	}
+	.nfInput .placeLabel {
+	    font-size: 16px;
 	}
 }
 
@@ -1055,7 +1127,7 @@ ul.structural li.phone-number .inputError {
 	    padding-right: 1rem;
 	    width: auto;
 	    line-height: 1rem;
-	}
+	}	
 }
 
 @media only screen and (max-width: 500px){
@@ -1064,6 +1136,9 @@ ul.structural li.phone-number .inputError {
 	}
 	.footer-link-item {
 	    width: 49%;
+	}
+	.nf-btn{
+	    margin: 10px 0;
 	}
 }
 

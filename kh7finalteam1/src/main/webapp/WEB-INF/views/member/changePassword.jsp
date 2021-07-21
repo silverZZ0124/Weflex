@@ -21,6 +21,9 @@
 <title>Netflix</title>
 	<script>
 		$(function(){
+			var newPwCheck = false;
+			var confirmPwCheck = false;
+			
 			$("#profileSelector").hover(function(){	
 				$(this).click();
 			},function(){
@@ -30,35 +33,75 @@
 				});
 			});
 			
-			$("#id_phoneNumber").on("propertychange change keyup paste input", function(){				
-				var regex = /^\d{3}-\d{3,4}-\d{4}$/;
+			$("#id_newPassword").on("propertychange change keyup paste input", function(){				
+				var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!%*#?&]{6,16}$/;
 				
 				if(regex.test($(this).val())){
-					$(".inputError").css("display", "none");
-					$("#btn-next").attr('disabled', false);
+					$(this).css("border-color", "#5fa53f");					
+					$("#newPassword_inputError").css("display", "none");
+					newPwCheck = true;
 				}
 				else{
-					$(".inputError").css("display", "block");
-					$("#btn-next").attr('disabled', true);
+					$(this).css("border-color", "#b92d2b");
+					$("#newPassword_inputError").css("display", "block");
+					newPwCheck = false;
+				}
+				
+				$("#id_confirmNewPassword").blur();
+			});
+			
+			$("#id_confirmNewPassword").blur(function(){		
+				
+				if($("#id_newPassword").val() == "" || $("#id_newPassword").val() == null){
+					$("#id_newPassword").focus();
+					return;
+				}
+				
+				if($(this).val() != $("#id_newPassword").val()){
+					$(this).css("border-color", "#b92d2b");
+					$("#confirmNewPassword_inputError").css("display", "block");
+					confirmPwCheck = false;
+				}else{
+					$(this).css("border-color", "#5fa53f");					
+					$("#confirmNewPassword_inputError").css("display", "none");
+					confirmPwCheck = true;
 				}
 			});
 			
 			$("#btn-next").click(function(e){
+				e.preventDefault();
+				
+				var nullCheck = false;
+				
+				$(".nfTextField").each(function(){
+					if($(this).val() == "" || $(this).val() == null){
+						$(this).focus();
+						nullCheck = true;
+						return false;
+					}
+				});
+				
+				if(nullCheck)
+					return;
+								
+				if(!newPwCheck || !confirmPwCheck){			
+					return;					
+				}
+												
 				$.ajax({
 					//url:"${pageContext.request.contextPath}/data/member/changePhone",
-					url:contextPath+"/data/member/changePhone",
+					url:contextPath+"/data/member/changePassword",
 					type:"post",
-					data: {"phoneNumber": $("#id_phoneNumber").val()},
-					success:function(resp){
+					data: {"currentPassword": $("#id_currentPassword").val(),
+							"newPassword": $("#id_newPassword").val()},
+					success:function(resp){						
 						$(".success-modal").modal("show");
 					},
 					error:function(resp){
 						$(".fail-modal").modal("show");
 					}
 				});
-				
-				e.preventDefault();
-				
+								
 			});
 			
 			$("#btn-cancel").click(function(){
@@ -131,32 +174,51 @@
 				
 				<!-- 중단 content 부분 -->
 				<div class="bd">
-					<div class="responsive-account-container responsive-account-container-phone">
-						<form class="change-phone-form">
-							<div class="ui-message-container ui-message-security-pass">
-								<div class="ui-message-svg-icon">
-									<i class="fas fa-user-shield" style="color: white;"></i>
-								</div>
-								<div class="ui-message-contents">
-									확인되었습니다! 본인 확인이 완료되었으므로 이제 계정 정보를 변경하실 수 있습니다.
-								</div>
-							</div>
-							<h1 class="headline">전화번호를 변경하세요	</h1>
-							<p class="secondary">등록하신 전화번호는 나중에 접속 문제를 해결하거나 계정을 복구하는 데 사용됩니다.</p>
-							<label for="id_phoneNumber">휴대폰 번호</label>
+					<div class="responsive-account-container">
+						<form class="change-password-form">							
+							<h1>비밀번호 변경</h1>
 							<ul class="simpleForm structural ui-grid">
-								<li class="nfFormSpace phone-number">
-									<div class="nfInput externalLabel">
+								<li class="nfFormSpace">
+									<div class="nfInput">
 										<div class="nfInputPlacement">
-											<input type="text" name="phoneNumber" placeholder="${phoneNumber }" class="nfTextField hasText" id="id_phoneNumber">
-											<div class="inputError">정확한 전화번호를 입력하세요.	예: 010-0000-0000</div>
+											<label class="input_id">
+												<input type="password" name="currentPassword" class="nfTextField error hasText" id="id_currentPassword" autocomplete="off" required>
+												<label for="id_currentPassword" class="placeLabel">기존 비밀번호</label>
+											</label>
+										</div>
+										<div class="inputError" id="currentPassword_inputError" style="display: block;"> 
+											<a href="#">비밀번호를 잊으셨나요? </a>
 										</div>
 									</div>
 								</li>
+								<li class="nfFormSpace">
+									<div class="nfInput validated">
+										<div class="nfInputPlacement">
+											<label class="input_id">
+												<input type="password" name="newPassword" class="nfTextField hasText" id="id_newPassword" autocomplete="off" required>
+												<label for="id_newPassword" class="placeLabel">새 비밀번호(6~16자)</label>
+											</label>
+										</div>
+										<div class="inputError" id="newPassword_inputError">비밀번호는 6~16자 사이여야 합니다.</div>
+									</div>
+								</li>
+								<li class="nfFormSpace">
+									<div class="nfInput validated">
+										<div class="nfInputPlacement">
+											<label class="input_id">
+												<input type="password" name="confirmNewPassword" class="nfTextField hasText" id="id_confirmNewPassword" autocomplete="off" required>
+												<label for="id_confirmNewPassword" class="placeLabel">새 비밀번호 재입력</label>
+											</label>
+										</div>
+										<div class="inputError" id="confirmNewPassword_inputError">새 비밀번호와 일치해야 합니다.</div>
+									</div>
+								</li>
 							</ul>
+							<%-- <input type="text" name="phoneNumber" placeholder="${email }">											
+							<div class="inputError">정확한 전화번호를 입력하세요.	</div> --%>
 							<div class="nf-btn-bar change-phone-buttons">
-								<button id="btn-next" type="submit" disabled class="nf-btn nf-btn-primary nf-btn-retro nf-btn-small">
-									변경
+								<button id="btn-next" type="submit" class="nf-btn nf-btn-primary nf-btn-retro nf-btn-small">
+									저장
 								</button>
 								<button id="btn-cancel" type="button" class="nf-btn nf-btn-secondary nf-btn-solid nf-btn-small">
 									취소
@@ -171,7 +233,7 @@
 					aria-labelledby="staticBackdropLabel" aria-hidden="true" >
 					<div class="modal-dialog">
 						<div class="modal-content" style="margin-top: 10rem;">
-							<div class="modal-body"><h1 class="headline">전화번호가 변경되었습니다</h1></div>
+							<div class="modal-body"><h1 class="headline">비밀번호가 변경되었습니다</h1></div>
 							<div class="modal-footer">
 								<button id="move-main-btn" type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">메인페이지로 이동</button>
 								<button type="button" class="move-account-btn btn btn-primary modal-btn">내 계정 보러가기</button>
@@ -186,7 +248,7 @@
 					<div class="modal-dialog">
 						<div class="modal-content" style="margin-top: 10rem;">
 							<div class="modal-header">
-								<h1 class="modal-title fail-modal-title" id="exampleModalLabel">전화번호가 변경 실패</h1>		
+								<h1 class="modal-title fail-modal-title" id="exampleModalLabel">비밀번호 변경 실패</h1>		
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>						
 							</div>
 							<div class="modal-body"><h5 class="headline">고객센터에 문의해주세요</h5></div>
