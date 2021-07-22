@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.finalteam1.entity.client.ClientDto;
+import com.kh.finalteam1.entity.ClientDto;
 import com.kh.finalteam1.error.AjaxException;
 import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.vo.ClientUpdatePasswordVO;

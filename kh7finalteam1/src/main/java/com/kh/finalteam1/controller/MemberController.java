@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalteam1.entity.client.ClientDto;
-import com.kh.finalteam1.entity.client.ClientGradeDto;
+import com.kh.finalteam1.entity.ClientDto;
+import com.kh.finalteam1.entity.ClientGradeDto;
 import com.kh.finalteam1.repository.ClientDao;
 
 @Controller

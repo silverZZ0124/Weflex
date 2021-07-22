@@ -1,7 +1,7 @@
 package com.kh.finalteam1.repository;
 
-import com.kh.finalteam1.entity.content.NoSeriesDto;
-import com.kh.finalteam1.entity.content.YesSeriesDto;
+import com.kh.finalteam1.entity.NoSeriesDto;
+import com.kh.finalteam1.entity.YesSeriesDto;
 
 public interface SeriesDao {
 	void yesInsert(YesSeriesDto yesSeriesDto);
