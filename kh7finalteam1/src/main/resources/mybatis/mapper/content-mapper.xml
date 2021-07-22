@@ -15,7 +15,7 @@
 	<insert id="insert" parameterType="ContentDto">
 		insert into content values(
 		#{contentNo} , #{contentName}, #{contentInfo}, #{contentLimit},  #{contentSeries}, 
-		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}
+		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}, #{contentTrailer}
 		)
 	</insert>
 	

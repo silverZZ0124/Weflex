@@ -19,4 +19,5 @@ public class ContentDto {
 	private int contentViews;
 	private String contentThumbnail;
 	private String contentType;
+	private String contentTrailer;
 }
