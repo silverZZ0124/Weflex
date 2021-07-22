@@ -40,5 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	<!-- yes_series 에피소드 삭제 -->
+	<delete id="yesDelete" parameterType="YesSeriesDto">
+		delete yes_series where content_no=#{contentNo} and content_season=#{contentSeason} and content_episode=#{contentEpisode}
+	</delete>
 	
 </mapper>
