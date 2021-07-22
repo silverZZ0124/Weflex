@@ -170,6 +170,11 @@
                     <label>컨텐츠 썸네일</label>
                     <input type="text" name="contentThumbnail" class="form-control" required>
                 </div>
+                
+                <div class="form-group">
+                    <label>컨텐츠 예고편</label>
+                    <input type="text" name="contentTrailer" class="form-control" required>
+                </div>
 
                 <button type="submit" class="btn btn-primary btn-block">등록</button>
                 <button type="reset" class="btn btn-secondary btn-block">초기화</button>
