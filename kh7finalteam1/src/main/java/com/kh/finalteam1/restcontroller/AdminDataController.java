@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.finalteam1.entity.content.GenreDto;
-import com.kh.finalteam1.entity.content.NoSeriesDto;
-import com.kh.finalteam1.entity.content.ProgramFeatureDto;
-import com.kh.finalteam1.entity.content.YesSeriesDto;
-import com.kh.finalteam1.repository.genre.GenreDao;
-import com.kh.finalteam1.repository.programfeature.ProgramFeatureDao;
-import com.kh.finalteam1.repository.series.SeriesDao;
+import com.kh.finalteam1.entity.GenreDto;
+import com.kh.finalteam1.entity.NoSeriesDto;
+import com.kh.finalteam1.entity.ProgramFeatureDto;
+import com.kh.finalteam1.entity.YesSeriesDto;
+import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.ProgramFeatureDao;
+import com.kh.finalteam1.repository.SeriesDao;
 
 import lombok.extern.slf4j.Slf4j;
 

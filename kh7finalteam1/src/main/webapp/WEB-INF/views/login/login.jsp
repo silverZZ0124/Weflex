@@ -24,7 +24,7 @@
 			</div>
 			<div class="nfHeader login-header signupBasicHeader">
 				<a href="#" class="svg-nfLogo signupBasicHeader">
-					<img class="logo_img" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png">
+					<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 				</a>
 			</div>
 			<div class="login-body">
