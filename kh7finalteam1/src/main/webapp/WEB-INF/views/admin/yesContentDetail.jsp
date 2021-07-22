@@ -18,8 +18,10 @@
 	
 	        <div class="card shadow mb-4">
 	        
-	            <div class="card-header py-3">
-	                <h6 class="m-0 font-weight-bold text-primary">YES 컨텐츠 상세보기</h6>
+	            <div class="card-header py-3" >
+	            	<div>
+	                	<h6 class="m-0 font-weight-bold text-primary">YES 컨텐츠 상세보기</h6>
+	                </div>
 	            </div>
 	            
 	            <div class="card-body row">
@@ -53,7 +55,7 @@
 						<div class="mt-3">조회수 : ${contentDto.contentViews}</div>
 	            	</div>
 	            	
-                    <div class="col-md-6 offset-md-6">
+                    <div class="col-md-6 offset-md-6 pt-3">
                         <div class="row">
                             <div class="col-md-6 p-1">
                                 <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal" data-target="#edit-content-modal">수정</button>
@@ -67,8 +69,10 @@
 	     	 </div>
 	     	 
 	     	 <div class="card shadow mb-4">
-	     	 	<div class="card-header py-3">
-	                <h6 class="m-0 font-weight-bold text-primary">YES 컨텐츠 상세보기</h6>
+	     	 	<div class="card-header py-3" >
+	                <div class="col-md-2 offset-md-10">
+	                	<button class="btn btn-block btn-primary" data-toggle="modal" data-target="#insert-episode-modal">에피소드 추가</button>
+	                </div>
 	            </div>
 	            <div class="card-body row">
 	            	<table class="table">
@@ -78,7 +82,7 @@
 		            			<th>회차</th>
 		            			<th style="width:50%;">소개글</th>
 		            			<th>영상 길이</th>
-		            			<th>??</th>
+		            			<th></th>
 		            		</tr>
 	            		</thead>
 	            		<tbody>
@@ -91,10 +95,12 @@
 			            			<td>
 			            				<div class="row">
 				                            <div class="col-md-6 p-1">
-				                                <button class="btn btn-block btn-outline-primary" id="episode-modal-btn" data-toggle="modal" data-target="#edit-series-modal" data-no="${yesSeriesDto.contentNo}" data-url="${yesSeriesDto.seriesPath}">수정</button>
+				                                <button class="btn btn-block btn-outline-primary episode-modal-btn" data-toggle="modal" 
+				                                data-target="#edit-series-modal" data-no="${yesSeriesDto.contentNo}" 
+				                                data-url="${yesSeriesDto.seriesPath}">수정</button>
 				                            </div>
 				                            <div class="col-md-6 p-1">
-				                                <a href="#" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
+				                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn btn-outline-danger">삭제</a>
 				                            </div>
 				                        </div>
 			            			</td>
@@ -254,6 +260,64 @@
         	</div>
    	 	</div>
 	</div>
+	
+	<!-- 회차 추가 화면 모달창 -->
+    <div class="modal fade" id="insert-episode-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">에피소드 추가</h4>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="conatiner-fluid">
+                        <div class="row">
+                        	<div class="col-md-12">
+                        	
+	                            <form action="insertEpisode" method="post" class="form">	
+									<input type="hidden" name="contentNo" id="contentNo" value="${contentDto.contentNo }">
+									
+					                <div class="form-group">
+					                    <label>시즌 </label>
+					                    	<input type="text" name="contentSeason" class="form-control">
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label>회차</label>
+					                    	<input type="text" name="contentEpisode" class="form-control">
+					                </div>
+					                
+					                <div class="form-group form-textarea">
+					                    <label>에피소드 소개</label>
+					                    	<textarea name="episodeInfo" class="form-control form-textarea"></textarea>
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label>url</label>
+					                    	<input type="text" name="seriesPath" class="form-control">
+					                </div>
+					                
+					                <div class="form-group">
+					                    <label>영상 길이(분)</label>
+					                    	<input type="text" name="contentPlaytime" class="form-control">
+					                </div>
+					
+					                 
+					                <div class="modal-footer">
+					                    <button type="submit" class="btn btn-primary">확인</button>                        
+					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                </div>
+					            </form>
+				            
+                        	</div>
+                    	</div>                    
+                	</div>
+            	</div>
+        	</div>
+   	 	</div>
+	</div>
 </div>
 <!-- /.container-fluid -->
 
@@ -264,7 +328,7 @@
 		$('select[name="contentType"]').find('option[value="${contentDto.contentType}"]').attr("selected",true);
 		$('select[name="contentRelease"]').find('option:contains("${contentDto.contentRelease}")').attr("selected",true);
 		
-		$("#episode-modal-btn").click(function(){
+		$(".episode-modal-btn").click(function(){
 			
 			var contentNo = $(this).data("no");
 			var seriesPath = $(this).data("url");
