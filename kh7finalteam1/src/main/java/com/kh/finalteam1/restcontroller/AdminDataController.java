@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.finalteam1.entity.ClientGradeListDto;
 import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.NoSeriesDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
+import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
@@ -44,6 +46,16 @@ public class AdminDataController {
 		return programFeatureDao.get(featureName);
 		
 	}
+	
+	@Autowired
+	private ClientDao clientDao;
+	
+	//회원 목록 출력 (관리자 페이지 회원 목록)
+	@GetMapping("/client/list")
+	public List<ClientGradeListDto> list(){
+		return clientDao.list();
+	}
+	
 	
 	@Autowired
 	private SeriesDao seriesDao;

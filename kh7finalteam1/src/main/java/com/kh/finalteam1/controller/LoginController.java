@@ -3,12 +3,15 @@ package com.kh.finalteam1.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+//import com.kh.finalteam1.repository.LoginDao;
 
 @Controller
 public class LoginController {
+	
 	/*
 	 * @Autowired private LoginDao loginDao;
 	 */
+	
 	@GetMapping("/login")
 	public String login() {
 		return "login/login"; 
@@ -45,5 +48,6 @@ public class LoginController {
 	 * if(clientDto == null) { return "redirect:join1"; } else {
 	 * model.addAttribute("email", email); return "login/login"; } }
 	 */
+
 
 }
