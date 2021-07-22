@@ -1,8 +1,8 @@
-package com.kh.finalteam1.repository;
+  package com.kh.finalteam1.repository;
 
 import java.util.List;
 
-import com.kh.finalteam1.entity.content.ContentDto;
+import com.kh.finalteam1.entity.ContentDto;
 
 public interface ContentDao {
 	

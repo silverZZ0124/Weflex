@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.finalteam1.entity.content.ProgramFeatureDto;
+import com.kh.finalteam1.entity.ProgramFeatureDto;
 
 @Repository
 public class ProgramFeatureDaoImpl implements ProgramFeatureDao{
