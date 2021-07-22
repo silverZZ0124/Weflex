@@ -59,7 +59,7 @@
 					    <div class="mt-3">영상 길이 : ${noSeriesDto.contentPlaytime}</div>
 	            	</div>
 	            	
-                    <div class="col-md-6 offset-md-6">
+                    <div class="col-md-6 offset-md-6 pt-3" >
                         <div class="row">
                             <div class="col-md-6 p-1">
                                 <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal" data-target="#edit-content-modal">수정</button>

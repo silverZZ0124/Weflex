@@ -25,6 +25,9 @@
     
     <!-- Bootstrap core JavaScript(jQuery)-->
   	<script src="${pageContext.request.contextPath}/res/vendor/jquery/jquery.min.js"></script>
+  	
+  	<!-- Custom styles for this page -->
+    <link href="${pageContext.request.contextPath}/res/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">	
 
 </head>
 

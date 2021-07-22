@@ -23,5 +23,15 @@
 	<update id="changePassword" parameterType="ClientUpdatePasswordVO">
 		update client set client_pw = #{clientNewPw} where client_no = #{ clientNo} and client_pw = #{clientPw}
 	</update>
+	
+	<!-- 회원 목록 (관리자 페이지 이용) -->
+	<select id="grade-list" resultType="ClientGradeListDto">
+		select 
+			C.*, G.grade_name 
+		from 
+			client C
+				left outer join client_grade G on C.grade_no = G.grade_no
+	</select>
+	
 </mapper>
 

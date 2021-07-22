@@ -2,7 +2,7 @@ package com.kh.finalteam1.repository;
 
 import java.util.List;
 
-import com.kh.finalteam1.entity.content.GenreDto;
+import com.kh.finalteam1.entity.GenreDto;
 
 public interface GenreDao {
 	void insert(String genreName);
