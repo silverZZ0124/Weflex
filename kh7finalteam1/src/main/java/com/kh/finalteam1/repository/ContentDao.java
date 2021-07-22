@@ -1,4 +1,4 @@
-package com.kh.finalteam1.repository.content;
+package com.kh.finalteam1.repository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.kh.finalteam1.repository.series;
+package com.kh.finalteam1.repository;
 
 import com.kh.finalteam1.entity.content.NoSeriesDto;
 import com.kh.finalteam1.entity.content.YesSeriesDto;

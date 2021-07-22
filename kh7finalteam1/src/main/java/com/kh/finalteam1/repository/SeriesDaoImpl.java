@@ -1,4 +1,4 @@
-package com.kh.finalteam1.repository.series;
+package com.kh.finalteam1.repository;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

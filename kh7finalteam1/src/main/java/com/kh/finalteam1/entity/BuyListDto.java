@@ -1,4 +1,4 @@
-package com.kh.finalteam1.entity.log;
+package com.kh.finalteam1.entity;
 
 import java.sql.Date;
 
@@ -8,10 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class WatchLogDto {
+public class BuyListDto {
+	private int buyNo;
 	private int clientNo;
-	private int contentNo;
-	private int watchLogSeason;
-	private int watchLogEpisode;
-	private Date watchLogPlaytime;
+	private Date buyPaymentDate;
+	private int buyPaymentPrice;
 }

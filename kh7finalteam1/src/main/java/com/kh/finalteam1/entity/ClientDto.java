@@ -1,4 +1,4 @@
-package com.kh.finalteam1.entity.client;
+package com.kh.finalteam1.entity;
 
 import java.sql.Date;
 

@@ -1,6 +1,4 @@
-package com.kh.finalteam1.entity.client;
-
-import java.sql.Date;
+package com.kh.finalteam1.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class BuyListDto {
-	private int buyNo;
+public class WishListDto {
 	private int clientNo;
-	private Date buyPaymentDate;
-	private int buyPaymentPrice;
+	private int contentNo;
 }

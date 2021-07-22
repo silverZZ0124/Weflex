@@ -1,4 +1,4 @@
-package com.kh.finalteam1.repository.genre;
+package com.kh.finalteam1.repository;
 
 import java.util.List;
 

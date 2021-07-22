@@ -1,4 +1,4 @@
-package com.kh.finalteam1.entity.qna;
+package com.kh.finalteam1.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

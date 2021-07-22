@@ -1,4 +1,4 @@
-package com.kh.finalteam1.entity.content;
+package com.kh.finalteam1.entity;
 
 
 import lombok.AllArgsConstructor;
