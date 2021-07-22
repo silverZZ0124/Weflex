@@ -69,7 +69,7 @@
                                     <!-- 제목 들어갈 자리 -->
                                     <td class="d-flex align-items-center">
                                         <div>
-                                            <img src="https://via.placeholder.com/120x60?text=P" width="100%"> 
+                                            <%-- <img src="${contentDto.contentThumbnail }" alt="${contentDto.contentName}이미지" width="100px" height="60px"> --%> 
                                         </div>
                                         <div class="pl-3 email">
                                             <span>${contentDto.contentName }</span>
