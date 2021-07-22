@@ -47,4 +47,10 @@ public class SeriesDaoImpl implements SeriesDao{
 		return count>0;
 	}
 	
+	@Override
+	public boolean yesDelete(YesSeriesDto yesSeriesDto) {
+		int count = sqlSession.delete("series.yesDelete", yesSeriesDto);
+		return count>0;
+	}
+
 }

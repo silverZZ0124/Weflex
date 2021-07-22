@@ -55,10 +55,10 @@ public class AdminContentController {
 		}
 	}
 	
+	//컨텐츠 삭제될때 시리즈도 삭제 (on delete cascade)
 	@GetMapping("/contentDelete")
 	public String contentDelete(@RequestParam int contentNo, Model model) {
 		contentDao.delete(contentNo);
-		
 		return "redirect:/admin/content/";
 	}
 	
@@ -88,6 +88,18 @@ public class AdminContentController {
 		return "redirect:contentDetail?contentNo="+yesSeriesDto.getContentNo();
 	}
 	
+	@PostMapping("/insertEpisode")
+	public String insertEpisode(@ModelAttribute YesSeriesDto yesSeriesDto) {
+		seriesDao.yesInsert(yesSeriesDto);
+		return "redirect:contentDetail?contentNo="+yesSeriesDto.getContentNo();
+	}
+	
+	//에피소드 삭제하고 다시 컨텐츠 상세보기로 이동
+	@GetMapping("/episodeDelete")
+	public String episodeDelete(@ModelAttribute YesSeriesDto yesSeriesDto) {
+		seriesDao.yesDelete(yesSeriesDto);
+		return "redirect:contentDetail?contentNo="+yesSeriesDto.getContentNo();
+	}
 	
 	//contentRegist.jsp 이동
 	@GetMapping("/contentRegist")

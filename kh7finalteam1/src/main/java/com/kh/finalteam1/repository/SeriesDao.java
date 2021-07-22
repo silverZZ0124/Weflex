@@ -12,4 +12,5 @@ public interface SeriesDao {
 	boolean noEdit(NoSeriesDto noSeriesDto);
 	List<YesSeriesDto> yesList(int contentNo);
 	boolean yesEdit(YesSeriesDto yesSeriesDto);
+	boolean yesDelete(YesSeriesDto yesSeriesDto);
 }
