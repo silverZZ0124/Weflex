@@ -45,6 +45,27 @@
 								<c:when test="${contentDto.contentType eq 'do'}"> 다큐멘터리 </c:when>
 							</c:choose>
 						</div>
+						<div class="mt-3">
+							장르 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
+								<span>${genreFeatureCastVO.genreName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
+						<div class="mt-3">
+							특징 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
+								<span>${genreFeatureCastVO.featureName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
+						<div class="mt-3">
+							출연 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
+								<span>${genreFeatureCastVO.castName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
 						<div class="mt-3">${contentDto.contentLimit}세 이상</div>
 						<div class="mt-3">연작 여부 : ${contentDto.contentSeries}</div>
 						<div class="mt-3">개봉년도 : ${contentDto.contentRelease}</div>
