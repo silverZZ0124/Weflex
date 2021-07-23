@@ -319,7 +319,10 @@ $(function(){
 	</div>
 	<div class="main-btn-box">
 		<div>
-			<button class="btn btn-light main-btn" id="main-play-btn" data-contentNo="${mainTrailerList.contentNo }"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+			<form action="play" style="display: inline-block;">
+				<input type="hidden" name="contentNo" value="${mainTrailerList.contentNo }">
+				<button class="btn btn-light main-btn" id="main-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+			</form>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
 		</div>
 		<div class="main-btn-etc-box">
@@ -350,7 +353,7 @@ $(function(){
 				<div class="main-trailer-img">
 				<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
 				</div>
-				<div class="modal-btn-box">
+				<div class="modal-btn-box">				
 				<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 				<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 				<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
