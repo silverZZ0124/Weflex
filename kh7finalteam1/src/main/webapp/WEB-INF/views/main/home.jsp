@@ -363,28 +363,41 @@ $(function(){
 	    <div class="modal-content">
 	     
 	      <div class="modal-body main-color" style="padding:0px; border:none;">
-	      <button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-	        <div>
+			<button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+			<div style="position:relative;">
+	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5"> -->
 	        	<iframe id="player" width="100%" height="100%" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5">
-    				<source src="res/video/main_trailer1.mp4" type="video/mp4" style="width:100%">
-				</video> -->
 				<div class="modal-gradation-box">&ensp;&ensp;</div>
 	        </div>
 	        
-	        <div class="modal-trailer-over-box">
+	        <div class="modal-trailer-over-box">	
+					<div class="main-trailer-img">
+					<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
+					</div>
+					<div class="modal-btn-box">				
+						<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
+					</div>
+				
+			</div>
+				
+	        
+	       <!--  <div class="modal-trailer-over-box">
 				<div class="main-trailer-img">
 				<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
 				</div>
-				<div class="modal-btn-box">				
-					<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
-					<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-					<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-					<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
-					<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
+				<div class="modal-btn-box">
+				<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+				<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
 				</div>
 			
-			</div>
+			</div> -->
 			
 			<div class="modal-body-box">
 					<div class="modal-trailer-info-box">
@@ -461,7 +474,7 @@ $(function(){
 				       				
 											<div class="similar-contents-detail-box">
 					       					<div class="similar-contents-detail-img-box">
-					       						<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" style="width:100%;">
+					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
 					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
 					       					</div>
 					       					<div class="similar-contents-detail-text-box">
