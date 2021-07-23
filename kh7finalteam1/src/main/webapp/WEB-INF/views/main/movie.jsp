@@ -536,11 +536,11 @@ $(function(){
 	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
 	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
 	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div> 
-	   		 -->
+	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div> -->
+	   		
 		   		<c:forEach var="i" begin="1" end="10" step="1">
 					<div><img src="res/img/slider_img${i}.png" class="slider-img"></div>
-				</c:forEach> 
+				</c:forEach>
 	  
 	  		</div>
 		</div>

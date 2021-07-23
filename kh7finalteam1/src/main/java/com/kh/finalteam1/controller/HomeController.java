@@ -16,4 +16,16 @@ public class HomeController {
 		return "main/play";
 
 	}
+	
+	@GetMapping("/tv")
+	public String tv() {
+		return "main/TV";
+
+	}
+	
+	@GetMapping("/movie")
+	public String movie() {
+		return "main/movie";
+
+	}
 }
