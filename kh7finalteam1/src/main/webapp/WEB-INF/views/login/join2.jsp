@@ -42,7 +42,7 @@
 											<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
-													<input name="clientId"class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="">
+													<input name="clientId"class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}">
 													<label for="id_email" class="placeLabel">이메일 주소</label>
 													</label>
 												</div>
