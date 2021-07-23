@@ -124,7 +124,7 @@
 			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
 		</div>
 		<div style="widht:100%;height:100%;">
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/qI4AMF0Zd74?autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/qI4AMF0Zd74?start=00&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 		<div class="main-color play-bottom-div" style="display:none;">
 			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
