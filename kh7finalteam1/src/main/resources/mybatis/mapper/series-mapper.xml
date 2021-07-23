@@ -29,9 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update no_series set content_playtime=#{contentPlaytime}, series_path=#{seriesPath} where content_no=#{contentNo}
 	</update>
 	
-	<!-- 연작 있는('Y') 전체 조회 -->
+	<!-- 연작 있는('Y') 조회 -->
 	<select id="yesList" parameterType="YesSeriesDto" resultType="YesSeriesDto">
-		select * from yes_series where content_no = #{contentNo}
+		select * from yes_series where content_no = #{contentNo} order by content_season asc, content_episode asc
 	</select>
 	
 	<!-- yes_series 정보 수정 -->
@@ -39,10 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update yes_series set episode_info=#{episodeInfo}, content_playtime=#{contentPlaytime}, series_path=#{seriesPath} where content_no=#{contentNo} and content_season=#{contentSeason} and content_episode=#{contentEpisode}
 	</update>
 	
-	
 	<!-- yes_series 에피소드 삭제 -->
 	<delete id="yesDelete" parameterType="YesSeriesDto">
 		delete yes_series where content_no=#{contentNo} and content_season=#{contentSeason} and content_episode=#{contentEpisode}
 	</delete>
+	
+	<!-- 시즌 몇인지 검색 -->
+	<select id="selectSeason" parameterType="YesSeriesDto" resultType="YesSeriesDto">
+		select * from yes_series where content_season=#{contentSeason} and content_no=#{contentNo} order by content_episode asc
+	</select>
 	
 </mapper>

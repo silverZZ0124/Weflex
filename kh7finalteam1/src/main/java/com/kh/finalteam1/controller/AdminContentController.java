@@ -1,5 +1,6 @@
 package com.kh.finalteam1.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -51,6 +52,15 @@ public class AdminContentController {
 		else {
 			List<YesSeriesDto> yesSeriesList = seriesDao.yesList(contentNo);
 			model.addAttribute("yesSeriesList",yesSeriesList);
+			
+			List<Integer> seasonSize = new ArrayList<>();
+			for(YesSeriesDto yesSeriesDto : yesSeriesList) {
+				if(!seasonSize.contains(yesSeriesDto.getContentSeason())) {
+					seasonSize.add(yesSeriesDto.getContentSeason());
+				}
+			}
+			
+			model.addAttribute("seasonSize", seasonSize);
 			return "admin/yesContentDetail";	
 		}
 	}
