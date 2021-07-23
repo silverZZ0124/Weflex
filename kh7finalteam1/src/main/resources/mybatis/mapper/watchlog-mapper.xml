@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="watchlog"> 
+	<select id="get" parameterType="map" resultType="WatchLogDto">
+		select * from watch_log where content_no=#{contentNo} and client_no = #{clientNo}
+	</select>
+	<insert id="mergeInto" parameterType="WatchLogDto">
+		merge into watch_log
+		    using dual
+		        on (client_no=#{clientNo} and content_no=#{contentNo})
+		    when matched then
+		        update set watch_log_season=#{watchLogSeason}, watch_log_episode=#{watchLogEpisode}, watch_log_playtime=#{watchLogPlaytime}
+		    when not matched then
+		        insert (client_no, content_no, watch_log_season, watch_log_episode, watch_log_playtime)
+		            values (#{clientNo}, #{contentNo}, #{watchLogSeason}, #{watchLogEpisode}, #{watchLogPlaytime})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+

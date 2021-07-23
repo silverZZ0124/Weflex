@@ -1,6 +1,8 @@
 package com.kh.finalteam1.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,16 @@ public class SeriesDaoImpl implements SeriesDao{
 	@Override
 	public List<YesSeriesDto> yesSeason(YesSeriesDto yesSeriesDto) {
 		return sqlSession.selectList("series.selectSeason", yesSeriesDto);
+	}
+
+	@Override
+	public YesSeriesDto yesGet(int contentNo, int season, int episode) {	
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("contentNo", contentNo);
+		map.put("season", season);
+		map.put("episode", episode);
+		
+		return sqlSession.selectOne("series.yesGet", map);
 	}
 
 }
