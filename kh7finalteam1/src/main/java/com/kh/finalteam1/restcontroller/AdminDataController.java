@@ -35,6 +35,9 @@ public class AdminDataController {
 	@Autowired
 	private ProgramFeatureDao programFeatureDao;
 	
+	@Autowired
+	private SeriesDao seriesDao;
+	
 	@GetMapping("/admin/searchGenre")
 	public List<GenreDto> searchGenre(@RequestParam String genreName) {
 		return genreDao.get(genreName);
@@ -47,6 +50,12 @@ public class AdminDataController {
 		
 	}
 	
+	@GetMapping("/admin/content/selectSeason")
+	public List<YesSeriesDto> selectSeason(@ModelAttribute YesSeriesDto yesSeriesDto) {
+		return seriesDao.yesSeason(yesSeriesDto);
+		
+	}
+	
 	@Autowired
 	private ClientDao clientDao;
 	
@@ -56,9 +65,6 @@ public class AdminDataController {
 		return clientDao.list();
 	}
 	
-	
-	@Autowired
-	private SeriesDao seriesDao;
 	
 	@PostMapping("/series/yes")
 	public void seriesInsertYes(

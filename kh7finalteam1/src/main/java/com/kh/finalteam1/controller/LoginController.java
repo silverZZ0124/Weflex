@@ -1,16 +1,23 @@
 package com.kh.finalteam1.controller;
 
 
+import org.apache.catalina.mapper.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-//import com.kh.finalteam1.repository.LoginDao;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.finalteam1.entity.ClientDto;
+import com.kh.finalteam1.repository.ClientDao;
 
 @Controller
 public class LoginController {
-	
-	/*
-	 * @Autowired private LoginDao loginDao;
-	 */
+	@Autowired
+	private ClientDao clientDao; 
 	
 	@GetMapping("/login")
 	public String login() {
@@ -39,15 +46,37 @@ public class LoginController {
 		return "login/join4";
 	}
 	
-	/*
-	 * @PostMapping("regitCheck") public String regitCheck(@RequestParam String
-	 * email, Model model ) {
-	 * 
-	 * ClientDto clientDto = loginDao.regitCheck(email);
-	 * 
-	 * if(clientDto == null) { return "redirect:join1"; } else {
-	 * model.addAttribute("email", email); return "login/login"; } }
-	 */
+	@PostMapping("regitCheck")
+	public String regitCheck(@RequestParam String email, Model model ) {
+	
+		ClientDto clientDto = clientDao.regitCheck(email);
+		
+		if(clientDto == null) {
+			return "redirect:join1";
+		}
+		else {
+			model.addAttribute("email", email);
+			return "login/login";
+		}
+	}
+	@PostMapping("loginCheck")
+	public String loginCheck(@ModelAttribute ClientDto clientDto) {
+		//System.out.println(email);
+		//System.out.println(pw);
 
+		ClientDto client = clientDao.loginCheck(clientDto);
 
+		if(client ==null) {
+			return "redirect: login";
+		}
+		else {
+			return"main/index";
+		}
+	}
+	@PostMapping("joinCheck")
+	public String joinCheck(@ModelAttribute ClientDto clientDto) {
+		clientDao.joinCheck(clientDto);
+		
+		return "redirect:/";
+	}
 }

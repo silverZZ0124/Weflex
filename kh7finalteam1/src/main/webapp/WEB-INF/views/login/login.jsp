@@ -32,12 +32,12 @@
 					<div class="login-content login-form hybrid-login-form hybrid-login-form-signup">
 						<div class="hybrid-login-form-main">
 							<h1>로그인</h1>
-							<form class="login-form">
+							<form action="loginCheck" method="post" class="login-form">
 								<div class="nfInput nfEmailPhoneInput login-input login-input-email">
 									<div class="nfInputPlacement">
 										<div class="nfEmailPhoneControls">
 											<label class="input_id">
-												<input type="text" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소 또는 전화번호">
+												<input type="text"  name="clientId" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소 또는 전화번호">
 											</label>
 										</div>
 									</div>
@@ -46,7 +46,7 @@
 									<div class="nfInputPlacement">
 										<div class="nfPasswordControls">
 											<label class="input_id">
-												<input type="text" class="nfTextField hasText" placeholder="비밀번호">
+												<input type="password"  name="clientPw" class="nfTextField hasText" placeholder="비밀번호">
 											</label>
 										</div>
 									</div>

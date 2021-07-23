@@ -33,6 +33,21 @@ public class ClientDaoImpl implements ClientDao {
 	}
 
 	@Override
+	public ClientDto regitCheck(String email) {
+		ClientDto clientDto = sqlSession.selectOne("client.regitCheck", email);
+		return clientDto;
+	}
+	@Override
+	public ClientDto loginCheck(ClientDto clientDto) {
+		//System.out.println(clientDto);
+		ClientDto client = sqlSession.selectOne("client.loginCheck",clientDto);
+		return client;
+	}
+	@Override
+	public void joinCheck(ClientDto clientDto){
+		sqlSession.insert("client.joinCheck",clientDto);
+	}
+
 	public boolean changeEmail(ClientDto clientDto) {
 		return sqlSession.update("client.changeEmail", clientDto) > 0;
 	}
