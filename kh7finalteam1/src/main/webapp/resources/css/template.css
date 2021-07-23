@@ -8,76 +8,7 @@ body, html{
 	background-color:#141414; /*ㅇㄹㅇ  */
 }
 
-@media screen and (max-width:960px){
-	.slider-box{
-		margin-bottom:10%;
-	}
-	
-            
-}
-@media screen and (max-width:830px){
-	.arrow-img{
-		cursor:pointer;
-		height:40% !important;
-	}
-            
-}
-@media screen and (max-width:719px){
-	.nav2-item{
-		display:none;
-	}
-            
-}
-@media screen and (max-width:600px){
-	.nav2-item{
-		display:none;
-	}
-    #sound-on,#sound-off{
-		display:none;
-	}    
-	.slider-box{
-		margin-bottom:20%;
-	}     
-	.arrow-img{
-		cursor:pointer;
-		height:40% !important;
-	}
-	.arrow-img{
-		cursor:pointer;
-		height:30% !important;
-	}
-	.main-btn{
-		padding: 0.1rem 0.4rem !important;
-	}
-	.trailer-series-section-info-title{
-		font-size:2.3vw !important;
-	}
-	.similar-contents-detail-box{
-		flex: 0 0 47% !important;
-	}
-	.series-play-btn{
-		margin-left: 6% !important;
-    	margin-top: -9% !important;
-	}
-	.modal-wallpaper-play-btn {
-	    margin-left: 20% !important;
-	    margin-top: -16% !important;
-	}
-	.modal-wallpaper-text{
-		font-size: 2.5vw !important;
-	}
-}
-@media screen and (max-width:570px){
-	.main-trailer-text{
-	display:none;
-	}
-	.main-btn{
-		margin-left:0 !important;
-	}
-	.series-play-btn > i {
-		font-size:1.5vw !important;
-	}
-}	
+
 
 
 body{
@@ -624,6 +555,10 @@ i{
 	margin-right: 15px;
 }
 
+
+
+
+
 @media screen and (max-width:991px){
 	#navbar1-ul{
 		display:none;
@@ -692,12 +627,20 @@ i{
 	}
             
 }
+@media screen and (max-width:830px){
+	.arrow-img{
+		cursor:pointer;
+		height:40% !important;
+	}
+            
+}
 @media screen and (max-width:719px){
 	.nav2-item{
 		display:none;
 	}
             
 }
+
 @media screen and (max-width:600px){
 	.nav2-item{
 		display:none;
@@ -739,6 +682,7 @@ i{
 		font-size: 2.5vw !important;
 	}
 }
+
 @media screen and (max-width:570px){
 	.main-trailer-text{
 		display:none;
