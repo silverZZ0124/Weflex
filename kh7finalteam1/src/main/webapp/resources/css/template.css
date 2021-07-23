@@ -695,31 +695,14 @@ i{
 	}
 }	
 
-@media screen and (min-width: 1500px){
-    .nav-style{
-		padding: 0 60px;
-	}
-}
 
-@media screen and (min-width: 1200px){
-	#header{
-		font-size: 14px;
-	}
-}
 
-@media screen and (min-width: 1150px){
-	#header .logo {
-        margin-right: 25px;
-	}
-}
 
 @media screen and (min-width: 950px){
 	.nav-style{
 		height: 68px;
 	}
-	#header .logo {
-	    width: 93px;
-	}
+	
 }
 
 @media (min-width: 800px){
