@@ -232,20 +232,20 @@ $(function(){
 <div class="main-color">
 	<div class="main-trailer-video">
 		<video width="100%" height="80%"  id="main-video" autoplay loop muted>
-    		<source src="res/video/main_trailer1.mp4" type="video/mp4">
+    		<source src="${mainTrailerList.trailerUrl }" type="video/mp4">
 		</video>
 		<div class="main-trailer-over-box">
 	<div class="main-trailer-img">
-	<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
+		<img src="${mainTrailerList.trailerLogo }" style="width:100%;">
 	</div>
 	
 	<div class="main-trailer-text">
-	인디애나주의 작은 마을에서 행방불명된 소년. 이와 함께 미스터리한 힘을 가진 소녀가 나타나고, 마을에는 기묘한 현상들이 일어나기 시작한다. 아들을 찾으려는 엄마와 마을 사람들은 이제 정부의 일급비밀 실험의 실체와 무시무시한 기묘한 현상들에 맞서야 한다.
+		${mainTrailerList.trailerInfo }
 	</div>
 	
 	<div class="main-btn-box">
 		<div>
-			<button class="btn btn-light main-btn" id="main-play-btn"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+			<button class="btn btn-light main-btn" id="main-play-btn" data-contentNo="${mainTrailerList.contentNo }"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
 		</div>
 		<div class="main-btn-etc-box">
