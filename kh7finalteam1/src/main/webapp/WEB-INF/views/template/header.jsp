@@ -39,19 +39,7 @@
 </head>
 <script>
 	$(function(){
-		$(document).ready(function() {
-			
-		      if (window.location.href == 'http://localhost:8080/finalteam1/tv') {
-		          
-		          $("#header").css("position","absolute");
-		          /* $("#second-nav-bar").css("display","block");
-		          $("#second-nav-bar").css("margin","block"); */
-		          $("#second-nav-bar").addClass("show-second-nav-bar");
-	          }
-	      else{
-	    	  $("#second-nav-bar").css("display","none");
-	      } 
-	    });
+		
 		
 		$(window).on('scroll',function(){
 			if($(window).scrollTop()){
