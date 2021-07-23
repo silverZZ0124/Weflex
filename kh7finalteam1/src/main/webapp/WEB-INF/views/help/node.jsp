@@ -134,13 +134,18 @@
         
         var content= `${qnaBoardDto.qnaBoardContent}` || "";
         
-        console.log(content);
-
         var viewer = toastui.Editor.factory({
             el: document.querySelector('#left-pane-content'),
             viewer: true,
             height: '500px',
-            initialValue: content
+            initialValue: ""
+        });
+        
+        $(function(){
+        	//$("#left-pane-content").text(content);
+        	console.log(viewer);
+        	viewer.markdownValue =  content;    
+        	console.log(viewer);
         });
     </script>
 	

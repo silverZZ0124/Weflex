@@ -12,11 +12,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	
 	<typeAliases>
-		<package name="com.kh.finalteam1.entity.client"/>
-		<package name="com.kh.finalteam1.entity.content"/>
-		<package name="com.kh.finalteam1.entity.log"/>
-		<package name="com.kh.finalteam1.entity.qna"/>
-	</typeAliases>
+      <package name="com.kh.finalteam1.entity"/>
+      <package name="com.kh.finalteam1.vo"/>
+   </typeAliases>
 	
 	<!-- <environments default="development">
 		<environment id="development">

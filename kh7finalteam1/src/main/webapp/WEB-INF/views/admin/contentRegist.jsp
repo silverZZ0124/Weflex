@@ -22,23 +22,95 @@
         }
 	</style>
 	
+	<script>
+	
+    $(function(){
+        $("#form-regist").submit(function(e){
+            e.preventDefault();
+            
+            var form = this;
+            //console.log(form);
+	            
+	         if($("#season").val() == 'Y'){
+		            $("#yes-Modal").modal("show");
+		        
+		            $("#content-form-yes").submit(function (e){
+		            	 e.preventDefault();
+		               
+		            	 var formdata = $(this).serialize();
+		                //console.log(formdata);
+	
+	                $.ajax({
+	                        url : "${pageContext.request.contextPath}/data/series/yes",
+	                        type : "post",
+	                        data:formdata,
+	                        success:function(resp){
+	                        	//console.log(resp)
+	                            $("#yes-Modal").modal("hide");
+	                        	//$(form).submit();//submit 이벤트를 발생시키는 명령(트리거)
+	                        	form.submit();//form 객체를 전송시키는 명령
+	                            }
+	                        });
+	                });
+	        } 
+	         else if($("#season").val() == 'N'){
+	        	 	$("#no-Modal").modal("show");
+	        	
+		        	 $("#content-form-no").submit(function (e){
+		            	 e.preventDefault();
+		            	 
+		            	 var formdata = $(this).serialize();
+		            	 //console.log(formdata);
+	        	
+	            	 $.ajax({
+	                     url : "${pageContext.request.contextPath}/data/series/no",
+	                     type : "post",
+	                     data:formdata,
+	                     success:function(resp){
+	                     	//console.log(resp)
+	                         $("#no-Modal").modal("hide");
+	                     	//$(form).submit();//submit 이벤트를 발생시키는 명령(트리거)
+	                     	form.submit();//form 객체를 전송시키는 명령
+	                         }
+	                     });
+        	 
+       				 });  
+    		 }
+		});
+	});
+    
+    $(function(){
+        $("input[name=contentPlaytime]").on("input",function(){
+            var num = $(this).val();
+            //console.log(num);
+            //console.log(num.length);
+            var maxlength = $(this).attr("maxlength");
+           if(num.length > maxlength){  
+              num = num.slice(0, maxlength);
+              //console.log(num)
+              $(this).val(num); 
+           }
+        });
+    });
+	</script>
+
 	
 <div class="container-fluid">
         <div class="row mt-3">
-            <div class="col-md-4 offset-sm-4">
+            <div class="col-md-6 offset-md-3">
                 <div class="text-center mb-3">
                     <h1>컨텐츠 등록</h1>
                 </div>
-            <form action="contentRegist" method="post" class="form">	
+            <form action="contentRegist" method="post" class="form" id="form-regist">	
 				<!--  <input type="text" name="contentNo" value="${contentNo}"> -->
                 <div class="form-group">
                     <label>컨텐츠명</label>
-                    <input type="text" name="contentName" class="form-control">
+                    <input type="text" name="contentName" class="form-control" required>
                 </div>
 
                 <div class="form-group form-textarea">
                     <label>컨텐츠 소개</label>
-                    <textarea name="contentInfo" class="form-control form-textarea"></textarea>
+                    <textarea name="contentInfo" class="form-control form-textarea" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -91,12 +163,17 @@
 
                  <div class="form-group">
                     <label>컨텐츠 로고</label>
-                    <input type="text" name="contentLogo" class="form-control">
+                    <input type="text" name="contentLogo" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label>컨텐츠 썸네일</label>
-                    <input type="text" name="contentThumbnail" class="form-control">
+                    <input type="text" name="contentThumbnail" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>컨텐츠 예고편</label>
+                    <input type="text" name="contentTrailer" class="form-control" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">등록</button>
@@ -108,5 +185,5 @@
 </div>
 
 	
-		
+	<jsp:include page="/WEB-INF/views/admin/seriesModal.jsp"></jsp:include>
     <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

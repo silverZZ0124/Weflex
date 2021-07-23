@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="client">
+	<select id="findClient" parameterType="int" resultType="ClientDto">
+		select * from client where client_no = #{clientNo}
+	</select> 
+	<select id="getGrade" parameterType="int" resultType="ClientGradeDto">
+		select * from client_grade where grade_no = #{gradeNo}
+	</select>
+	<update id="changePhone" parameterType="ClientDto">
+		update client set client_phone = #{clientPhone} where client_no = #{ clientNo} 
+	</update>
+	<update id="changeEmail" parameterType="ClientDto">
+		update client set client_id = #{clientId} where client_no = #{ clientNo} 
+	</update>
+	<select id="regitCheck" parameterType="string" resultType="ClientDto" >
+		select * from client where client_id=#{email}
+	</select>
+	<update id="changePassword" parameterType="ClientUpdatePasswordVO">
+		update client set client_pw = #{clientNewPw} where client_no = #{ clientNo} and client_pw = #{clientPw}
+	</update>
+	
+	<!-- 회원 목록 (관리자 페이지 이용) -->
+	<select id="grade-list" resultType="ClientGradeListDto">
+		select 
+			C.*, G.grade_name 
+		from 
+			client C
+				left outer join client_grade G on C.grade_no = G.grade_no
+	</select>
+	
+</mapper>
+

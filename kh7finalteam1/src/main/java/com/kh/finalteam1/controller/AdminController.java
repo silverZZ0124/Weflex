@@ -7,20 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalteam1.entity.content.ContentDto;
-import com.kh.finalteam1.entity.content.GenreDto;
-import com.kh.finalteam1.entity.content.NoSeriesDto;
-import com.kh.finalteam1.entity.content.ProgramFeatureDto;
-import com.kh.finalteam1.entity.content.YesSeriesDto;
-import com.kh.finalteam1.repository.content.ContentDao;
-import com.kh.finalteam1.repository.genre.GenreDao;
-import com.kh.finalteam1.repository.programfeature.ProgramFeatureDao;
-import com.kh.finalteam1.repository.series.SeriesDao;
+import com.kh.finalteam1.entity.GenreDto;
+import com.kh.finalteam1.entity.ProgramFeatureDto;
+import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.ProgramFeatureDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -53,6 +47,17 @@ public class AdminController {
 		model.addAttribute("genreList", genreList);
 		model.addAttribute("editGenreName", genreName);
 		return "admin/genreEdit";
+	}
+	
+	@PostMapping("/genreEditComplete")
+	public String genreEditComplete(@ModelAttribute GenreDto genreDto) {
+		boolean isChange = genreDao.edit(genreDto);
+		if(isChange) {
+			return "redirect:/admin/genre";
+		}
+		else {
+			return "admin/genreEdit?genreName="+genreDto.getGenreName();
+		}
 	}
 	
 	@GetMapping("/genreDelete")
@@ -91,58 +96,34 @@ public class AdminController {
 		return "admin/programFeatureEdit";
 	}
 	
+	@PostMapping("/featureEditComplete")
+	public String featureEditComplete(@ModelAttribute ProgramFeatureDto programFeatureDto) {
+		boolean isChange = programFeatureDao.edit(programFeatureDto);
+		if(isChange) {
+			return "redirect:/admin/feature";
+		}
+		else {
+			return "admin/featureEdit?featureName="+programFeatureDto.getFeatureName();
+		}
+	}
+	
 	@GetMapping("/featureDelete")
 	public String featureDelete(@RequestParam String featureName, Model model) {
 		boolean isDelete = programFeatureDao.delete(featureName);
 		if(isDelete) {
-			return "redirect:/admin/programFeature";
+			return "redirect:/admin/feature";
 		}
 		else {
 			model.addAttribute("featureName", featureName);
-			return "programFeatureEdit";
+			return "admin/programFeatureEdit";
 		}
 	}
 	
-	//contentRegist.jsp 이동
-	@GetMapping("/contentRegist")
-	public String contentRegist() {
-		return "admin/contentRegist";
-	}
 	
-	//content 등록 관련 controller
-	@Autowired
-	private ContentDao contentDao;
-	
-	@PostMapping("/contentRegist")
-	public String contentRegist(@ModelAttribute ContentDto contentDto) {
-		int contentNo = contentDao.sequence();
-		contentDto.setContentNo(contentNo);
-		contentDao.insert(contentDto);
-		return "redirect:/admin/seriesRegist/"+contentNo;
-	}
-	
-	//series 등록 관련 controller
-	@GetMapping("/seriesRegist/{contentNo}")
-	public String seriesRegist(
-			@PathVariable int contentNo, Model model) {
-			ContentDto contentDto = contentDao.get(contentNo);
-			model.addAttribute("contentDto", contentDto);
-		return "admin/seriesRegist";
-	}
-	
-	@Autowired
-	private SeriesDao seriesDao;
-	
-	@PostMapping("/seriesRegist/yes")
-	public String seriesRegistYes(@ModelAttribute YesSeriesDto yesSeriesDto) {
-		seriesDao.yesInsert(yesSeriesDto);
-		return "redirect:/admin/";
-	}
-	
-	@PostMapping("/seriesRegist/no")
-	public String seriesRegistNo(@ModelAttribute NoSeriesDto noSeriesDto) {
-		seriesDao.noInsert(noSeriesDto);
-		return "redirect:/admin/";
-	}
+	//회원 관리
+		@GetMapping("/clientAdmin")
+		public String clientAdmin() {
+			return "admin/clientAdmin";
+		}
 
 }

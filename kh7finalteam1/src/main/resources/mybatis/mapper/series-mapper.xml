@@ -5,16 +5,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="series">
-	
+	<!-- 연작('Y')일때 등록 -->
 	<insert id="yesInsert" parameterType="YesSeriesDto">
 		insert into yes_series values(
 			#{contentNo}, #{contentSeason}, #{contentEpisode}, #{episodeInfo}, #{contentPlaytime}, #{seriesPath}
 		)
 	</insert>
 	
-		<insert id="noInsert" parameterType="NoSeriesDto">
+	<!-- 연작('N')일때 등록 -->
+	<insert id="noInsert" parameterType="NoSeriesDto">
 		insert into no_series values(
 			#{contentNo}, #{contentPlaytime}, #{seriesPath}
 		)
 	</insert>
+	
+	<!-- 연작 없는('N') 단일 조회 -->
+	<select id="noGet" parameterType="int" resultType="NoSeriesDto">
+		select * from no_series where content_no = #{contentNo}
+	</select>
+	
+	<!-- no_series 정보 수정 -->
+	<update id="noEdit" parameterType="NoSeriesDto">
+		update no_series set content_playtime=#{contentPlaytime}, series_path=#{seriesPath} where content_no=#{contentNo}
+	</update>
+	
+	<!-- 연작 있는('Y') 조회 -->
+	<select id="yesList" parameterType="YesSeriesDto" resultType="YesSeriesDto">
+		select * from yes_series where content_no = #{contentNo} order by content_season asc, content_episode asc
+	</select>
+	
+	<!-- yes_series 정보 수정 -->
+	<update id="yesEdit" parameterType="YesSeriesDto">
+		update yes_series set episode_info=#{episodeInfo}, content_playtime=#{contentPlaytime}, series_path=#{seriesPath} where content_no=#{contentNo} and content_season=#{contentSeason} and content_episode=#{contentEpisode}
+	</update>
+	
+	<!-- yes_series 에피소드 삭제 -->
+	<delete id="yesDelete" parameterType="YesSeriesDto">
+		delete yes_series where content_no=#{contentNo} and content_season=#{contentSeason} and content_episode=#{contentEpisode}
+	</delete>
+	
+	<!-- 시즌 몇인지 검색 -->
+	<select id="selectSeason" parameterType="YesSeriesDto" resultType="YesSeriesDto">
+		select * from yes_series where content_season=#{contentSeason} and content_no=#{contentNo} order by content_episode asc
+	</select>
+	
 </mapper>

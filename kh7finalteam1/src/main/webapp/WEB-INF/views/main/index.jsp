@@ -22,7 +22,7 @@
 			<div class="our-story-header-wrapper">
 				<div class="our-story-header">
 					<span class="our-story-logo">
-						<a style="display: inline-block; height: 100%;" href="#"><img class="img-logo" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png" ></a> 
+						<a style="display: inline-block; height: 100%;" href="#"><img class="img-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" ></a> 
 					</span>	
 					
 					<div class="lang-selection-container">
@@ -51,7 +51,7 @@
 					<div class="our-story-card-text">
 						<h1 class="our-story-card-title">영화, TV 프로그램을 무제한으로.</h1>
 						<h2 class="our-story-card-subtitle">다양한 디바이스에서 시청하세요. 언제든 해지하실 수 있습니다.</h2>
-						<form class="cta-form email-form">
+						<form action="regitCheck" method="post"class="cta-form email-form" >
 							<h3 class="email-form-title">시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.</h3>
 							<div class="email-form-lockup">
 								<ul class="simpleForm structural ui-grid">
@@ -59,16 +59,17 @@
 										<div class="nfInput nfInputResponsive">
 											<div class="nfInputPlacement">
 												<label class="input_id" placeholder="email">
-													<input type="email" id="id_email_hero_fuji" name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소">													
+													<input  type="email" id="id_email_hero_fuji"  name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소">													
 												</label>
 											</div>
 										</div>
 									</li>
 								</ul>
 								<div class="our-story-cta-container cta-link-wrapper">
-									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom">
-										<span class="cta-btn-txt">시작하기</span>
-										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i></span>									
+									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom"  type="submit">
+										<span class="cta-btn-txt" >시작하기</span>
+										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i>
+										</span>									
 									</button>
 								</div>
 							</div>
@@ -162,13 +163,13 @@
 						<ul class="faq-list">
 							<li class="faq-list-item">
 								<div class="custom-accordion-item">
-									<button class="accordion-button faq-question" type="button"
+									<button class="accordion-button collapsed faq-question" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapseOne"
 										aria-expanded="false" aria-controls="collapseOne">
 										넷플릭스란 무엇인가요?</button>
 									<div id="collapseOne" class="accordion-collapse collapse faq-answer"
 										aria-labelledby="headingOne"
-										data-bs-parent=".faq-list-item">
+										data-bs-parent=".faq-list">
 										<div class="accordion-body">
 											넷플릭스는 각종 수상 경력에 빛나는 TV 프로그램, 영화, 애니메이션, 다큐멘터리 등 다양한 콘텐츠를 인터넷 연결이 가능한 수천 종의 디바이스에서 시청할 수 있는 스트리밍 서비스입니다.
 											<br>
@@ -178,7 +179,223 @@
 									</div>
 								</div>
 							</li>
+							<li class="faq-list-item">
+								<div class="custom-accordion-item">
+									<button class="accordion-button collapsed faq-question" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+										aria-expanded="false" aria-controls="collapseTwo">
+										넷플릭스 요금은 얼마인가요?</button>
+									<div id="collapseTwo" class="accordion-collapse collapse faq-answer"
+										aria-labelledby="headingTwo"
+										data-bs-parent=".faq-list">
+										<div class="accordion-body">
+											스마트폰, 태블릿, 스마트 TV, 노트북, 스트리밍 디바이스 등 다양한 디바이스에서 월정액 요금 하나로 넷플릭스를 시청하세요. 멤버십 요금은 월 9,500원부터 14,500원까지 다양합니다. 추가 비용이나 약정이 없습니다.
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="faq-list-item">
+								<div class="custom-accordion-item">
+									<button class="accordion-button collapsed faq-question" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree">
+										어디에서 시청할 수 있나요?</button>
+									<div id="collapseThree" class="accordion-collapse collapse faq-answer"
+										aria-labelledby="headingThree"
+										data-bs-parent=".faq-list">
+										<div class="accordion-body">
+											다양한 디바이스에서 언제 어디서나 시청할 수 있습니다. 넷플릭스 계정으로 로그인하면 PC에서 netflix.com을 통해 바로 시청할 수 있으며, 인터넷이 연결되어 있고 넷플릭스 앱을 지원하는 디바이스(스마트 TV, 스마트폰, 태블릿, 스트리밍 미디어 플레이어, 게임 콘솔 등)에서도 언제든지 시청할 수 있습니다. 
+											<br>
+											<br>
+											iOS, Android, Windows 10용 앱에서는 좋아하는 프로그램을 저장할 수도 있습니다. 저장 기능을 이용해 이동 중이나 인터넷에 연결할 수 없는 곳에서도 시청하세요. 넷플릭스는 어디서든 함께니까요.
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="faq-list-item">
+								<div class="custom-accordion-item">
+									<button class="accordion-button collapsed faq-question" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseFour"
+										aria-expanded="false" aria-controls="collapseFour">
+										멤버십을 해지하려면 어떻게 하나요?</button>
+									<div id="collapseFour" class="accordion-collapse collapse faq-answer"
+										aria-labelledby="headingFour"
+										data-bs-parent=".faq-list">
+										<div class="accordion-body">
+											넷플릭스는 부담 없이 간편합니다. 성가신 계약도, 약정도 없으니까요. 멤버십 해지도 온라인에서 클릭 두 번이면 완료할 수 있습니다. 해지 수수료도 없으니 원할 때 언제든 계정을 시작하거나 종료하세요.
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="faq-list-item">
+								<div class="custom-accordion-item">
+									<button class="accordion-button collapsed faq-question" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseFive"
+										aria-expanded="false" aria-controls="collapseFive">
+										넷플릭스에서 어떤 콘텐츠를 시청할 수 있나요?</button>
+									<div id="collapseFive" class="accordion-collapse collapse faq-answer"
+										aria-labelledby="headingFive"
+										data-bs-parent=".faq-list">
+										<div class="accordion-body">
+											넷플릭스는 장편 영화, 다큐멘터리, TV 프로그램, 애니메이션, 각종 상을 수상한 넷플릭스 오리지널 등 수많은 콘텐츠를 확보하고 있습니다. 마음에 드는 콘텐츠를 원하는 시간에 원하는 만큼 시청하세요.
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="faq-list-item">
+								<div class="custom-accordion-item">
+									<button class="accordion-button collapsed faq-question" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseSix"
+										aria-expanded="false" aria-controls="collapseSix">
+										아이들이 넷플릭스를 봐도 좋을까요?</button>
+									<div id="collapseSix" class="accordion-collapse collapse faq-answer"
+										aria-labelledby="headingSix"
+										data-bs-parent=".faq-list">
+										<div class="accordion-body">
+											멤버십에 넷플릭스 키즈 환경이 포함되어 있어 자녀가 자기만의 공간에서 가족용 TV 프로그램과 영화를 즐기는 동안 부모가 이를 관리할 수 있습니다. 
+											<br>
+											<br>
+											키즈 프로필과 더불어 PIN 번호를 이용한 자녀 보호 기능도 있어, 자녀가 시청할 수 있는 콘텐츠의 관람등급을 제한하고 자녀의 시청을 원치 않는 특정 작품을 차단할 수도 있습니다.
+										</div>
+									</div>
+								</div>
+							</li>
 						</ul>
+						
+						<!-- 맨 아래 form -->
+						<form class="cta-form email-form">
+							<h3 class="email-form-title">
+								시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.
+							</h3>
+							<div class="email-form-lockup">
+								<ul class="simpleForm structural ui-grid">
+									<li class="nfFormSpace field-email">
+										<div class="nfInput nfInputResponsive">
+											<div class="nfInputPlacement">
+												<label class="input_id" placeholder="email">
+													<input type="text" class="nfTextField hasText" id="id_email_faq" maxlength="50" minlength="5" placeholder="이메일 주소">													
+												</label>
+											</div>
+										</div>
+									</li>
+								</ul>
+								<div class="our-story-cta-container cta-link-wrapper">
+									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom" type="submit">
+										<span class="cta-btn-txt">시작하기</span>
+										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i></span>											
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- footer -->
+				<div class="our-story-card card-contents footer-card our-story-card-no-border position-relative">
+					<div class="site-footer-wrapper centered dark">
+						<div class="site-footer">
+							<p class="footer-top">
+								질문이 있으신가요? 문의 전화:&nbsp;
+								<a href="#" class="footer-top-a">080-001-9587</a>
+							</p>
+							<ul class="footer-links structural">
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>자주 묻는 질문</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>고객 센터</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>계정</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>미디어 센터</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>투자 정보(IR)</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>입사 정보</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>넷플릭스 지원 디바이스</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>이용 약관</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>개인정보</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>쿠키 설정</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>회사 정보</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>문의하기</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>속도 테스트</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>법적 고지</span>
+									</a>
+								</li>
+								<li class="footer-link-item">
+									<a class="footer-link" href="#">
+										<span>오직 넷플릭스에서</span>
+									</a>
+								</li>
+							</ul>
+							<div class="footer-lang-selection-container">
+								<div class="ui-select-wrapper">
+									<div class="select-arrow medium prefix globe">
+										<select class="ui-select medium">
+											<option selected>한국어</option>
+											<option>English</option>
+										</select>
+									</div>									
+								</div>
+							</div>
+							<p class="footer-country">넷플릭스 대한민국</p>
+							<div class="copy-text">
+								<div class="copy-text-block">넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587</div>
+								<div class="copy-text-block">대표: 레지널드 숀 톰프슨</div>
+								<div class="copy-text-block">이메일 주소: korea@netflix.com</div>
+								<div class="copy-text-block">주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</div>
+								<div class="copy-text-block">사업자등록번호: 165-87-00119</div>
+								<div class="copy-text-block">클라우드 호스팅: Amazon Web Services Inc.</div>
+								<div class="copy-text-block">공정거래위원회 웹사이트</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

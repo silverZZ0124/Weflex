@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?> 
 
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
 <mapper namespace="content">
 
-	 <!-- contentNo 뽑기 (시퀀스번호 미리 추출) -->
+	<!-- contentNo 뽑기 (시퀀스번호 미리 추출) -->
 	 <select id="sequence" resultType="int">
 		select content_seq.nextval from dual
 	</select>
@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="ContentDto">
 		insert into content values(
 		#{contentNo} , #{contentName}, #{contentInfo}, #{contentLimit},  #{contentSeries}, 
-		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}
+		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}, #{contentTrailer}
 		)
 	</insert>
 	
@@ -23,4 +23,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="get" parameterType="int" resultType="ContentDto">
 		select * from content where content_no = #{contentNo}
 	</select>
+	
+	<!-- 컨텐츠 리스트 -->
+	<select id="list" resultType="ContentDto">
+		select * from content order by content_no desc
+	</select>
+	
+	<!-- 컨텐츠 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from content where content_no=#{contentNo}
+	</delete>
+	 
+	<!-- 컨텐츠 상세정보 수정 -->
+	<update id="edit" parameterType="ContentDto">
+		update content set 
+			content_name=#{contentName}, content_info=#{contentInfo}, content_limit=#{contentLimit}, 
+			content_type=#{contentType},  content_release=#{contentRelease},
+			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail}
+		where content_no=#{contentNo}
+	</update> 
+	 
 </mapper>
