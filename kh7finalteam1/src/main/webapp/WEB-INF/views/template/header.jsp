@@ -149,7 +149,7 @@
             	</a>       		
 		          
 		          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark dropdown-left" aria-labelledby="navbarDarkDropdownMenuLink">
-		            <li><a class="dropdown-item" href="#">계정</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/help">고객센터</a></li>
 		            <li><a class="dropdown-item" href="#">로그아웃</a></li>
 		          </ul>
