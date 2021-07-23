@@ -1,6 +1,8 @@
 package com.kh.finalteam1.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -60,17 +62,15 @@ public class LoginController {
 		}
 	}
 	@PostMapping("loginCheck")
-	public String loginCheck(@ModelAttribute ClientDto clientDto) {
-		//System.out.println(email);
-		//System.out.println(pw);
-
+	public String loginCheck(@ModelAttribute ClientDto clientDto, HttpSession session) {
 		ClientDto client = clientDao.loginCheck(clientDto);
 
 		if(client ==null) {
 			return "redirect: login";
 		}
 		else {
-			return"main/index";
+			session.setAttribute("clientNo", client.getClientNo());
+			return "redirect:/";
 		}
 	}
 	@PostMapping("joinCheck")

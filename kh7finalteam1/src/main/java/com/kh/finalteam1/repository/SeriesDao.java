@@ -9,6 +9,7 @@ public interface SeriesDao {
 	void yesInsert(YesSeriesDto yesSeriesDto);
 	void noInsert(NoSeriesDto noSeriesDto);
 	NoSeriesDto noGet(int contentNo);
+	YesSeriesDto yesGet(int contentNo, int season, int episode);
 	boolean noEdit(NoSeriesDto noSeriesDto);
 	List<YesSeriesDto> yesList(int contentNo);
 	boolean yesEdit(YesSeriesDto yesSeriesDto);

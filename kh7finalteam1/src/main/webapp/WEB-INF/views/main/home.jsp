@@ -193,7 +193,7 @@ $(function(){
 		$("#detailModal").on("hidden.bs.modal",function(){
 			videoDomObj.play();
     	});
-		
+				
 		//소리 재생 
 		$("#sound-on").click(function(){
 			videoDomObj.muted=false;
@@ -252,11 +252,33 @@ $(function(){
 		});
 		
 		//모달 버튼 누르면 wallpaper 출력
-		$("#detailModal").on("show.bs.modal",function(){
+		$("#detailModal").on("show.bs.modal",function(e){
 			var index=$(".similar-contents-box").find("var")
 			if(index>6){
 				$(".similar-contents-detail-box").css("display","none");
 			}
+			
+			var el = $(e.relatedTarget);
+			var contentNo = el.attr("data-contentno");
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/getContent",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: contentNo	
+				},
+				success:function(resp){
+					
+					var url = resp.contentTrailer + "/enablejsapi=1&start=00&autoplay=1&mute=0&controls=1&modestbranding=1";
+					$("#player").attr("src", url);
+					console.log(url);
+				}
+			});
+		});
+		
+		$("#detailModal").on("shown.bs.modal",function(e){
+			//$("#player").playVideo();
 		});
 
 		
@@ -319,8 +341,11 @@ $(function(){
 	</div>
 	<div class="main-btn-box">
 		<div>
-			<button class="btn btn-light main-btn" id="main-play-btn" data-contentNo="${mainTrailerList.contentNo }"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
-			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
+			<form action="play" style="display: inline-block;">
+				<input type="hidden" name="contentNo" value="${mainTrailerList.contentNo }">
+				<button class="btn btn-light main-btn" id="main-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+			</form>
+			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" data-contentno="${mainTrailerList.contentNo }" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
 		</div>
 		<div class="main-btn-etc-box">
 			<button class="btn btn-outline-light modal-etc-btn" id="sound-off" style="display:none;"><i class="fas fa-volume-up"></i></button>
@@ -338,26 +363,27 @@ $(function(){
 	    <div class="modal-content">
 	     
 	      <div class="modal-body main-color" style="padding:0px; border:none;">
-	      <button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-	        <div style="position:relative;">
-	        	<video width="100%" height="80%"  autoplay loop muted  style="z-index:-5">
-    				<source src="res/video/main_trailer1.mp4" type="video/mp4" style="width:100%">
-				</video>
-				 <div class="modal-trailer-over-box">
-				<div class="main-trailer-img">
-				<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
-				</div>
-				<div class="modal-btn-box">
-				<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
-				<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-				<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-				<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
-				<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
-				</div>
-			
-			</div>
+			<button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+			<div style="position:relative;">
+	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5"> -->
+	        	<iframe id="player" width="100%" height="100%" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 				<div class="modal-gradation-box">&ensp;&ensp;</div>
 	        </div>
+	        
+	        <div class="modal-trailer-over-box">	
+					<div class="main-trailer-img">
+					<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
+					</div>
+					<div class="modal-btn-box">				
+						<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
+					</div>
+				
+			</div>
+				
 	        
 	       <!--  <div class="modal-trailer-over-box">
 				<div class="main-trailer-img">
