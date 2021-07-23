@@ -13,10 +13,10 @@
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registrationWithContext simplicity">
 				<div class="nfHeader noBorderHeader signupBasicHeader">
-					<a href="/" class="svg-nfLogo signupBasicHeader">
+					<a href="/finalteam1/index" class="svg-nfLogo signupBasicHeader">
 						<img class="svg-icon svg-icon-netflix-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">						
 					</a>
-					<a href="/login" class="authLinks signupBasicHeader">로그인
+					<a href="/finalteam1/login" class="authLinks signupBasicHeader">로그인
 					</a>
 				</div>
 				<div class="simpleContainer">
@@ -36,7 +36,9 @@
 							<div id="" class="contextBody contextRow">맞춤형 콘텐츠 서비스, 넷플릭스! 비밀번호를 설정해 다양한 디바이스에서 아무 때나 시청하세요.</div>
 						</div>
 						<div class="submitBtnContainer">
-						<button type="button" autocomplete="off" class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"  placeholder="registration_button_continue">다음</button>
+						<a href="/finalteam1/join2">
+						<button  type="button" autocomplete="off" class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"  placeholder="registration_button_continue">다음</button>
+						</a>
 						</div>
 					</div>
 				</div>
