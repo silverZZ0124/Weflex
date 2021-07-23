@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +10,7 @@
 <title>join2페이지</title>
 </head>
 <body>
+
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registration simplicity">
@@ -20,7 +22,7 @@
 				</div>
 				<div class="simpleContainer" data-transitioned-child="true">
 					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
-						<form method="POST">
+						<form action="joinCheck"method="POST" id="joinCheck">
 							<div class="regFormContainer">
 								<div class="stepHeader-container" >
 									<div class="stepHeader" data-a11y-focus="true" tabindex="0">
@@ -40,47 +42,57 @@
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
-													<input name="email"class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="6666666@naver.com">
+													<input name="clientId"class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="6666666@naver.com">
 													<label for="id_email" class="placeLabel">이메일 주소</label>
 													</label>
 												</div>
 											</div>
 											</li>
-										<li data-uia="field-password+wrapper" class="nfFormSpace">
+										<li class="nfFormSpace">
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="password">
-													<input name="password"class="nfTextField" id="id_password" type="password"tabindex="0" autocomplete="password" maxlength="62"minlength="6" dir="" value="">
+													<input name="clientPw"class="nfTextField" id="id_password" type="password"value tabindex="0" autocomplete="off" maxlength="61"minlength="4" dir="" dir>
 													<label for="id_password" class="placeLabel">비밀번호를 추가하세요</label>
 													</label>
 												</div>
-											</div>
-											</li>
-										<li  class="nfFormSpace">
-										<div class="ui-binary-input">
-												<input type="checkbox" class="" name="pipcConsent"id="cb_pipcConsent" tabindex="0" value="true">
-													 <label for="cb_pipcConsent" >
-													 <span id="" data-uia="">예, 저는
-													 <a href="https://help.netflix.com/legal/privacy"target="_blank">개인정보 처리방침</a>에 따른 개인정보 수집 및 활용에 동의합니다.
-												</span>
-												</label>
-												<div class="helper">
-												</div>
-											</div>
-											</li>
+										</div>
+										</li>
 										<li class="nfFormSpace">
-										<div class="ui-binary-input">
-												<input type="checkbox" class="" name="emailPreference"id="cb_emailPreference" tabindex="0"value="true">
-												<label for="cb_emailPreference">예, 넷플릭스 특별할인 알림 이메일을 보내주세요. (선택 사항)</label>
-												<div class="helper">
+										<div class="nfInput nfInputOversize">
+												<div class="nfInputPlacement">
+													<label class="input_id" placeholder="이름">
+													<input name="clientName"class="nfTextField" id="id_name" type="text"tabindex="0" autocomplete="name" maxlength="62"dir="" value="">
+													<label for="id_name" class="placeLabel">이름</label>
+													</label>
 												</div>
-											</div>
-											</li>
+										</div>
+										</li>
+										<li class="nfFormSpace">
+										<div class="nfInput nfInputOversize">
+												<div class="nfInputPlacement">
+													<label class="input_birth" placeholder="생년월일">
+													<input name="clientBirth"class="nfTextField" id="id_birth" type="date"tabindex="0" autocomplete="birth" maxlength="62"minlength="6" dir="" value="">
+													<label for="id_birth" class="placeLabel">생년월일를 /포함하여 입력해주세요</label>
+													</label>
+												</div>
+										</div>
+										</li>
+										<li class="nfFormSpace">
+										<div class="nfInput nfInputOversize">
+												<div class="nfInputPlacement">
+													<label class="input_id" placeholder="phone">
+													<input name="clientPhone"class="nfTextField" id="id_phone" type="text"tabindex="0" autocomplete="phone" maxlength="62"minlength="6" dir="" value="">
+													<label for="id_phone" class="placeLabel">핸드폰번호를 -포함하여 적어주세요</label>
+													</label>
+												</div>
+										</div>
+										</li>
 									</ul>
 								</div>
 							</div>
 							<div class="submitBtnContainer">
-								<button type="submit" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="regForm_agree_next_registration_button">동의하고다음</button>
+								<button type="submit" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="regForm_agree_next_registration_button">회원가입하기</button>
 							</div>
 						</form>
 					</div>
