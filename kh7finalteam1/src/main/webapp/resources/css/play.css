@@ -53,3 +53,41 @@
 	z-index: 10;
     padding-top: 6%;
 }
+.play-top-div{
+	width:100%;
+	height:60px;
+	position:absolute;
+	display:flex;
+}
+#go-back{
+	margin-top: auto;
+	border:none;
+}
+.play-bottom-div{
+	width: 100%;
+    height: 61px;
+    position: absolute;
+    display: flex;
+    bottom: 0%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

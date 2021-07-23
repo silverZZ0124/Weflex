@@ -1,7 +1,11 @@
 package com.kh.finalteam1.repository;
 
-import com.kh.finalteam1.entity.client.ClientDto;
-import com.kh.finalteam1.entity.client.ClientGradeDto;
+import java.util.List;
+
+import com.kh.finalteam1.entity.ClientDto;
+import com.kh.finalteam1.entity.ClientGradeDto;
+import com.kh.finalteam1.entity.ClientGradeListDto;
+import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 
 public interface ClientDao {
 	ClientDto findClient(int clientNo);
@@ -10,4 +14,7 @@ public interface ClientDao {
 	ClientDto regitCheck(String email);
 	ClientDto loginCheck(ClientDto clientDto);
 	 void  joinCheck(ClientDto clientDto);
+	boolean changeEmail(ClientDto clientDto);
+	boolean changePassword(ClientUpdatePasswordVO clientVO);	
+	List<ClientGradeListDto> list();//회원 전체 목록 출력(관리자 게시판 사용)
 }

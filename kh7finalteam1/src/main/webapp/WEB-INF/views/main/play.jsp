@@ -111,18 +111,26 @@
 
 <body class="main-color fade-in no-scroll">
 <div class="main-color play-video-box">
-		<nav class="navbar navbar-dark navbar-expand-sm video-page-nav-style" id="video-top-nav">
+		<!-- <nav class="navbar navbar-dark navbar-expand-sm video-page-nav-style" id="video-top-nav">
 			<div>
 				<button class="btn play-btn" id="go-back" style="display:none;"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
 			</div>
-		</nav>
+		</nav> -->
 		
-		<video class="play-video"autoplay muted  id="page-video">
+		<!-- <video class="play-video"autoplay muted  id="page-video">
     		<source src="res/video/main_trailer1.mp4" type="video/mp4">
-		</video>
+		</video> -->
+		<div class="main-color play-top-div">
+			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
+		</div>
+		<div style="widht:100%;height:100%;">
+		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/qI4AMF0Zd74?autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+		<div class="main-color play-bottom-div" style="display:none;">
+			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
+		</div>
 		
-		
-		<nav class="navbar navbar-dark navbar-expand-sm video-nav-style" id="video-bottom-nav">
+		<!-- <nav class="navbar navbar-dark navbar-expand-sm video-nav-style" id="video-bottom-nav">
             
             <div class="video-bottom-nav-box">
             <div style="display:flex;">
@@ -138,12 +146,9 @@
                 <div id="progressBar"> </div>
             </div>
                 
-        </nav>
+        </nav> -->
 </div>
 </body>
-
-
-
 
 
 

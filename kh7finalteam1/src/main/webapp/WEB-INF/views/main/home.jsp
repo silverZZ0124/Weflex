@@ -14,9 +14,7 @@ $(function(){
 		infinite : true, 	//무한 반복 옵션	 
 		slidesToShow : 6,		// 한 화면에 보여질 컨텐츠 개수
 		slidesToScroll : 6,		//스크롤 한번에 움직일 컨텐츠 개수
-
-		speed : 1000,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-
+		speed : 1000,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)//ㅇㄹㄴㅇㄹㄴㅇ
 		arrows : true, 		// 옆으로 이동하는 화살표 표시 여부
 		//centerMode: true,
 		//dots : true, 		// 스크롤바 아래 점으로 페이지네이션 여부
@@ -49,16 +47,63 @@ $(function(){
  
 	});
 	
+		var timeout;
+		var modalX;
+		var modalY;
+		var img;
 		//마우스 호버 시 모달 팝업 	
-		$(".slider-img").hover(function(){
-			$(".hoverModal").show();
-		},function(){
-			$(".hoverModal").hide();    
+		$(".slider-img").mouseenter(function(){
+			console.log("start");
+			
+			img = $(this);
+			timeout=setTimeout(function(){
+				$("#hoverModal").modal("show");
+				$("#hoverModal").modal({keyboard: false});
+				$("#hoverModal").modal("show");
+				var imgX=img.offset().left;
+				var imgY=img.offset().top;
+				
+				var imgMiddleX=imgX+(img.width()/2);
+				var imgMiddleY=imgY+(img.height()/2);
+				
+				modalX=imgMiddleX-$("#hoverModal").width()/2;
+				modalY=imgMiddleY-$("#hoverModal").height()/2;
+
+				if(modalX<0) modalX=10;
+				if((modalX+$("#hoverModal").width())>$(window).width()){
+					modalX=$(window).width()-$("#hoverModal").width()-10;
+				}
+			
+				
+			$(".slider-img").mouseleave(function(){
+				clearTimeout(timeout);
+			});
+			
+		
+			$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
+			$("body").removeClass("modal-open");
+			},1000);
+			
+			
+					
 		});
 		
 		
+		
+		$(".slider-img").mouseleave(function(){
+			$("#hoverModal").modal("hide");
+		});
+		
+		$("#hoverModal").mouseleave(function(){
+			$("#hoverModal").modal("hide");
+	
+		});
+		
+		
+		
+		
 		//슬릭 호버 시 화살표 보임 
-		$(".slider-box").hover(function(){
+		 $(".slider-box").hover(function(){
 			var arrow=$(this).find(".arrow-img");
 			arrow.css("visibility","visible");
 			arrow.css("transition-duration","0.1s");
@@ -66,7 +111,7 @@ $(function(){
 		},function(){
 			var arrow=$(this).find(".arrow-img");
 			arrow.css("visibility","hidden");
-		});
+		}); 
 		
 		//화살표 호버 시 커짐 
 		$(".arrow-img").hover(function(){
@@ -150,19 +195,28 @@ $(function(){
 				$(".similar-contents-detail-box").css("display","none");
 			}
 		});
-		
-		
-		/* var img=$(this).find(".slider-img");
-		$(".test2").hover(function(){
-			var img=$(this).find(".slider-img");
-			$(this).addClass("test");
-			img.removeClass(".slider-img").addClass("test1");
 
-		},function(){
-			var img=$(this).find(".slider-img");
-			$(this).removeClass("test");
-			img.removeClass("test1").addClass(".slider-img");
-		}); */
+		
+		$(".wallpaper-more-button").click(function(){
+			$(".similar-contents-box").css("height","1600px");
+			$(this).css("display","none");
+			$(".wallpaper-less-button").css("display","block");
+		});
+		
+		$(".wallpaper-less-button").click(function(){
+			$(".similar-contents-box").css("height","700px");
+			$(this).css("display","none");
+			$(".wallpaper-more-button").css("display","block");
+		});
+		
+		$(".hover-modal-play-btn").click(function(){
+			location.href="play";
+		});
+		
+		$(".hover-modal-more-button").click(function(){
+			$("#hoverModal").modal("hide");
+		});
+		
 		$(".slider-img").hover(function(){
 			$(this).css("cursor","pointer");
 		});
@@ -178,20 +232,20 @@ $(function(){
 <div class="main-color">
 	<div class="main-trailer-video">
 		<video width="100%" height="80%"  id="main-video" autoplay loop muted>
-    		<source src="res/video/main_trailer1.mp4" type="video/mp4">
+    		<source src="${mainTrailerList.trailerUrl }" type="video/mp4">
 		</video>
 		<div class="main-trailer-over-box">
 	<div class="main-trailer-img">
-	<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
+		<img src="${mainTrailerList.trailerLogo }" style="width:100%;">
 	</div>
 	
 	<div class="main-trailer-text">
-	인디애나주의 작은 마을에서 행방불명된 소년. 이와 함께 미스터리한 힘을 가진 소녀가 나타나고, 마을에는 기묘한 현상들이 일어나기 시작한다. 아들을 찾으려는 엄마와 마을 사람들은 이제 정부의 일급비밀 실험의 실체와 무시무시한 기묘한 현상들에 맞서야 한다.
+		${mainTrailerList.trailerInfo }
 	</div>
 	
 	<div class="main-btn-box">
 		<div>
-			<button class="btn btn-light main-btn" id="main-play-btn"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+			<button class="btn btn-light main-btn" id="main-play-btn" data-contentNo="${mainTrailerList.contentNo }"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
 		</div>
 		<div class="main-btn-etc-box">
@@ -333,8 +387,14 @@ $(function(){
 				       		
 				       </div>
 				       
-				       <div class="similar-contents-box modal-contents-detail-info" >
-				       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button main-color"><i class="fas fa-chevron-down"></i></button>
+				       <div style="position: absolute;width: 95%;">
+				       <div class="modal-second-gradation-box">&ensp;&ensp;</div>
+				       <div class="modal-contents-detail-info" >
+				       		
+				       		<div class="modal-cotents-detail-btn" style="display:flex;">
+					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button "><i class="fas fa-chevron-down"></i></button>
+					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-less-button " style="display:none;"><i class="fas fa-chevron-up"></i></button>
+					       	</div>
 				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
 				       		<div >
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div>
@@ -347,7 +407,7 @@ $(function(){
 	       			
 				       		</div>
 				       </div>
-				      
+				      </div>
 				       
 			      </div>
 		      </div>
@@ -357,6 +417,29 @@ $(function(){
 	    </div>
 	  </div>
 	</div>
+
+
+	<!-- 호버시 팝업될 창 -->
+    <div class="modal fade hoverModal" id="hoverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content hoverModalBox main-color">
+               
+                <div class="modal-header" style="padding:0;display:flex;border:none;">
+                    <iframe class="hoverModalVideo" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="modal-body" style="display:flex; border:none;">
+                    <button class="btn btn-outline-light modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    <button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+					<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+					<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
+					<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
+					<button class="btn btn-outline-light modal-etc-btn hover-modal-more-button "data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
 
 	
 
@@ -383,13 +466,7 @@ $(function(){
           
   		</div>
   		
-	  		<!-- 호버시 팝업될 창 -->
-		<!-- <div class="hoverModal modal" >
-			<div class="modalBox modal-dialog modal-dialog-centered modal-sm" style="background-color:gray; ">
-				호버 모달 내용 . . .
-				해당이미지 위에 모달 띄우기 
-			</div>
-		</div> -->
+	  	
   		
 	
 		</div>
@@ -463,28 +540,7 @@ $(function(){
 	
 		</div>
 		
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
 		
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
-		<div>보고 또 봐도 좋은 명작 TV 프로그램</div>
-		<div>00님이 시청 중인 콘텐츠</div>
 	</div>
 </div>
 

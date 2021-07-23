@@ -13,6 +13,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script>
+    	var contextPath = "${pageContext.request.contextPath}";
+    </script>
         
 <meta charset="UTF-8">
 <title>Netflix</title>
@@ -42,15 +45,15 @@
 			
 			$("#btn-next").click(function(e){
 				$.ajax({
-					url:"${pageContext.request.contextPath}/data/member/changePhone",
+					//url:"${pageContext.request.contextPath}/data/member/changePhone",
+					url:contextPath+"/data/member/changePhone",
 					type:"post",
 					data: {"phoneNumber": $("#id_phoneNumber").val()},
 					success:function(resp){
-						$(".modal").modal("show");
+						$(".success-modal").modal("show");
 					},
 					error:function(resp){
-						console.log(resp);
-						window.alert("업로드 실패..");
+						$(".fail-modal").modal("show");
 					}
 				});
 				
@@ -63,13 +66,16 @@
 			});
 			
 			$("#move-main-btn").click(function(){
-				location.replace("/");
+				location.replace(contextPath);
 			});
 			
-			$("#move-account-btn").click(function(){
-				console.log("move account");
+			$(".move-account-btn").click(function(){
+				location.replace(contextPath + "/yourAccount");
 			});
-						
+					
+			$("#move-help-btn").click(function(){
+				location.replace(contextPath + "/help");
+			});
 		});
 	</script>
 </head>
@@ -82,8 +88,8 @@
 					<div id="hdPinTarget" class="member-header">
 						<div id="hd">
 							<div>
-								<a href="#" class="svg-nfLogo logo">
-									<img class="logo_img" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png">
+								<a href="${pageContext.request.contextPath }" class="svg-nfLogo logo">
+									<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 								</a>
 							</div>
 							<div class="account-secondary-navigation last">
@@ -143,7 +149,7 @@
 									<div class="nfInput externalLabel">
 										<div class="nfInputPlacement">
 											<input type="text" name="phoneNumber" placeholder="${phoneNumber }" class="nfTextField hasText" id="id_phoneNumber">
-											<div class="inputError">정확한 전화번호를 입력하세요.	</div>
+											<div class="inputError">정확한 전화번호를 입력하세요.	예: 010-0000-0000</div>
 										</div>
 									</div>
 								</li>
@@ -160,15 +166,33 @@
 					</div>
 				</div>
 				
-				<!-- Modal -->
-				<div class="modal fade" id="staticBackdrop"	data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				<!-- 변경 성공 Modal -->
+				<div class="modal fade success-modal" id="staticBackdrop"	data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 					aria-labelledby="staticBackdropLabel" aria-hidden="true" >
 					<div class="modal-dialog">
 						<div class="modal-content" style="margin-top: 10rem;">
 							<div class="modal-body"><h1 class="headline">전화번호가 변경되었습니다</h1></div>
 							<div class="modal-footer">
 								<button id="move-main-btn" type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">메인페이지로 이동</button>
-								<button id="move-account-btn" type="button" class="btn btn-primary modal-btn">내 계정 보러가기</button>
+								<button type="button" class="move-account-btn btn btn-primary modal-btn">내 계정 보러가기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- 변경 실패 Modal -->
+				<div class="modal fade fail-modal" id="staticBackdrop"	data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+					aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+					<div class="modal-dialog">
+						<div class="modal-content" style="margin-top: 10rem;">
+							<div class="modal-header">
+								<h1 class="modal-title fail-modal-title" id="exampleModalLabel">전화번호가 변경 실패</h1>		
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>						
+							</div>
+							<div class="modal-body"><h5 class="headline">고객센터에 문의해주세요</h5></div>
+							<div class="modal-footer">
+								<button id="move-help-btn" type="button" class="btn btn-secondary modal-btn" data-bs-dismiss="modal">고객센터로 이동</button>
+								<button type="button" class="move-account-btn btn btn-primary modal-btn">내 계정 보러가기</button>
 							</div>
 						</div>
 					</div>
