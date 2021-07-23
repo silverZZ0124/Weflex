@@ -64,22 +64,7 @@
 			}
 		});
 		
-		$(window).on('scroll',function(){
-			var windowTop=$(window).scrollTop();
-			var contentTop=$("#second-nav-bar").offset().top;
-			console.log(windowTop);
-			console.log(contentTop);
-			if(windowTop>contentTop){
-				
-
-				$('#second-nav-bar').css("margin-top","0"); 
-				$('#second-nav-bar').css("position","fixed");
-			}else{ 
-				$('#second-nav-bar').css("margin-top","60px");  
-				$('#second-nav-bar').css("position","absolute"); 
-				
-			} 
-		});
+		
 		
 		$("#search-icon").click(function(){
 			if($("#input-box").css("display")=="none"){

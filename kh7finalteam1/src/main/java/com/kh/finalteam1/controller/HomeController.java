@@ -7,14 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.MainTrailerDto;
+import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.MainTrailerDao;
 
 @Controller
 public class HomeController {
 	@Autowired
 	private MainTrailerDao mainTrailerDao;
+	
+	@Autowired
+	private ContentDao contentDao;
 	
 	@GetMapping("/")
 	public String home(Model model) {
@@ -34,7 +40,11 @@ public class HomeController {
 	}
 
 	@GetMapping("/play")
-	public String play() {
+	public String play(@RequestParam int contentNo, Model model) {
+		ContentDto contentDto = contentDao.get(contentNo);		
+		System.out.println(contentDto);
+		model.addAttribute("contentDto", contentDto);		
+		
 		return "main/play";
 
 	}
