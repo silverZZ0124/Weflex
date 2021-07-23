@@ -24,7 +24,7 @@
 			</div>
 			<div class="nfHeader login-header signupBasicHeader">
 				<a href="#" class="svg-nfLogo signupBasicHeader">
-					<img class="logo_img" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png">
+					<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 				</a>
 			</div>
 			<div class="login-body">
@@ -37,7 +37,7 @@
 									<div class="nfInputPlacement">
 										<div class="nfEmailPhoneControls">
 											<label class="input_id">
-												<input type="text" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소 또는 전화번호">
+												<input type="text"  name="clientId" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소 또는 전화번호">
 											</label>
 										</div>
 									</div>
@@ -46,7 +46,7 @@
 									<div class="nfInputPlacement">
 										<div class="nfPasswordControls">
 											<label class="input_id">
-												<input type="text" class="nfTextField hasText" placeholder="비밀번호">
+												<input type="password"  name="clientPw" class="nfTextField hasText" placeholder="비밀번호">
 											</label>
 										</div>
 									</div>

@@ -17,4 +17,5 @@ public class ClientDto {
 	private Date clientBirth;
 	private String clientPhone;
 	private Date clientExpire;
+	private Date clientJoin;
 }

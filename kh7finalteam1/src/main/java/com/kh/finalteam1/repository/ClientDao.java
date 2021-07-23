@@ -7,4 +7,7 @@ public interface ClientDao {
 	ClientDto findClient(int clientNo);
 	ClientGradeDto getGrade(int gradeNo);
 	boolean changePhone(ClientDto clientDto);
+	ClientDto regitCheck(String email);
+	ClientDto loginCheck(ClientDto clientDto);
+	 void  joinCheck(ClientDto clientDto);
 }

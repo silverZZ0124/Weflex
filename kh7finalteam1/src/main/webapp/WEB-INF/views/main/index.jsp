@@ -22,7 +22,7 @@
 			<div class="our-story-header-wrapper">
 				<div class="our-story-header">
 					<span class="our-story-logo">
-						<a style="display: inline-block; height: 100%;" href="#"><img class="img-logo" src="${pageContext.request.contextPath }/res/img/Netflix_Logo_RGB.png" ></a> 
+						<a style="display: inline-block; height: 100%;" href="#"><img class="img-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" ></a> 
 					</span>	
 					
 					<div class="lang-selection-container">
@@ -34,7 +34,7 @@
 						</div>
 					</div>	
 					
-					<a href="#" class="custom-a-tag login-red-btn">로그인</a>
+					<a href="/finalteam1/login" class="custom-a-tag login-red-btn">로그인</a>
 				</div>
 			</div>
 			

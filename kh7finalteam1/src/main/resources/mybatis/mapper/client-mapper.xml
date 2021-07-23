@@ -17,5 +17,11 @@
 	<select id="regitCheck" parameterType="string" resultType="ClientDto" >
 		select * from client where client_id=#{email}
 	</select>
+	<select id="loginCheck" parameterType="ClientDto" resultType="ClientDto">
+		select * from client where client_id=#{clientId} and client_pw=#{clientPw}
+	</select>
+	<insert id="joinCheck" parameterType="ClientDto" >
+		insert into client values(client_seq.nextval , 4 ,#{clientId} , #{clientPw}, #{clientName} , #{clientBirth}, #{clientPhone}, sysdate, sysdate)	
+	</insert>
 </mapper>
 
