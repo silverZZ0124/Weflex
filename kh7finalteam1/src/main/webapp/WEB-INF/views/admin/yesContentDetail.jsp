@@ -4,11 +4,8 @@
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/style.css"> --%>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 <div class="container-fluid">
 	
@@ -68,10 +65,25 @@
 	            </div>             
 	     	 </div>
 	     	 
+   	 		
 	     	 <div class="card shadow mb-4">
-	     	 	<div class="card-header py-3" >
-	                <div class="col-md-2 offset-md-10">
-	                	<button class="btn btn-block btn-primary" data-toggle="modal" data-target="#insert-episode-modal">에피소드 추가</button>
+	     	 	<div class="card-header py-3">
+	     	 		<div class="row">
+		     	 		<div class="col-md-4">
+				     	 	<div class="dropdown">
+							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+							    시즌 1
+							  </a>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							  	<c:forEach var="seasonSize" items="${seasonSize }">
+								    <li class="dropdown-item">시즌 ${seasonSize }</li>							  	
+							  	</c:forEach>
+							  </ul>
+							</div>
+		     	 		</div>
+		                <div class="col-md-2 offset-md-6">
+		                	<button class="btn btn-block btn-primary" data-toggle="modal" data-target="#insert-episode-modal">에피소드 추가</button>
+		                </div>
 	                </div>
 	            </div>
 	            <div class="card-body row">
@@ -85,26 +97,29 @@
 		            			<th></th>
 		            		</tr>
 	            		</thead>
-	            		<tbody>
-	            			<c:forEach var="yesSeriesDto" items="${yesSeriesList }">	            			
-			            		<tr>
-			            			<td>${yesSeriesDto.contentSeason }</td>
-			            			<td>${yesSeriesDto.contentEpisode }</td>
-			            			<td>${yesSeriesDto.episodeInfo }</td>
-			            			<td>${yesSeriesDto.contentPlaytime }</td>
-			            			<td>
-			            				<div class="row">
-				                            <div class="col-md-6 p-1">
-				                                <button class="btn btn-block btn-outline-primary episode-modal-btn" data-toggle="modal" 
-				                                data-target="#edit-series-modal" data-no="${yesSeriesDto.contentNo}" 
-				                                data-url="${yesSeriesDto.seriesPath}">수정</button>
-				                            </div>
-				                            <div class="col-md-6 p-1">
-				                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn btn-outline-danger">삭제</a>
-				                            </div>
-				                        </div>
-			            			</td>
-			            		</tr>
+	            		<tbody id="episode-list">
+	            			<c:forEach var="yesSeriesDto" items="${yesSeriesList }">
+	            				<c:if test="${yesSeriesDto.contentSeason eq 1}">	            			
+				            		<tr>
+				            			<td style="display:none">${yesSeriesDto.contentNo }</td>		
+	    								<td style="display:none">${yesSeriesDto.seriesPath }</td>
+				            			<td>${yesSeriesDto.contentSeason }</td>
+				            			<td>${yesSeriesDto.contentEpisode }</td>
+				            			<td>${yesSeriesDto.episodeInfo }</td>
+				            			<td>${yesSeriesDto.contentPlaytime }</td>
+				            			<td>
+				            				<div class="row">
+					                            <div class="col-md-6 p-1">
+					                                <button class="btn btn-block btn-outline-primary episode-modal-btn" data-toggle="modal" 
+					                                data-target="#edit-series-modal"">수정</button>
+					                            </div>
+					                            <div class="col-md-6 p-1">
+					                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn btn-outline-danger">삭제</a>
+					                            </div>
+					                        </div>
+				            			</td>
+				            		</tr>
+			            		</c:if>
 	            			</c:forEach>
 	            		</tbody>
 	            	</table>
@@ -233,17 +248,17 @@
 					                
 					                <div class="form-group form-textarea">
 					                    <label>에피소드 소개</label>
-					                    <textarea name="episodeInfo" class="form-control form-textarea" id="episodeInfo"></textarea>
+					                    <textarea name="episodeInfo" class="form-control form-textarea" id="modal-episodeInfo"></textarea>
 					                </div>
 					                
 					                <div class="form-group">
 					                    <label>url</label>
-					                    <input type="text" name="seriesPath" class="form-control" id="seriesPath">
+					                    <input type="text" name="seriesPath" class="form-control" id="modal-seriesPath">
 					                </div>
 					                
 					                <div class="form-group">
 					                    <label>영상 길이(분)</label>
-					                    <input type="text" name="contentPlaytime" class="form-control" id="contentPlaytime">
+					                    <input type="text" name="contentPlaytime" class="form-control" id="modal-contentPlaytime">
 					                </div>
 					
 					                 
@@ -277,7 +292,7 @@
                         	<div class="col-md-12">
                         	
 	                            <form action="insertEpisode" method="post" class="form">	
-									<input type="hidden" name="contentNo" id="contentNo" value="${contentDto.contentNo }">
+									<input type="hidden" name="contentNo" value="${contentDto.contentNo }">
 									
 					                <div class="form-group">
 					                    <label>시즌 </label>
@@ -328,15 +343,62 @@
 		$('select[name="contentType"]').find('option[value="${contentDto.contentType}"]').attr("selected",true);
 		$('select[name="contentRelease"]').find('option:contains("${contentDto.contentRelease}")').attr("selected",true);
 		
-		$(".episode-modal-btn").click(function(){
+		
+		//시즌 몇까지 있는지 확인 후 드롭다운에 출력
+		//시즌에 따라 에피소트 테이블 변경 ajax
+		
+		$(".dropdown-item").click(function(e){
+			var contentNo = "<c:out value='${contentDto.contentNo}' />"
+			var choice = $(this).text();
+			$("#dropdownMenuLink").text(choice);
 			
-			var contentNo = $(this).data("no");
-			var seriesPath = $(this).data("url");
+			choice = choice.slice(3);
+			console.log(choice);
 			
-			var contentSeason = $(this).parents("tr").children("td").eq(0).text();
-			var contentEpisode = $(this).parents("tr").children("td").eq(1).text();
-			var episodeInfo = $(this).parents("tr").children("td").eq(2).text();
-			var contentPlaytime = $(this).parents("tr").children("td").eq(3).text();
+			e.preventDefault();
+			
+			$.ajax({
+    			url : "${pageContext.request.contextPath}/data/admin/content/selectSeason",
+    			type : "get",
+    			dataType : "json",
+    			data : {contentSeason:choice,
+    					contentNo:contentNo},
+    			success:function(resp){
+					$("#episode-list").empty();					
+					var index = 0;
+					for(var i=0; i < resp.length; i++){
+						var template = $("#episode-list-template").html();
+						template = template.replace("{{id}}", index+"");
+						template = template.replace("{{contentNo}}", resp[i].contentNo);
+						template = template.replace("{{seriesPath}}", resp[i].seriesPath);
+						template = template.replace("{{contentSeason}}", resp[i].contentSeason);
+						template = template.replace("{{contentEpisode}}", resp[i].contentEpisode);
+						template = template.replace("{{EpisodeInfo}}", resp[i].episodeInfo);
+						template = template.replace("{{contentPlaytime}}", resp[i].contentPlaytime);
+						template = template.replace("#no", resp[i].contentNo);
+						template = template.replace("#season", resp[i].contentSeason);
+						template = template.replace("#episode", resp[i].contentEpisode);
+						$("#episode-list").append(template);
+						index++;
+					}
+					
+				}
+    		});
+			
+			$("#episode-modal-btn").addClass("episode-modal-btn");
+			
+		});
+		
+		$("#edit-series-modal").on("show.bs.modal", function(e){
+			var el = $(e.relatedTarget);
+			//console.log(el);
+			
+			var contentNo = el.parents("tr").children("td").eq(0).text();
+			var seriesPath = el.parents("tr").children("td").eq(1).text();
+			var contentSeason = el.parents("tr").children("td").eq(2).text();
+			var contentEpisode = el.parents("tr").children("td").eq(3).text();
+			var episodeInfo = el.parents("tr").children("td").eq(4).text();
+			var contentPlaytime = el.parents("tr").children("td").eq(5).text();
 			
 			$("#contentNo").val(contentNo);
 			$("#contentSeason").val(contentSeason);
@@ -344,13 +406,33 @@
 			
 			$("#modal-contentSeason").text(contentSeason);
 			$("#modal-contentEpisode").text(contentEpisode+"화");
-			$("#episodeInfo").text(episodeInfo);
-			$("#seriesPath").val(seriesPath);
-			$("#contentPlaytime").val(contentPlaytime);
-
+			$("#modal-episodeInfo").text(episodeInfo);
+			$("#modal-seriesPath").val(seriesPath);
+			$("#modal-contentPlaytime").val(contentPlaytime);
 		});
-
+		
 	});
+</script>
+
+<script id="episode-list-template" type="text/template">       			
+	<tr>
+    	<td style="display:none">{{contentNo}}</td>		
+	    <td style="display:none">{{seriesPath}}</td>
+	    <td>{{contentSeason}}</td>
+	    <td>{{contentEpisode}}</td>
+	    <td>{{EpisodeInfo}}</td>
+	    <td>{{contentPlaytime}}</td>
+	    <td>
+	        <div class="row">
+	            <div class="col-md-6 p-1">
+	                <button class="btn btn-block btn-outline-primary" id="episode-modal-btn" data-toggle="modal" data-target="#edit-series-modal">수정</button>
+	            </div>
+	            <div class="col-md-6 p-1">
+	                <a href="episodeDelete?contentNo=#no&contentSeason=#season&contentEpisode=#episode" class="btn btn-block btn btn-outline-danger">삭제</a>
+	            </div>
+	        </div>
+	    </td>
+	</tr>
 </script>
 
 

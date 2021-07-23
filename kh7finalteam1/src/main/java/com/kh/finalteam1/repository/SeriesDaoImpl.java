@@ -53,4 +53,9 @@ public class SeriesDaoImpl implements SeriesDao{
 		return count>0;
 	}
 
+	@Override
+	public List<YesSeriesDto> yesSeason(YesSeriesDto yesSeriesDto) {
+		return sqlSession.selectList("series.selectSeason", yesSeriesDto);
+	}
+
 }

@@ -13,4 +13,6 @@ public interface SeriesDao {
 	List<YesSeriesDto> yesList(int contentNo);
 	boolean yesEdit(YesSeriesDto yesSeriesDto);
 	boolean yesDelete(YesSeriesDto yesSeriesDto);
+	
+	List<YesSeriesDto> yesSeason(YesSeriesDto yesSeriesDto);
 }
