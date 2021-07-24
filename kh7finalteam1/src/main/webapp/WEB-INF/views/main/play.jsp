@@ -164,7 +164,7 @@
 
 <body class="main-color fade-in no-scroll">
 <div class="main-color play-video-box">
-		<div class="main-color play-top-div">
+		<div class=" play-top-div">
 			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
 		</div>
 		<div style="widht:100%;height:100%;">
