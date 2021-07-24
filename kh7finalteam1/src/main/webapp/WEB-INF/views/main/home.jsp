@@ -133,7 +133,6 @@ $(function(){
 		});
 		
 		
-		
 		$(".slider-img").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 		});
@@ -349,8 +348,18 @@ $(function(){
  						else
  							$(".content-cast").append(", "+resp.castList[i]);
  					}
-
-				}
+ 					
+					//연작 없는 content일 경우 회차 div를 숨긴다
+ 					if(resp.contentDto.contentSeries == "N")
+ 						$(".modal-series").css("display", "none");
+					//연작 있는 content일 경우 회차 div를 block으로
+ 					else if(resp.contentDto.contentSeries == "Y"){
+ 						var template = $("#episode-list-template").html();
+ 						
+ 						$(".modal-series").css("display", "block");
+ 					}
+				}		
+					
 			});
 		});
 		
@@ -394,6 +403,29 @@ $(function(){
 
 	});
 
+</script>
+
+<script id="episode-list-template" type="text/template">
+<div class="trailer-series-section-box">
+	<div class="trailer-series-section">
+		<div class="trailer-series-section-index">${i}</div>
+		<div class="trailer-series-section-thumbnail-box">
+			<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYlNPB0ZkssHuy-ssQNE9R7eqCObZ3Kb9Hbe3UhfSjm1W2_v4pBPQt45taoKeGYUVkB-CFqzP4tTwoordt3VPeBEJBK9Dn3OZmxa-GcwfQ1HxVW8.webp?r=9e5"
+				class="trailer-series-section-thumbnail">
+			<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
+				<i class="fas fa-play"></i>
+			</button>
+		</div>
+
+		<div class="trailer-series-section-info-box">
+			<div class="trailer-series-section-info-title">
+				<div>제${i}장 어쩌구저쩌구</div>
+				<div style="margin-left: auto;">(시간)분</div>
+			</div>
+			<div class="trailer-series-section-info-text">회차 설명 	ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 대충 두줄</div>
+		</div>
+	</div>
+</div>
 </script>
 
 <div class="main-color">
@@ -524,27 +556,32 @@ $(function(){
 								  </select>
 			        		</div>
 			        	</div>
-			        			<c:forEach var="i" begin="1" end="9" step="1"> <!-- 회차수만큼 반복 -->
-			        				
-									<div class="trailer-series-section-box" >
-							        <div class="trailer-series-section">
-							        	<div class="trailer-series-section-index">${i}</div>
-							        	<div class="trailer-series-section-thumbnail-box">
-							        		<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYlNPB0ZkssHuy-ssQNE9R7eqCObZ3Kb9Hbe3UhfSjm1W2_v4pBPQt45taoKeGYUVkB-CFqzP4tTwoordt3VPeBEJBK9Dn3OZmxa-GcwfQ1HxVW8.webp?r=9e5"  class="trailer-series-section-thumbnail">
-							        		<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-							        	</div>
-							        	
-							        	<div class="trailer-series-section-info-box">
-							        		<div class="trailer-series-section-info-title">
-							        			<div>제${i}장 어쩌구저쩌구</div>
-							        			<div style="margin-left: auto;">(시간)분</div>
-							        		</div>
-							        		<div class="trailer-series-section-info-text">회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 대충 두줄</div>
-							        		
-							        	</div>
-							        </div>   
-						        </div>
-								</c:forEach>
+	        			<%-- <c:forEach var="i" begin="1" end="9" step="1"> <!-- 회차수만큼 반복 --> --%>
+							<div class="trailer-series-section-box-wrapper">
+								<%-- <div class="trailer-series-section-box">
+									<div class="trailer-series-section">
+										<div class="trailer-series-section-index">${i}</div>
+										<div class="trailer-series-section-thumbnail-box">
+											<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYlNPB0ZkssHuy-ssQNE9R7eqCObZ3Kb9Hbe3UhfSjm1W2_v4pBPQt45taoKeGYUVkB-CFqzP4tTwoordt3VPeBEJBK9Dn3OZmxa-GcwfQ1HxVW8.webp?r=9e5"
+												class="trailer-series-section-thumbnail">
+											<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
+												<i class="fas fa-play"></i>
+											</button>
+										</div>
+
+										<div class="trailer-series-section-info-box">
+											<div class="trailer-series-section-info-title">
+												<div>제${i}장 어쩌구저쩌구</div>
+												<div style="margin-left: auto;">(시간)분</div>
+											</div>
+											<div class="trailer-series-section-info-text">회차 설명
+												ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 대충 두줄
+											</div>
+										</div>
+									</div>
+								</div> --%>
+							</div>
+						<%-- </c:forEach> --%>
 					        	
 				        </div>
 				       <%--  </c:if> --%>
