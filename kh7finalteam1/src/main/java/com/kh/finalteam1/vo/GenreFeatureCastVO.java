@@ -9,6 +9,11 @@ import lombok.NoArgsConstructor;
 public class GenreFeatureCastVO {
 	private int contentNo;
 	private int genreNo;
+	private int contentGenreNo;
+	private String genreName;
 	private int featureNo;
+	private int contentFeatureNo;
+	private String featureName;
+	
 	private String castName;
 }

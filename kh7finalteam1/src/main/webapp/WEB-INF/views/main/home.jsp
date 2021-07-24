@@ -102,8 +102,7 @@ $(function(){
 			
 			img = $(this);
 			timeout=setTimeout(function(){
-				$("#hoverModal").modal("show");
-				$("#hoverModal").modal({keyboard: false});
+				$("#hoverModal").modal({backdrop: false});
 				$("#hoverModal").modal("show");
 				var imgX=img.offset().left;
 				var imgY=img.offset().top;
@@ -143,6 +142,21 @@ $(function(){
 	
 		});
 		
+		$("#hoverModal").on("show.bs.modal",function(){
+			$("body").addClass("overflow-scroll");
+			/* $("#hoverModal").css("display", "none");
+			$(".modal-backdrop").css("display","none"); */
+		});
+
+		$("#hoverModal").on("shown.bs.modal",function(){
+			
+			//$("#hoverModal").css("display", "block");
+		});
+		$("#hoverModal").on("hide.bs.modal",function(){
+			$("body").removeClass("overflow-scroll");
+
+			
+		});
 		
 		
 		
@@ -195,7 +209,17 @@ $(function(){
 				arrow.css("visibility","hidden");  
 			}); 
 		
-		
+		 $(document).mouseup(function (e){
+
+				var container = $('#detailModal');
+
+				if( container.has(e.target).length === 0){
+
+				container.modal("hide");
+
+				}
+
+			});
 		//화살표 호버 시 커짐 
 		$(".arrow-img").hover(function(){
 			$(this).addClass("arrow-hover");
@@ -289,6 +313,7 @@ $(function(){
 					contentNo: contentNo	
 				},
 				success:function(resp){
+
 				 	$("#player").css("visibility", "hidden");
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
  					var url = resp.contentDto.contentTrailer + "?enablejsapi=1&start=00&autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist="+youtubeId;
@@ -416,9 +441,6 @@ $(function(){
 	<div class="main-trailer-text">
 		${mainTrailerList.trailerInfo }
 	</div>
-	
-	
-	</div>
 	<div class="main-btn-box">
 		<div>
 			<form action="play" style="display: inline-block;">
@@ -434,25 +456,31 @@ $(function(){
 		</div>
 	</div>
 	
+	</div>
+	
+	
 		<div class="gradation-box">&ensp;&ensp;</div>
 	</div>
 	
 	<!-- 상세 정보 클릭시 팝업 모달 -->
-	<div class="modal fade " id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+	<div class="modal fade " id="detailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg detail-modal">
 	    <div class="modal-content">
 	     
 	      <div class="modal-body main-color" style="padding:0px; border:none;">
 			<button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
-			<div style="position:relative;">
+			<div style="position:relative;" class="detail-modal-video-box">
 	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5"> -->
+
 	        	<iframe id="player" width="100%" height="100%" src="https://www.youtube.com/embed/6qaW-KZpmjM?enablejsapi=1&start=00&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+
 				<div class="modal-gradation-box">&ensp;&ensp;</div>
-	        </div>
-	        
-	        <div class="modal-trailer-over-box">	
+				
+				  <div class="modal-trailer-over-box">	
 					<div class="main-trailer-img">
+
 						<img id="content-logo" src="" style="width:100%;">
+
 					</div>
 					<div class="modal-btn-box">
 						<form action="play" style="display: inline-block;">
@@ -466,6 +494,9 @@ $(function(){
 					</div>
 				
 			</div>
+	        </div>
+	        
+	      
 				
 	        
 	       <!--  <div class="modal-trailer-over-box">
@@ -492,8 +523,10 @@ $(function(){
 								<div class="modal-trailer-feature-box">시즌 3개</div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
+
 							<div id="content-info" class="modal-trailer-text">
 								
+
 							</div>
 						</div>
 						<div class="modal-trailer-etc"> 
@@ -503,7 +536,7 @@ $(function(){
 						</div>
 					</div>
 			
-					<div>
+					<div style="position: relative;">
 					<!-- 드라마 콘텐츠일 경우 회차 정보 표시 -->
 					<%-- <c:if test="${isYseries}"> --%>
 			        <div class="modal-series">
@@ -619,7 +652,8 @@ $(function(){
 
 
 	<!-- 호버시 팝업될 창 -->
-    <div class="modal fade hoverModal" id="hoverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--   <div class="modal fade hoverModal" id="hoverModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+        <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content hoverModalBox ">
                

@@ -45,6 +45,27 @@
 								<c:when test="${contentDto.contentType eq 'do'}"> 다큐멘터리 </c:when>
 							</c:choose>
 						</div>
+						<div class="mt-3">
+							장르 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
+								<span>${genreFeatureCastVO.genreName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
+						<div class="mt-3">
+							특징 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
+								<span>${genreFeatureCastVO.featureName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
+						<div class="mt-3">
+							출연 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
+								<span>${genreFeatureCastVO.castName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
 						<div class="mt-3">${contentDto.contentLimit}세 이상</div>
 						<div class="mt-3">연작 여부 : ${contentDto.contentSeries}</div>
 						<div class="mt-3">개봉년도 : ${contentDto.contentRelease}</div>
@@ -207,7 +228,7 @@
 					                    <input type="text" name="contentThumbnail" class="form-control" value="${contentDto.contentThumbnail}">
 					                </div>
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary">확인</button>                        
+					                    <button type="submit" class="btn btn-primary" id="yesContent-edit">확인</button>                        
 					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
@@ -263,7 +284,7 @@
 					
 					                 
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary">확인</button>                        
+					                    <button type="submit" class="btn btn-primary" id="episodeEdit-btn">확인</button>                        
 					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
@@ -296,32 +317,32 @@
 									
 					                <div class="form-group">
 					                    <label>시즌 </label>
-					                    	<input type="text" name="contentSeason" class="form-control">
+					                    	<input type="text" name="contentSeason" class="form-control" id="insert-contentSeason">
 					                </div>
 					                
 					                <div class="form-group">
 					                    <label>회차</label>
-					                    	<input type="text" name="contentEpisode" class="form-control">
+					                    	<input type="text" name="contentEpisode" class="form-control" id="insert-contentEpisode">
 					                </div>
 					                
 					                <div class="form-group form-textarea">
 					                    <label>에피소드 소개</label>
-					                    	<textarea name="episodeInfo" class="form-control form-textarea"></textarea>
+					                    	<textarea name="episodeInfo" class="form-control form-textarea" id="insert-episodeInfo"></textarea>
 					                </div>
 					                
 					                <div class="form-group">
 					                    <label>url</label>
-					                    	<input type="text" name="seriesPath" class="form-control">
+					                    	<input type="text" name="seriesPath" class="form-control" id="insert-seriesPath">
 					                </div>
 					                
 					                <div class="form-group">
 					                    <label>영상 길이(분)</label>
-					                    	<input type="text" name="contentPlaytime" class="form-control">
+					                    	<input type="text" name="contentPlaytime" class="form-control" id="insert-contentPlaytime">
 					                </div>
 					
 					                 
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary">확인</button>                        
+					                    <button type="submit" class="btn btn-primary" id="insert-episode-btn">확인</button>                        
 					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
@@ -435,5 +456,106 @@
 	</tr>
 </script>
 
+<script>
+	$(function(){
+		/* 수정 값 유효성 검사 */
+		$("#yesContent-edit").click(function(e){
+			var contentName = $("input[name='contentName']").val();
+			var contentInfo = $("textarea[name='contentInfo']").val();			
+			var contentLogo = $("input[name='contentLogo']").val();
+			var contentThumbnail = $("input[name='contentThumbnail']").val();
+			
+			//console.log(contentName.length);
+			if(contentName.length == 0 || contentName.length>50){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentName']").val("");
+				$("input[name='contentName']").focus();
+				e.preventDefault();
+			}
+			else if(contentInfo.length == 0 || contentInfo.length>300){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("textarea[name='contentInfo']").val("");
+				$("textarea[name='contentInfo']").focus();
+				e.preventDefault();
+			}
+			else if(contentLogo.length == 0 || contentLogo.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentLogo']").val("");
+				$("input[name='contentLogo']").focus();
+				e.preventDefault();
+			}
+			else if(contentThumbnail.length == 0 || contentThumbnail.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentThumbnail']").val("");
+				$("input[name='contentThumbnail']").focus();
+				e.preventDefault();
+			}
+		});
+		
+		$("#episodeEdit-btn").click(function(e){
+			var episodeInfo = $("#modal-episodeInfo").val();
+			var seriesPath = $("#modal-seriesPath").val();
+			var contentPlaytime = $("#modal-contentPlaytime").val();
+			
+			if(episodeInfo.length == 0 || episodeInfo.length>300){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#modal-episodeInfo").val("");
+				$("#modal-episodeInfo").focus();
+				e.preventDefault();
+			}
+			else if(seriesPath.length == 0 || seriesPath.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#modal-seriesPath").val("");
+				$("#modal-seriesPath").focus();
+				e.preventDefault();
+			}
+			else if(contentPlaytime.length == 0 || contentPlaytime.length>3){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#modal-contentPlaytime").val("");
+				$("#modal-contentPlaytime").focus();
+				e.preventDefault();
+			}
+		});
+		
+		$("#insert-episode-btn").click(function(e){
+			var contentSeason = $("#insert-contentSeason").val();
+			var contentEpisode = $("#insert-contentEpisode").val();
+			var episodeInfo = $("#insert-episodeInfo").val();
+			var seriesPath = $("#insert-seriesPath").val();
+			var contentPlaytime = $("#insert-contentPlaytime").val();
+			
+			if(contentSeason.length == 0 || contentSeason.length>3){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#insert-contentSeason").val("");
+				$("#insert-contentSeason").focus();
+				e.preventDefault();
+			}
+			else if(contentEpisode.length == 0 || contentEpisode.length>3){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#insert-contentEpisode").val("");
+				$("#insert-contentEpisode").focus();
+				e.preventDefault();
+			}
+			else if(episodeInfo.length == 0 || episodeInfo.length>300){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#insert-episodeInfo").val("");
+				$("#insert-episodeInfo").focus();
+				e.preventDefault();
+			}
+			else if(seriesPath.length == 0 || seriesPath.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#insert-seriesPath").val("");
+				$("#insert-seriesPath").focus();
+				e.preventDefault();
+			}
+			else if(contentPlaytime.length == 0 || contentPlaytime.length>3){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("#insert-contentPlaytime").val("");
+				$("#insert-contentPlaytime").focus();
+				e.preventDefault();
+			}
+		});
+	});
+</script>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
