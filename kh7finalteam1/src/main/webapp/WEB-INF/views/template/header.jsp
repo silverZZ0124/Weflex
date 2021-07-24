@@ -44,15 +44,17 @@
 		$(window).on('scroll',function(){
 			if($(window).scrollTop()){
 				$('#header').removeClass('active-gradation').addClass('active-black'); 
-				$('#second-nav-bar').removeClass('active-gradation2').addClass('active-black'); 
+				$("#second-header").removeClass("active-gradation2").addClass("active-black");
 			}else{ 
 			
 				$('#header').removeClass('active-black').addClass('active-gradation');
-				$('#second-nav-bar').removeClass('active-black').addClass('active-gradation2');
+				$("#second-header").removeClass("active-black").addClass("active-gradation2");
 			}
 		});
 		
-		
+		if(location.href==="http://localhost:8080/finalteam1/tv"){
+			$(".search-nav-style").css("display","block");
+		}
 		
 		$("#search-icon").click(function(){
 			if($("#input-box").css("display")=="none"){
@@ -80,17 +82,17 @@
 		<main>
 		<div class="" >
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style" id="header">
-			<ul class="navbar-nav" style="width: 8%; margin-left: 1%;">
-				<li class="nav-item"> <a class="nav-link" href="../finalteam1/"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
+			<ul class="navbar-nav nav-logo-ul" style="width: 120px; margin-left: 1%;">
+				<li class="nav-item"> <a class="nav-link logo-wrapper" href="../finalteam1/"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
 			</ul>
-			<ul class="navbar-nav" style="position: absolute;margin-left: 10%;" id="navbar1-ul">
+			<ul class="navbar-nav" style="position: absolute;margin-left: 160px;" id="navbar1-ul">
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">NEW! 요즘 대세 콘텐츠</a> </li>
 				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
 			</ul> 
-			<ul class="navbar-nav" style="position: absolute;margin-left: 10%;">
+			<ul class="navbar-nav" style="position: absolute;margin-left: 130px;">
 				  <li class="nav-item dropdown"  id="navbar1-ul-dropdown">
          		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             	메뉴
@@ -134,6 +136,23 @@
 
 		</nav>
 		
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style search-nav-style" id="second-header" style="display:none;">
+			
+			<ul class="navbar-nav" style="position: absolute;">
+				  <li class="nav-item second-nav-title-text" style="color:white;"> TV 프로그램 </li> 
+				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
+								    
+								      <option>장르</option>
+								      <option>한국드라마</option>
+								      <option>미국드라마</option>  
+								      <option>영국드라마</option>
+								      
+								  
+								  </select> </li> 
+				 
+			</ul> 
+
+		</nav>
 		
 
 
