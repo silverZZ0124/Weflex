@@ -4,7 +4,29 @@
 <%-- <c:set var="isYseries" value=""></c:set> --%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <script>
+var player;
+
+window.onload = function(){			
+	
+	function onYouTubeIframeAPIReady() {
+	    player = new YT.Player('player', {
+	        events: {	  
+	        	'onReady': onPlayerReady,
+	            'onStateChange': onPlayerStateChange
+	          }
+	    });
+	}		
+	
+	function onPlayerReady(event) {
+    }
+	
+	function onPlayerStateChange(event) {
+	}	
+	
+	onYouTubeIframeAPIReady();
+}
 
 $(function(){
 	var video=$("#main-video");
@@ -69,8 +91,7 @@ $(function(){
         });
          
       }); 
-
-		
+      
 	
 		var timeout;
 		var modalX;
@@ -269,16 +290,46 @@ $(function(){
 					contentNo: contentNo	
 				},
 				success:function(resp){
-					
-					var url = resp.contentTrailer + "/enablejsapi=1&start=00&autoplay=1&mute=0&controls=1&modestbranding=1";
-					$("#player").attr("src", url);
-					console.log(url);
+				 	$("#player").css("visibility", "hidden");
+				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
+ 					var url = resp.contentDto.contentTrailer + "?enablejsapi=1&start=00&autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist="+youtubeId;
+ 					$("#player").attr("src", url);
+ 					
+ 					$("#input-content-no").val(resp.contentDto.contentNo);
+ 					$("#content-logo").attr("src", resp.contentDto.contentLogo);
+ 					$("#content-info").text(resp.contentDto.contentInfo);
+ 					$("#content-release").text(resp.contentDto.contentRelease);
+ 					$(".content-limit").text(" "+resp.contentDto.contentLimit+"+");
+ 					
+ 					$(".content-genre").empty();
+ 					for(var i=0; i < resp.genreList.length; i++){
+ 						if(i==0)
+ 							$(".content-genre").append(" "+resp.genreList[i]);
+ 						else
+ 							$(".content-genre").append(","+resp.genreList[i]);
+ 					}
+ 					
+ 					$(".content-feature").empty();
+ 					for(var i=0; i < resp.featureList.length; i++){
+ 						if(i==0)
+ 							$(".content-feature").append(" "+resp.featureList[i]);
+ 						else
+ 							$(".content-feature").append(", "+resp.featureList[i]);
+ 					}
+ 					
+ 					$(".content-cast").empty();
+ 					for(var i=0; i < resp.castList.length; i++){
+ 						if(i==0)
+ 							$(".content-cast").append(" "+resp.castList[i]);
+ 						else
+ 							$(".content-cast").append(", "+resp.castList[i]);
+ 					}
 				}
 			});
 		});
 		
 		$("#detailModal").on("shown.bs.modal",function(e){
-			//$("#player").playVideo();
+			$("#player").css("visibility", "visible");
 		});
 
 		
@@ -316,10 +367,6 @@ $(function(){
 		});
 
 	});
-	
-		
-		
-	
 
 </script>
 
@@ -366,16 +413,19 @@ $(function(){
 			<button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
 			<div style="position:relative;">
 	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5"> -->
-	        	<iframe id="player" width="100%" height="100%" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+	        	<iframe id="player" width="100%" height="100%" src="https://www.youtube.com/embed/6qaW-KZpmjM?enablejsapi=1&start=00&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 				<div class="modal-gradation-box">&ensp;&ensp;</div>
 	        </div>
 	        
 	        <div class="modal-trailer-over-box">	
 					<div class="main-trailer-img">
-					<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
+						<img id="content-logo" src="" style="width:100%;">
 					</div>
-					<div class="modal-btn-box">				
-						<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+					<div class="modal-btn-box">
+						<form action="play" style="display: inline-block;">
+							<input type="hidden" id="input-content-no" name="contentNo">
+							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+						</form>										
 						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
 						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
@@ -404,19 +454,19 @@ $(function(){
 						<div style="max-width:60%;">
 							<div class="modal-trailer-feature">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
-								<div class="modal-trailer-feature-box">2020</div>
-								<div class="modal-trailer-feature-box">18+(이미지)</div>
+								<div id="content-release" class="modal-trailer-feature-box "></div>
+								<div class="modal-trailer-feature-box content-limit"></div>
 								<div class="modal-trailer-feature-box">시즌 3개</div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
-							<div class="modal-trailer-text">
-								인디애나주의 작은 마을에서 행방불명된 소년. 이와 함께 미스터리한 힘을 가진 소녀가 나타나고, 마을에는 기묘한 현상들이 일어나기 시작한다. 아들을 찾으려는 엄마와 마을 사람들은 이제 정부의 일급비밀 실험의 실체와 무시무시한 기묘한 현상들에 맞서야 한다.
+							<div id="content-info" class="modal-trailer-text">
+								
 							</div>
 						</div>
 						<div class="modal-trailer-etc"> 
-							<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span>aa</span></div>
-				       		<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span></span></div>
-				       		<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span></span></div>
+							<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div>
+				       		<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div>
+				       		<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-feature"></span></div>
 						</div>
 					</div>
 			
@@ -509,13 +559,12 @@ $(function(){
 					       	</div>
 				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
 				       		<div >
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><span></span></div>
-				       			
+				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div>
+				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><span class="content-limit"></span></div>				       			
 	       			
 				       		</div>
 				       </div>
