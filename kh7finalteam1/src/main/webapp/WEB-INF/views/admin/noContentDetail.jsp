@@ -51,6 +51,27 @@
 								<c:when test="${contentDto.contentType eq 'do'}"> 다큐멘터리 </c:when>
 							</c:choose>
 						</div>
+						<div class="mt-3">
+							장르 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
+								<span>${genreFeatureCastVO.genreName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
+						<div class="mt-3">
+							특징 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
+								<span>${genreFeatureCastVO.featureName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
+						<div class="mt-3">
+							출연 : 
+							<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
+								<span>${genreFeatureCastVO.castName}</span>
+								<c:if test="${status.last eq false}">,</c:if>
+							</c:forEach>
+						</div>
 						<div class="mt-3">${contentDto.contentLimit}세 이상</div>
 						<div class="mt-3">연작 여부 : ${contentDto.contentSeries}</div>
 						<div class="mt-3">개봉년도 : ${contentDto.contentRelease}</div>
@@ -62,7 +83,7 @@
                     <div class="col-md-6 offset-md-6 pt-3" >
                         <div class="row">
                             <div class="col-md-6 p-1">
-                                <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal" data-target="#edit-content-modal">수정</button>
+                                <button type="button" class="btn btn-block btn-outline-primary" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
                                 <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
@@ -164,7 +185,7 @@
 				                    <input type="text" name="contentThumbnail" class="form-control" value="${contentDto.contentThumbnail}">
 				                </div>
 				                <div class="modal-footer">
-				                    <button type="submit" class="btn btn-primary">확인</button>                        
+				                    <button type="submit" class="btn btn-primary" id="noContent-edit">확인</button>                        
 				                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
 				                </div>
 				            </form>
@@ -187,6 +208,54 @@
 		$('select[name="contentLimit"]').find('option[value="${contentDto.contentLimit}"]').attr("selected",true);
 		$('select[name="contentType"]').find('option[value="${contentDto.contentType}"]').attr("selected",true);
 		$('select[name="contentRelease"]').find('option:contains("${contentDto.contentRelease}")').attr("selected",true);
+		
+		/* 수정 값 유효성 검사 */
+		$("#noContent-edit").click(function(e){
+			var contentName = $("input[name='contentName']").val();
+			var contentInfo = $("textarea[name='contentInfo']").val();
+			var seriesPath = $("input[name='seriesPath']").val();
+			var contentPlaytime = $("input[name='contentPlaytime']").val();
+			var contentLogo = $("input[name='contentLogo']").val();
+			var contentThumbnail = $("input[name='contentThumbnail']").val();
+			
+			//console.log(contentName.length);
+			if(contentName.length == 0 || contentName.length>50){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentName']").val("");
+				$("input[name='contentName']").focus();
+				e.preventDefault();
+			}
+			else if(contentInfo.length == 0 || contentInfo.length>300){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("textarea[name='contentInfo']").val("");
+				$("textarea[name='contentInfo']").focus();
+				e.preventDefault();
+			}
+			else if(seriesPath.length == 0 || seriesPath.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='seriesPath']").val("");
+				$("input[name='seriesPath']").focus();
+				e.preventDefault();
+			}
+			else if(contentPlaytime.length == 0 || contentPlaytime.length>3){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentPlaytime']").val("");
+				$("input[name='contentPlaytime']").focus();
+				e.preventDefault();
+			}
+			else if(contentLogo.length == 0 || contentLogo.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentLogo']").val("");
+				$("input[name='contentLogo']").focus();
+				e.preventDefault();
+			}
+			else if(contentThumbnail.length == 0 || contentThumbnail.length>500){
+				window.alert("잘못된 값입니다. 다시 입력하세요.");
+				$("input[name='contentThumbnail']").val("");
+				$("input[name='contentThumbnail']").focus();
+				e.preventDefault();
+			}
+		});
 
 	});
 </script>

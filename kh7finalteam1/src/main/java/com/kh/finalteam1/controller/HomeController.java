@@ -76,4 +76,10 @@ public class HomeController {
 		return "main/movie";
 
 	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "template/test";
+
+	}
 }
