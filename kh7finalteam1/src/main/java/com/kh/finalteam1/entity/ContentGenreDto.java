@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 public class ContentGenreDto {
 	private int contentNo;
 	private int genreNo;
+	
 }

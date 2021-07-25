@@ -13,5 +13,5 @@ public class WatchLogDto {
 	private int contentNo;
 	private int watchLogSeason;
 	private int watchLogEpisode;
-	private Date watchLogPlaytime;
+	private int watchLogPlaytime;
 }

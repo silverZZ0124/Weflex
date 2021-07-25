@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="/plugin/slick/slick.js"></script>
-    
+    <script src="http://www.youtube.com/player_api"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
 
 
@@ -36,6 +38,44 @@
 <title>Weflex</title>
 </head>
 <script>
+	var player;
+	var endFlag = false;
+	
+	window.onload = function(){			
+		
+		function onYouTubeIframeAPIReady() {
+		    player = new YT.Player('player', {
+		        events: {	  
+		        	'onReady': onPlayerReady,
+		            'onStateChange': onPlayerStateChange
+		          }
+		    });
+		}		
+		
+		function onPlayerReady(event) {
+	    }
+		
+		function onPlayerStateChange(event) {
+			var totalTime = player.getDuration() / 100 * 98; 
+			var curTime = player.getCurrentTime();
+
+			if(curTime >= totalTime){
+				endFlag = true;
+			}
+			
+		}
+	
+		onYouTubeIframeAPIReady();
+	}
+	
+	window.onbeforeunload = function(){
+		var curTime;
+		
+		if(endFlag)
+			$.fn.insertWatchLog(0);
+		else
+			$.fn.insertWatchLog(parseInt(player.getCurrentTime()));
+	}
  $(function(){
 	 
 	 var video=$("#page-video");
@@ -48,7 +88,7 @@
 		 /* $(document).mousemove(function(event){
 			 $("#go-back").css("display","block");
 		 }); */
-	    });
+     });
 	 
 	 $("#playButton").click(function(){
 		 videoDomObj.play();
@@ -62,48 +102,61 @@
 		 $("#stopButton").css("display","none");
 	 });
 	 
-		//소리 재생 
-		$("#sound-on").click(function(){
-			videoDomObj.muted=true;
-			$("#sound-off").css("display","block");
-			$("#sound-on").css("display","none");
-		});
+	//소리 재생 
+	$("#sound-on").click(function(){
+		videoDomObj.muted=true;
+		$("#sound-off").css("display","block");
+		$("#sound-on").css("display","none");
+	});
+	
+	//음소거 
+	$("#sound-off").click(function(){
+		videoDomObj.muted=false;
+		$("#sound-off").css("display","none");
+		$("#sound-on").css("display","block");
+	});
+	
+	 $("#video-top-nav").hover(function(){
+		$("#go-back").css("display","block");
+		$("#video-bottom-nav").css("display","block");
 		
-		//음소거 
-		$("#sound-off").click(function(){
-			videoDomObj.muted=false;
-			$("#sound-off").css("display","none");
-			$("#sound-on").css("display","block");
-		});
-		
-		 $("#video-top-nav").hover(function(){
-			$("#go-back").css("display","block");
-			$("#video-bottom-nav").css("display","block");
+
+	},function(){
+		$("#go-back").css("display","none");
+		$("#video-bottom-nav").css("display","none");
+	}); 
+	 
+	$("#video-bottom-nav").hover(function(){
+			$(".video-bottom-nav-box").css("display","block");
 			
 	
 		},function(){
-			$("#go-back").css("display","none");
-			$("#video-bottom-nav").css("display","none");
-		}); 
-		 
-		$("#video-bottom-nav").hover(function(){
-				$(".video-bottom-nav-box").css("display","block");
-				
-		
-			},function(){
-				$(".video-bottom-nav-box").css("display","none");
-			});  
-		
-		$("#full-screen").click(function(){
-			videoDomObj.webkitRequestFullscreen();
+			$(".video-bottom-nav-box").css("display","none");
+		});  
+	
+	$("#full-screen").click(function(){
+		videoDomObj.webkitRequestFullscreen();
 
-		});
-		 
+	});
+	 
+	
+	$("#go-back").click(function(){
+		window.history.back();
+	});
+
+	$.fn.insertWatchLog = function(curTime){	
 		
-		$("#go-back").click(function(){
-			window.history.back();
+		$.ajax({
+			url : "${pageContext.request.contextPath}/data/home/insertWatchLog",
+			type : "post",
+			dataType : "json",
+			data : {clientNo: '${playlistVO.clientNo}',
+					contentNo: '${playlistVO.contentNo}',
+					watchLogSeason: '${playlistVO.contentSeason}',
+					watchLogEpisode: '${playlistVO.contentEpisode}',
+					watchLogPlaytime: curTime}							
 		});
-		
+	};
 		
  });
 </script>
@@ -111,20 +164,11 @@
 
 <body class="main-color fade-in no-scroll">
 <div class="main-color play-video-box">
-		<!-- <nav class="navbar navbar-dark navbar-expand-sm video-page-nav-style" id="video-top-nav">
-			<div>
-				<button class="btn play-btn" id="go-back" style="display:none;"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
-			</div>
-		</nav> -->
-		
-		<!-- <video class="play-video"autoplay muted  id="page-video">
-    		<source src="res/video/main_trailer1.mp4" type="video/mp4">
-		</video> -->
-		<div class="main-color play-top-div">
+		<div class=" play-top-div">
 			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
 		</div>
 		<div style="widht:100%;height:100%;">
-		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/qI4AMF0Zd74?start=00&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe id="player" width="100%" height="100%" src="${playlistVO.contentUrl }?enablejsapi=1&start=${playlistVO.lastPlaytime }&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 		<div class="main-color play-bottom-div" style="display:none;">
 			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
