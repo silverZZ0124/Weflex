@@ -10,6 +10,7 @@ var player;
 var detailModalPlayerReady = true;
 var seriesArray = new Array();
 var contentThumbnail;
+var curContentNo;
 
 window.onload = function(){			
 	
@@ -302,14 +303,27 @@ $(function(){
 		
 		//+누르면 체크
 		$("#plus-btn").click(function(){
-			$("#plus-btn").css("display","none");
-			$("#check-btn").css("display","block");
+
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/insertWishList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$("#plus-btn").css("display","none");
+					$("#check-btn").css("display","block");					
+				}						
+			});
 		});
 		
 		//체크 누르면 +
 		$("#check-btn").click(function(){
 			$("#plus-btn").css("display","block");
 			$("#check-btn").css("display","none");
+			
+			console.log(curContentNo);
 		});
 		
 		//영상 재생 버튼
@@ -325,14 +339,14 @@ $(function(){
 			}
 			
 			var el = $(e.relatedTarget);
-			var contentNo = el.attr("data-contentno");
+			curContentNo = el.attr("data-contentno");
 			
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/getContent",
 				type: "post",
 				dataType: "json",
 				data: {
-					contentNo: contentNo	
+					contentNo: curContentNo	
 				},
 				success:function(resp){
 				 	$("#player").css("visibility", "hidden");
@@ -346,7 +360,8 @@ $(function(){
  					$("#content-logo").attr("src", resp.contentDto.contentLogo);
  					$("#content-info").text(resp.contentDto.contentInfo);
  					$("#content-release").text(resp.contentDto.contentRelease);
- 					$(".content-limit").text(" "+resp.contentDto.contentLimit+"+");
+ 					var imgSrc = "res/img/content_limit_"+resp.contentDto.contentLimit+".png";
+ 					$(".content-limit").attr("src", imgSrc);
  					
  					$(".content-genre").empty();
  					for(var i=0; i < resp.genreList.length; i++){
@@ -373,8 +388,9 @@ $(function(){
  					}
  					
 					//연작 없는 content일 경우 회차 div를 숨긴다
- 					if(resp.contentDto.contentSeries == "N")
- 						$(".modal-series").css("display", "none");
+ 					if(resp.contentDto.contentSeries == "N"){
+ 						$(".modal-series").css("display", "none"); 						
+ 					}
 					//연작 있는 content일 경우 회차 div를 block으로
  					else if(resp.contentDto.contentSeries == "Y"){
  						//season이 몇 까지 있는지 파악 후 시즌 별로 배열에 나누기
@@ -394,6 +410,7 @@ $(function(){
  						}
  						
  						seriesArray.push(array); 
+ 						$(".contentSeason").text("시즌 " + season + "개");
  						
  						//select 박스 동적 생성
  						$(".series-select-box").empty();
@@ -480,7 +497,8 @@ $(function(){
 			var index = season - 1;
 			
 			$(".trailer-series-section-box-wrapper").empty();
-						
+			$(".trailer-series-section-box-wrapper").css("border-top", "1px solid #404040");
+			
 			for(var i=0; i<seriesArray[index].length; i++){
 				var template = $("#episode-list-template").html();
 				
@@ -500,9 +518,14 @@ $(function(){
 
 			//모든 episode section 동적 생성 
 			$(".trailer-series-section-box-wrapper").empty();
+			$(".trailer-series-section-box-wrapper").css("border-top", "none");
 				
 			for(var i in seriesArray){
-				var template = "<div><h1>시즌 "+(Number(i)+1)+"</h1>";
+				var template;
+				if(i == 0)
+					template = '<div><h5 style="margin:0; font-weight: bold;">시즌 '+(Number(i)+1)+"</h5>";
+				else
+					template = '<div style="margin-top:20px;"><h5 style="margin:0; font-weight: bold;">시즌 '+(Number(i)+1)+"</h5>";
 				var index = 1;
 				for(var j in seriesArray[i]){
 					template += $("#episode-list-template").html();
@@ -587,8 +610,6 @@ $(function(){
 	</div>
 	
 	</div>
-	
-	
 		<div class="gradation-box">&ensp;&ensp;</div>
 	</div>
 	
@@ -608,9 +629,7 @@ $(function(){
 				
 				  <div class="modal-trailer-over-box">	
 					<div class="main-trailer-img">
-
 						<img id="content-logo" src="" style="width:100%;">
-
 					</div>
 					<div class="modal-btn-box">
 						<form action="play" style="display: inline-block;">
@@ -624,24 +643,7 @@ $(function(){
 					</div>
 				
 			</div>
-	        </div>
-	        
-	      
-				
-	        
-	       <!--  <div class="modal-trailer-over-box">
-				<div class="main-trailer-img">
-				<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABQf8iUunOQO0mlUgvOOACXLBSSb5VxGX1hOUMKP42LZ7XVzKWCJsHgCig5B4SYtgoaXqAqfPb1CnZMBEfvCF7GIu0jOzzACNGqtUb_l9xrJQQJGFjfVUJnQxp8cgtnhq9w3dvTlRKGYO6y5_OZm5mbP-NjwBQ5Q8qpwhAD1RUC1E.webp?r=034" style="width:100%;">
-				</div>
-				<div class="modal-btn-box">
-				<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
-				<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-				<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-				<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
-				<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
-				</div>
-			
-			</div> -->
+	        </div>      
 			
 			<div class="modal-body-box">
 					<div class="modal-trailer-info-box">
@@ -649,8 +651,8 @@ $(function(){
 							<div class="modal-trailer-feature">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box content-limit"></div>
-								<div class="modal-trailer-feature-box">시즌 3개</div>
+								<div class="modal-trailer-feature-box "><img class="content-limit" width="25px" height="25px"></div>
+								<div class="modal-trailer-feature-box contentSeason"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
 
@@ -673,45 +675,9 @@ $(function(){
 			        	<div class="modal-series-title">
 			        		<h3>회차</h3>
 			        		<div class="series-select-box">
-			        			
-			        			<!-- <select class="selectpicker main-color series-select-box-title">
-								    
-								      <option>시즌1</option>
-								      <option>시즌2</option>
-								      <option>시즌3</option>
-								  	  <option data-divider="true"></option>
-								      <option>전체 회차 표시</option>
-								      
-								  
-								  </select> -->
 			        		</div>
 			        	</div>
-			        	<div class="trailer-series-section-box-wrapper"></div>
-	        			<%-- <c:forEach var="i" begin="1" end="9" step="1"> <!-- 회차수만큼 반복 --> 
-								<div class="trailer-series-section-box">
-									<div class="trailer-series-section">
-										<div class="trailer-series-section-index">${i}</div>
-										<div class="trailer-series-section-thumbnail-box">
-											<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYlNPB0ZkssHuy-ssQNE9R7eqCObZ3Kb9Hbe3UhfSjm1W2_v4pBPQt45taoKeGYUVkB-CFqzP4tTwoordt3VPeBEJBK9Dn3OZmxa-GcwfQ1HxVW8.webp?r=9e5"
-												class="trailer-series-section-thumbnail">
-											<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
-												<i class="fas fa-play"></i>
-											</button>
-										</div>
-
-										<div class="trailer-series-section-info-box">
-											<div class="trailer-series-section-info-title">
-												<div>제${i}장 어쩌구저쩌구</div>
-												<div style="margin-left: auto;">(시간)분</div>
-											</div>
-											<div class="trailer-series-section-info-text">회차 설명
-												ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 대충 두줄
-											</div>
-										</div>
-									</div>
-								</div>
-						</c:forEach>  --%>
-					        	
+			        	<div class="trailer-series-section-box-wrapper"></div>	        								        	
 				        </div>
 				       <%--  </c:if> --%>
 				       
@@ -762,10 +728,9 @@ $(function(){
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><span class="content-limit"></span></div>	<br>		       			
-	       			
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><img class="content-limit" width="25px" height="25px"></div>				       				       			
 				       		</div>
 				       </div>
 				      </div>

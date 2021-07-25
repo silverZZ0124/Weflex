@@ -3,6 +3,8 @@ package com.kh.finalteam1.restcontroller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.finalteam1.entity.ClientDto;
 import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.WatchLogDto;
+import com.kh.finalteam1.entity.WishListDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
 import com.kh.finalteam1.error.AjaxException;
 import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.SeriesDao;
 import com.kh.finalteam1.repository.WatchLogDao;
+import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.service.MainModalService;
 import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 import com.kh.finalteam1.vo.MainModalDetailVO;
@@ -37,6 +41,9 @@ public class HomeDataController {
 	
 	@Autowired
 	private SeriesDao seriesDao;
+	
+	@Autowired
+	private WishListDao wishListDao;
 	
 	@PostMapping("/insertWatchLog")
 	public void insertWatchLog(@ModelAttribute WatchLogDto watchLogDto) {
@@ -73,5 +80,27 @@ public class HomeDataController {
 								.seriesList(seriesList)
 							.build();
 		 
+	}
+	
+	@PostMapping("/insertWishList")
+	public void insertWishList(@RequestParam int contentNo, HttpSession session) {
+		int clientNo = (int)session.getAttribute("clientNo");
+		WishListDto wishListDto = WishListDto.builder()
+									.clientNo(clientNo)
+									.contentNo(contentNo)
+								.build();
+		
+		wishListDao.insertWishList(wishListDto);
+	}
+	
+	@PostMapping("/deleteWishList")
+	public void deleteWishList(@RequestParam int contentNo, HttpSession session) {
+		int clientNo = (int)session.getAttribute("clientNo");
+		WishListDto wishListDto = WishListDto.builder()
+									.clientNo(clientNo)
+									.contentNo(contentNo)
+								.build();
+		
+		wishListDao.deleteWishList(wishListDto);
 	}
 }

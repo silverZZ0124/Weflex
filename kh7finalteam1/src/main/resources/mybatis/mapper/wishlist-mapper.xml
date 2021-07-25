@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="wishList">
+	<insert id="mergeInto" parameterType="WishListDto">
+		merge into wishlist
+		    using dual
+		        on (client_no=#{clientNo} and content_no=#{contentNo})		    
+		    when not matched then
+		        insert (client_no, content_no)
+		            values (#{clientNo}, #{contentNo})
+	</insert> 
+	
+	<delete id="delete" parameterType="WishListDto">
+		delete from wishlist where client_no=#{clientNo} and content_no#{contentNo}
+	</delete>
+	
+	<select id="get" parameterType="WishListDto">
+		select * from 
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
