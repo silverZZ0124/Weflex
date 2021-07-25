@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class ContentGenreDto {
-	private int content_no;
-	private int genre_no;
+	private int contentNo;
+	private int genreNo;
 }
