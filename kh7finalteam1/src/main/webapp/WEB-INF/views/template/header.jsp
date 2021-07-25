@@ -90,7 +90,6 @@
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
-				  <li class="nav-item"> <a class="nav-link" href="#">NEW! 요즘 대세 콘텐츠</a> </li>
 				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
 			</ul> 
 			<ul class="navbar-nav" style="position: absolute;margin-left: 130px;">
@@ -103,7 +102,6 @@
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/">홈</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/tv">TV프로그램</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/movie">영화</a></li>
-		            <li><a class="dropdown-item" href="#">NEW! 요즘 대세 콘텐츠</a></li>
 		            <li><a class="dropdown-item" href="#">내가 찜한 콘텐츠</a></li>
 		          </ul>
 		          

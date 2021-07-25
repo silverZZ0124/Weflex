@@ -62,7 +62,7 @@ $(function(){
 			responsive: [ // 반응형 웹 구현 옵션
 				
 				{  
-					breakpoint: 1150,
+					breakpoint: 1300,
 					settings: {
 						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
 						slidesToShow:5,
@@ -71,7 +71,7 @@ $(function(){
 				},
 				
 				{  
-					breakpoint: 960, //화면 사이즈 960px
+					breakpoint: 1100, //화면 사이즈 960px
 					settings: {
 						//위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
 						slidesToShow:4,
@@ -109,26 +109,41 @@ $(function(){
 			
 			img = $(this);
 			timeout=setTimeout(function(){
+				
+				var modalWidth=img.width()*1.4;
+				var modalVideoHeight=img.height()*1.4*1.05;
+
+				$("#modal-header").css("height",modalVideoHeight+"px");
+				$("#hoverModal").css("width",modalWidth+"px");
+				/* $("#hoverModal").css("height",modalHeight+"px"); */
+				
+
 				$("#hoverModal").modal({backdrop: false});
+				
 				$("#hoverModal").modal("show");
 				var imgX=img.offset().left;
 				var imgY=img.offset().top;
 				
+				
 				var imgMiddleX=imgX+(img.width()/2);
 				var imgMiddleY=imgY+(img.height()/2);
-				
-				modalX=imgMiddleX-$("#hoverModal").width()/2;
-				modalY=imgMiddleY-$("#hoverModal").height()/2;
+
+				var modalHeight=$("#hoverModal").height();
+				modalX=imgMiddleX-modalWidth/2;
+				modalY=imgMiddleY-modalHeight/2;
 
 				if(modalX<0) modalX=10;
 				if((modalX+$("#hoverModal").width())>$(window).width()){
 					modalX=$(window).width()-$("#hoverModal").width()-10;
 				}
-			
+				
+				
 				
 			$(".slider-img").mouseleave(function(){
 				clearTimeout(timeout);
 			});
+			
+			
 			
 		
 			$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
@@ -604,8 +619,8 @@ $(function(){
 						</form>										
 						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn "><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn "><i class="far fa-thumbs-down"></i></button>
 					</div>
 				
 			</div>
@@ -734,22 +749,22 @@ $(function(){
 				       		
 				       </div>
 				       
-				       <div style="position: absolute;width: 95%;">
+				       <div style="position: absolute;width: 100%;">
 				       <div class="modal-second-gradation-box">&ensp;&ensp;</div>
 				       <div class="modal-contents-detail-info" >
 				       		
-				       		<div class="modal-cotents-detail-btn" style="display:flex;">
+				       		<div class="modal-contents-detail-btn" style="display:flex;">
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button "><i class="fas fa-chevron-down"></i></button>
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-less-button " style="display:none;"><i class="fas fa-chevron-up"></i></button>
 					       	</div>
 				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
-				       		<div >
+				       		<div style="font-size:0.8rem;">
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><span class="content-limit"></span></div>				       			
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><span class="content-limit"></span></div>	<br>		       			
 	       			
 				       		</div>
 				       </div>
@@ -771,17 +786,34 @@ $(function(){
         <div class="modal-dialog" role="document">
             <div class="modal-content hoverModalBox ">
                
-                <div class="modal-header" style="padding:0;display:flex;border:none;">
+                <div class="modal-header" id="modal-header" style="padding:0;display:flex;border:none;">
                     <iframe class="hoverModalVideo" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="modal-body " style=" border:none;">
+                <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
-                    	<button class="btn btn-outline-light modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
-	                    <button class="btn btn-outline-light modal-etc-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn"><i class="far fa-thumbs-down"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn hover-modal-more-button "data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
+                    	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+	                    <button class="btn btn-outline-light hover-modal-etc-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-up" ><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-down"><i class="far fa-thumbs-down"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button "data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div>
+                    	<div class="modal-trailer-feature" style="margin-top:2%;">
+								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
+								<div id="content-release" class="modal-trailer-feature-box "></div>
+								<div class="modal-trailer-feature-box content-limit"></div>
+								<div class="modal-trailer-feature-box">시즌 3개</div>
+								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
+							</div>
+                    	<div >
+                    		<span>다크</span>
+                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
+                    		<span>흥미진진</span>
+                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
+                    		<span>스릴러</span>
+                    	</div>
+                    	
                     </div>
                 </div>
                 
