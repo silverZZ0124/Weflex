@@ -6,9 +6,23 @@
 
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/style.css"> --%>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<style>
+	.genreBox, .featureBox, .castBox{
+		display:inline-block;
+		background-color:lightgray;
+		border-radius:5px;
+	}
+	.btn-close{
+		background-color:lightgray;
+		border:none;
+	}
+	.btn-close:hover{
+		color:gray;
+	}
+</style>
 
 <div class="container-fluid">
 	
@@ -60,14 +74,14 @@
 						</div>
 						<div class="mt-3">
 							특징 : 
-							<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
+							<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }" varStatus="status">
 								<span>${genreFeatureCastVO.featureName}</span>
 								<c:if test="${status.last eq false}">,</c:if>
 							</c:forEach>
 						</div>
 						<div class="mt-3">
 							출연 : 
-							<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
+							<c:forEach var="genreFeatureCastVO" items="${contentCastList }" varStatus="status">
 								<span>${genreFeatureCastVO.castName}</span>
 								<c:if test="${status.last eq false}">,</c:if>
 							</c:forEach>
@@ -162,6 +176,37 @@
 				                    </select>
 				                  </div>
 				                  
+				                  <div class="form-group">
+				                  	<label>장르</label>
+				                  	<select class="form-control" name="genreName" >
+				                  		<option value="">선택하세요</option>
+				                  		<c:forEach var="genreDto" items="${genreList }">
+				                  			<option>${genreDto.genreName }</option>
+				                  		</c:forEach>
+				                  	</select>
+				                  </div>
+				                  
+				                  <div id="this-content-genre"></div>
+				                  
+				                  <div class="form-group">
+				                  	<label>프로그램 특징</label>
+				                  	<select class="form-control" name="featureName" >
+				                  		<option value="">선택하세요</option>
+				                  		<c:forEach var="programFeatureDto" items="${featureList }">
+				                  			<option>${programFeatureDto.featureName }</option>
+				                  		</c:forEach>
+				                  	</select>
+				                  </div>
+				                  
+				                  <div id="this-content-feature"></div>
+				                  
+				                  <div class="form-group">
+				                    <label>출연진 추가</label>
+				                    <input type="text" name="castName" class="form-control">
+				                  </div>
+				                  
+				                  <div id="this-content-cast"></div>
+				                  
 								<div class="form-group">
 				                    <label>개봉연도</label>
 				                    <select class="form-control" name="contentRelease" required>
@@ -208,6 +253,67 @@
 		$('select[name="contentLimit"]').find('option[value="${contentDto.contentLimit}"]').attr("selected",true);
 		$('select[name="contentType"]').find('option[value="${contentDto.contentType}"]').attr("selected",true);
 		$('select[name="contentRelease"]').find('option:contains("${contentDto.contentRelease}")').attr("selected",true);
+		
+		<c:if test="${not empty contentGenreList }">
+			$("#this-content-genre").addClass("mb-3");
+		</c:if>
+		<c:forEach var="genreFeatureCastVO" items="${contentGenreList }">
+			$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
+		</c:forEach>
+		
+		<c:if test="${not empty contentFeatureList }">
+			$("#this-content-feature").addClass("mb-3");
+		</c:if>
+		<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
+			$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
+		</c:forEach>
+		
+		<c:if test="${not empty contentCastList }">
+			$("#this-content-cast").addClass("mb-3");
+		</c:if>
+		<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
+			$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'>${genreFeatureCastVO.castName}<button class='btn-close'>&times;</button></span>");
+		</c:forEach>
+		
+		
+		$("select[name='genreName']").change(function(){
+			var selectedGenre = $(this).val();
+			
+			var genreDiv = "";
+			genreDiv += "<span class='genreBox p-2 mr-2 mb-2'>";
+			genreDiv += selectedGenre;
+			genreDiv += "<button class='btn-close'>&times;</button></span>";
+			$("#this-content-genre").append(genreDiv);
+			
+		});
+		
+		$("select[name='featureName']").change(function(){
+			var selectedFeature = $(this).val();
+			
+			var featureDiv = "";
+			featureDiv += "<span class='featureBox p-2 mr-2 mb-2'>";
+			featureDiv += selectedFeature;
+			featureDiv += "<button class='btn-close'>&times;</button></span>";
+			$("#this-content-feature").append(featureDiv);
+			
+		});
+		
+		$("input[name='castName']").keydown(function(key) {
+        	if (key.keyCode == 13) {
+           		event.preventDefault();
+				var cast = $(this).val();
+				
+				var castDiv = "";
+				castDiv += "<span class='castBox p-2 mr-2 mb-2'>";
+				castDiv += cast;
+				castDiv += "<button class='btn-close'>&times;</button></span>";
+				$("#this-content-cast").append(castDiv);
+				
+				$(this).val("");
+        	}
+		});
+
+		
 		
 		/* 수정 값 유효성 검사 */
 		$("#noContent-edit").click(function(e){
@@ -259,6 +365,14 @@
 
 	});
 </script>
-
+<script>
+	$(function(){
+		$(document).on("click",".btn-close",function(e){
+			e.preventDefault();
+			$(this).parents("span").remove();
+		});
+		
+	});
+</script>
 
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

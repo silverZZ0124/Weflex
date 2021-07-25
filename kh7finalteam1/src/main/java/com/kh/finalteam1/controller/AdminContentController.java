@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalteam1.entity.ContentDto;
+import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.NoSeriesDto;
+import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
 import com.kh.finalteam1.repository.CastDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.ContentFeatureDao;
 import com.kh.finalteam1.repository.ContentGenreDao;
+import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
 import com.kh.finalteam1.vo.GenreFeatureCastVO;
 
@@ -43,6 +47,12 @@ public class AdminContentController {
 	@Autowired
 	private CastDao castDao;
 	
+	@Autowired
+	private GenreDao genreDao;
+	
+	@Autowired
+	private ProgramFeatureDao programFeatureDao;
+	
 	@GetMapping("/")
 	public String content(Model model) {
 		List<ContentDto> contentList = contentDao.list();
@@ -63,6 +73,12 @@ public class AdminContentController {
 		
 		List<GenreFeatureCastVO> contentCastList  = castDao.contentCastLists(contentNo);
 		model.addAttribute("contentCastList", contentCastList);
+		
+		List<GenreDto> genreList = genreDao.list();
+		model.addAttribute("genreList", genreList);
+		
+		List<ProgramFeatureDto> featureList = programFeatureDao.list();
+		model.addAttribute("featureList", featureList);
 		
 		//연작 없으면 (해당 컨텐츠 영상길이등 단일 전달)
 		if(contentDto.getContentSeries().equals("N")) {
