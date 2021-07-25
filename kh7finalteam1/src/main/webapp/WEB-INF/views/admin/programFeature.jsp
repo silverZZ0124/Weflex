@@ -65,7 +65,7 @@
                  <!-- 프로그램 특징 검색 -->
                  <div class="card shadow mb-4">
                      <div class="card-body mt-3 text-center">
-                    	<form class="form row" id="Feature-search-form">
+                    	<form class="form row" id="feature-search-form">
                     		<div class="form-group col-lg-9 col-sm-12">
                           		<input type="text" name="featureName" class="form-control" id="featureName" placeholder="검색어를 입력하세요">
                         	</div>
@@ -104,7 +104,35 @@
              </div>
                 
          </div>
+         
+		<!-- 중복된 값이거나 값이 없을때 입력될 때 띄우는 모달창 -->
+        <div class="modal fade" id="insert-feature-modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <h4 class="modal-title">입력 오류</h4>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <div class="conatiner-fluid">
+                            <div class="row">
+                                <div class="col" id="input-modal-content">#</div>
+                            </div>
+                        </div>                    
+                    </div>
 
+                    <div class="modal-footer row">                        
+                        <div class="col-md-3 offset-md-9">   
+                        	<button class="btn btn-secondary btn-block" data-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
      </div>
      <!-- /.container-fluid -->
      
@@ -121,11 +149,14 @@
 				console.log(Feature);
 				<c:forEach var="programFeatureDto" items="${featureList}">
 					if(Feature == "${programFeatureDto.featureName}"){
-						window.alert("중복된 값이 존재합니다.");
+						$("#input-modal-content").text("중복된 값이 존재합니다.");
+						$('#insert-feature-modal').modal('show');
 						event.preventDefault();
 					}
 				</c:forEach>
 				if(Feature.trim() == ""){
+					$("#input-modal-content").text("값을 입력하세요.");
+					$('#insert-feature-modal').modal('show');
 					event.preventDefault();
 				}
 				

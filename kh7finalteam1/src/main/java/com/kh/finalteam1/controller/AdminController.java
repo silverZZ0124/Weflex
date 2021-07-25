@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalteam1.entity.content.GenreDto;
-import com.kh.finalteam1.entity.content.ProgramFeatureDto;
-import com.kh.finalteam1.repository.genre.GenreDao;
-import com.kh.finalteam1.repository.programfeature.ProgramFeatureDao;
+import com.kh.finalteam1.entity.GenreDto;
+import com.kh.finalteam1.entity.ProgramFeatureDto;
+import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.ProgramFeatureDao;
 
 @Controller
 @RequestMapping("/admin")
@@ -45,6 +47,17 @@ public class AdminController {
 		model.addAttribute("genreList", genreList);
 		model.addAttribute("editGenreName", genreName);
 		return "admin/genreEdit";
+	}
+	
+	@PostMapping("/genreEditComplete")
+	public String genreEditComplete(@ModelAttribute GenreDto genreDto) {
+		boolean isChange = genreDao.edit(genreDto);
+		if(isChange) {
+			return "redirect:/admin/genre";
+		}
+		else {
+			return "admin/genreEdit?genreName="+genreDto.getGenreName();
+		}
 	}
 	
 	@GetMapping("/genreDelete")
@@ -83,16 +96,34 @@ public class AdminController {
 		return "admin/programFeatureEdit";
 	}
 	
+	@PostMapping("/featureEditComplete")
+	public String featureEditComplete(@ModelAttribute ProgramFeatureDto programFeatureDto) {
+		boolean isChange = programFeatureDao.edit(programFeatureDto);
+		if(isChange) {
+			return "redirect:/admin/feature";
+		}
+		else {
+			return "admin/featureEdit?featureName="+programFeatureDto.getFeatureName();
+		}
+	}
+	
 	@GetMapping("/featureDelete")
 	public String featureDelete(@RequestParam String featureName, Model model) {
 		boolean isDelete = programFeatureDao.delete(featureName);
 		if(isDelete) {
-			return "redirect:/admin/programFeature";
+			return "redirect:/admin/feature";
 		}
 		else {
 			model.addAttribute("featureName", featureName);
-			return "programFeatureEdit";
+			return "admin/programFeatureEdit";
 		}
 	}
+	
+	
+	//회원 관리
+		@GetMapping("/clientAdmin")
+		public String clientAdmin() {
+			return "admin/clientAdmin";
+		}
 
 }

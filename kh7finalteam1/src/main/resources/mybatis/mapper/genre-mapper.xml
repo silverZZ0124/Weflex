@@ -22,6 +22,10 @@
 		delete from genre where genre_name=#{genreName}
 	</delete>
 	 
+	<update id="edit" parameterType="GenreDto">
+		update genre set genre_name=#{newGenreName} where genre_name=#{genreName}
+	</update>
+	
 </mapper>
 
 

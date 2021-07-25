@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.finalteam1.entity.qna.QnaBoardDto;
+import com.kh.finalteam1.entity.QnaBoardDto;
 import com.kh.finalteam1.repository.QnaBoardDao;
 
 @Controller
@@ -38,6 +38,7 @@ public class HelpController {
 	
 	@PostMapping("/editor")
 	public String editor(@RequestParam int categoryNo, @RequestParam String title, @RequestParam String content) {
+		System.out.println("ee");
 		QnaBoardDto qnaBoardDto = QnaBoardDto.builder()
 									.categoryNo(categoryNo)
 									.qnaBoardTitle(title)

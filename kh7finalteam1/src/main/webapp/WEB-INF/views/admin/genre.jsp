@@ -104,14 +104,42 @@
              </div>
                 
          </div>
+		
+		<!-- 중복된 값이거나 값이 없을때 입력될 때 띄우는 모달창 -->
+        <div class="modal fade" id="insert-genre-modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <h4 class="modal-title">입력 오류</h4>
+                        <button class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <div class="conatiner-fluid">
+                            <div class="row">
+                                <div class="col" id="input-modal-content">#</div>
+                            </div>
+                        </div>                    
+                    </div>
 
-     </div>
-     <!-- /.container-fluid -->
+                    <div class="modal-footer row"> 
+                        <div class="col-md-3 offset-md-9">   
+                        <button class="btn btn-secondary btn-block" data-dismiss="modal">확인</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+	 </div>
+	 <!-- /.container-fluid -->
      
     
     
     <script>
-		//중복된 값이 입력될 때 띄우는 경고창 (모달로 수정 예정)
+		//값 입력시 중복값 존재하는지 검사
 		window.onload = function () {
 			var genreForm = document.querySelector("#genreForm");
 			genreForm.addEventListener("submit",function(event){
@@ -120,11 +148,14 @@
 				console.log(genre);
 				<c:forEach var="genreDto" items="${genreList}">
 					if(genre == "${genreDto.genreName}"){
-						window.alert("중복된 값이 존재합니다.");
+						$("#input-modal-content").text("중복된 값이 존재합니다.");
+						$('#insert-genre-modal').modal('show');
 						event.preventDefault();
 					}
 				</c:forEach>
 				if(genre.trim() == ""){
+					$("#input-modal-content").text("값을 입력하세요.");
+					$('#insert-genre-modal').modal('show');
 					event.preventDefault();
 				}
 				

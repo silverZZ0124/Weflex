@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<link rel="stylesheet" href="res/css/common.css"/>
-	<link rel="stylesheet" href="res/css/template.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	</section>
-	<footer>
+	<footer class="member-footer">
 		<div class="d-flex social-links">
 			<a class="social-link" href="#"><i class="fab fa-facebook-square"></i></a>
 			<a class="social-link" href="#"><i class="fab fa-instagram"></i></a>
