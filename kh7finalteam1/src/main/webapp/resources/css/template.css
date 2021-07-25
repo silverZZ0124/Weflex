@@ -4,14 +4,20 @@
 }
 #navbar1-ul-dropdown{
 		display:none;
-	}
+}
 
 body, html{
 	background-color:#141414; /*ㅇㄹㅇ  */
 }
 body{
 	min-width:370px;
+	-ms-overflow-style:none;
 }
+body::-webkit-scrollbar { 
+	display:none; 
+}
+
+
 #navbar1-ul > li {
 	font-size: 1.1vw;
 }
@@ -262,19 +268,24 @@ i{
     margin-right: 2.5%;
     margin-top: -32%;
 }
-.trailer-series-section-box{
-	border-bottom:1px solid #404040;
-	
-}
+
+
 .modal-series > div:nth-child(2){
 	border-top:1px solid #404040;
+
 }
+
+
+.trailer-series-section-box{
+	border-bottom:1px solid #404040;	
+}
+
+
 .trailer-series-section{
 	display:flex;
-	padding:3% 0;
-	
-	
+	padding:3% 0;	
 }
+
 .trailer-series-section-index{
 	font-size:1.5em;
 	display:flex;

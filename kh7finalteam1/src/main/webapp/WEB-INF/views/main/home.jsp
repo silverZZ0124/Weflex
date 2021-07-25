@@ -7,6 +7,9 @@
 
 <script>
 var player;
+var detailModalPlayerReady = true;
+var seriesArray = new Array();
+var contentThumbnail;
 
 window.onload = function(){			
 	
@@ -20,6 +23,10 @@ window.onload = function(){
 	}		
 	
 	function onPlayerReady(event) {
+		if(!detailModalPlayerReady){
+			$("#player").css("visibility", "visible");
+			detailModalPlayerReady = true;
+		}
     }
 	
 	function onPlayerStateChange(event) {
@@ -146,7 +153,6 @@ $(function(){
 			
 					
 		});
-		
 		
 		
 		$(".slider-img").mouseleave(function(){
@@ -310,7 +316,7 @@ $(function(){
 		$("#main-play-btn").click(function(){
 			location.href="play";
 		});
-		
+				
 		//모달 버튼 누르면 wallpaper 출력
 		$("#detailModal").on("show.bs.modal",function(e){
 			var index=$(".similar-contents-box").find("var")
@@ -329,8 +335,9 @@ $(function(){
 					contentNo: contentNo	
 				},
 				success:function(resp){
-
 				 	$("#player").css("visibility", "hidden");
+				 	detailModalPlayerReady = false;
+				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
  					var url = resp.contentDto.contentTrailer + "?enablejsapi=1&start=00&autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist="+youtubeId;
  					$("#player").attr("src", url);
@@ -364,16 +371,54 @@ $(function(){
  						else
  							$(".content-cast").append(", "+resp.castList[i]);
  					}
-
-				}
+ 					
+					//연작 없는 content일 경우 회차 div를 숨긴다
+ 					if(resp.contentDto.contentSeries == "N")
+ 						$(".modal-series").css("display", "none");
+					//연작 있는 content일 경우 회차 div를 block으로
+ 					else if(resp.contentDto.contentSeries == "Y"){
+ 						//season이 몇 까지 있는지 파악 후 시즌 별로 배열에 나누기
+ 						seriesArray = new Array();
+ 						var array = new Array();
+ 						var season = 1;
+ 						
+ 						for(var i=0; i<resp.seriesList.length; i++){
+ 							if(resp.seriesList[i].contentSeason == season){
+ 								array.push(resp.seriesList[i]);
+ 							}else{
+ 								seriesArray.push(array);
+ 								season++;
+ 								array = new Array();
+ 								array.push(resp.seriesList[i]);
+ 							}
+ 						}
+ 						
+ 						seriesArray.push(array); 
+ 						
+ 						//select 박스 동적 생성
+ 						$(".series-select-box").empty();
+ 						var selectTemplate = $("#select-template-header").html();
+ 						for(var i=1; i<=season; i++){
+ 							selectTemplate += '<option value='+i+'>시즌'+i+'</option>';	
+ 						}
+ 						if(season != 1)
+ 							selectTemplate += '<option data-divider="true"></option><option value="allSeason">전체 회차 표시</option>';
+ 							
+ 						selectTemplate += $("#select-template-footer").html();						
+ 						$(".series-select-box").append(selectTemplate);
+ 						
+ 						//contentThumbnail 변수에 Thumbnail url 할당
+ 						contentThumbnail = resp.contentDto.contentThumbnail;
+  						 				
+ 						$.fn.initTrailerSeriesSection(1);
+ 						
+ 						$(".modal-series").css("display", "block"); 						
+ 					}
+				}		
+					
 			});
 		});
-		
-		$("#detailModal").on("shown.bs.modal",function(e){
-			$("#player").css("visibility", "visible");
-		});
-
-		
+				
 		$(".wallpaper-more-button").click(function(){
 			$(".similar-contents-box").css("height","1600px");
 			$(this).css("display","none");
@@ -406,9 +451,111 @@ $(function(){
 			$(this).css("display","none");
 			$("#modal-plus-btn").css("display","block")
 		});
+		
+		$(".series-select-box-title").change(function(){
+			console.log($(this).val());
+		});
+		
+		$.fn.initEvent = function(){
+			$(".series-select-box-title").change(function(){
+				if($(this).val() == "allSeason")
+					$.fn.initTrailerAllSeriesSection();
+				else
+					$.fn.initTrailerSeriesSection($(this).val());
+			});
+			
+			$(".trailer-series-section-box").hover(function(){
+				var playBtn=$(this).find(".series-play-btn");
+				playBtn.addClass("show-play-btn");
+				$(this).css("cursor","pointer");
+			},function(){
+				var playBtn=$(this).find(".series-play-btn");
+				playBtn.removeClass("show-play-btn");
+				$(this).css("cursor","default");
+			});
+		}
+		
+		$.fn.initTrailerSeriesSection = function(season){
+			//season에 맞게 section 동적 생성 
+			var index = season - 1;
+			
+			$(".trailer-series-section-box-wrapper").empty();
+						
+			for(var i=0; i<seriesArray[index].length; i++){
+				var template = $("#episode-list-template").html();
+				
+				template = template.replace("{{index}}", i+1);
+				template = template.replace("{{contentThumbnail}}", contentThumbnail); 							
+				template = template.replace("{{contentEpisode}}", seriesArray[index][i].contentEpisode);
+				template = template.replace("{{contentPlaytime}}", String(seriesArray[index][i].contentPlaytime));
+				template = template.replace("{{episodeInfo}}", seriesArray[index][i].episodeInfo);
+				
+				$(".trailer-series-section-box-wrapper").append(template);	
+			}
+			
+			$.fn.initEvent();
+		}
+		
+		$.fn.initTrailerAllSeriesSection = function(){
+
+			//모든 episode section 동적 생성 
+			$(".trailer-series-section-box-wrapper").empty();
+				
+			for(var i in seriesArray){
+				var template = "<div><h1>시즌 "+(Number(i)+1)+"</h1>";
+				var index = 1;
+				for(var j in seriesArray[i]){
+					template += $("#episode-list-template").html();
+					
+					template = template.replace("{{index}}", String(index));
+					template = template.replace("{{contentThumbnail}}", contentThumbnail); 							
+					template = template.replace("{{contentEpisode}}", seriesArray[i][j].contentEpisode);
+					template = template.replace("{{contentPlaytime}}", String(seriesArray[i][j].contentPlaytime));
+					template = template.replace("{{episodeInfo}}", seriesArray[i][j].episodeInfo);					
+						
+					index++;
+				}
+				template += "</div>";
+				$(".trailer-series-section-box-wrapper").append(template);
+			}
+			
+			$.fn.initEvent();
+		}
 
 	});
 
+</script>
+
+<script id="episode-list-template" type="text/template">
+<div class="trailer-series-section-box">
+	<div class="trailer-series-section">
+		<div class="trailer-series-section-index">{{index}}</div>
+		<div class="trailer-series-section-thumbnail-box">
+			<img src="{{contentThumbnail}}"
+				class="trailer-series-section-thumbnail">
+			<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
+				<i class="fas fa-play"></i>
+			</button>
+		</div>
+
+		<div class="trailer-series-section-info-box">
+			<div class="trailer-series-section-info-title">
+				<div>제{{contentEpisode}}화</div>
+				<div style="margin-left: auto;">{{contentPlaytime}}분</div>
+			</div>
+			<div class="trailer-series-section-info-text">{{episodeInfo}}</div>
+		</div>
+	</div>
+</div>
+</script>
+
+<script id="select-template-header" type="text/template">
+<select class="selectpicker main-color series-select-box-title">
+</script>	
+
+
+<script id="select-template-footer" type="text/template">    
+</select>
 </script>
 
 <div class="main-color">
@@ -446,7 +593,7 @@ $(function(){
 	</div>
 	
 	<!-- 상세 정보 클릭시 팝업 모달 -->
-	<div class="modal fade " id="detailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+	<div class="modal fade " id="detailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg detail-modal">
 	    <div class="modal-content">
 	     
@@ -455,7 +602,7 @@ $(function(){
 			<div style="position:relative;" class="detail-modal-video-box">
 	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5"> -->
 
-	        	<iframe id="player" width="100%" height="100%" src="https://www.youtube.com/embed/6qaW-KZpmjM?enablejsapi=1&start=00&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+	        	<iframe id="player" width="100%" height="100%" src="https://www.youtube.com/embed/6qaW-KZpmjM?enablejsapi=1&start=00&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 
 				<div class="modal-gradation-box">&ensp;&ensp;</div>
 				
@@ -527,7 +674,7 @@ $(function(){
 			        		<h3>회차</h3>
 			        		<div class="series-select-box">
 			        			
-			        			<select class="selectpicker main-color series-select-box-title">
+			        			<!-- <select class="selectpicker main-color series-select-box-title">
 								    
 								      <option>시즌1</option>
 								      <option>시즌2</option>
@@ -536,37 +683,41 @@ $(function(){
 								      <option>전체 회차 표시</option>
 								      
 								  
-								  </select>
+								  </select> -->
 			        		</div>
 			        	</div>
-			        			<c:forEach var="i" begin="1" end="9" step="1"> <!-- 회차수만큼 반복 -->
-			        				
-									<div class="trailer-series-section-box" >
-							        <div class="trailer-series-section">
-							        	<div class="trailer-series-section-index">${i}</div>
-							        	<div class="trailer-series-section-thumbnail-box">
-							        		<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYlNPB0ZkssHuy-ssQNE9R7eqCObZ3Kb9Hbe3UhfSjm1W2_v4pBPQt45taoKeGYUVkB-CFqzP4tTwoordt3VPeBEJBK9Dn3OZmxa-GcwfQ1HxVW8.webp?r=9e5"  class="trailer-series-section-thumbnail">
-							        		<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-							        	</div>
-							        	
-							        	<div class="trailer-series-section-info-box">
-							        		<div class="trailer-series-section-info-title">
-							        			<div>제${i}장 어쩌구저쩌구</div>
-							        			<div style="margin-left: auto;">(시간)분</div>
-							        		</div>
-							        		<div class="trailer-series-section-info-text">회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 대충 두줄</div>
-							        		
-							        	</div>
-							        </div>   
-						        </div>
-								</c:forEach>
+			        	<div class="trailer-series-section-box-wrapper"></div>
+	        			<%-- <c:forEach var="i" begin="1" end="9" step="1"> <!-- 회차수만큼 반복 --> 
+								<div class="trailer-series-section-box">
+									<div class="trailer-series-section">
+										<div class="trailer-series-section-index">${i}</div>
+										<div class="trailer-series-section-thumbnail-box">
+											<img src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABYlNPB0ZkssHuy-ssQNE9R7eqCObZ3Kb9Hbe3UhfSjm1W2_v4pBPQt45taoKeGYUVkB-CFqzP4tTwoordt3VPeBEJBK9Dn3OZmxa-GcwfQ1HxVW8.webp?r=9e5"
+												class="trailer-series-section-thumbnail">
+											<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
+												<i class="fas fa-play"></i>
+											</button>
+										</div>
+
+										<div class="trailer-series-section-info-box">
+											<div class="trailer-series-section-info-title">
+												<div>제${i}장 어쩌구저쩌구</div>
+												<div style="margin-left: auto;">(시간)분</div>
+											</div>
+											<div class="trailer-series-section-info-text">회차 설명
+												ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 ddddddddd회차 설명 대충 두줄
+											</div>
+										</div>
+									</div>
+								</div>
+						</c:forEach>  --%>
 					        	
 				        </div>
 				       <%--  </c:if> --%>
 				       
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
-				       		<c:set var="wallpaperNo" value="12" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
+				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
 				       		<div style="display:flex; flex-wrap:wrap;">
 				       			
 				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
