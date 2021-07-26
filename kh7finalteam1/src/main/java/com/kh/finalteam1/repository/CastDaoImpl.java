@@ -26,4 +26,10 @@ public class CastDaoImpl implements CastDao{
 		sqlSession.insert("cast.regist", list);	
 	}
 
+	@Override
+	public boolean deleteAll(int contentNo) {
+		int count = sqlSession.delete("cast.delete", contentNo);
+		return count>0;
+	}
+
 }

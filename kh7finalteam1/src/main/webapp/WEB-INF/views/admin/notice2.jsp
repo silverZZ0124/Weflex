@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.kh.finalteam1.entity.NoticeVo"%>
+<%@page import="com.kh.finalteam1.vo.NoticeVo"%>
 <%@page import="java.util.ArrayList"%>
 
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
