@@ -11,10 +11,10 @@
 
 <style>
 	#linkeFeatureEdit:hover{
-		background-color:#5a5c69;
+		background-color:lightgray;
 	}
 	.link-feature:hover{
-		color:#fff;
+		color:#5a5c69;
 		text-decoration:none;
 		
 	}
