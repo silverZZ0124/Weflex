@@ -10,4 +10,6 @@ public interface ContentFeatureDao {
 	
 	//Content_feature 테이블 등록(컨텐츠 특징 추가)
 	void regist(List<ContentFeatureDto> list);
+
+	boolean deleteAll(int contentNo);
 }

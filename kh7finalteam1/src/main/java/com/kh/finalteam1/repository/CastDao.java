@@ -10,4 +10,7 @@ public interface CastDao {
 	
 	//배우 등록(관리자)
 	void regist(List<CastDto> list);
+
+	//수정할때 모두 삭제
+	boolean deleteAll(int contentNo);
 }
