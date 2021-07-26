@@ -18,14 +18,9 @@
         margin-top : 5px;
         }
 
-        .h-b{
+        .head-regist{
             margin-bottom: 0;
         }
-       
-       
-        @media screen and (max-width : 576px){        
-        }
-        
     </style>
 
 <script>
@@ -53,7 +48,7 @@ $(function(){
                 <div class="card">
                     <form class="form" action="castRegist" method="post">
                     <div class="card-header"> 
-                           <h5 class="h-b">배우명 등록</h5>
+                           <h5 class="head-regist">배우명 등록</h5>
                     </div>
                     
                         <div class="card-body">
