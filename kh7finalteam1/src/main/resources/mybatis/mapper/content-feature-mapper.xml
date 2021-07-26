@@ -18,4 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				)
 		</foreach>
 	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from content_feature where content_no = #{contentNo}
+	</delete>
+	
 </mapper>

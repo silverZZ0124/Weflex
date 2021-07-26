@@ -178,10 +178,10 @@
 				                  
 				                  <div class="form-group">
 				                  	<label>장르</label>
-				                  	<select class="form-control" name="genreName" >
+				                  	<select class="form-control" name="genreName">
 				                  		<option value="">선택하세요</option>
 				                  		<c:forEach var="genreDto" items="${genreList }">
-				                  			<option>${genreDto.genreName }</option>
+				                  			<option value="${genreDto.genreNo }">${genreDto.genreName }</option>
 				                  		</c:forEach>
 				                  	</select>
 				                  </div>
@@ -193,7 +193,7 @@
 				                  	<select class="form-control" name="featureName" >
 				                  		<option value="">선택하세요</option>
 				                  		<c:forEach var="programFeatureDto" items="${featureList }">
-				                  			<option>${programFeatureDto.featureName }</option>
+				                  			<option value="${programFeatureDto.featureNo }">${programFeatureDto.featureName }</option>
 				                  		</c:forEach>
 				                  	</select>
 				                  </div>
@@ -257,42 +257,58 @@
 		<c:if test="${not empty contentGenreList }">
 			$("#this-content-genre").addClass("mb-3");
 		</c:if>
+		
+		/* input type="hidden" name 통일하여 컨트롤러로 배열 값 전달  */
 		<c:forEach var="genreFeatureCastVO" items="${contentGenreList }">
-			$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
+			$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'><input name='genreNo' type='hidden' value='${genreFeatureCastVO.genreNo}'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
 		</c:forEach>
 		
 		<c:if test="${not empty contentFeatureList }">
 			$("#this-content-feature").addClass("mb-3");
 		</c:if>
 		<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
-			$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
+			$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'><input name='featureNo' type='hidden' value='${genreFeatureCastVO.featureNo}'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
 		</c:forEach>
 		
 		<c:if test="${not empty contentCastList }">
 			$("#this-content-cast").addClass("mb-3");
 		</c:if>
 		<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
-			$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'>${genreFeatureCastVO.castName}<button class='btn-close'>&times;</button></span>");
+			$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'><input name='castName' type='hidden' value='${genreFeatureCastVO.castName}'>${genreFeatureCastVO.castName}<button class='btn-close'>&times;</button></span>");
 		</c:forEach>
 		
 		
 		$("select[name='genreName']").change(function(){
-			var selectedGenre = $(this).val();
+			var selectedGenreName = $("select[name='genreName'] option:checked").text();
+			var selectedGenreNo = $(this).val();
+			
+			var genreInput = document.createElement("input");
+			genreInput.setAttribute("type", "hidden");
+            genreInput.setAttribute("name", "genreNo");
+            genreInput.setAttribute("value", selectedGenreNo);
+            $("#this-content-genre").append(genreInput);
 			
 			var genreDiv = "";
 			genreDiv += "<span class='genreBox p-2 mr-2 mb-2'>";
-			genreDiv += selectedGenre;
+			genreDiv += selectedGenreName;
 			genreDiv += "<button class='btn-close'>&times;</button></span>";
 			$("#this-content-genre").append(genreDiv);
 			
 		});
 		
 		$("select[name='featureName']").change(function(){
-			var selectedFeature = $(this).val();
+			var selectedFeatureName = $("select[name='featureName'] option:checked").text();
+			var selectedFeatureNo = $(this).val();
+			
+			var featureInput = document.createElement("input");
+			featureInput.setAttribute("type", "hidden");
+			featureInput.setAttribute("name", "featureNo");
+			featureInput.setAttribute("value", selectedFeatureNo);
+            $("#this-content-feature").append(featureInput);
 			
 			var featureDiv = "";
 			featureDiv += "<span class='featureBox p-2 mr-2 mb-2'>";
-			featureDiv += selectedFeature;
+			featureDiv += selectedFeatureName;
 			featureDiv += "<button class='btn-close'>&times;</button></span>";
 			$("#this-content-feature").append(featureDiv);
 			
@@ -301,11 +317,17 @@
 		$("input[name='castName']").keydown(function(key) {
         	if (key.keyCode == 13) {
            		event.preventDefault();
-				var cast = $(this).val();
+				var castName = $(this).val();
 				
-				var castDiv = "";
+				var castInput = document.createElement("input");
+				castInput.setAttribute("type", "hidden");
+				castInput.setAttribute("name", "castName");
+				castInput.setAttribute("value", castName);
+	            $("#this-content-cast").append(castInput);
+				
+	            var castDiv = "";
 				castDiv += "<span class='castBox p-2 mr-2 mb-2'>";
-				castDiv += cast;
+				castDiv += castName;
 				castDiv += "<button class='btn-close'>&times;</button></span>";
 				$("#this-content-cast").append(castDiv);
 				
@@ -315,8 +337,10 @@
 
 		
 		
-		/* 수정 값 유효성 검사 */
+		
 		$("#noContent-edit").click(function(e){
+			
+			/* 수정 값 유효성 검사 */
 			var contentName = $("input[name='contentName']").val();
 			var contentInfo = $("textarea[name='contentInfo']").val();
 			var seriesPath = $("input[name='seriesPath']").val();
