@@ -36,7 +36,7 @@
 			console.log(genre);
 			console.log(feature);
 			
-			if(!genre || !feature){//둘중 하나라도 체크를 하나도 안했으면 데이터 전송을 막음!!!
+			if(!genre && !feature){//둘다 체크를 하나도 안했으면 데이터 전송을 막음!!!
 				e.preventDefault();
 				$("#myModal").modal("show");
 			}
