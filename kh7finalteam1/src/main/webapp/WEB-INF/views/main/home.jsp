@@ -511,7 +511,7 @@ $(function(){
 		$.fn.initTrailerSeriesSection = function(season){
 			//season에 맞게 section 동적 생성 
 			var index = season - 1;
-			
+			console.log(seriesArray);
 			$(".trailer-series-section-box-wrapper").empty();
 			$(".trailer-series-section-box-wrapper").css("border-top", "1px solid #404040");
 			
@@ -519,8 +519,11 @@ $(function(){
 				var template = $("#episode-list-template").html();
 				
 				template = template.replace("{{index}}", i+1);
-				template = template.replace("{{contentThumbnail}}", contentThumbnail); 							
+				template = template.replace("{{contentThumbnail}}", contentThumbnail);
+				template = template.replace("{{contentNo}}", seriesArray[index][i].contentNo);
+				template = template.replace("{{contentSeason}}", seriesArray[index][i].contentSeason);				
 				template = template.replace("{{contentEpisode}}", seriesArray[index][i].contentEpisode);
+				template = template.replace("{{contentIndex}}", seriesArray[index][i].contentEpisode);
 				template = template.replace("{{contentPlaytime}}", String(seriesArray[index][i].contentPlaytime));
 				template = template.replace("{{episodeInfo}}", seriesArray[index][i].episodeInfo);
 				
@@ -535,7 +538,8 @@ $(function(){
 			//모든 episode section 동적 생성 
 			$(".trailer-series-section-box-wrapper").empty();
 			$(".trailer-series-section-box-wrapper").css("border-top", "none");
-				
+			
+			
 			for(var i in seriesArray){
 				var template;
 				if(i == 0)
@@ -549,6 +553,7 @@ $(function(){
 					template = template.replace("{{index}}", String(index));
 					template = template.replace("{{contentThumbnail}}", contentThumbnail); 							
 					template = template.replace("{{contentEpisode}}", seriesArray[i][j].contentEpisode);
+					template = template.replace("{{contentIndex}}", String(seriesArray[i][j].contentEpisode));
 					template = template.replace("{{contentPlaytime}}", String(seriesArray[i][j].contentPlaytime));
 					template = template.replace("{{episodeInfo}}", seriesArray[i][j].episodeInfo);					
 						
@@ -572,14 +577,19 @@ $(function(){
 		<div class="trailer-series-section-thumbnail-box">
 			<img src="{{contentThumbnail}}"
 				class="trailer-series-section-thumbnail">
-			<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
-				<i class="fas fa-play"></i>
-			</button>
+			<form action="play" >
+		        <input type="hidden" name="contentNo" value="{{contentNo}}">
+		        <input type="hidden" name="contentSeason" value="{{contentSeason}}">
+		        <input type="hidden" name="contentEpisode" value="{{contentEpisode}}">
+		        <button type="submit" class="btn btn-outline-light modal-etc-btn series-play-btn"	style="display: none;">
+			        <i class="fas fa-play"></i>
+		        </button>
+	        </form>
 		</div>
 
 		<div class="trailer-series-section-info-box">
 			<div class="trailer-series-section-info-title">
-				<div>제{{contentEpisode}}화</div>
+				<div>제 {{contentIndex}}화</div>
 				<div style="margin-left: auto;">{{contentPlaytime}}분</div>
 			</div>
 			<div class="trailer-series-section-info-text">{{episodeInfo}}</div>
@@ -613,6 +623,8 @@ $(function(){
 		<div>
 			<form action="play" style="display: inline-block;">
 				<input type="hidden" name="contentNo" value="${mainTrailerList.contentNo }">
+				<input type="hidden" name="contentSeason" value="-1">
+				<input type="hidden" name="contentEpisode" value="-1">
 				<button class="btn btn-light main-btn" id="main-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 			</form>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" data-contentno="${mainTrailerList.contentNo }" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
@@ -649,6 +661,8 @@ $(function(){
 					<div class="modal-btn-box">
 						<form action="play" style="display: inline-block;">
 							<input type="hidden" id="input-content-no" name="contentNo">
+							<input type="hidden" name="contentSeason" value="-1">
+							<input type="hidden" name="contentEpisode" value="-1">
 							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
 						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
@@ -841,7 +855,7 @@ $(function(){
 	          
 	  		</div>
 		</div>
-	</div>
+	</div>	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

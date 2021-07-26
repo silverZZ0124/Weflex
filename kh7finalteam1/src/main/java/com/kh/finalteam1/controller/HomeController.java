@@ -42,10 +42,13 @@ public class HomeController {
 	}
 
 	@GetMapping("/play")
-	public String play(@RequestParam int contentNo, Model model, HttpSession session) {
+	public String play(@RequestParam int contentNo,
+			@RequestParam int contentSeason,
+			@RequestParam int contentEpisode,
+			Model model, HttpSession session) {
 		int clientNo = (int)session.getAttribute("clientNo");
 		
-		PlaylistVO playlistVO = playService.createPlaylist(contentNo, clientNo);
+		PlaylistVO playlistVO = playService.createPlaylist(contentNo, clientNo, contentSeason, contentEpisode);
 				
 		model.addAttribute("playlistVO", playlistVO);
 		

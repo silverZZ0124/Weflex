@@ -117,7 +117,7 @@
                     <label>연령제한</label>
                     <select class="form-control" name="contentLimit" required>
                       <option value="" selected>선택하세요</option>
-                      <option value="1">전체 이용가</option>
+                      <option value="0">전체 이용가</option>
                       <option value="12">12세 이용가</option>
                       <option value="15">15세 이용가</option>
                       <option value="19">19세 이용가</option>

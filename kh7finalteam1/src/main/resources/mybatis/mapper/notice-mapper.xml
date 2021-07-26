@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="notice">
+
+	<resultMap type="com.kh.finalteam1.entity.NoticeVo" id="client">
+    	<result column="client_no" property="clientNo"/>
+    	<result column="client_name" property="clientName"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="NoticeDto">
+		insert into notice values
+		(notice_seq.nextval, #{clientNo}, #{noticeName}, #{noticeWrite}, sysdate, 0)
+	</insert>
+	
+	<select id="list" resultType="NoticeVo"  resultMap="client">
+		select n.*, c.client_name from notice n
+		inner join client c on n.client_no = c.client_no
+		order by notice_no desc
+	</select>
+	
+	<select id="search" resultType="NoticeVo" parameterType="int">
+		select * from genre where instr(notice_no,#{noticeNo})>0
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from notice where notice_no=#{noticeNO} 
+	</delete>
+	 
+</mapper>
+
+
+
+
+
+
+
+
+

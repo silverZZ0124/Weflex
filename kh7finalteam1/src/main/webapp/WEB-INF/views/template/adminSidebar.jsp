@@ -26,7 +26,7 @@
     <!-- Bootstrap core JavaScript(jQuery)-->
   	<script src="${pageContext.request.contextPath}/res/vendor/jquery/jquery.min.js"></script>
   	
-  	<!-- Custom styles for this page -->
+	<!-- Custom styles for this page -->
     <link href="${pageContext.request.contextPath}/res/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">	
     
 
@@ -76,7 +76,6 @@
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/content/contentRegist">컨텐츠 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/genre">장르 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/feature">특징 추가</a>
-                        <a class="collapse-item" href="forgot-password.html">배우 추가</a>
                     </div>
                 </div>
                     
@@ -87,6 +86,11 @@
                       <a class="nav-link" href="${pageContext.request.contextPath}/admin/clientAdmin">
                    <i class="fas fa-fw fa-user-cog"></i>
                     <span>회원 관리</span></a>
+                    
+                    
+                    <a class="nav-link" href="${pageContext.request.contextPath}/">
+                   <i class="fas fa-fw fa-home"></i>
+                    <span>메인 페이지</span></a>
             </li>
 
             <!-- Divider -->
