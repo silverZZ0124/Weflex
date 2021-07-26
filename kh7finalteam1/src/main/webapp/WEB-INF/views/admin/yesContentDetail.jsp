@@ -91,7 +91,7 @@
                     <div class="col-md-6 offset-md-6 pt-3">
                         <div class="row">
                             <div class="col-md-6 p-1">
-                                <button type="button" class="btn btn-block btn-outline-primary" data-toggle="modal" data-target="#edit-content-modal">수정</button>
+                                <button type="button" class="btn btn-block btn-outline-primary" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
                                 <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
@@ -222,10 +222,10 @@
 					                  
 					                  <div class="form-group">
 					                  	<label>장르</label>
-					                  	<select class="form-control" name="genreName" >
+					                  	<select class="form-control" name="contentGenre" >
 					                  		<option value="">선택하세요</option>
 					                  		<c:forEach var="genreDto" items="${genreList }">
-					                  			<option>${genreDto.genreName }</option>
+					                  			<option value="${genreDto.genreNo }">${genreDto.genreName }</option>
 					                  		</c:forEach>
 					                  	</select>
 					                  </div>
@@ -234,10 +234,10 @@
 					                  
 					                  <div class="form-group">
 					                  	<label>프로그램 특징</label>
-					                  	<select class="form-control" name="featureName" >
+					                  	<select class="form-control" name="contentFeature" >
 					                  		<option value="">선택하세요</option>
 					                  		<c:forEach var="programFeatureDto" items="${featureList }">
-					                  			<option>${programFeatureDto.featureName }</option>
+					                  			<option value="${programFeatureDto.featureNo }">${programFeatureDto.featureName }</option>
 					                  		</c:forEach>
 					                  	</select>
 					                  </div>
@@ -246,7 +246,7 @@
 					                  
 					                  <div class="form-group">
 					                    <label>출연진 추가</label>
-					                    <input type="text" name="castName" class="form-control">
+					                    <input type="text" name="contentCast" class="form-control">
 					                  </div>
 					                  
 					                  <div id="this-content-cast"></div>
@@ -504,67 +504,111 @@
 
 <script>
 	$(function(){
-		<c:if test="${not empty contentGenreList }">
-			$("#this-content-genre").addClass("mb-3");
-		</c:if>
-		<c:forEach var="genreFeatureCastVO" items="${contentGenreList }">
-			$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
-		</c:forEach>
-		
-		<c:if test="${not empty contentFeatureList }">
-			$("#this-content-feature").addClass("mb-3");
-		</c:if>
-		<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
-			$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
-		</c:forEach>
-		
-		<c:if test="${not empty contentCastList }">
-			$("#this-content-cast").addClass("mb-3");
-		</c:if>
-		<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
-			$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'>${genreFeatureCastVO.castName}<button class='btn-close'>&times;</button></span>");
-		</c:forEach>
-		
-		
-		$("select[name='genreName']").change(function(){
-			var selectedGenre = $(this).val();
+		$("#edit-content-btn").click(function(){
+			//다시 불러올 때 비웠다가 불러오기
+			$("#this-content-genre").empty();
+			$("#this-content-feature").empty();
+			$("#this-content-cast").empty();
 			
+			$("select[name='contentFeature'] option:eq(0)").prop("selected",true);
+			$("select[name='contentGenre'] option:eq(0)").prop("selected",true);
+			$("input[name='contentCast']").val("");
+			
+			var contentGenreList = '<c:out value="${contentGenreList}"/>';
+			if(!contentGenreList){
+				$("#this-content-genre").addClass("mb-3");
+			}
+			
+			var contentFeatureList = '<c:out value="${contentFeatureList}"/>';
+			if(!contentFeatureList){
+				$("#this-content-feature").addClass("mb-3");
+			}
+			
+			var contentGenreList = '<c:out value="${contentCastList}"/>';
+			if(!contentGenreList){
+				$("#this-content-cast").addClass("mb-3");
+			}
+			
+			/* input type="hidden" name 통일하여 컨트롤러로 배열 값 전달  */
+			<c:forEach var="genreFeatureCastVO" items="${contentGenreList }">
+				$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'><input name='genreNo' type='hidden' value='${genreFeatureCastVO.genreNo}'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
+			</c:forEach>
+			
+			<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
+				$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'><input name='featureNo' type='hidden' value='${genreFeatureCastVO.featureNo}'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
+			</c:forEach>
+			
+			<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
+				$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'><input name='castName' type='hidden' value='${genreFeatureCastVO.castName}'>${genreFeatureCastVO.castName}<button class='btn-close'>&times;</button></span>");
+			</c:forEach>
+		});
+		
+		
+		$("select[name='contentGenre']").change(function(){
+			var selectedGenreName = $("select[name='contentGenre'] option:checked").text();
+			var selectedGenreNo = $(this).val();
+            
 			var genreDiv = "";
 			genreDiv += "<span class='genreBox p-2 mr-2 mb-2'>";
-			genreDiv += selectedGenre;
+			genreDiv += selectedGenreName;
+			genreDiv += '<input type="hidden" name="genreNo" value="'+selectedGenreNo+'">';
 			genreDiv += "<button class='btn-close'>&times;</button></span>";
 			$("#this-content-genre").append(genreDiv);
 			
 		});
 		
-		$("select[name='featureName']").change(function(){
-			var selectedFeature = $(this).val();
+		$("select[name='contentFeature']").change(function(){
+			var selectedFeatureName = $("select[name='contentFeature'] option:checked").text();
+			var selectedFeatureNo = $(this).val();
 			
 			var featureDiv = "";
 			featureDiv += "<span class='featureBox p-2 mr-2 mb-2'>";
-			featureDiv += selectedFeature;
+			featureDiv += selectedFeatureName;
+			featureDiv += '<input type="hidden" name="featureNo" value="'+selectedFeatureNo+'">';
 			featureDiv += "<button class='btn-close'>&times;</button></span>";
 			$("#this-content-feature").append(featureDiv);
 			
 		});
 		
-		$("input[name='castName']").keydown(function(key) {
-	    	if (key.keyCode == 13) {
-	       		event.preventDefault();
-				var cast = $(this).val();
+		$("input[name='contentCast']").keydown(function(key) {
+        	if (key.keyCode == 13) {
+           		event.preventDefault();
+				var castName = $(this).val();
 				
-				var castDiv = "";
+	            var castDiv = "";
 				castDiv += "<span class='castBox p-2 mr-2 mb-2'>";
-				castDiv += cast;
+				castDiv += castName;
+				castDiv += '<input type="hidden" name="castName" value="'+castName+'">';
 				castDiv += "<button class='btn-close'>&times;</button></span>";
 				$("#this-content-cast").append(castDiv);
 				
 				$(this).val("");
-	    	}
+        	}
 		});
 		
 		/* 수정 값 유효성 검사 */
 		$("#yesContent-edit").click(function(e){
+			/* 
+				장르, 특징, 배우가 입력 되었는지 검사.  
+				아무것도 없으면 입력하라는 메세지
+			*/
+			if($("#this-content-genre").children().length == 0){
+				window.alert("장르를 입력하세요");
+				$("select[name='contentGenre']").focus();
+				e.preventDefault();
+			}
+			else if($("#this-content-feature").children().length == 0){
+				window.alert("특징을 입력하세요");
+				$("select[name='contentFeature']").focus();
+				e.preventDefault();
+			}
+			else if($("#this-content-cast").children().length == 0){
+				window.alert("배우를 입력하세요");
+				$("input[name='contentCast']").focus();
+				e.preventDefault();
+			}
+			
+			
 			var contentName = $("input[name='contentName']").val();
 			var contentInfo = $("textarea[name='contentInfo']").val();			
 			var contentLogo = $("input[name='contentLogo']").val();

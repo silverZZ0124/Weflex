@@ -139,30 +139,52 @@ public class AdminContentController {
 		contentGenreService.regist(contentNo, genreNo);
 		contentFeatureService.regist(contentNo, featureNo);
 		
-		if(castName != null) {
-			List<CastDto> castList = new ArrayList<>();
-			
-			for(int i = 0; i < castName.size(); i++) {
-				castList.add(CastDto.builder()
-										.contentNo(contentNo)
-										.castName(castName.get(i))
-									.build());	
-			}
-
-			castDao.regist(castList);
-			
-		}
+		List<CastDto> castList = new ArrayList<>();
 		
+		for(int i = 0; i < castName.size(); i++) {
+			castList.add(CastDto.builder()
+									.contentNo(contentNo)
+									.castName(castName.get(i))
+								.build());	
+		}
+
+		castDao.regist(castList);
 		return "redirect:contentDetail?contentNo="+contentNo;
 	}
+
 	
 	//연작 있는 컨텐츠 수정
 	@PostMapping("/yesContentEdit")
 	public String yesContentEdit(
-			@ModelAttribute ContentDto contentDto) {
+			@ModelAttribute ContentDto contentDto,
+			@RequestParam List<Integer> genreNo, 
+			@RequestParam List<Integer> featureNo,
+			@RequestParam List<String> castName) {
+		
+		int contentNo = contentDto.getContentNo();
 		
 		contentDao.edit(contentDto);
-		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
+		
+		//수정 누르면 해당 컨텐츠 장르, 특징, 배우 모두 삭제 후 다시 등록
+		contentGenreDao.deleteAll(contentNo);
+		contentFeatureDao.deleteAll(contentNo);
+		castDao.deleteAll(contentNo);
+		
+		contentGenreService.regist(contentNo, genreNo);
+		contentFeatureService.regist(contentNo, featureNo);
+		
+		List<CastDto> castList = new ArrayList<>();
+		
+		for(int i = 0; i < castName.size(); i++) {
+			castList.add(CastDto.builder()
+									.contentNo(contentNo)
+									.castName(castName.get(i))
+								.build());	
+		}
+
+		castDao.regist(castList);
+		
+		return "redirect:contentDetail?contentNo="+contentNo;
 	}
 	
 	@PostMapping("/episodeEdit")
