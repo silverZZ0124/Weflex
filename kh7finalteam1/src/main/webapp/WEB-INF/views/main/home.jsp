@@ -613,8 +613,6 @@ $(function(){
 		<div>
 			<form action="play" style="display: inline-block;">
 				<input type="hidden" name="contentNo" value="${mainTrailerList.contentNo }">
-				<input type="hidden" name="contentSeason" value="-1">
-				<input type="hidden" name="contentEpisode" value="-1">
 				<button class="btn btn-light main-btn" id="main-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 			</form>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" data-contentno="${mainTrailerList.contentNo }" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
