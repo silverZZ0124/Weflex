@@ -59,11 +59,6 @@ public class AdminContentController {
 	@Autowired
 	private CastDao castDao;
 	
-	@Autowired
-	private GenreDao genreDao;
-	
-	@Autowired
-	private ProgramFeatureDao programFeatureDao;
 	
 	@GetMapping("/")
 	public String content(Model model) {
