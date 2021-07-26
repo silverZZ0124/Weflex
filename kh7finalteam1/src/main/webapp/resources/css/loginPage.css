@@ -131,8 +131,7 @@ ul.structural>li {
 
 .login-body {
     color: #333;
-    margin: 0 auto;
-    padding: 0 5%;
+    margin: 0 auto;    
 }
 
 .login-content {
@@ -770,6 +769,9 @@ ul.structural>li {
 @media only screen and (max-width: 740px){
 	.footer-link-item {
 	    width: 32%;
+	}
+	.login-body{
+		padding: 0 5%;
 	}
 }
 

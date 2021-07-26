@@ -303,7 +303,6 @@ $(function(){
 		
 		//+누르면 체크
 		$("#plus-btn").click(function(){
-
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/insertWishList",
 				type: "post",
@@ -320,10 +319,18 @@ $(function(){
 		
 		//체크 누르면 +
 		$("#check-btn").click(function(){
-			$("#plus-btn").css("display","block");
-			$("#check-btn").css("display","none");
-			
-			console.log(curContentNo);
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/deleteWishList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$("#plus-btn").css("display","block");
+					$("#check-btn").css("display","none");					
+				}						
+			});
 		});
 		
 		//영상 재생 버튼
@@ -362,6 +369,15 @@ $(function(){
  					$("#content-release").text(resp.contentDto.contentRelease);
  					var imgSrc = "res/img/content_limit_"+resp.contentDto.contentLimit+".png";
  					$(".content-limit").attr("src", imgSrc);
+ 					
+ 					if(resp.wishListDto == null){
+ 						$("#plus-btn").css("display","block");
+ 						$("#check-btn").css("display","none");	
+ 					}
+ 					else{
+ 						$("#plus-btn").css("display","none");
+ 						$("#check-btn").css("display","block");	
+ 					}
  					
  					$(".content-genre").empty();
  					for(var i=0; i < resp.genreList.length; i++){
@@ -576,7 +592,6 @@ $(function(){
 <select class="selectpicker main-color series-select-box-title">
 </script>	
 
-
 <script id="select-template-footer" type="text/template">    
 </select>
 </script>
@@ -598,6 +613,8 @@ $(function(){
 		<div>
 			<form action="play" style="display: inline-block;">
 				<input type="hidden" name="contentNo" value="${mainTrailerList.contentNo }">
+				<input type="hidden" name="contentSeason" value="-1">
+				<input type="hidden" name="contentEpisode" value="-1">
 				<button class="btn btn-light main-btn" id="main-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 			</form>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" data-contentno="${mainTrailerList.contentNo }" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
@@ -789,128 +806,43 @@ $(function(){
 
 	
 
-	<div style="position: relative;top: -12vw;">
-	
-		<div class="container-center slider-box">
-			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>
-		
-		  	 <div class="custom-img-slide">
-	   			<!-- <div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div> 
-	   		 -->
+	<div style="position: relative;top: -12vw;">	
+		<div class="container-center slider-box" id="slider1">
+			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>		
+		  	<div class="custom-img-slide">
 		   		<c:forEach var="i" begin="1" end="10" step="1">
 					<div><img src="res/img/slider_img${i}.png" class="slider-img"></div>
-				</c:forEach> 
-	  
+				</c:forEach> 	  
 	  		</div>
 		</div>
 		
-		<div class="container-center slider-box">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
-		</div>
-		<div class="container-center slider-box">
-			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
-		</div>
-		<div class="container-center slider-box">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
+		<div class="container-center slider-box" id="slider2">
+			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>			 
+	  	 	<div class="custom-img-slide">
+	   			
+  			</div>
 		</div>
 		
-		<div class="container-center slider-box">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
+		<div class="container-center slider-box" id="slider3">
+			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>			 
+		  	<div class="custom-img-slide">
+	   			
+	  		</div>
 	
 		</div>
+		<div class="container-center slider-box" id="slider4">
+			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>			 
+			<div class="custom-img-slide">
+			
+			</div>	
+		</div>
 		
-		
+		<div class="container-center slider-box" id="slider5">
+			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>			 
+		  	<div class="custom-img-slide">  			   			
+	          
+	  		</div>
+		</div>
 	</div>
 </div>
 

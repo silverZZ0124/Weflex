@@ -6,7 +6,12 @@
  
 <mapper namespace="watchlog"> 
 	<select id="get" parameterType="map" resultType="WatchLogDto">
-		select * from watch_log where content_no=#{contentNo} and client_no = #{clientNo}
+		select * from (
+			select * from watch_log 
+				where content_no=#{contentNo} and client_no = #{clientNo}
+				order by watch_log_day
+			)
+		where ROWNUM = 1		
 	</select>
 	<insert id="mergeInto" parameterType="WatchLogDto">
 		merge into watch_log

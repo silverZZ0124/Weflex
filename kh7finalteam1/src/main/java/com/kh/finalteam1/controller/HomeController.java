@@ -1,7 +1,6 @@
 package com.kh.finalteam1.controller;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,25 +17,21 @@ import com.kh.finalteam1.entity.YesSeriesDto;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.MainTrailerDao;
 import com.kh.finalteam1.repository.SeriesDao;
+import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
 import com.kh.finalteam1.vo.PlaylistVO;
 
 @Controller
 public class HomeController {
 	@Autowired
-	private MainTrailerDao mainTrailerDao;
-	
-	@Autowired
 	private PlayService playService;
 	
+	@Autowired
+	private HomeService homeService;
+	
 	@GetMapping("/")
-	public String home(Model model) {
-		List<MainTrailerDto> mainTrailerList = mainTrailerDao.list();
-		
-		Random ran = new Random();
-		int trailerIndex = ran.nextInt(mainTrailerList.size());
-								
-		model.addAttribute("mainTrailerList", mainTrailerList.get(trailerIndex));
+	public String home(Model model) {										
+		model.addAttribute("mainTrailerList", homeService.getMainTrailer());
 		
 		return "main/home";
 	}
@@ -49,11 +44,10 @@ public class HomeController {
 	@GetMapping("/play")
 	public String play(@RequestParam int contentNo, Model model, HttpSession session) {
 		int clientNo = (int)session.getAttribute("clientNo");
+		
 		PlaylistVO playlistVO = playService.createPlaylist(contentNo, clientNo);
 				
 		model.addAttribute("playlistVO", playlistVO);
-		
-		System.out.println(playlistVO);
 		
 		return "main/play";
 

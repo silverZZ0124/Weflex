@@ -21,4 +21,9 @@ public class WishListDaoImpl implements WishListDao {
 		return sqlSession.delete("wishList.delete", wishListDto) > 0;
 	}
 
+	@Override
+	public WishListDto getWishList(WishListDto wishListDto) {
+		return sqlSession.selectOne("wishList.get", wishListDto);
+	}
+
 }

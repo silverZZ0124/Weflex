@@ -37,14 +37,13 @@ public class PlayServiceImpl implements PlayService{
 		String contentSeries = "";
 		
 		ContentDto contentDto = getContent(contentNo);
-		ClientDto clientDto = getClient(clientNo);
 		WatchLogDto watchLogDto = getWatchLog(contentNo, clientNo);
 				
 		if(watchLogDto != null) {			
 			season = watchLogDto.getWatchLogSeason();		
 			episode = watchLogDto.getWatchLogEpisode();
 			playtime = watchLogDto.getWatchLogPlaytime();
-		}else {
+		}else {		
 			season = 1;
 			episode = 1;
 			playtime = 0;
@@ -59,6 +58,8 @@ public class PlayServiceImpl implements PlayService{
 			contentSeries = "N";
 			NoSeriesDto noSeriesDto = seriesDao.noGet(contentNo);
 			contentUrl = noSeriesDto.getSeriesPath();
+			season = -1;
+			episode = -1;
 		}
 
 		PlaylistVO playlistVO = PlaylistVO.builder()

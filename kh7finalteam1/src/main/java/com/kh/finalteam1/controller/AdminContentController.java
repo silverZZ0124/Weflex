@@ -139,7 +139,6 @@ public class AdminContentController {
 		return "admin/contentRegist";
 	}
 	
-	
 	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록
 	@PostMapping("/contentRegist")
 	public String contentRegist(@ModelAttribute ContentDto contentDto, HttpSession session) {
@@ -161,7 +160,5 @@ public class AdminContentController {
 			session.removeAttribute("noSeriesDto");
 		}
 		return "redirect:/admin/content/";
-	}
-	
-	
+	}	
 }
