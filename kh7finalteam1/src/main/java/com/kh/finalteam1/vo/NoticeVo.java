@@ -1,8 +1,8 @@
-package com.kh.finalteam1.entity;
+package com.kh.finalteam1.vo;
 
 import java.sql.Date;
 
-import com.kh.finalteam1.entity.client.ClientDto;
+import com.kh.finalteam1.entity.ClientDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
