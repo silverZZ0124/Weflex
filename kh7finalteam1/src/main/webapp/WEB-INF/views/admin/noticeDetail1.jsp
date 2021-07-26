@@ -10,7 +10,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-	NoticeVo noticeVo = 
+	//NoticeVo noticeVo = 
 	Integer clientNo = (Integer)session.getAttribute("clientNo");
 	String root = request.getContextPath();
 	
@@ -41,7 +41,9 @@
 				<tr>
 					<th>작성자</th>
 					<td>
+						<%--
 						<p><%=noticeVo.clientDto.getClientName()%></p>
+						--%>
 					</td>
 				</tr>
 				

@@ -2,7 +2,7 @@ package com.kh.finalteam1.entity;
 
 import java.sql.Date;
 
-import com.kh.finalteam1.entity.client.ClientDto;
+import com.kh.finalteam1.entity.ClientDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
