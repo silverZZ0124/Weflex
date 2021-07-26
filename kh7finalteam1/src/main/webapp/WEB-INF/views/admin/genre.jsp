@@ -11,13 +11,15 @@
 
 <style>
 	#linkeGenreEdit:hover{
-		background-color:lightgray;
+		background-color:#5a5c69;
 	}
 	.link-genre:hover{
+		color:#fff;
 		text-decoration:none;
 		
 	}
 	.link-genre{
+		color:#5a5c69;
 		display:block;
 	}
 	
@@ -43,7 +45,7 @@
                  <!-- Circle Buttons -->
                  <div class="card shadow mb-4">
                      <div class="card-header py-3">
-                         <h6 class="m-0 font-weight-bold text-primary">장르 입력</h6>
+                         <h6 class="m-0 font-weight-bold text-dark">장르 입력</h6>
                      </div>
                      
                      <div class="card-body">
@@ -88,7 +90,7 @@
              <div class="col-md-6">
 	             <div class="card shadow mb-4">
 	             	<div class="card-header py-3">
-	                     <h6 class="m-0 font-weight-bold text-primary">등록된 장르</h6>
+	                     <h6 class="m-0 font-weight-bold text-dark">등록된 장르</h6>
 	                </div>
 	             	<div class="card-body" id="list-result">
 	             		<ul class="genrelist">
