@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">	
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/">
                     <i class="fas fa-fw fa-user-cog"></i>
                     <span>관리자</span></a>
             
@@ -86,14 +86,13 @@
                     </div>
                 </div>
                     
-                    <a class="nav-link" href="#">
-                   <i class="fas fa-fw fa-user"></i>
-                    <span>고객센터 관리</span></a>
-                    
                       <a class="nav-link" href="${pageContext.request.contextPath}/admin/clientAdmin">
                    <i class="fas fa-fw fa-user-cog"></i>
                     <span>회원 관리</span></a>
                     
+                      <a class="nav-link" href="#">
+                   <i class="fas fa-fw fa-user"></i>
+                    <span>고객센터 관리</span></a>                  
                     
                     <a class="nav-link" href="${pageContext.request.contextPath}/">
                    <i class="fas fa-fw fa-home"></i>
