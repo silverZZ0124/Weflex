@@ -6,7 +6,7 @@
 
 
  <!-- Begin Page Content -->
-     <div class="container-fluid">
+     <div class="container-fluid" style="color:#141414;">
 
          <!-- Page Heading -->
          <h1 class="h3 mb-4 text-gray-800">회원 관리</h1>
@@ -17,7 +17,7 @@
      </div>
      <div class="card-body">
          <div class="table-responsive">
-            	 <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+            	 <table class="table table-bordered text-center" id="dataTable" cellspacing="0" style="color:#141414;width:100%">
 								<thead>
 	                                  <tr>
 	                                      <th>회원번호</th>
