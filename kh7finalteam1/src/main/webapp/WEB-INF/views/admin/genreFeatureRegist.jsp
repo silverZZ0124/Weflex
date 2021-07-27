@@ -54,7 +54,7 @@
          	 <div class="col-md-6">
 	             <div class="card shadow mb-4">
 	             	<div class="card-header py-3">
-	                     <h6 class="m-0 font-weight-bold text-dark">장르 등록</h6>
+	                     <h6 class="m-0 font-weight-bold text-primary">장르 등록</h6>
 	                </div>
 	             	<div class="card-body" id="list-result" >
 					<form action="genreFeatureRegist" method="post" id="regist-form">
