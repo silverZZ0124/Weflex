@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.repository.ClientDao;
+import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 
@@ -23,6 +24,9 @@ public class AdminController {
 	
 	@Autowired
 	private ClientDao clientDao;
+	
+	@Autowired
+	private ContentDao contentDao;
 	
 	@RequestMapping("/")
 	public String index(Model model) {
