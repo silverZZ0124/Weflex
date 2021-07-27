@@ -139,6 +139,13 @@
 
 	});
 	 
+	$(".play-top-div").hover(function(){
+		$("#go-back").fadeIn(500);
+	},function(){
+		
+		$("#go-back").fadeOut(3000);
+		
+	});
 	
 	$("#go-back").click(function(){
 		window.history.back();
@@ -165,7 +172,7 @@
 <body class="main-color fade-in no-scroll">
 <div class="main-color play-video-box">
 		<div class=" play-top-div">
-			<button class="btn play-btn" id="go-back"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
+			<button class="btn play-btn" id="go-back" style="display:none;"><i class="fas fa-arrow-left fa-2x" style="color:white;"></i></button>
 		</div>
 		<div style="widht:100%;height:100%;">
 			<iframe id="player" width="100%" height="100%" src="${playlistVO.contentUrl }?enablejsapi=1&start=${playlistVO.lastPlaytime }&autoplay=1&mute=0&controls=1&modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

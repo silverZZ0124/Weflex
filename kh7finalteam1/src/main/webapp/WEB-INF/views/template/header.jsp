@@ -38,6 +38,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weflex</title>
 </head>
+
 <script>
 	$(function(){
 		
@@ -91,6 +92,7 @@
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
+				   <li class="nav-item"> <a class="nav-link" href="admin/">관리자 페이지</a> </li>	 
 			</ul> 
 			<ul class="navbar-nav" style="position: absolute;margin-left: 130px;">
 				  <li class="nav-item dropdown"  id="navbar1-ul-dropdown">
@@ -103,6 +105,8 @@
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/tv">TV프로그램</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/movie">영화</a></li>
 		            <li><a class="dropdown-item" href="#">내가 찜한 콘텐츠</a></li>
+		            <li><a class="dropdown-item" href="admin/">관리자 페이지</a></li>
+		           
 		          </ul>
 		          
        		 	</li>
@@ -137,14 +141,63 @@
 		
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style search-nav-style" id="second-header" style="display:none;">
 			
-			<ul class="navbar-nav" style="position: absolute;">
-				  <li class="nav-item second-nav-title-text" style="color:white;"> TV 프로그램 </li> 
+			<ul class="navbar-nav" style="position: absolute;height:100%;">
+				  <li class="nav-item second-nav-title-text" style="color:white;"><div>TV 프로그램</div> </li> 
 				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
 								    
 								      <option>장르</option>
-								      <option>한국드라마</option>
-								      <option>미국드라마</option>  
-								      <option>영국드라마</option>
+								      <option>한국 드라마</option>
+								      <option>미국 드라마</option>  
+								      <option>영국 드라마</option>
+								      <option>아시아 드라마</option>
+								      <option>버라이어티/예능</option>
+								      <option>애니메이션</option>
+								      <option>코미디</option>
+								      <option>로맨스</option>
+								      <option>드라마</option>
+								      <option>액션</option>
+								      <option>스릴러</option>
+								      <option>SF/판타지</option>
+								      <option>호러</option>
+								      <option>키즈</option>
+								      <option>청춘/하이틴</option>
+								      <option>다큐시리즈</option>
+								      
+								      
+								  
+								  </select> </li> 
+				 
+			</ul> 
+
+		</nav>
+		
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style "  style="display:none;">
+			
+			<ul class="navbar-nav" style="position: absolute;height:100%;">
+				  <li class="nav-item second-nav-title-text" style="color:white;"><div>영화</div> </li> 
+				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
+								    
+								      <option>장르</option>
+								      <option>한국</option>
+								      <option>미국 영화</option>  
+								      <option>외국 작품</option>
+								      <option>영화제 수상작</option>
+								      <option>인디</option>
+								      <option>어린이/가족</option>
+								      <option>애니메이션</option>
+								      <option>액션</option>
+								      <option>코미디</option>
+								      <option>로맨스</option>
+								      <option>스릴러</option>
+								      <option>호러</option>
+								      <option>SF</option>
+								      <option>판타지</option>
+								      <option>드라마</option>
+								      <option>범죄</option>
+								      <option>다큐멘터리</option>
+								      <option>음악/뮤지컬</option>
+								      <option>고전</option>
+								      
 								      
 								  
 								  </select> </li> 
