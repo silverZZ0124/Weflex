@@ -28,17 +28,17 @@
                           		<input type="text" name="newFeatureName" class="form-control" id="new-feature-input" value="${editFeatureName }">
                         	</div>
 	                         <div class="form-group">
-	                         	<input type="submit" value="수정" class="btn btn-block btn-success">
+	                         	<input type="submit" value="수정" class="btn btn-block btn-light">
 	                         </div>
                         </form>
                         
                         <!-- 클릭시 스크립트에서 주소 변경해줌 -->
-						<a href="#" class="btn btn-block btn-danger" id="delete-btn">삭제</a>
+						<a href="#" class="btn btn-block btn-outline-danger" id="delete-btn">삭제</a>
 		             </div>             
 		         </div>
 		         
 		         <div class="text-right mb-4">
-		         	<a href="feature" class="btn btn-primary">취소</a>
+		         	<a href="feature" class="btn btn-secondary">취소</a>
 		         </div>
              </div>
          </div>

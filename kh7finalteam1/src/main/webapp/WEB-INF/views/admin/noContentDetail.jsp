@@ -10,10 +10,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <style>
+	label{
+		color:#141414;
+	}
+	.txt-bar{
+		color:#ececec;
+	}
+	.text-gray-800{
+		font-size:2rem !important;
+	}
 	.genreBox, .featureBox, .castBox{
 		display:inline-block;
 		background-color:lightgray;
 		border-radius:5px;
+		color:#141414;
 	}
 	.btn-close{
 		background-color:lightgray;
@@ -42,56 +52,66 @@
 		            		<img alt="${contentDto.contentName }" src="${contentDto.contentThumbnail }" style="width:100%;"><br>
 		            		<img alt="${contentDto.contentName }" src="${contentDto.contentLogo }" style="width:40%; position:absolute; top:0; left:0; transform:translateY(100%);">
 	            		</div>
-	            		<div class="mt-4">
-	            			url : ${noSeriesDto.seriesPath}
-	            		</div>
-	            		<div>
-	            			
-	            		</div>
+	            		
 	            	</div>
 	            	
 	            	<div class="col-md-6">
-	            		<div>컨텐츠 번호 : ${contentDto.contentNo }</div>
-	            		<div class="mt-3">컨텐츠명 : ${contentDto.contentName }</div>
-	            		<div class="mt-3">
-	            			컨텐츠 타입 : 
-		            		<c:choose>
-								<c:when test="${contentDto.contentType eq 'km'}"> 한국 영화 </c:when>
-								<c:when test="${contentDto.contentType eq 'fm'}"> 외국 영화 </c:when>
-								<c:when test="${contentDto.contentType eq 'kd'}"> 한국 드라마 </c:when>
-								<c:when test="${contentDto.contentType eq 'fd'}"> 외국 드라마 </c:when>
-								<c:when test="${contentDto.contentType eq 'co'}"> TV 예능 </c:when>
-								<c:when test="${contentDto.contentType eq 'an'}"> 애니메이션  </c:when>
-								<c:when test="${contentDto.contentType eq 'do'}"> 다큐멘터리 </c:when>
-							</c:choose>
-						</div>
-						<div class="mt-3">
-							장르 : 
-							<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
-								<span>${genreFeatureCastVO.genreName}</span>
-								<c:if test="${status.last eq false}">,</c:if>
-							</c:forEach>
-						</div>
-						<div class="mt-3">
-							특징 : 
-							<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }" varStatus="status">
-								<span>${genreFeatureCastVO.featureName}</span>
-								<c:if test="${status.last eq false}">,</c:if>
-							</c:forEach>
-						</div>
-						<div class="mt-3">
-							출연 : 
-							<c:forEach var="genreFeatureCastVO" items="${contentCastList }" varStatus="status">
-								<span>${genreFeatureCastVO.castName}</span>
-								<c:if test="${status.last eq false}">,</c:if>
-							</c:forEach>
-						</div>
-						<div class="mt-3">${contentDto.contentLimit}세 이상</div>
-						<div class="mt-3">연작 여부 : ${contentDto.contentSeries}</div>
-						<div class="mt-3">개봉년도 : ${contentDto.contentRelease}</div>
-						<div class="mt-3">좋아요 : ${contentDto.contentLikes}</div>
-						<div class="mt-3">조회수 : ${contentDto.contentViews}</div>
-					    <div class="mt-3">영상 길이 : ${noSeriesDto.contentPlaytime}</div>
+	            		<div class="mb-2">
+		            		<span class="text-gray-800 mr-1">${contentDto.contentName }</span>
+		            		<span class="txt-bar">|</span>
+		            		<span class="ml-1 text-primary">${contentDto.contentRelease}&nbsp;개봉</span>
+		            		<span class="txt-bar">|</span>
+		            		<span class="ml-1 text-primary">${contentDto.contentLimit}세 이상</span>
+		            		<span class="txt-bar">|</span>
+		            		<span class="ml-1 text-primary">${noSeriesDto.contentPlaytime}분</span>
+	            		</div>
+	            		
+	            		<dl>
+	            		<dt>번호</dt> <dd>${contentDto.contentNo }</dd>
+	            		
+	            			<dt>타입</dt>
+	            			<dd>
+			            		<c:choose>
+									<c:when test="${contentDto.contentType eq 'km'}"> 한국 영화 </c:when>
+									<c:when test="${contentDto.contentType eq 'fm'}"> 외국 영화 </c:when>
+									<c:when test="${contentDto.contentType eq 'kd'}"> 한국 드라마 </c:when>
+									<c:when test="${contentDto.contentType eq 'fd'}"> 외국 드라마 </c:when>
+									<c:when test="${contentDto.contentType eq 'co'}"> TV 예능 </c:when>
+									<c:when test="${contentDto.contentType eq 'an'}"> 애니메이션  </c:when>
+									<c:when test="${contentDto.contentType eq 'do'}"> 다큐멘터리 </c:when>
+								</c:choose>
+							</dd>
+						
+						
+							<dt>장르</dt> 
+							<dd>
+								<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
+									<span>${genreFeatureCastVO.genreName}</span>
+									<c:if test="${status.last eq false}">,</c:if>
+								</c:forEach>
+							</dd>
+						
+							<dt>특징</dt> 
+							<dd>
+								<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }" varStatus="status">
+									<span>${genreFeatureCastVO.featureName}</span>
+									<c:if test="${status.last eq false}">,</c:if>
+								</c:forEach>
+							</dd>
+							
+							<dt>출연</dt> 
+							<dd>
+								<c:forEach var="genreFeatureCastVO" items="${contentCastList }" varStatus="status">
+									<span>${genreFeatureCastVO.castName}</span>
+									<c:if test="${status.last eq false}">,</c:if>
+								</c:forEach>
+							</dd>
+						
+							<dt>좋아요</dt><dd>${contentDto.contentLikes}</dd>
+							<dt>조회수</dt><dd>${contentDto.contentViews}</dd>
+					    </dl>
+					    
+					    
 	            	</div>
 	            	
                     <div class="col-md-6 offset-md-6 pt-3" >
@@ -106,9 +126,16 @@
                     </div>
 	            </div>             
 	     	 </div>
+	     	 
+	     	 <div class="card shadow mb-4">
+		     	 <div class="card-body px-3">
+		     	 	<div class="text-primary mb-1" style="font-weight:bold">소개 </div>
+		     	 	<div class="text-primary">${contentDto.contentInfo }</div>
+		     	 </div>
+	     	 </div>
 	     
 		     <div class="text-right mb-4">
-		     	<a href="${pageContext.request.contextPath}/admin/content/" class="btn btn-primary">목록으로</a>
+		     	<a href="${pageContext.request.contextPath}/admin/content/" class="btn btn-secondary">목록으로</a>
 		     </div>
 	     </div>
 	 </div>
@@ -260,6 +287,9 @@
 			$("#this-content-feature").empty();
 			$("#this-content-cast").empty();
 			
+			$("select[name='contentGenre'] option").prop('disabled',false);
+			$("select[name='contentFeature'] option").prop('disabled',false);
+			
 			$("select[name='contentFeature'] option:eq(0)").prop("selected",true);
 			$("select[name='contentGenre'] option:eq(0)").prop("selected",true);
 			$("input[name='contentCast']").val("");
@@ -282,10 +312,12 @@
 			/* input type="hidden" name 통일하여 컨트롤러로 배열 값 전달  */
 			<c:forEach var="genreFeatureCastVO" items="${contentGenreList }">
 				$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'><input name='genreNo' type='hidden' value='${genreFeatureCastVO.genreNo}'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
+				$("select[name='contentGenre'] option[value*='${genreFeatureCastVO.genreNo}']").prop('disabled',true);
 			</c:forEach>
 			
 			<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
 				$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'><input name='featureNo' type='hidden' value='${genreFeatureCastVO.featureNo}'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
+				$("select[name='contentFeature'] option[value*='${genreFeatureCastVO.featureNo}']").prop('disabled',true);
 			</c:forEach>
 			
 			<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
@@ -297,6 +329,7 @@
 		$("select[name='contentGenre']").change(function(){
 			var selectedGenreName = $("select[name='contentGenre'] option:checked").text();
 			var selectedGenreNo = $(this).val();
+			console.log(selectedGenreNo);
             
 			var genreDiv = "";
 			genreDiv += "<span class='genreBox p-2 mr-2 mb-2'>";
@@ -304,6 +337,8 @@
 			genreDiv += '<input type="hidden" name="genreNo" value="'+selectedGenreNo+'">';
 			genreDiv += "<button class='btn-close'>&times;</button></span>";
 			$("#this-content-genre").append(genreDiv);
+			
+			$("select[name='contentGenre'] option[value*='"+selectedGenreNo+"']").prop('disabled',true);
 			
 		});
 		
@@ -318,12 +353,26 @@
 			featureDiv += "<button class='btn-close'>&times;</button></span>";
 			$("#this-content-feature").append(featureDiv);
 			
+			$("select[name='contentFeature'] option[value*='"+selectedFeatureNo+"']").prop('disabled',true);
+			
 		});
 		
 		$("input[name='contentCast']").keydown(function(key) {
         	if (key.keyCode == 13) {
            		event.preventDefault();
 				var castName = $(this).val();
+
+				var castList = $(".castBox");
+				
+				for(var i=0; i<castList.length; i++){
+					var cast = castList[i].innerText.replace('×', '');
+					//console.log(cast);
+					if(castName == cast){
+						//console.log(cast);
+						$(this).val("");
+						return false;
+					}
+				}
 				
 	            var castDiv = "";
 				castDiv += "<span class='castBox p-2 mr-2 mb-2'>";
