@@ -28,27 +28,6 @@
   	
 	<!-- Custom styles for this page -->
     <link href="${pageContext.request.contextPath}/res/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">	
-    
-    <style>
-    @media (max-width: 767px){
-    #weflex-logo {
-    	display : none;
-    	} 
-    #w-logo {
-    	display: inline!important;
-    	}
-    }
-    
-   @media (min-width: 768px){
-    #w-logo {
-    	display:none!important;	
-   		 }
-   	#weflex-logo {
-   		display:inline;
-   		}
-    }
-    
-    </style>
 
 </head>
 
