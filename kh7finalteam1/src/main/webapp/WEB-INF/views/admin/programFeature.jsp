@@ -14,10 +14,12 @@
 		background-color:lightgray;
 	}
 	.link-feature:hover{
+		color:#5a5c69;
 		text-decoration:none;
 		
 	}
 	.link-feature{
+		color:#5a5c69;
 		display:block;
 	}
 	
@@ -43,7 +45,7 @@
                  <!-- Circle Buttons -->
                  <div class="card shadow mb-4">
                      <div class="card-header py-3">
-                         <h6 class="m-0 font-weight-bold text-primary">프로그램 특징 입력</h6>
+                         <h6 class="m-0 font-weight-bold text-dark">프로그램 특징 입력</h6>
                      </div>
                      
                      <div class="card-body">
@@ -88,7 +90,7 @@
              <div class="col-md-6">
 	             <div class="card shadow mb-4">
 	             	<div class="card-header py-3">
-	                     <h6 class="m-0 font-weight-bold text-primary">등록된 프로그램 특징</h6>
+	                     <h6 class="m-0 font-weight-bold text-dark">등록된 프로그램 특징</h6>
 	                </div>
 	             	<div class="card-body" id="list-result">
 	             		<ul>
