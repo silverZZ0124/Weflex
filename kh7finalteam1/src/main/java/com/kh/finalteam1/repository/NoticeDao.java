@@ -12,5 +12,7 @@ public interface NoticeDao {
 	
 	boolean noticeDelete(int noticeNo);
 	
+	NoticeVo noticeGet(int noticeNo);
+	
 	void noticeInsert(NoticeDto noticeDto);
 }
