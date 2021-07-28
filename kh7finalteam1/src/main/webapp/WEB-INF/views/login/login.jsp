@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%--<% String errMsg = (String)session.getAttribute("errMsg");
+ if(errMsg == null) errMsg = "";
+ session.invalidate();
+ --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,7 @@
 					srcset="https://assets.nflxext.com/ffe/siteui/vlv3/b8e09d9c-d1e7-4800-afd9-810e41ace684/6d68acdf-6efa-4f03-9513-ef482daff117/KR-ko-20210607-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/b8e09d9c-d1e7-4800-afd9-810e41ace684/6d68acdf-6efa-4f03-9513-ef482daff117/KR-ko-20210607-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/b8e09d9c-d1e7-4800-afd9-810e41ace684/6d68acdf-6efa-4f03-9513-ef482daff117/KR-ko-20210607-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w">				
 			</div>
 			<div class="nfHeader login-header signupBasicHeader">
-				<a href="#" class="svg-nfLogo signupBasicHeader">
+				<a href="/finalteam1/index" class="svg-nfLogo signupBasicHeader">
 					<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 				</a>
 			</div>
@@ -31,13 +35,14 @@
 				<div>
 					<div class="login-content login-form hybrid-login-form hybrid-login-form-signup">
 						<div class="hybrid-login-form-main">
+						<%--<div id = "errMsg" style="color:white"><%=errMsg %></div> --%>
 							<h1>로그인</h1>
 							<form action="loginCheck" method="post" class="login-form">
 								<div class="nfInput nfEmailPhoneInput login-input login-input-email">
 									<div class="nfInputPlacement">
 										<div class="nfEmailPhoneControls">
 											<label class="input_id">
-												<input type="text"  name="clientId" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소 또는 전화번호">
+												<input type="text"  name="clientId" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소">
 											</label>
 										</div>
 									</div>

@@ -282,46 +282,13 @@ input[Attributes Style] {
     font-size: 16px;
     max-width: 500px;
 }
-.ui-binary-input input[type=checkbox], .ui-binary-input input[type=radio] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-input[type=checkbox], input[type=radio] {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0;
-}
-input[type=checkbox], input[type=radio] {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0;
-}
-input {
-    line-height: normal;
-}
+
 button, input, optgroup, select, textarea {
     color: inherit;
     font: inherit;
     margin: 0;
 }
-.ui-binary-input input[type=checkbox]+label:before {
-    width: 25px;
-    height: 25px;
-}
-.ui-binary-input input[type=checkbox]+label:before, .ui-binary-input input[type=radio]+label:before {
-    content: "";
-    position: absolute;
-    display: block;
-    top: 2px;
-    left: -36px;
-    padding: 0;
-    border: 1px solid;
-    background-color: #fff;
-}
+
 a {
     text-decoration: none;
     color: #0071eb;
@@ -360,15 +327,7 @@ ul>li {
     font-size: 16px;
     max-width: 500px;
 }
-.ui-binary-input input[type=checkbox]+label {
-    margin: 8px 0;
-}
-.ui-binary-input input[type=checkbox]+label, .ui-binary-input input[type=radio]+label {
-    position: relative;
-    display: block;
-    line-height: 1.2;
-    padding: 6px 0;
-}
+
 .ui-binary-input .helper {
     font-size: 13px;
     line-height: 1em;

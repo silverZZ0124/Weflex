@@ -1,5 +1,7 @@
 package com.kh.finalteam1.restcontroller;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,4 +55,21 @@ public class MemberDataController {
 			throw new AjaxException("에러에러");
 		}
 	}
+	
+/*	@PostMapping("/regitCheck")
+	public boolean regitCheck(
+													 @RequestParam String clientPw,
+													 @RequestParam String clientName,
+													 @RequestParam Date clientBirth,
+													 @RequestParam String clientPhone) {
+
+		System.out.println(clientPw);
+		System.out.print(clientName);
+		System.out.print(clientBirth);
+		System.out.print(clientPhone);
+		
+		return false;
+		}
+		*/
+	
 }
