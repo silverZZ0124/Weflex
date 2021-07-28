@@ -10,4 +10,6 @@ public interface ContentGenreDao {
 	
 	//content_genre 테이블 추가(컨텐츠 장르 등록)
 	void regist(List<ContentGenreDto> list);
+
+	boolean deleteAll(int contentNo);
 }

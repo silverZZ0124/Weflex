@@ -12,6 +12,7 @@ import com.kh.finalteam1.entity.ClientGradeListDto;
 import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 
 
+
 @Repository
 public class ClientDaoImpl implements ClientDao {
 	@Autowired
@@ -47,7 +48,7 @@ public class ClientDaoImpl implements ClientDao {
 	public void joinCheck(ClientDto clientDto){
 		sqlSession.insert("client.joinCheck",clientDto);
 	}
-
+	@Override
 	public boolean changeEmail(ClientDto clientDto) {
 		return sqlSession.update("client.changeEmail", clientDto) > 0;
 	}
@@ -62,4 +63,17 @@ public class ClientDaoImpl implements ClientDao {
 	public List<ClientGradeListDto> list() {
 		return sqlSession.selectList("client.grade-list");
 	}
+	
+	//이번달 회원 가입 수
+	@Override
+	public int monthMemberCount() {
+		return sqlSession.selectOne("client.month-clientCount");
+	}
+	
+	//올해 회원 가입 수(2021년)
+	@Override
+	public int yearMemberCount() {
+		return sqlSession.selectOne("client.year-clientCount");
+	}
+	
 }

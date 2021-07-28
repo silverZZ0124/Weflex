@@ -83,10 +83,6 @@ public class HomeController {
 
 	}
 	
-	@GetMapping("/movie")
-	public String movie() {
-		return "main/movie";
-
-	}
+	
 
 }

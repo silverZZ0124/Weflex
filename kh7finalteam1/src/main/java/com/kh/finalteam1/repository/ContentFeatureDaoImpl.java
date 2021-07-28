@@ -24,4 +24,10 @@ public class ContentFeatureDaoImpl implements ContentFeatureDao{
 	public void regist(List<ContentFeatureDto> list) {
 		sqlSession.insert("content-feature.regist", list);
 	}
+
+	@Override
+	public boolean deleteAll(int contentNo) {
+		int count = sqlSession.delete("content-feature.delete", contentNo);
+		return count>0;
+	}
 }

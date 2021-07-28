@@ -26,4 +26,10 @@ public class ContentGenreDaoImpl implements ContentGenreDao{
 		sqlSession.insert("content-genre.regist", list);
 	}
 
+	@Override
+	public boolean deleteAll(int contentNo) {
+		int count = sqlSession.delete("content-genre.delete", contentNo);
+		return count>0;
+	}
+
 }

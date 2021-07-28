@@ -8,11 +8,9 @@
 <!-- Begin Page Content -->
      <div class="container-fluid">
 
-         <!-- Page Heading -->
-         <h1 class="h3 mb-4 text-gray-800">프로그램 특징 수정</h1>
-
-         <div class="row mt-3">
-             <div class="col-md-6">
+         <div class="row mt-3" style="margin-bottom:25%">
+             <div class="col-md-6 offset-lg-3 offset-md-3">
+             	<h1 class="h3 mb-4 text-gray-800 text-center">프로그램 특징 수정</h1>
 
                  <div class="card shadow mb-4">
                  
@@ -28,17 +26,17 @@
                           		<input type="text" name="newFeatureName" class="form-control" id="new-feature-input" value="${editFeatureName }">
                         	</div>
 	                         <div class="form-group">
-	                         	<input type="submit" value="수정" class="btn btn-block btn-success">
+	                         	<input type="submit" value="수정" class="btn btn-block btn-outline-danger">
 	                         </div>
                         </form>
                         
                         <!-- 클릭시 스크립트에서 주소 변경해줌 -->
-						<a href="#" class="btn btn-block btn-danger" id="delete-btn">삭제</a>
+						<a href="#" class="btn btn-block btn-outline-secondary" id="delete-btn">삭제</a>
 		             </div>             
 		         </div>
 		         
 		         <div class="text-right mb-4">
-		         	<a href="feature" class="btn btn-primary">취소</a>
+		         	<a href="feature" class="btn btn-dark">취소</a>
 		         </div>
              </div>
          </div>
@@ -70,6 +68,7 @@
 
             </div>
         </div>
+     </div>
      </div>
      <!-- /.container-fluid -->
      

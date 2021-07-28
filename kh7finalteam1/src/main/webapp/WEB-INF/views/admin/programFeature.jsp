@@ -10,14 +10,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
 <style>
-	#linkeFeatureEdit:hover{
-		background-color:lightgray;
+	.card-body{
+		color:#141414 !important;
 	}
 	.link-feature:hover{
-		text-decoration:none;
+		color:#d10914;
 		
 	}
 	.link-feature{
+		color:#141414;
 		display:block;
 	}
 	
@@ -55,7 +56,7 @@
                           		<input type="text" name="featureName" id="insert-featureName" class="form-control">
                         	</div>
 	                         <div class="text-center">
-	                         	<button class="btn btn-block btn-success">확인</button>
+	                         	<button class="btn btn-block btn-danger">확인</button>
 	                         </div>
                         </form>
                          
@@ -70,7 +71,7 @@
                           		<input type="text" name="featureName" class="form-control" id="featureName" placeholder="검색어를 입력하세요">
                         	</div>
 	                         <div class="form-group col-lg-3 col-md-12 ">
-	                         	<input type="submit" value="검색" class="btn btn-success">
+	                         	<input type="submit" value="검색" class="btn btn-danger">
 	                         </div>
                         </form>
                      </div>
@@ -176,7 +177,7 @@
     			e.preventDefault();
     			
     			var formdata = $(this).serialize();
-				console.log(formdata);
+				//console.log(formdata);
     			
 	    		$.ajax({
 	    			url : "${pageContext.request.contextPath}/data/admin/searchFeature",
@@ -198,16 +199,20 @@
 	    				cardDiv += "</div>";
 	    				$("#search-feature-card").append(cardDiv);
 	    				
-	    				
-	    				for(var i=0; i < resp.length; i++){
-	    					var content = "";
-	    					content += "<li>";
-	    					content += resp[i].featureName;
-	    					content += "</li>";
-	    	    			
+	    				if(resp.length == 0){
+	    					var content = "<li>없음</li>";
 	    					$("#search-list").append(content);
 	    				}
-	    				
+	    				else{
+	    					for(var i=0; i < resp.length; i++){
+		    					var content = "";
+		    					content += "<li>";
+		    					content += resp[i].featureName;
+		    					content += "</li>";
+		    	    			
+		    					$("#search-list").append(content);
+		    				}
+	    				}
 					}
 	    		});
     		});

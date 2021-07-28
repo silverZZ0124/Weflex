@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+.pay-page-main{
+	width:40%;
+	margin-top:5%;  
+	margin-bottom: 10%;
+	
+}
+.pay-page-small-font{
+	font-size: 0.8rem;
+    font-weight: 800;
+}
+.pay-page-big-font{
+	font-weight: 700;
+    font-size: 1.6rem;
+}
+.red-block-box{
+	display:flex;
+	margin-right: 1%;
+    margin-left: auto;
+    width: 40%;
+        justify-content: space-between;
+}
+.red-block{
+	width: 100px;
+    height: 100px;
+    color: white;
+    display: flex;
+}
+.semi-red{
+    background-color: rgb(223,115,117);
+}
+.real-red{
+	background-color: rgb(210,51,38);
+}
+.real-red-font{
+	color: rgb(210,51,38);
+}
+.gray-font{
+	olor:rgb(99,99,99);
+}
+.semi-red-block-text{
+	margin:auto;
+}
+.pay-page-detail-text{
+	display:flex;
+	border-bottom:1px solid rgb(205,205,205); 
+	height: 40px;
+	width:100%;
+}
+.gray-check{
+	color:#737373;
+	fill:#737373;
+}
+.pay-page-detail-text > div:first-child{
+	margin-left:2%;
+	margin-top:auto;
+	margin-bottom:auto;
+	width: 57%;
+}
+.pay-page-detail-small-text-box{
+	width:40%;
+	display:flex;
+	justify-content: space-between;
+}
+.pay-page-detail-small-text{
+	width: 100px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.red-next-btn{
+	background-color:rgb(210,51,38);
+	color:white;
+	padding: 0.5rem;
+    width: 300px;
+    text-align: center;;
+	border:none;
+	margin-top:10%;
+	border-radius: 3px;
+    box-shadow: 1px 1px 4px 1px rgb(205 205 205);
+}
+.pay-page-etc-text{
+	text-align:center;
+	margin-top:3%;
+}
+.pay-page-etc-text >div:nth-child(3){
+	font-weight:700;
+}
+.pay-page-etc-text >div:last-child{
+	font-weight:700;
+}
+.pay-info-box{
+	width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 10%;
+    box-shadow: 2px 2px 8px 1px rgb(205 205 205);
+    padding: 1% 0;
+}
+.pay-info-title{
+	font-weight:700;
+}
+
+
+
+
+
+
+
+
+
+
+
+

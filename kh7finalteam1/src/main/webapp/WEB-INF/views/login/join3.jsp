@@ -4,10 +4,20 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/res/css/join3.css"/>
-<title>join3페이지</title>
+<title>Weflex</title>
 </head>
+<script>
+	$(function(){
+		$("#join3-next-btn").click(function(){
+			location.href="${pageContext.request.contextPath }/shop/";
+		});
+	});
+</script>
 <body>
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
@@ -42,7 +52,7 @@
 											<path fill="currentColor"d="M3.707 12.293l-1.414 1.414L8 19.414 21.707 5.707l-1.414-1.414L8 16.586z">
 											</path>
 											</svg>
-											<spanclass="checkmark-group--text">無약정, 無위약금. 해지도쿨하게 언제든지.</span>
+											<span class="checkmark-group--text">無약정, 無위약금. 해지도쿨하게 언제든지.</span>
 											</li>
 									<li class="checkmark-group--row">
 									<svg viewBox="0 0 24 24"class="checkmark-group--icon" aria-hidden="true">
@@ -62,7 +72,7 @@
 							</div>
 						</div>
 						<div class="submitBtnContainer">
-							<button type="button" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="button_see_plans">다음</button>
+							<button type="button" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="button_see_plans" id="join3-next-btn">다음</button>
 						</div>
 					</div>
 				</div>

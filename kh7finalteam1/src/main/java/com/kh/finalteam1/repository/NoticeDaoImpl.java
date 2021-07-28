@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kh.finalteam1.entity.NoticeDto;
-import com.kh.finalteam1.entity.NoticeVo;
+import com.kh.finalteam1.vo.NoticeVo;
 
 public class NoticeDaoImpl implements NoticeDao{
 	@Autowired

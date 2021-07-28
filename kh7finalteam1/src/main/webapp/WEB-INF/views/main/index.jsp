@@ -22,7 +22,8 @@
 			<div class="our-story-header-wrapper">
 				<div class="our-story-header">
 					<span class="our-story-logo">
-						<a style="display: inline-block; height: 100%;" href="#"><img class="img-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" ></a> 
+						<a style="display: inline-block; height: 100%;">
+						<img class="img-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" ></a> 
 					</span>	
 					
 					<div class="lang-selection-container">
@@ -59,7 +60,7 @@
 										<div class="nfInput nfInputResponsive">
 											<div class="nfInputPlacement">
 												<label class="input_id" placeholder="email">
-													<input  type="email" id="id_email_hero_fuji"  name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소">													
+													<input  type="email" id="id_email_hero_fuji"  name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소" required>													
 												</label>
 											</div>
 										</div>

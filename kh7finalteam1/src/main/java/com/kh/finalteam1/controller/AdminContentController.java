@@ -58,7 +58,7 @@ public class AdminContentController {
 	
 	@Autowired
 	private CastDao castDao;
-		
+
 	@GetMapping("/")
 	public String content(Model model) {
 		List<ContentDto> contentList = contentDao.list();
@@ -116,23 +116,74 @@ public class AdminContentController {
 		return "redirect:/admin/content/";
 	}
 	
+	//연작 없는 컨텐츠 수정
 	@PostMapping("/noContentEdit")
 	public String noContentEdit(
 			@ModelAttribute ContentDto contentDto,
-			@ModelAttribute NoSeriesDto noSeriesDto) {
+			@ModelAttribute NoSeriesDto noSeriesDto,
+			@RequestParam List<Integer> genreNo, 
+			@RequestParam List<Integer> featureNo,
+			@RequestParam List<String> castName) {
+		
+		int contentNo = contentDto.getContentNo();
+		
+		//수정 누르면 해당 컨텐츠 장르, 특징, 배우 모두 삭제 후 다시 등록
+		contentGenreDao.deleteAll(contentNo);
+		contentFeatureDao.deleteAll(contentNo);
+		castDao.deleteAll(contentNo);
 		
 		contentDao.edit(contentDto);
 		seriesDao.noEdit(noSeriesDto);
 		
-		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
+		contentGenreService.regist(contentNo, genreNo);
+		contentFeatureService.regist(contentNo, featureNo);
+		
+		List<CastDto> castList = new ArrayList<>();
+		
+		for(int i = 0; i < castName.size(); i++) {
+			castList.add(CastDto.builder()
+									.contentNo(contentNo)
+									.castName(castName.get(i))
+								.build());	
+		}
+
+		castDao.regist(castList);
+		return "redirect:contentDetail?contentNo="+contentNo;
 	}
+
 	
+	//연작 있는 컨텐츠 수정
 	@PostMapping("/yesContentEdit")
 	public String yesContentEdit(
-			@ModelAttribute ContentDto contentDto) {
+			@ModelAttribute ContentDto contentDto,
+			@RequestParam List<Integer> genreNo, 
+			@RequestParam List<Integer> featureNo,
+			@RequestParam List<String> castName) {
+		
+		int contentNo = contentDto.getContentNo();
 		
 		contentDao.edit(contentDto);
-		return "redirect:contentDetail?contentNo="+contentDto.getContentNo();
+		
+		//수정 누르면 해당 컨텐츠 장르, 특징, 배우 모두 삭제 후 다시 등록
+		contentGenreDao.deleteAll(contentNo);
+		contentFeatureDao.deleteAll(contentNo);
+		castDao.deleteAll(contentNo);
+		
+		contentGenreService.regist(contentNo, genreNo);
+		contentFeatureService.regist(contentNo, featureNo);
+		
+		List<CastDto> castList = new ArrayList<>();
+		
+		for(int i = 0; i < castName.size(); i++) {
+			castList.add(CastDto.builder()
+									.contentNo(contentNo)
+									.castName(castName.get(i))
+								.build());	
+		}
+
+		castDao.regist(castList);
+		
+		return "redirect:contentDetail?contentNo="+contentNo;
 	}
 	
 	@PostMapping("/episodeEdit")
@@ -207,9 +258,10 @@ public class AdminContentController {
 	@Autowired
 	private ContentFeatureService contentFeatureService;
 	
+	//장르만 있거나, 특징만 있는 컨텐츠가 존재하므로 required=false
 	@PostMapping("/genreFeatureRegist")
 	public String genreFeatureRegist(
-			@RequestParam List<Integer> genreNo, @RequestParam List<Integer> featureNo,
+			@RequestParam(required = false) List<Integer> genreNo, @RequestParam(required = false) List<Integer> featureNo,
 			HttpSession session) {
 		
 		log.debug("genreNoList = {}", genreNo);
@@ -217,8 +269,17 @@ public class AdminContentController {
 		int contentNo = (Integer)session.getAttribute("contentNo");
 		//int contentNo = 1;
 		
+		if(genreNo != null && featureNo != null) {//장르, 특징 둘다 있다면
 		contentGenreService.regist(contentNo, genreNo);
 		contentFeatureService.regist(contentNo, featureNo);
+		}
+		else if(genreNo != null) {//장르는 있고 특징이 없다면
+		contentGenreService.regist(contentNo, genreNo);
+		}
+		else if(featureNo != null) {//특징만 있다면(장르는 x)
+		contentFeatureService.regist(contentNo, featureNo);
+		}
+		
 		return "redirect:/admin/content/castRegist";
 	}
 	
@@ -239,9 +300,9 @@ public class AdminContentController {
 		
 		for(int i = 0; i < castName.size(); i++) {
 				list.add(CastDto.builder()
-													.contentNo(contentNo)
-													.castName(castName.get(i))
-												.build());	
+									.contentNo(contentNo)
+									.castName(castName.get(i))
+								.build());	
 		}
 
 		log.debug("castRegistDto = {}", list);

@@ -4,8 +4,10 @@
 <%-- <c:set var="isYseries" value=""></c:set> --%>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<script>history.scrollRestoration = "auto"</script>
 <script>
+
+
 var player;
 var hoverPlayer;
 var detailModalPlayerReady = true;
@@ -583,6 +585,30 @@ $(function(){
 			console.log($(this).val());
 		});
 		
+		$("#thumbs-up-empty").click(function(){
+			$(this).hide();
+			$("#thumbs-up-full").show();
+			
+			
+		});
+		 $("#thumbs-up-full").click(function(){
+			$(this).hide();
+			$("#thumbs-up-empty").show();
+		}); 
+		
+		
+		$("#thumbs-up-empty2").click(function(){
+			$(this).hide();
+			$("#thumbs-up-full2").show();
+			
+			
+		});
+		 $("#thumbs-up-full2").click(function(){
+			$(this).hide();
+			$("#thumbs-up-empty2").show();
+		}); 
+		
+		
 		$.fn.initEvent = function(){
 			$(".series-select-box-title").change(function(){
 				if($(this).val() == "allSeason")
@@ -769,8 +795,8 @@ $(function(){
 						</form>										
 						<button class="btn btn-outline-light modal-etc-btn wish-delete-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light modal-etc-btn wish-insert-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn like-insert-btn"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn like-delete-btn"><i class="fas fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-insert-btn" id="thumbs-up-empty"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-delete-btn" id="thumbs-up-full" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
 					</div>
 				
 			</div>
@@ -859,8 +885,8 @@ $(function(){
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><img class="content-limit" width="25px" height="25px"></div>				       				       			
 				       		</div>
 				       </div>
@@ -890,8 +916,8 @@ $(function(){
                     	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
 	                    <button class="btn btn-outline-light hover-modal-etc-btn wish-delete-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn wish-insert-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn like-delete-btn"><i class="fas fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn modal-thumbs-up" id="thumbs-up-empty2"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-delete-btn modal-thumbs-up" id="thumbs-up-full2" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
                     </div>
                     <div>

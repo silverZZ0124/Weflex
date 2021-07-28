@@ -24,6 +24,7 @@
   --white: #fff;
   --gray: #858796;
   --gray-dark: #5a5c69;
+  --hex-dark:#141414;
   --primary: #4e73df;
   --secondary: #858796;
   --success: #1cc88a;
@@ -126,7 +127,7 @@ dt {
 
 dd {
   margin-bottom: .5rem;
-  margin-left: 0;
+  margin-left: 1rem;
 }
 
 blockquote {
@@ -3600,14 +3601,14 @@ input[type="button"].btn-block {
 
 .custom-control-label {
   position: relative;
-  margin-bottom: 0;
+  /*margin-bottom: 0;*/
   vertical-align: top;
 }
 
 .custom-control-label::before {
   position: absolute;
   top: 0.25rem;
-  left: -1.5rem;
+  left: -2rem;
   display: block;
   width: 1rem;
   height: 1rem;
@@ -3620,7 +3621,7 @@ input[type="button"].btn-block {
 .custom-control-label::after {
   position: absolute;
   top: 0.25rem;
-  left: -1.5rem;
+  left: -2rem;
   display: block;
   width: 1rem;
   height: 1rem;
@@ -4554,6 +4555,7 @@ input[type="button"].btn-block {
   margin-bottom: 0;
   background-color: #f8f9fc;
   border-bottom: 1px solid #e3e6f0;
+  font-weight:bold
 }
 
 .card-header:first-child {
@@ -10024,7 +10026,7 @@ a:focus {
 }
 
 .text-gray-800 {
-  color: #5a5c69 !important;
+  color: #141414 !important;font-weight:bold;
 }
 
 .text-gray-900 {
@@ -10453,7 +10455,7 @@ a:focus {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 800;
-  padding: 1.5rem 1rem;
+  padding: 2.75rem 1rem;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
@@ -11279,3 +11281,21 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+@media (max-width: 767px){
+    #weflex-logo {
+    	display : none;
+    	} 
+    #w-logo {
+    	display: inline!important;
+    	}
+    }
+    
+   @media (min-width: 768px){
+    #w-logo {
+    	display:none!important;	
+   		 }
+   	#weflex-logo {
+   		display:inline;
+   		}
+    }
