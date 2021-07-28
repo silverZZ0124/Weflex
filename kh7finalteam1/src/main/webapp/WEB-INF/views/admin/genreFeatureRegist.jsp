@@ -5,12 +5,27 @@
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <style>
-	.btn-lab, .genre-add, .feature-add{
-	cursor: pointer;
+	input[type=checkbox] {
+	    display:none;
+	}
+	input[type=checkbox] + label { 
+	    cursor: pointer; 
+	    padding-left:2rem; 
+	    background-repeat: no-repeat;
+	    background-image: url('${pageContext.request.contextPath}/res/img/checker-off.svg');
+	}
+	input[type=checkbox]:checked + label {
+	    background-image: url('${pageContext.request.contextPath}/res/img/checker-on.svg');
 	}
 	
 	input[type=checkbox]:checked + label {
-   color: #4e73df;
+		
+   		color: #d10914;
+   		font-weight:bold;
+	}
+	
+	input[type=checkbox]{
+		color:#141414;
 	}
 	
 	.category-ul{
@@ -53,13 +68,13 @@
 	             	<div class="card-header py-3">
 	                     <h6 class="m-0 font-weight-bold text-primary">장르 등록</h6>
 	                </div>
-	             	<div class="card-body" id="list-result" >
 					<form action="genreFeatureRegist" method="post" id="regist-form">
+	             	<div class="card-body" id="list-result" >
 	             		<ul class="category-ul" style="overflow-y: scroll; height:550px;">
 	               		<c:forEach var="genreDto" items="${genreList}">
-				    		<li class="category-li custom-control custom-checkbox">
+				    		<li class="category-li custom-control custom-checkbox text-primary">
 				    			<input type="checkbox" name="genreNo" value="${genreDto.genreNo}" class="genre-add custom-control-input"  id="genre-${genreDto.genreNo}">
-				    			<label class="btn-lab custom-control-label" for="genre-${genreDto.genreNo}">${genreDto.genreName}</label>
+				    			<label  for="genre-${genreDto.genreNo}">${genreDto.genreName}</label>
 				    		</li>
 						</c:forEach>
 
@@ -77,17 +92,17 @@
 	             	<div class="card-body" id="list-result">
 	             		<ul class="category-ul" style="overflow-y: scroll; height:550px;">
 	               		<c:forEach var="featureDto" items="${featureList}">
-				    		<li class="category-li custom-control custom-checkbox"">
+				    		<li class="category-li custom-control custom-checkbox text-primary">
 				    				<input type="checkbox" name="featureNo" value="${featureDto.featureNo}" class="feature-add custom-control-input" id="feature-${featureDto.featureNo}">
-				    				<label class="btn-lab custom-control-label" for="feature-${featureDto.featureNo}">${featureDto.featureName}</label>
+				    				<label for="feature-${featureDto.featureNo}">${featureDto.featureName}</label>
 				    		</li>
 						</c:forEach>
 						</ul>
 	             	</div>
 	             </div>
              </div>
-                <div class="text-center" style="width: 100%">
-							<button type="submit" class="btn btn-success">등록</button>
+                <div class="text-center mb-5" style="width: 100%">
+							<button type="submit" class="btn btn-danger">등록</button>
 							<button type="reset" class="btn btn-secondary">초기화</button>
 				</div>
 				</form>
