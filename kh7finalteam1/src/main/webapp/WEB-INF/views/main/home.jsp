@@ -443,7 +443,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){		
+				success:function(resp){						
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -541,7 +541,33 @@ $(function(){
   						 				
  						$.fn.initTrailerSeriesSection(1);
  						
- 						$(".modal-series").css("display", "block"); 						
+ 						$(".modal-series").css("display", "block"); 
+ 						 						
+ 						$("#similar-content-wrapper").empty();
+ 						for(var i in resp.similarList){
+ 							var correct = resp.similarList[i].matchingCount / resp.genreList.length * 100;
+ 							var template = $("#detail-modal-similar-template").html();
+ 							template = template.replace("{{thumbnail}}", resp.similarList[i].contentThumbnail);
+ 							template = template.replace("{{correct}}", parseInt(correct));
+ 							template = template.replace("{{contentRelease}}", resp.similarList[i].contentRelease);
+ 							template = template.replace("{{contentInfo}}", resp.similarList[i].contentInfo);
+ 							template = template.replace("{{contentLimit}}", resp.similarList[i].contentLimit);
+ 							
+ 							if(resp.similarList[i].clientNo === 0){
+ 								template = template.replace("{{plusStyle}}", "block");
+ 								template = template.replace("{{checkStyle}}", "none");
+ 							}
+ 							else{
+ 								template = template.replace("{{plusStyle}}", "none");
+ 								template = template.replace("{{checkStyle}}", "block");
+ 							}
+ 							
+ 							template = template.replaceAll("{{contentNo}}", resp.similarList[i].contentNo);
+ 							
+ 							$("#similar-content-wrapper").append(template);
+ 						} 
+ 						
+ 						$.fn.initWishBtn();
  					}
 				}		
 					
@@ -684,7 +710,47 @@ $(function(){
 			
 			$.fn.initEvent();
 		}
+		
+		$.fn.initWishBtn = function(){
+			$(".wish-insert-btn-inDetail").click(function(){
+				var contentNo = $(this).attr("data-contentNo");
+				var insertBtn = $("#wish-insert-btn"+contentNo);
+				var deleteBtn = $("#wish-delete-btn"+contentNo);
 
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/home/insertWishList",
+					type: "post",
+					dataType: "json",
+					data: {
+						contentNo: contentNo	
+					},
+					success:function(resp){
+						insertBtn.css("display","none");
+						deleteBtn.css("display","block");					
+					}						
+				});
+			});
+			
+			//체크 누르면 +
+			$(".wish-delete-btn-inDetail").click(function(){
+				var contentNo = $(this).attr("data-contentNo");
+				var insertBtn = $("#wish-insert-btn"+contentNo);
+				var deleteBtn = $("#wish-delete-btn"+contentNo);
+				
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/home/deleteWishList",
+					type: "post",
+					dataType: "json",
+					data: {
+						contentNo: contentNo	
+					},
+					success:function(resp){
+						insertBtn.css("display","block");
+						deleteBtn.css("display","none");					
+					}						
+				});
+			});
+		};
 	});
 
 </script>
@@ -732,6 +798,29 @@ $(function(){
 <script id="hover-modal-genre-template" type="text/template">
 <span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
 <span>{{genre_name}}</span>
+</script>
+
+<script id="detail-modal-similar-template" type="text/template">
+<div class="similar-contents-detail-box">
+	<div class="similar-contents-detail-img-box">
+		<img class="similar-contents-detail-img"src="{{thumbnail}}" >
+		<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+	</div>
+	<div class="similar-contents-detail-text-box">
+		<div style="display:flex;">
+			<div>
+				<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+				<div class="modal-feature-percent-text"><span>{{correct}}%</span><span>일치</span></div>
+				<div>{{contentRelease}}</div>
+			</div>
+			<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" data-contentNo="{{contentNo}}" id="wish-insert-btn{{contentNo}}"><i class="fas fa-plus"></i></button>
+			<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" data-contentNo="{{contentNo}}" id="wish-delete-btn{{contentNo}}"><i class="fas fa-check"></i></button>
+		</div>
+		<div class="modal-wallpaper-text">
+			{{contentInfo}}
+		</div>
+	</div>
+</div>
 </script>
 
 <div class="main-color">
@@ -841,32 +930,28 @@ $(function(){
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-				       		<div style="display:flex; flex-wrap:wrap;">
+				       		<div id="similar-content-wrapper" style="display:flex; flex-wrap:wrap;">
 				       			
-				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-											<div class="similar-contents-detail-box">
-					       					<div class="similar-contents-detail-img-box">
-					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
-					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-					       					</div>
-					       					<div class="similar-contents-detail-text-box">
-					       						<div style="display:flex;">
-					       							<div>
-					       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
-					       							<div>2020</div>
-						       						</div>
-						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
-					       						</div>
-					       						<div class="modal-wallpaper-text">
-					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
-					       						</div>
-					       					</div>
-					       				</div>
-					       			
-					       				
-									
-				       			</c:forEach>
+<%-- 				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">				       				 --%>
+<!-- 										<div class="similar-contents-detail-box"> -->
+<!-- 					       					<div class="similar-contents-detail-img-box"> -->
+<!-- 					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" > -->
+<!-- 					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button> -->
+<!-- 					       					</div> -->
+<!-- 					       					<div class="similar-contents-detail-text-box"> -->
+<!-- 					       						<div style="display:flex;"> -->
+<!-- 					       							<div> -->
+<!-- 					       								<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div> -->
+<!-- 					       								<div>2020</div> -->
+<!-- 						       						</div> -->
+<!-- 						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button> -->
+<!-- 					       						</div> -->
+<!-- 					       						<div class="modal-wallpaper-text"> -->
+<!-- 					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다. -->
+<!-- 					       						</div> -->
+<!-- 					       					</div> -->
+<!-- 					       				</div>									 -->
+<%-- 				       			</c:forEach> --%>
 				       			
 				       		</div>
 				       		

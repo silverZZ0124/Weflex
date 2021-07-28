@@ -37,7 +37,7 @@ public class MainModalServiceImpl implements MainModalService {
 	private LikeListDao likeListDao;
 	
 	@Override
-	public MainModalDetailVO getModalDetailVO(int contentNo, int clientNo) {
+	public MainModalDetailVO getModalDetailVO(int contentNo, int clientNo) throws CloneNotSupportedException {
 		//해당 content 가져오는 메소드
 		ContentDto contentDto = contentDao.get(contentNo);
 				
@@ -63,14 +63,18 @@ public class MainModalServiceImpl implements MainModalService {
 				
 		//해당 content의 장르 가져오는 메소드
 		List<String> genreList = getGenre(contentNo);
-		
+
 		//해당 content의 프로그램 특징 가져오는 메소드
 		List<String> featureList = getFeature(contentNo);
 		
 		//해당 content의 출연진 가져오는 메소드
 		List<String> castList = getCast(contentNo);
 		
-		List<SimilarContentVO> similarList = getSimilarList(genreList);
+		List<String> genreClone = new ArrayList<String>();
+		for(String genre : genreList)
+			genreClone.add(genre);
+		 
+		List<SimilarContentVO> similarList = getSimilarList(contentNo, contentDto.getContentType(), genreClone, clientNo);
 		
 		MainModalDetailVO mainModalDetailVO = MainModalDetailVO.builder()
 								.contentDto(contentDto)
@@ -87,9 +91,54 @@ public class MainModalServiceImpl implements MainModalService {
 	}
 	
 	@Override
-	public List<SimilarContentVO> getSimilarList(List<String> genreList) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreClone, int clientNo) throws CloneNotSupportedException {
+		int maxCount = 12;
+
+		List<SimilarContentVO> list = new ArrayList<SimilarContentVO>();
+		List<SimilarContentVO> finalList = new ArrayList<SimilarContentVO>();
+		
+		List<SimilarContentVO> temp;
+		while(true) {
+			temp = contentDao.getSimilarList(contentNo, contentType, genreClone, clientNo, maxCount);
+			
+			for(SimilarContentVO vo : temp) {
+				if(!list.contains(vo)) {
+					list.add(vo);
+					SimilarContentVO voTemp = vo.clone();
+					
+					voTemp.setMatchingCount(genreClone.size());
+					finalList.add(voTemp);
+					maxCount--;
+				}
+			}		
+			
+			if(list.size() >= 12) {
+				break;
+			}
+			else {				
+				if(genreClone.size() > 1) 
+					genreClone.remove(genreClone.size()-1);		
+				else 
+					break;
+			}
+		}
+		
+		if(list.size() < 12) {
+			temp = contentDao.getSimilarListAll(contentNo, contentType, clientNo);
+			
+			for(SimilarContentVO vo : temp) {
+				if(!list.contains(vo)) {
+					list.add(vo);
+					vo.setMatchingCount(0);
+					finalList.add(vo);
+				}
+				
+				if(list.size() >= 12)
+					break;
+			}	
+		}
+						
+		return finalList;		
 	}
 	
 	@Override

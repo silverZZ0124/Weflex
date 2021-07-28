@@ -9,8 +9,8 @@ public interface MainModalService {
 	List<String> getGenre(int contentNo);
 	List<String> getFeature(int contentNo);
 	List<String> getCast(int contentNo);
-	MainModalDetailVO getModalDetailVO(int contentNo, int clientNo);
+	MainModalDetailVO getModalDetailVO(int contentNo, int clientNo) throws CloneNotSupportedException;
 	void insertWishList(int clientNo, int contentNo);
 	void deleteWishList(int clientNo, int contentNo);
-	List<SimilarContentVO> getSimilarList(List<String> genreList);
+	List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreClone, int clientNo) throws CloneNotSupportedException;
 }
