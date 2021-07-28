@@ -62,6 +62,7 @@ public class HomeServiceImpl implements HomeService {
 		list.add(getSlider("한국 드라마", ContentType.KOREA_DRAMA, GENRE, "TV 드라마·로맨스"));
 		list.add(getSlider("한국 드라마", ContentType.KOREA_DRAMA, GENRE, "한국 드라마"));
 		list.add(getSlider("미국 드라마 나와라", ContentType.FOREIGN_DRAMA, GENRE, "미국 TV 프로그램"));
+		list.add(getSlider("한국 스릴러 영화", ContentType.KOREA_MOVIE, GENRE, "스릴러 영화"));
 		
 		return list;
 	}
