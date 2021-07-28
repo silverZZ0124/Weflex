@@ -7,19 +7,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath }/res/css/join2.css" />
-<title>join2페이지</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join3.css"/>
+
+
+<title>Weflex</title>
+
 </head>
 <body>
-
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registration simplicity">
-				<div class="nfHeader noBorderHeader signupBasicHeader">
-					<a href="/" class="svg-nfLogo signupBasicHeader">
-					<img class="svg-icon svg-icon-netflix-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
+				<div class="" >
+		<div class="nfHeader noBorderHeader signupBasicHeader"style="background-color:white !important">
+					<a href="#" class="svg-nfLogo signupBasicHeader">
+						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="margin-bottom:18%;">
+						
 					</a>
-					<a href="/login" class="authLinks signupBasicHeader">로그인</a>
+					<a href="/signout" id="login-header-logout" style="display:none;" class="authLinks signupBasicHeader">로그아웃</a>
+					<a href="/signin" id="login-header-login" style="display:none;" class="authLinks signupBasicHeader">로그인</a>
 				</div>
+	
+		
+		
+
+		
+		</div>	
 				<div class="simpleContainer" data-transitioned-child="true">
 					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
 						<form action="joinCheck"method="POST" id="joinCheck">
@@ -39,20 +51,21 @@
 									<div class="contextRow">복잡한단계는 모두 없앴습니다.</div>
 									<ul class="simpleForm structural ui-grid">
 										<li class="nfFormSpace">
-										<div class="nfInput nfInputOversize">
+											<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
-													<input name="clientId"class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="6666666@naver.com">
+													<input type="hidden" name="clientId" value="${param.email}" >
+													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}"  disabled required>
 													<label for="id_email" class="placeLabel">이메일 주소</label>
 													</label>
 												</div>
 											</div>
-											</li>
+										</li>
 										<li class="nfFormSpace">
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="password">
-													<input name="clientPw"class="nfTextField" id="id_password" type="password"value tabindex="0" autocomplete="off" maxlength="61"minlength="4" dir="" dir>
+													<input name="clientPw"class="nfTextField hasText" id="id_password" type="password"value tabindex="0" autocomplete="password" maxlength="61"minlength="4" dir="" dir required>
 													<label for="id_password" class="placeLabel">비밀번호를 추가하세요</label>
 													</label>
 												</div>
@@ -61,8 +74,8 @@
 										<li class="nfFormSpace">
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
-													<label class="input_id" placeholder="이름">
-													<input name="clientName"class="nfTextField" id="id_name" type="text"tabindex="0" autocomplete="name" maxlength="62"dir="" value="">
+													<label class="input_id" placeholder="이름" >
+													<input name="clientName"class="nfTextField hasText" id="id_name" type="text"tabindex="0" autocomplete="name" maxlength="62" dir="" value="" required>
 													<label for="id_name" class="placeLabel">이름</label>
 													</label>
 												</div>
@@ -72,8 +85,8 @@
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_birth" placeholder="생년월일">
-													<input name="clientBirth"class="nfTextField" id="id_birth" type="date"tabindex="0" autocomplete="birth" maxlength="62"minlength="6" dir="" value="">
-													<label for="id_birth" class="placeLabel">생년월일를 /포함하여 입력해주세요</label>
+													<input name="clientBirth"class="nfTextField hasText" id="id_birth" type="date"tabindex="0" autocomplete="birth" maxlength="62"minlength="6" dir="" value="" required>
+													<label for="id_birth" class="placeLabel">생년월일를 입력해주세요</label>
 													</label>
 												</div>
 										</div>
@@ -82,7 +95,7 @@
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="phone">
-													<input name="clientPhone"class="nfTextField" id="id_phone" type="text"tabindex="0" autocomplete="phone" maxlength="62"minlength="6" dir="" value="">
+													<input name="clientPhone"class="nfTextField hasText" id="id_phone" type="text"tabindex="0" autocomplete="phone" maxlength="62"minlength="6" dir="" value="" required>
 													<label for="id_phone" class="placeLabel">핸드폰번호를 -포함하여 적어주세요</label>
 													</label>
 												</div>

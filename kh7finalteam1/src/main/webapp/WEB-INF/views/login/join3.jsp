@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/res/css/join3.css"/>
-<title>join3페이지</title>
-</head>
+<jsp:include page="/WEB-INF/views/template/loginHeader.jsp"></jsp:include>
+<script>
+	$(function(){
+		$("#join3-next-btn").click(function(){
+			location.href="${pageContext.request.contextPath }/shop/";
+		});
+	});
+</script>
 <body>
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-planSelectionWithContext simplicity">
-				<div class="nfHeader noBorderHeader signupBasicHeader">
-					<a href="/" class="svg-nfLogo signupBasicHeader">
-						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
-					</a>
-					<a href="/signout" class="authLinks signupBasicHeader">로그아웃</a>
-				</div>
+				
 				<div class="simpleContainer" data-transitioned-child="true">
 					<div class="centerContainer contextStep"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
 						<div class="planContainer" >
@@ -62,7 +57,7 @@
 							</div>
 						</div>
 						<div class="submitBtnContainer">
-							<button type="button" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="button_see_plans">다음</button>
+							<button type="button" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="button_see_plans" id="join3-next-btn">다음</button>
 						</div>
 					</div>
 				</div>

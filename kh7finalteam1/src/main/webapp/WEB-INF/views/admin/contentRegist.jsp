@@ -113,6 +113,7 @@
                       <option value="0">전체 이용가</option>
                       <option value="12">12세 이용가</option>
                       <option value="15">15세 이용가</option>
+                      <option value="18">18세 이용가</option>
                       <option value="19">19세 이용가</option>
                     </select>
                   </div>

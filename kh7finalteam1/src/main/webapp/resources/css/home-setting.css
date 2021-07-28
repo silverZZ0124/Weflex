@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+.home-setting-header{
+	text-align: center; 
+	margin-bottom: 2rem;	
+}
+
+.mini-browser{
+	width: 100%; 
+	min-height: 1050px; 
+	background: #141414;
+	border-radius: 8px;
+	position: relative;	
+}
+
+.mini-browser-header{
+	padding: 15px;
+    position: relative;
+    z-index: 10;
+}
+
+.logo-wrapper, .profile-wrapper{
+	display: inline-block;
+}
+
+.profile-wrapper{
+	top: 13px;
+    right: 28px;
+    position: absolute;
+    border-radius: 17px;
+}
+
+.background-img{
+    position: absolute;
+    top: -100px;
+    width: 100%;
+}
+
+.concord-img-gradient {
+    position: absolute;
+    background: rgba(0,0,0,.4);
+    background-image: linear-gradient(to top,rgba(0,0,0,.8) 0,rgba(0,0,0,0) 35%,rgba(0,0,0,.8) 100%);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.slider-title{
+	font-size:1.4rem;
+	font-weight:bold;
+	margin-bottom:1%;
+}
+
+.slider-img{
+	border-radius:5%;
+	width:98%;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+.slider-box{
+	width:90%;
+	margin-bottom: 2%;
+}
+
+.mini-browser-body{
+	top: 300px;
+	position: relative;
+}
+
+.container-center{
+	margin: 0 auto 2% auto;
+}
+
+.background-img-wrapper{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    min-height: 450px;
+}
+
+.arrow-img{
+	position:absolute;
+	z-index:1;
+	margin:0;
+	visibility:hidden;
+	height:50%;
+}
+    
+.slider-wrapper{
+	width: 100%;
+}
+
+.slick-list{
+	border-radius: 2px !important;
+}
+
+.change-btn-wrapper{
+	display: inline-block; 
+	color: #858796;
+	position: relative;
+	top: -3px;	
+}
+
+.slick-track{
+	margin-left: 0 !important;
+}

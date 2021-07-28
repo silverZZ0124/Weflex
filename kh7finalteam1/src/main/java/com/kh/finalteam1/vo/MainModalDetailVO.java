@@ -3,6 +3,8 @@ package com.kh.finalteam1.vo;
 import java.util.List;
 
 import com.kh.finalteam1.entity.ContentDto;
+import com.kh.finalteam1.entity.LikeListDto;
+import com.kh.finalteam1.entity.WishListDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
 
 import lombok.AllArgsConstructor;
@@ -17,4 +19,7 @@ public class MainModalDetailVO {
 	private List<String> featureList;
 	private List<String> castList;
 	private List<YesSeriesDto> seriesList;
+	private WishListDto wishListDto;
+	private LikeListDto likeListDto;
+	private List<SimilarContentVO> similarList;
 }

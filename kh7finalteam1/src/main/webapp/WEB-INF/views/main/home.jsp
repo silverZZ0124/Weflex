@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,6 +11,7 @@
 
 
 var player;
+var hoverPlayer;
 var detailModalPlayerReady = true;
 var seriesArray = new Array();
 var contentThumbnail;
@@ -23,13 +26,25 @@ window.onload = function(){
 	            'onStateChange': onPlayerStateChange
 	          }
 	    });
+	    
+	    hoverPlayer = new YT.Player('hoverPlayer', {
+	        events: {	  
+	        	'onReady': onHoverPlayerReady,
+	            'onStateChange': onPlayerStateChange
+	          }
+	    });
 	}		
 	
 	function onPlayerReady(event) {
-		if(!detailModalPlayerReady){
-			$("#player").css("visibility", "visible");
-			detailModalPlayerReady = true;
+		if(event.target.getVideoUrl() == "https://www.youtube.com/watch?v=6qaW-KZpmjM"){
+			return;
 		}
+		
+		$("#player").css("visibility", "visible");		
+    }
+	
+	function onHoverPlayerReady(event) {
+		$("#hoverPlayer").css("visibility", "visible");		
     }
 	
 	function onPlayerStateChange(event) {
@@ -108,9 +123,10 @@ $(function(){
 		var modalY;
 		var img;
 		//마우스 호버 시 모달 팝업 	
-		$(".slider-img").mouseenter(function(){
-			
+		$(".slider-img").mouseenter(function(){		
+			curContentNo = $(this).attr("data-contentNo");			
 			img = $(this);
+			
 			timeout=setTimeout(function(){
 				
 				var modalWidth=img.width()*1.4;
@@ -139,67 +155,119 @@ $(function(){
 				if((modalX+$("#hoverModal").width())>$(window).width()){
 					modalX=$(window).width()-$("#hoverModal").width()-10;
 				}
-				
-				
-				
-			$(".slider-img").mouseleave(function(){
-				clearTimeout(timeout);
-			});
-			
-			
-			
+								
+				$(".slider-img").mouseleave(function(){
+					clearTimeout(timeout);
+				});
 		
-			$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
-			$("body").removeClass("modal-open");
-			},1000);
-			
-			
-					
+				$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
+				$("body").removeClass("modal-open");
+			},800);					
 		});
 		
 		
-		$(".slider-img").mouseleave(function(){
+		 $(".slider-img").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 		});
 		
-		$("#hoverModal").mouseleave(function(){
+		 $("#hoverModal").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 	
-		});
+		});  
 		
 		$("#hoverModal").on("show.bs.modal",function(){
 			$("body").addClass("overflow-scroll");
-			/* $("#hoverModal").css("display", "none");
-			$(".modal-backdrop").css("display","none"); */
-		});
-
-		$("#hoverModal").on("shown.bs.modal",function(){
+			$("#hoverPlayer").css("visibility", "hidden");
+			$("#hoverModal").css("display", "none");
+			$("#hover-modal-play-btn").val(curContentNo);
 			
-			//$("#hoverModal").css("display", "block");
-		});
-		$("#hoverModal").on("hide.bs.modal",function(){
-			$("body").removeClass("overflow-scroll");
-
-			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/getHoverModalItem",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){					
+					var youtubeId = resp.contentTrailer.substring(30);
+					var videoUrl = resp.contentTrailer + "?enablejsapi=1&start=00&autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist="+youtubeId;
+					$(".hoverModalVideo").attr("src", videoUrl);
+					
+					$("#hover-content-limit").attr("src", "res/img/content_limit_"+resp.contentLimit+".png")
+					
+					if(resp.wish){
+						$("#modal-plus-btn").css("display", "none");
+						$("#modal-check-btn").css("display", "block");
+					}
+					else{
+						$("#modal-plus-btn").css("display", "block");
+						$("#modal-check-btn").css("display", "none");
+					}	
+					
+					if(resp.like){
+						$(".like-insert-btn").css("display", "none");
+						$(".like-delete-btn").css("display", "block");
+					}
+					else{
+						$(".like-insert-btn").css("display", "block");
+						$(".like-delete-btn").css("display", "none");
+					}	
+										
+					$("#hover-content-season").empty();
+					if(resp.contentSeries === "Y"){
+						$("#hover-content-season").text("시즌 "+resp.seasonCount+"개");
+					}
+					else{
+						$("#hover-content-season").text(resp.contentPlayTime+" 분");
+					}
+					
+					$(".hover-modal-genre").empty();
+					for(var i=0; i<resp.genreList.length; i++){
+						var template;												
+						
+						if(i == 0){
+							template = $("#hover-modal-genre-template-start").html();
+						}
+						else{
+							template = $("#hover-modal-genre-template").html();
+						}
+						
+						template = template.replace("{{genre_name}}", resp.genreList[i].genreName);
+						$(".hover-modal-genre").append(template);
+					}
+					
+					$(".hover-modal-more-button").attr("data-contentno", curContentNo);
+				}	
+			});
 		});
 		
+		$("#hoverModal").on("shown.bs.modal", function(){
+			$("#hoverModal").css("display", "block");
+		});
+		
+		$("#hoverModal").on("hide.bs.modal",function(){
+			$("body").removeClass("overflow-scroll");
+		});		
 		
 		
 		//슬릭 호버 시 화살표 보임 
-		 $(".slick-slider").hover(function(){
+		 $(".custom-img-slide-box").hover(function(){
+			
 			var arrow=$(this).find(".arrow-img-left");
-			 
-			var X=$(this).offset().left;
-			var Y=$(this).offset().top;
+			var slidebox=$(this).find(".custom-img-slide");
+			
+			var X=$(slidebox).offset().left;
+			var Y=$(slidebox).offset().top;
+			
 
 			
-			var middleY=Y+$(this).height()/2;
+			var middleY=Y+$(slidebox).height()/2;
+			
 
 			var arrowY=(middleY-arrow.height()/2)-Y;
 			
 			var minusX=(X/3)*2*(-1);
 	
-			arrow.offset().top=arrowY;
 			arrow.css("left",minusX+"px");	
 			arrow.css("top",arrowY+"px"); 
 			arrow.css("width",(X/3)*2+"px");
@@ -210,20 +278,20 @@ $(function(){
 			arrow.css("visibility","hidden");  
 		}); 
 		
-		 $(".slick-slider").hover(function(){
+		 $(".custom-img-slide-box").hover(function(){
 				var arrow=$(this).find(".arrow-img-right");
+				var slidebox=$(this).find(".custom-img-slide");
 				 
-				var X=$(this).offset().left;
-				var totalX=X+$(this).width();
-				var Y=$(this).offset().top;
+				var X=$(slidebox).offset().left;
+				var totalX=X+$(slidebox).width();
+				var Y=$(slidebox).offset().top;
 
-				var middleY=Y+$(this).height()/2;
+				var middleY=Y+$(slidebox).height()/2;
 
 				var arrowWidth=$(window).width()-totalX;
 				var arrowY=(middleY-arrow.height()/2)-Y;
 				var arrowRight=(arrowWidth/3)*2;
 
-				arrow.offset().top=arrowY;
 				arrow.css("left",(totalX-arrowWidth)+"px");	
 				arrow.css("top",arrowY+"px"); 
 				arrow.css("width",arrowRight+"px");
@@ -245,6 +313,8 @@ $(function(){
 				}
 
 			});
+		
+		 
 		//화살표 호버 시 커짐 
 		$(".arrow-img").hover(function(){
 			$(this).addClass("arrow-hover");
@@ -261,6 +331,9 @@ $(function(){
 		//모달이 닫히면 영상 재생 
 		$("#detailModal").on("hidden.bs.modal",function(){
 			videoDomObj.play();
+			$(".similar-contents-box").css("height","700px");
+			$(".wallpaper-less-button").css("display","none");
+			$(".wallpaper-more-button").css("display","block");
     	});
 				
 		//소리 재생 
@@ -304,8 +377,7 @@ $(function(){
 		});
 		
 		//+누르면 체크
-		$("#plus-btn").click(function(){
-
+		$(".wish-insert-btn").click(function(){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/insertWishList",
 				type: "post",
@@ -321,11 +393,49 @@ $(function(){
 		});
 		
 		//체크 누르면 +
-		$("#check-btn").click(function(){
-			$("#plus-btn").css("display","block");
-			$("#check-btn").css("display","none");
-			
-			console.log(curContentNo);
+		$(".wish-delete-btn").click(function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/deleteWishList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$("#plus-btn").css("display","block");
+					$("#check-btn").css("display","none");					
+				}						
+			});
+		});
+		
+		$(".like-insert-btn").click(function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/insertLikeList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$(".like-insert-btn").css("display","none");
+					$(".like-delete-btn").css("display","block");					
+				}						
+			});
+		});
+		
+		$(".like-delete-btn").click(function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/deleteLikeList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$(".like-insert-btn").css("display","block");
+					$(".like-delete-btn").css("display","none");					
+				}						
+			});
 		});
 		
 		//영상 재생 버튼
@@ -339,7 +449,7 @@ $(function(){
 			if(index>6){
 				$(".similar-contents-detail-box").css("display","none");
 			}
-			
+			$("#player").css("visibility", "hidden");
 			var el = $(e.relatedTarget);
 			curContentNo = el.attr("data-contentno");
 			
@@ -350,8 +460,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){
-				 	$("#player").css("visibility", "hidden");
+				success:function(resp){	
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -364,6 +473,24 @@ $(function(){
  					$("#content-release").text(resp.contentDto.contentRelease);
  					var imgSrc = "res/img/content_limit_"+resp.contentDto.contentLimit+".png";
  					$(".content-limit").attr("src", imgSrc);
+ 					
+ 					if(resp.wishListDto == null){
+ 						$("#plus-btn").css("display","block");
+ 						$("#check-btn").css("display","none");	
+ 					}
+ 					else{
+ 						$("#plus-btn").css("display","none");
+ 						$("#check-btn").css("display","block");	
+ 					}
+ 					
+ 					if(resp.likeListDto == null){
+ 						$(".like-insert-btn").css("display","block");
+ 						$(".like-delete-btn").css("display","none");	
+ 					}
+ 					else{
+ 						$(".like-insert-btn").css("display","none");
+ 						$(".like-delete-btn").css("display","block");
+ 					}
  					
  					$(".content-genre").empty();
  					for(var i=0; i < resp.genreList.length; i++){
@@ -431,8 +558,34 @@ $(function(){
   						 				
  						$.fn.initTrailerSeriesSection(1);
  						
- 						$(".modal-series").css("display", "block"); 						
+ 						$(".modal-series").css("display", "block");
  					}
+					
+ 					$("#similar-content-wrapper").empty();
+					for(var i in resp.similarList){
+						var correct = resp.similarList[i].matchingCount / resp.genreList.length * 100;
+						var template = $("#detail-modal-similar-template").html();
+						template = template.replace("{{thumbnail}}", resp.similarList[i].contentThumbnail);
+						template = template.replace("{{correct}}", parseInt(correct));
+						template = template.replace("{{contentRelease}}", resp.similarList[i].contentRelease);
+						template = template.replace("{{contentInfo}}", resp.similarList[i].contentInfo);
+						template = template.replace("{{contentLimit}}", resp.similarList[i].contentLimit);
+						
+						if(resp.similarList[i].clientNo === 0){
+							template = template.replace("{{plusStyle}}", "block");
+							template = template.replace("{{checkStyle}}", "none");
+						}
+						else{
+							template = template.replace("{{plusStyle}}", "none");
+							template = template.replace("{{checkStyle}}", "block");
+						}
+						
+						template = template.replaceAll("{{contentNo}}", resp.similarList[i].contentNo);
+						
+						$("#similar-content-wrapper").append(template);
+					} 
+					
+					$.fn.initSimilarContent();
 				}		
 					
 			});
@@ -449,11 +602,7 @@ $(function(){
 			$(this).css("display","none");
 			$(".wallpaper-more-button").css("display","block");
 		});
-		
-		$(".hover-modal-play-btn").click(function(){
-			location.href="play";
-		});
-		
+				
 		$(".hover-modal-more-button").click(function(){
 			$("#hoverModal").modal("hide");
 		});
@@ -521,7 +670,6 @@ $(function(){
 		$.fn.initTrailerSeriesSection = function(season){
 			//season에 맞게 section 동적 생성 
 			var index = season - 1;
-			
 			$(".trailer-series-section-box-wrapper").empty();
 			$(".trailer-series-section-box-wrapper").css("border-top", "1px solid #404040");
 			
@@ -529,8 +677,11 @@ $(function(){
 				var template = $("#episode-list-template").html();
 				
 				template = template.replace("{{index}}", i+1);
-				template = template.replace("{{contentThumbnail}}", contentThumbnail); 							
+				template = template.replace("{{contentThumbnail}}", contentThumbnail);
+				template = template.replace("{{contentNo}}", seriesArray[index][i].contentNo);
+				template = template.replace("{{contentSeason}}", seriesArray[index][i].contentSeason);				
 				template = template.replace("{{contentEpisode}}", seriesArray[index][i].contentEpisode);
+				template = template.replace("{{contentIndex}}", seriesArray[index][i].contentEpisode);
 				template = template.replace("{{contentPlaytime}}", String(seriesArray[index][i].contentPlaytime));
 				template = template.replace("{{episodeInfo}}", seriesArray[index][i].episodeInfo);
 				
@@ -545,7 +696,8 @@ $(function(){
 			//모든 episode section 동적 생성 
 			$(".trailer-series-section-box-wrapper").empty();
 			$(".trailer-series-section-box-wrapper").css("border-top", "none");
-				
+			
+			
 			for(var i in seriesArray){
 				var template;
 				if(i == 0)
@@ -559,6 +711,7 @@ $(function(){
 					template = template.replace("{{index}}", String(index));
 					template = template.replace("{{contentThumbnail}}", contentThumbnail); 							
 					template = template.replace("{{contentEpisode}}", seriesArray[i][j].contentEpisode);
+					template = template.replace("{{contentIndex}}", String(seriesArray[i][j].contentEpisode));
 					template = template.replace("{{contentPlaytime}}", String(seriesArray[i][j].contentPlaytime));
 					template = template.replace("{{episodeInfo}}", seriesArray[i][j].episodeInfo);					
 						
@@ -570,7 +723,58 @@ $(function(){
 			
 			$.fn.initEvent();
 		}
+		
+		$.fn.initSimilarContent = function(){
+			$(".wish-insert-btn-inDetail").click(function(){
+				var contentNo = $(this).attr("data-contentNo");
+				var insertBtn = $("#wish-insert-btn"+contentNo);
+				var deleteBtn = $("#wish-delete-btn"+contentNo);
 
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/home/insertWishList",
+					type: "post",
+					dataType: "json",
+					data: {
+						contentNo: contentNo	
+					},
+					success:function(resp){
+						insertBtn.css("display","none");
+						deleteBtn.css("display","block");					
+					}						
+				});
+			});
+			
+			//체크 누르면 +
+			$(".wish-delete-btn-inDetail").click(function(){
+				var contentNo = $(this).attr("data-contentNo");
+				var insertBtn = $("#wish-insert-btn"+contentNo);
+				var deleteBtn = $("#wish-delete-btn"+contentNo);
+				
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/home/deleteWishList",
+					type: "post",
+					dataType: "json",
+					data: {
+						contentNo: contentNo	
+					},
+					success:function(resp){
+						insertBtn.css("display","block");
+						deleteBtn.css("display","none");					
+					}						
+				});
+			});
+			
+			//월페이퍼 호버시 재생버튼 
+			$(".similar-contents-detail-box").hover(function(){
+				var playBtn=$(this).find(".modal-wallpaper-play-btn");
+				playBtn.css("display","block");
+				$(this).css("cursor","pointer");
+			},function(){
+				var playBtn=$(this).find(".modal-wallpaper-play-btn");
+				playBtn.css("display","none");
+				$(this).css("cursor","default");
+			});			
+		};
 	});
 
 </script>
@@ -582,14 +786,19 @@ $(function(){
 		<div class="trailer-series-section-thumbnail-box">
 			<img src="{{contentThumbnail}}"
 				class="trailer-series-section-thumbnail">
-			<button class="btn btn-outline-light modal-etc-btn series-play-btn" style="display: none;">
-				<i class="fas fa-play"></i>
-			</button>
+			<form action="play" >
+		        <input type="hidden" name="contentNo" value="{{contentNo}}">
+		        <input type="hidden" name="contentSeason" value="{{contentSeason}}">
+		        <input type="hidden" name="contentEpisode" value="{{contentEpisode}}">
+		        <button type="submit" class="btn btn-outline-light modal-etc-btn series-play-btn"	style="display: none;">
+			        <i class="fas fa-play"></i>
+		        </button>
+	        </form>
 		</div>
 
 		<div class="trailer-series-section-info-box">
 			<div class="trailer-series-section-info-title">
-				<div>제{{contentEpisode}}화</div>
+				<div>제 {{contentIndex}}화</div>
 				<div style="margin-left: auto;">{{contentPlaytime}}분</div>
 			</div>
 			<div class="trailer-series-section-info-text">{{episodeInfo}}</div>
@@ -602,9 +811,51 @@ $(function(){
 <select class="selectpicker main-color series-select-box-title">
 </script>	
 
-
 <script id="select-template-footer" type="text/template">    
 </select>
+</script>
+
+<script id="hover-modal-genre-template-start" type="text/template">
+<span>{{genre_name}}</span>
+</script>
+
+<script id="hover-modal-genre-template" type="text/template">
+<span style="color:rgb(100,100,100);">•</span>
+<span>{{genre_name}}</span>
+</script>
+
+<script id="detail-modal-similar-template" type="text/template">
+<div class="similar-contents-detail-box">
+	<div class="similar-contents-detail-img-box">
+		<img class="similar-contents-detail-img"src="{{thumbnail}}" >
+		<form action="play" style="display: inline-block;">
+			<input type="hidden" name="contentNo" value="{{contentNo}}">
+			<input type="hidden" name="contentSeason" value="-1">
+			<input type="hidden" name="contentEpisode" value="-1">			
+			<button type="submit" class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+		</form>
+	</div>
+	<div class="similar-contents-detail-text-box">
+
+		<div style="display:flex; justify-content: space-between; align-items: center;">
+			<div>
+				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
+				<div style="margin-right: 5px; display: inline-block;">
+					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+				</div>			
+				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
+			</div>			
+			<div>
+				<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" data-contentNo="{{contentNo}}" id="wish-insert-btn{{contentNo}}"><i class="fas fa-plus"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" data-contentNo="{{contentNo}}" id="wish-delete-btn{{contentNo}}"><i class="fas fa-check"></i></button>
+
+			</div>
+		</div>
+		<div class="modal-wallpaper-text">
+			{{contentInfo}}
+		</div>
+	</div>
+</div>
 </script>
 
 <div class="main-color">
@@ -624,6 +875,8 @@ $(function(){
 		<div>
 			<form action="play" style="display: inline-block;">
 				<input type="hidden" name="contentNo" value="${mainTrailerList.contentNo }">
+				<input type="hidden" name="contentSeason" value="-1">
+				<input type="hidden" name="contentEpisode" value="-1">
 				<button class="btn btn-light main-btn" id="main-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 			</form>
 			<button class="btn btn-secondary main-btn" data-bs-toggle="modal" data-bs-target="#detailModal" data-contentno="${mainTrailerList.contentNo }" style="margin-left:10px;opacity:0.7;"><i class="fas fa-info-circle"></i>&ensp;상세 정보</button>
@@ -660,13 +913,14 @@ $(function(){
 					<div class="modal-btn-box">
 						<form action="play" style="display: inline-block;">
 							<input type="hidden" id="input-content-no" name="contentNo">
+							<input type="hidden" name="contentSeason" value="-1">
+							<input type="hidden" name="contentEpisode" value="-1">
 							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
-						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="thumbs-up-empty"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="thumbs-up-full" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
-						
+						<button class="btn btn-outline-light modal-etc-btn wish-delete-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn wish-insert-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-insert-btn" id="thumbs-up-empty"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-delete-btn" id="thumbs-up-full" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
 					</div>
 				
 			</div>
@@ -711,33 +965,7 @@ $(function(){
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-				       		<div style="display:flex; flex-wrap:wrap;">
-				       			
-				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-											<div class="similar-contents-detail-box">
-					       					<div class="similar-contents-detail-img-box">
-					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
-					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-					       					</div>
-					       					<div class="similar-contents-detail-text-box">
-					       						<div style="display:flex;">
-					       							<div>
-					       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
-					       							<div>2020</div>
-						       						</div>
-						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
-					       						</div>
-					       						<div class="modal-wallpaper-text">
-					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
-					       						</div>
-					       					</div>
-					       				</div>
-					       			
-					       				
-									
-				       			</c:forEach>
-				       			
+				       		<div id="similar-content-wrapper">				       			
 				       		</div>
 				       		
 				       </div>
@@ -757,7 +985,7 @@ $(function(){
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><img class="content-limit" width="25px" height="25px"></div>				       				       			
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급: </span><img class="content-limit" width="25px" height="25px"></div>				       				       			
 				       		</div>
 				       </div>
 				      </div>
@@ -774,37 +1002,37 @@ $(function(){
 
 	<!-- 호버시 팝업될 창 -->
   <!--   <div class="modal fade hoverModal" id="hoverModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-        <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content hoverModalBox ">
                
                 <div class="modal-header" id="modal-header" style="padding:0;display:flex;border:none;">
-                    <iframe class="hoverModalVideo" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="hoverModalVideo" id="hoverPlayer" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
-                    	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
-	                    <button class="btn btn-outline-light hover-modal-etc-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-up" id="thumbs-up-empty2"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-up" id="thumbs-up-full2" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
-						
-						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button "data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
+                    	<form action="play" style="display: inline-block;">
+                    		<input type="hidden" name="contentNo" id="hover-modal-play-btn">
+                    		<input type="hidden" name="contentSeason" value="-1">
+                    		<input type="hidden" name="contentEpisode" value="-1">
+                    		<button type="submit" class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	</form>
+	                    <button class="btn btn-outline-light hover-modal-etc-btn wish-delete-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn wish-insert-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn modal-thumbs-up" id="thumbs-up-empty2"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-delete-btn modal-thumbs-up" id="thumbs-up-full2" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
                     </div>
                     <div>
                     	<div class="modal-trailer-feature" style="margin-top:2%;">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box content-limit"></div>
-								<div class="modal-trailer-feature-box">시즌 3개</div>
+								<div class="modal-trailer-feature-box"><img id="hover-content-limit" src="" width="25" height="25"> </div>
+								<div class="modal-trailer-feature-box" id="hover-content-season"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
-                    	<div >
-                    		<span>다크</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>흥미진진</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>스릴러</span>
+                    	<div class="hover-modal-genre">
+                    		
                     	</div>
                     	
                     </div>
@@ -818,129 +1046,34 @@ $(function(){
 	
 
 	<div style="position: relative;top: -12vw;">
-	
-		<div class="container-center slider-box">
-			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>
-		
-		  	 <div class="custom-img-slide">
-	   			<!-- <div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img2.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img3.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img4.png" class="slider-img"></div>
-	   			<div class="test2"><img src="res/img/slider_img1.jpeg" class="slider-img"></div> 
-	   		 -->
-		   		<c:forEach var="i" begin="1" end="10" step="1">
-					<div><img src="res/img/slider_img${i}.png" class="slider-img"></div>
-				</c:forEach> 
-	  
-	  		</div>
-		</div>
-		
-		<div class="container-center slider-box">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
-		</div>
-		<div class="container-center slider-box">
-			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
-		</div>
-		<div class="container-center slider-box">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
-		</div>
-		
-		<div class="container-center slider-box">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>
-			 
-	  	 <div class="custom-img-slide">
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			<div><img src="res/img/slider_img2.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img3.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img4.png" class="slider-img"></div>
-   			<div><img src="res/img/slider_img1.jpeg" class="slider-img"></div>
-   			
-   			
-          
-  		</div>
-	
-		</div>
-		
-		
-	</div>
+		<c:forEach var="sliderVO" items="${sliderList }" varStatus="status">
+		<div class="slider-title container-center">${sliderVO.sliderTitle }</div>		
+		<div class="custom-img-slide-box">
+			<div class="container-center slider-box" id="slider1">
+				
+				
+			  	<div class="custom-img-slide">
+			   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
+						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
+					</c:forEach> 	  
+		  		</div>
+		  		</div>
+			</div>
+		</c:forEach> 	
+	</div>	
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
+
+
+
+
+
+
+
+
+
+
 

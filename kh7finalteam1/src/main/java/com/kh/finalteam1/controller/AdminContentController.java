@@ -58,7 +58,7 @@ public class AdminContentController {
 	
 	@Autowired
 	private CastDao castDao;
-	
+
 	@GetMapping("/")
 	public String content(Model model) {
 		List<ContentDto> contentList = contentDao.list();
@@ -211,7 +211,7 @@ public class AdminContentController {
 	public String contentRegist() {
 		return "admin/contentRegist";
 	}
-		
+	
 	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록
 	@PostMapping("/contentRegist")
 	public String contentRegist(@ModelAttribute ContentDto contentDto, HttpSession session) {
@@ -235,6 +235,7 @@ public class AdminContentController {
 			seriesDao.noInsert(noSeriesDto);
 			session.removeAttribute("noSeriesDto");
 		}
+
 		return "redirect:/admin/content/genreFeatureRegist";
 	}
 	
@@ -314,5 +315,4 @@ public class AdminContentController {
 		
 		return "redirect:/admin/content/";
 	}
-	
 }
