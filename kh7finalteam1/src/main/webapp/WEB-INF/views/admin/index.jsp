@@ -3,6 +3,115 @@
 
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>
+<style>
+	.our-story-card{
+		position: relative;
+	    padding: 50px 5%;
+	    margin-bottom: 0;
+	        background: 0 0;
+    color: #fff;
+	}
+	
+	
+	.animation-card .animation-card-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+	.animation-card.watchOnTv .our-story-card-text {
+    margin: -5% 0;
+    }
+	
+	.animation-card .our-story-card-text {
+		width: 52%;
+	    height: 100%;
+	    -webkit-box-flex: 0;
+	    -webkit-flex: 0 1 auto;
+	    -moz-box-flex: 0;
+	    -ms-flex: 0 1 auto;
+	    flex: 0 1 auto;
+	    padding: 0 3rem 0 0;
+	    z-index: 3;
+	
+	}
+	
+	.our-story-card-subtitle, .our-story-card-text {
+    font-size: 1.625rem;
+    font-weight: 400;
+	}
+	
+	.our-story-card-title {
+    font-size: 3.125rem;
+    line-height: 1.1;
+    margin-bottom: .5rem;
+    }
+    
+    .animation-card .our-story-card-img-container {
+    width: 48%;
+    height: 100%;
+    -webkit-box-flex: 0;
+    flex: 0 1 auto;
+    box-sizing: border-box;
+}
+
+.animation-card .our-story-card-animation-container {
+    position: relative;
+    overflow: hidden;
+    }
+
+.animation-card.watchOnTv .our-story-card-animation-container {
+    margin: -10% -5% -5% 0;
+	}
+	
+	.animation-card.watchOnDevice .our-story-card-img, .animation-card.watchOnTv .our-story-card-img {
+    position: relative;
+    z-index: 2;
+    }
+    
+    img {
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    }
+    
+    .animation-card.watchOnTv .our-story-card-animation {
+    width: 100%;
+    height: 100%;
+    max-width: 73%;
+    max-height: 54%;
+    position: absolute;
+    top: 48.3%;
+    left: 49.2%;
+    transform: translate(-50%,-50%);
+    }
+    
+    .animation-card.watchOnDevice .our-story-card-video, .animation-card.watchOnTv .our-story-card-video {
+    width: 100%;
+    height: 100%;
+    }
+    
+    audio, canvas, progress, video {
+    display: inline-block;
+    vertical-align: baseline;
+    }
+    
+</style>
+
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -82,7 +191,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                총 회원 수</div>
+                                                이번달 추가 된 컨텐츠 수</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                         </div>
                                         <div class="col-auto">
@@ -101,7 +210,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                총 보유 컨텐츠 수</div>
+                                                올해 추가 된 컨텐츠 수(2021년)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                         </div>
                                         <div class="col-auto">
@@ -196,8 +305,44 @@
 
                  <!-- Content Row -->
                     <div class="row">
-                        
+                    	<div class="col">
+                        	<div class="card shadow mb-4">
+				             <!--  
+				             	<div class="card-header py-3">
+											
+				                     <h6 class="m-0 font-weight-bold text-primary">Top 5</h6>
+				                </div>
+				                -->
+				             	<div class="card-body" style="background-color: black">
+											
+				             		<div class="our-story-card animation-card watchOnTv">
+									<div class="animation-card-container">
+										<div class="our-story-card-text">
+											<h3 class="our-story-card-title">TV로 즐기세요.</h1>
+											<h5 class="our-story-card-subtitle">스마트 TV, PlayStation, Xbox, Chromecast, Apple TV, 블루레이 플레이어 등 다양한 디바이스에서 시청하세요.</h2>
+										</div>
+									
+									
+									<div class="our-story-card-img-container">
+										<div class="our-story-card-animation-container">
+												<img alt class="our-story-card-img" src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png">
+											<div class="our-story-card-animation">
+											<video class="our-story-card-video" autoplay muted loop>
+												<source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v" type="video/mp4">
+											</video>
+												<div class=""class="our-story-card-animation-text"></div>
+											</div>
+										</div>
+				             		
+	               				</div>
+									<div class="center-pixel" style="position: absolute;"></div>
+									
+								</div>
+	             		</div>
+	             	</div>
+	             	</div>
 
+               	 </div>
                 </div>
                 <!-- /.container-fluid -->
 

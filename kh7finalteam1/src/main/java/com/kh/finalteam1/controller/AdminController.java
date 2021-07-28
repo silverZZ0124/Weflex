@@ -32,6 +32,8 @@ public class AdminController {
 	public String index(Model model) {
 		model.addAttribute("clientMonth", clientDao.monthMemberCount());
 		model.addAttribute("clientYear", clientDao.yearMemberCount());
+		//content
+		
 		return "admin/index";
 	}
 	
