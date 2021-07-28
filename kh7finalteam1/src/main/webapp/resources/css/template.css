@@ -2,6 +2,14 @@
 .modal{
 	/* height:fit-content !important; */
 }
+.custom-img-slide-box{
+	border:1px solid gray;
+	margin-bottom: 2%;
+}
+.slick-track{
+	margin-left:0 !important;
+}
+
 .navbar-nav .dropdown-menu {
     position: absolute !important;
 }
@@ -115,7 +123,7 @@ i{
 }
 .slider-box{
 	width:90%;
-	margin-bottom: 2%;
+	
 }
 .slider-img{
 	border-radius:3px;
@@ -128,6 +136,7 @@ i{
 	font-size:1.4rem;
 	font-weight:bold;
 	margin-bottom:1%;
+	width:90%;
 }
 .main-trailer-over-box{
 	position: absolute;
