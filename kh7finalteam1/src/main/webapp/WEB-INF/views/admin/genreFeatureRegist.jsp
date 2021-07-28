@@ -4,6 +4,8 @@
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+
+
 <style>
 	.btn-lab, .genre-add, .feature-add{
 	cursor: pointer;
