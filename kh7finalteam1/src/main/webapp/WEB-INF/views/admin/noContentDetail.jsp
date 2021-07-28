@@ -29,7 +29,7 @@
 		background-color:lightgray;
 		border:none;
 	}
-	..genre-btn-close:hover, .feature-btn-close:hover, .cast-btn-close:hover{
+	.genre-btn-close:hover, .feature-btn-close:hover, .cast-btn-close:hover{
 		color:gray;
 	}
 </style>
@@ -50,7 +50,7 @@
 	            	<div class="thumnail-img col-md-6 text-left">
 	            		<div style="position:relative">
 		            		<img alt="${contentDto.contentName }" src="${contentDto.contentThumbnail }" style="width:100%;"><br>
-		            		<img alt="${contentDto.contentName }" src="${contentDto.contentLogo }" style="width:40%; position:absolute; top:0; left:0; transform:translateY(100%);">
+		            		
 	            		</div>
 	            		
 	            	</div>
@@ -122,7 +122,7 @@
                                 <button type="button" class="btn btn-block btn-outline-danger" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
-                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-secondary" id="delete-btn">삭제</a>
+                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn-outline-secondary" id="delete-btn">삭제</a>
                             </div>
                         </div>
                     </div>
@@ -189,9 +189,10 @@
 				                    <label>연령제한</label>
 				                    <select class="form-control" name="contentLimit" required>
 				                      <option value="" >선택하세요</option>
-				                      <option value="1">전체 이용가</option>
+				                      <option value="0">전체 이용가</option>
 				                      <option value="12">12세 이용가</option>
 				                      <option value="15">15세 이용가</option>
+				                      <option value="18">18세 이용가</option>
 				                      <option value="19">19세 이용가</option>
 				                    </select>
 				                  </div>
@@ -265,7 +266,7 @@
 				                </div>
 				                <div class="modal-footer">
 				                    <button type="submit" class="btn btn-danger" id="noContent-edit">확인</button>                        
-				                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
+				                    <button class="btn btn-dark" data-dismiss="modal" >취소</button>
 				                </div>
 				            </form>
 				            
@@ -459,6 +460,12 @@
 				window.alert("잘못된 값입니다. 다시 입력하세요.");
 				$("input[name='contentThumbnail']").val("");
 				$("input[name='contentThumbnail']").focus();
+				e.preventDefault();
+			}
+		});
+		
+		$("#delete-btn").click(function(e){
+			if (!window.confirm("정말 삭제하시겠습니까?")) {
 				e.preventDefault();
 			}
 		});

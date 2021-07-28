@@ -77,7 +77,7 @@ $(document).ready(function() {
 			 {
 	        	 data : "contentLimit",
 	        	 render : function (data, type, row){	    				
-        			 if(data == "1"){
+        			 if(data == "0"){
         				 return "전체 이용가";
         			 }
         			 else if(data == "12"){
@@ -85,6 +85,9 @@ $(document).ready(function() {
         			 }
         			 else if(data == "15"){
         				 return "15세 이용가";
+        			 }
+        			 else if(data == "18"){
+        				 return "18세 이용가";
         			 }
         			 else if(data == "19"){
         				 return "19세 이용가";
