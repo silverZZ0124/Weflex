@@ -223,6 +223,11 @@
 					                    <label>컨텐츠 소개</label>
 					                    <textarea name="contentInfo" class="form-control form-textarea">${contentDto.contentInfo}</textarea>
 					                </div>
+					                
+					                <div class="form-group">
+					                    <label>트레일러 영상 주소</label>
+					                    <input type="text" name="contentTrailer" class="form-control" value="${contentDto.contentTrailer}">
+					                </div>
 									
 					                <div class="form-group">
 					                    <label>연령제한</label>
@@ -303,8 +308,8 @@
 					                    <input type="text" name="contentThumbnail" class="form-control" value="${contentDto.contentThumbnail}">
 					                </div>
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary" id="yesContent-edit">확인</button>                        
-					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                    <button type="submit" class="btn btn-danger" id="yesContent-edit">확인</button>                        
+					                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
 				            
@@ -359,8 +364,8 @@
 					
 					                 
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary" id="episodeEdit-btn">확인</button>                        
-					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                    <button type="submit" class="btn btn-danger" id="episodeEdit-btn">확인</button>                        
+					                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
 				            
@@ -417,8 +422,8 @@
 					
 					                 
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary" id="insert-episode-btn">확인</button>                        
-					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                    <button type="submit" class="btn btn-danger" id="insert-episode-btn">확인</button>                        
+					                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
 				            

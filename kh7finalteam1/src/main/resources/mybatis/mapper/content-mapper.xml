@@ -39,7 +39,8 @@
 		update content set 
 			content_name=#{contentName}, content_info=#{contentInfo}, content_limit=#{contentLimit}, 
 			content_type=#{contentType},  content_release=#{contentRelease},
-			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail}
+			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail},
+			content_trailer=#{contentTrailer}
 		where content_no=#{contentNo}
 	</update> 
 		 
