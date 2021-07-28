@@ -217,20 +217,18 @@ i{
 }
 .modal-trailer-info-box{
 	position: relative;
-	margin-top: 10%;
-	display:flex;
-	width:95%;
-	z-index: 2;
+    margin-top: 10%;
+    display: flex;
+    width: 100%;
+    z-index: 2;
     top: 52%;
-    left: 2.5%;
-    right: 2.5%;
 }
 .modal-trailer-text{
 	max-width: 100%;
 	font-size:1rem;
 }
 .modal-trailer-etc{
-	max-width:30%;
+	max-width:35%;
 	font-size:0.8rem;
 	margin-left:5%;	
 }
@@ -244,10 +242,12 @@ i{
 .modal-trailer-feature{
 	display:flex;
 	margin-bottom:5%;
+	height: 20px;
 }
 .modal-feature-percent-text{
 	color:#41A541;
 	font-weight:bold;
+
 }
 .modal-feature-border{
 	border: 1px solid #777;
@@ -261,7 +261,7 @@ i{
 
 }
 .modal-trailer-feature-box{
-	margin:0 0.2rem;
+	margin:auto 0.2rem;
 }
 .modal-series{
 	margin-top: 10%;
@@ -382,6 +382,7 @@ i{
 }
 .similar-contents-detail-text-box{
 	padding:3%;
+	margin-top:-10%;
 }
 .modal-wallpaper-plus-btn{
 	margin-left:auto;
@@ -399,6 +400,12 @@ i{
 	margin-left: 12%;
     margin-top: -14%;
     z-index: 3;
+}
+.wish-insert-btn-inDetail, .wish-delete-btn-inDetail{
+	margin-left: auto;
+    margin-right: 0px;
+    margin-bottom: -13%;
+    margin-top: -9%;
 }
 .modal-thumbs-up{
 	padding-bottom: 2px;
@@ -452,7 +459,9 @@ i{
 	position:absolute !important;
 	border-radius:10px;
 }
-
+.hover-modal-genre{
+	word-break: keep-all;
+}
 .hoverModalBox{
 	 background-color:rgb(24,24,24);
 	 overflow:hidden;
@@ -508,7 +517,8 @@ i{
 }
 .member-footer {
     max-width: 980px;
-    margin: -70px auto 0;
+    margin-right: auto;
+    margin-left: auto;
     padding: 0 4%;
     color: grey;
 }
@@ -686,6 +696,7 @@ i{
 	border-radius:5px; 
 	width:100%;
 }
+
 @media screen and (max-width:1300px){
 	.search-page-card {
 	    flex: 0 0 19.5% !important;

@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
         
 	<meta charset="UTF-8">
-	<title>넷플릭스 대한민국 - 인터넷으로 TV프로그램과 영화를 시청하세요</title>
+	<title>위플렉스 대한민국 - 인터넷으로 TV프로그램과 영화를 시청하세요</title>
 </head>
 <body>
 	<div class="basicLayout">

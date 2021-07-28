@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -164,14 +166,14 @@ $(function(){
 		});
 		
 		
-		$(".slider-img").mouseleave(function(){
+		 $(".slider-img").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 		});
 		
-		$("#hoverModal").mouseleave(function(){
+		 $("#hoverModal").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 	
-		});
+		});  
 		
 		$("#hoverModal").on("show.bs.modal",function(){
 			$("body").addClass("overflow-scroll");
@@ -818,7 +820,7 @@ $(function(){
 </script>
 
 <script id="hover-modal-genre-template" type="text/template">
-<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
+<span style="color:rgb(100,100,100);">•</span>
 <span>{{genre_name}}</span>
 </script>
 
@@ -834,6 +836,7 @@ $(function(){
 		</form>
 	</div>
 	<div class="similar-contents-detail-text-box">
+
 		<div style="display:flex; justify-content: space-between; align-items: center;">
 			<div>
 				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
@@ -845,6 +848,7 @@ $(function(){
 			<div>
 				<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" data-contentNo="{{contentNo}}" id="wish-insert-btn{{contentNo}}"><i class="fas fa-plus"></i></button>
 				<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" data-contentNo="{{contentNo}}" id="wish-delete-btn{{contentNo}}"><i class="fas fa-check"></i></button>
+
 			</div>
 		</div>
 		<div class="modal-wallpaper-text">
@@ -981,7 +985,7 @@ $(function(){
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><img class="content-limit" width="25px" height="25px"></div>				       				       			
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급: </span><img class="content-limit" width="25px" height="25px"></div>				       				       			
 				       		</div>
 				       </div>
 				      </div>
@@ -1023,7 +1027,7 @@ $(function(){
                     	<div class="modal-trailer-feature" style="margin-top:2%;">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box"><img id="hover-content-limit" src="" width="20" height="20"> </div>
+								<div class="modal-trailer-feature-box"><img id="hover-content-limit" src="" width="25" height="25"> </div>
 								<div class="modal-trailer-feature-box" id="hover-content-season"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>

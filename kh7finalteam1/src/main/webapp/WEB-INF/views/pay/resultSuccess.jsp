@@ -4,7 +4,7 @@
 <script>
 	$(function(){
 		$("#start-weflex-btn").click(function(){
-			location.href="${pageContext.request.contextPath }/";
+			location.href="${pageContext.request.contextPath }/home";
 		});
 	});
 </script>
@@ -12,7 +12,7 @@
 
 	<div class="pay-page-big-font text-center">결제가 완료되었습니다!</div>
 	<div style="margin-top:3%;">
-		<div style="text-align:center;">넷플릭스 회원이 되신걸 축하드립니다.</div>
+		<div style="text-align:center;">위플렉스 회원이 되신걸 축하드립니다.</div>
 		<div class="container-center" style="width:300px;margin-top:3%;">
 		<div>
 			<svg viewBox="0 0 24 24"class="checkmark-group--icon" aria-hidden="true">
