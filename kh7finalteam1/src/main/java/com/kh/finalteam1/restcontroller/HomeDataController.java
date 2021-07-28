@@ -68,7 +68,7 @@ public class HomeDataController {
 	}
 	
 	@PostMapping("/getContent")
-	public MainModalDetailVO getContent(@RequestParam int contentNo, HttpSession session) {		
+	public MainModalDetailVO getContent(@RequestParam int contentNo, HttpSession session) throws CloneNotSupportedException {		
 		MainModalDetailVO mainModalDetailVO = mainModalService.getModalDetailVO(contentNo, getClientNo(session));
 		
 		return mainModalDetailVO;
