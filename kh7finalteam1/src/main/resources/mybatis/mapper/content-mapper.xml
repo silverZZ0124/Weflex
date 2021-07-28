@@ -43,4 +43,51 @@
 		where content_no=#{contentNo}
 	</update> 
 	 
+	<select id="getGenreSlider" parameterType="map" resultType="ContentDto">
+		select 
+		    CT.*
+		from 
+		    content CT
+		        inner join content_genre CTGR on CT.content_no = CTGR.content_no
+		        inner join genre GR on CTGR.genre_no = GR.genre_no
+		where GR.genre_name = #{keyword} and CT.content_type = #{contentType}
+	</select>
+	
+	<select id="getContentList" parameterType="map" resultType="ContentListVO">
+		select 
+		    CT.content_no, CT.content_thumbnail
+		from 
+		    content CT
+		        inner join content_genre CTGR on CT.content_no = CTGR.content_no
+		        inner join genre GR on CTGR.genre_no = GR.genre_no
+		where GR.genre_name = #{keyword} and CT.content_type = #{contentType}
+	</select>
+	
+	<resultMap type="HoverModalVO" id="hoverModal">
+<!-- 		ContentDto 항목을 설정 -->
+  		<result column="content_no" property="contentNo"/>  
+		
+		<!-- GenreDto 항목을 조회하도록 구현 -->
+		<collection property="genreList" javaType="java.util.List"
+			ofType="GenreDto" column="content_no"
+			select="getContentListSub"></collection>
+					
+	</resultMap>
+	
+	<!-- 메인 조회 구문(컨텐츠) -->
+	<select id="getHoverModalVO" parameterType="int" resultMap="hoverModal">
+		select 
+		    CT.content_no, CT.content_trailer, CT.content_series, CT.content_limit
+		from 
+		    content CT		        
+		where CT.content_no = #{contentNo}
+	</select>
+	
+	<!-- 서브 조회 구문(장르) : 컨텐츠 번호로 조회 -->
+	<select id="getContentListSub" parameterType="int" resultType="GenreDto">
+		select gr.* from 
+			content_genre cg inner join genre gr on cg.genre_no = gr.genre_no
+			where cg.content_no = #{contentNo}
+	</select>
+
 </mapper>

@@ -7,6 +7,7 @@
 
 <script>
 var player;
+var hoverPlayer;
 var detailModalPlayerReady = true;
 var seriesArray = new Array();
 var contentThumbnail;
@@ -21,13 +22,21 @@ window.onload = function(){
 	            'onStateChange': onPlayerStateChange
 	          }
 	    });
+	    
+	    hoverPlayer = new YT.Player('hoverPlayer', {
+	        events: {	  
+	        	'onReady': onHoverPlayerReady,
+	            'onStateChange': onPlayerStateChange
+	          }
+	    });
 	}		
 	
 	function onPlayerReady(event) {
-		if(!detailModalPlayerReady){
-			$("#player").css("visibility", "visible");
-			detailModalPlayerReady = true;
-		}
+		$("#player").css("visibility", "visible");		
+    }
+	
+	function onHoverPlayerReady(event) {
+		$("#hoverPlayer").css("visibility", "visible");		
     }
 	
 	function onPlayerStateChange(event) {
@@ -106,9 +115,10 @@ $(function(){
 		var modalY;
 		var img;
 		//마우스 호버 시 모달 팝업 	
-		$(".slider-img").mouseenter(function(){
-			
+		$(".slider-img").mouseenter(function(){		
+			curContentNo = $(this).attr("data-contentNo");			
 			img = $(this);
+			
 			timeout=setTimeout(function(){
 				
 				var modalWidth=img.width()*1.4;
@@ -137,22 +147,14 @@ $(function(){
 				if((modalX+$("#hoverModal").width())>$(window).width()){
 					modalX=$(window).width()-$("#hoverModal").width()-10;
 				}
-				
-				
-				
-			$(".slider-img").mouseleave(function(){
-				clearTimeout(timeout);
-			});
-			
-			
-			
+								
+				$(".slider-img").mouseleave(function(){
+					clearTimeout(timeout);
+				});
 		
-			$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
-			$("body").removeClass("modal-open");
-			},1000);
-			
-			
-					
+				$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
+				$("body").removeClass("modal-open");
+			},800);					
 		});
 		
 		
@@ -167,20 +169,76 @@ $(function(){
 		
 		$("#hoverModal").on("show.bs.modal",function(){
 			$("body").addClass("overflow-scroll");
-			/* $("#hoverModal").css("display", "none");
-			$(".modal-backdrop").css("display","none"); */
-		});
-
-		$("#hoverModal").on("shown.bs.modal",function(){
+			$("#hoverPlayer").css("visibility", "hidden");
+			$("#hoverModal").css("display", "none");
 			
-			//$("#hoverModal").css("display", "block");
-		});
-		$("#hoverModal").on("hide.bs.modal",function(){
-			$("body").removeClass("overflow-scroll");
-
-			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/getHoverModalItem",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){					
+					var youtubeId = resp.contentTrailer.substring(30);
+					var videoUrl = resp.contentTrailer + "?enablejsapi=1&start=00&autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist="+youtubeId;
+					$(".hoverModalVideo").attr("src", videoUrl);
+					
+					$("#hover-content-limit").attr("src", "res/img/content_limit_"+resp.contentLimit+".png")
+					
+					if(resp.wish){
+						$("#modal-plus-btn").css("display", "none");
+						$("#modal-check-btn").css("display", "block");
+					}
+					else{
+						$("#modal-plus-btn").css("display", "block");
+						$("#modal-check-btn").css("display", "none");
+					}	
+					
+					if(resp.like){
+						$(".like-insert-btn").css("display", "none");
+						$(".like-delete-btn").css("display", "block");
+					}
+					else{
+						$(".like-insert-btn").css("display", "block");
+						$(".like-delete-btn").css("display", "none");
+					}	
+										
+					$("#hover-content-season").empty();
+					if(resp.contentSeries === "Y"){
+						$("#hover-content-season").text("시즌 "+resp.seasonCount+"개");
+					}
+					else{
+						$("#hover-content-season").text(resp.contentPlayTime+" 분");
+					}
+					
+					$(".hover-modal-genre").empty();
+					for(var i=0; i<resp.genreList.length; i++){
+						var template;												
+						
+						if(i == 0){
+							template = $("#hover-modal-genre-template-start").html();
+						}
+						else{
+							template = $("#hover-modal-genre-template").html();
+						}
+						
+						template = template.replace("{{genre_name}}", resp.genreList[i].genreName);
+						$(".hover-modal-genre").append(template);
+					}
+					
+					$(".hover-modal-more-button").attr("data-contentno", curContentNo);
+				}	
+			});
 		});
 		
+		$("#hoverModal").on("shown.bs.modal", function(){
+			$("#hoverModal").css("display", "block");
+		});
+		
+		$("#hoverModal").on("hide.bs.modal",function(){
+			$("body").removeClass("overflow-scroll");
+		});		
 		
 		
 		//슬릭 호버 시 화살표 보임 
@@ -197,7 +255,6 @@ $(function(){
 			
 			var minusX=(X/3)*2*(-1);
 	
-			arrow.offset().top=arrowY;
 			arrow.css("left",minusX+"px");	
 			arrow.css("top",arrowY+"px"); 
 			arrow.css("width",(X/3)*2+"px");
@@ -221,7 +278,6 @@ $(function(){
 				var arrowY=(middleY-arrow.height()/2)-Y;
 				var arrowRight=(arrowWidth/3)*2;
 
-				arrow.offset().top=arrowY;
 				arrow.css("left",(totalX-arrowWidth)+"px");	
 				arrow.css("top",arrowY+"px"); 
 				arrow.css("width",arrowRight+"px");
@@ -302,7 +358,7 @@ $(function(){
 		});
 		
 		//+누르면 체크
-		$("#plus-btn").click(function(){
+		$(".wish-insert-btn").click(function(){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/insertWishList",
 				type: "post",
@@ -318,7 +374,7 @@ $(function(){
 		});
 		
 		//체크 누르면 +
-		$("#check-btn").click(function(){
+		$(".wish-delete-btn").click(function(){
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/deleteWishList",
 				type: "post",
@@ -329,6 +385,36 @@ $(function(){
 				success:function(resp){
 					$("#plus-btn").css("display","block");
 					$("#check-btn").css("display","none");					
+				}						
+			});
+		});
+		
+		$(".like-insert-btn").click(function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/insertLikeList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$(".like-insert-btn").css("display","none");
+					$(".like-delete-btn").css("display","block");					
+				}						
+			});
+		});
+		
+		$(".like-delete-btn").click(function(){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/deleteLikeList",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){
+					$(".like-insert-btn").css("display","block");
+					$(".like-delete-btn").css("display","none");					
 				}						
 			});
 		});
@@ -344,7 +430,7 @@ $(function(){
 			if(index>6){
 				$(".similar-contents-detail-box").css("display","none");
 			}
-			
+			$("#player").css("visibility", "hidden");
 			var el = $(e.relatedTarget);
 			curContentNo = el.attr("data-contentno");
 			
@@ -355,8 +441,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){
-				 	$("#player").css("visibility", "hidden");
+				success:function(resp){		
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -377,6 +462,15 @@ $(function(){
  					else{
  						$("#plus-btn").css("display","none");
  						$("#check-btn").css("display","block");	
+ 					}
+ 					
+ 					if(resp.likeListDto == null){
+ 						$(".like-insert-btn").css("display","block");
+ 						$(".like-delete-btn").css("display","none");	
+ 					}
+ 					else{
+ 						$(".like-insert-btn").css("display","none");
+ 						$(".like-delete-btn").css("display","block");
  					}
  					
  					$(".content-genre").empty();
@@ -511,7 +605,6 @@ $(function(){
 		$.fn.initTrailerSeriesSection = function(season){
 			//season에 맞게 section 동적 생성 
 			var index = season - 1;
-			console.log(seriesArray);
 			$(".trailer-series-section-box-wrapper").empty();
 			$(".trailer-series-section-box-wrapper").css("border-top", "1px solid #404040");
 			
@@ -606,6 +699,15 @@ $(function(){
 </select>
 </script>
 
+<script id="hover-modal-genre-template-start" type="text/template">
+<span>{{genre_name}}</span>
+</script>
+
+<script id="hover-modal-genre-template" type="text/template">
+<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
+<span>{{genre_name}}</span>
+</script>
+
 <div class="main-color">
 	<div class="main-trailer-video">
 		<video width="100%" height="80%"  id="main-video" autoplay loop muted>
@@ -665,10 +767,10 @@ $(function(){
 							<input type="hidden" name="contentEpisode" value="-1">
 							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
-						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn "><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn "><i class="far fa-thumbs-down"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn wish-delete-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn wish-insert-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-insert-btn"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-delete-btn"><i class="fas fa-thumbs-up"></i></button>
 					</div>
 				
 			</div>
@@ -776,36 +878,32 @@ $(function(){
 
 	<!-- 호버시 팝업될 창 -->
   <!--   <div class="modal fade hoverModal" id="hoverModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
-        <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content hoverModalBox ">
                
                 <div class="modal-header" id="modal-header" style="padding:0;display:flex;border:none;">
-                    <iframe class="hoverModalVideo" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="hoverModalVideo" id="hoverPlayer" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
                     	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
-	                    <button class="btn btn-outline-light hover-modal-etc-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-up" ><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-down"><i class="far fa-thumbs-down"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button "data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
+	                    <button class="btn btn-outline-light hover-modal-etc-btn wish-delete-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn wish-insert-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-delete-btn"><i class="fas fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
                     </div>
                     <div>
                     	<div class="modal-trailer-feature" style="margin-top:2%;">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box content-limit"></div>
-								<div class="modal-trailer-feature-box">시즌 3개</div>
+								<div class="modal-trailer-feature-box"><img id="hover-content-limit" src="" width="20" height="20"> </div>
+								<div class="modal-trailer-feature-box" id="hover-content-season"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
-                    	<div >
-                    		<span>다크</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>흥미진진</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>스릴러</span>
+                    	<div class="hover-modal-genre">
+                    		
                     	</div>
                     	
                     </div>
@@ -818,43 +916,17 @@ $(function(){
 
 	
 
-	<div style="position: relative;top: -12vw;">	
-		<div class="container-center slider-box" id="slider1">
-			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>		
-		  	<div class="custom-img-slide">
-		   		<c:forEach var="i" begin="1" end="10" step="1">
-					<div><img src="res/img/slider_img${i}.png" class="slider-img"></div>
-				</c:forEach> 	  
-	  		</div>
-		</div>
-		
-		<div class="container-center slider-box" id="slider2">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>			 
-	  	 	<div class="custom-img-slide">
-	   			
-  			</div>
-		</div>
-		
-		<div class="container-center slider-box" id="slider3">
-			<div class="slider-title">보고 또 봐도 좋은 명작 TV 프로그램</div>			 
-		  	<div class="custom-img-slide">
-	   			
-	  		</div>
-	
-		</div>
-		<div class="container-center slider-box" id="slider4">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>			 
-			<div class="custom-img-slide">
-			
-			</div>	
-		</div>
-		
-		<div class="container-center slider-box" id="slider5">
-			<div class="slider-title">회원이름 님이 시청중인 콘텐츠</div>			 
-		  	<div class="custom-img-slide">  			   			
-	          
-	  		</div>
-		</div>
+	<div style="position: relative;top: -12vw;">
+		<c:forEach var="sliderVO" items="${sliderList }" varStatus="status">
+			<div class="container-center slider-box" id="slider1">
+				<div class="slider-title">${sliderVO.sliderTitle }</div>		
+			  	<div class="custom-img-slide">
+			   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
+						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
+					</c:forEach> 	  
+		  		</div>
+			</div>
+		</c:forEach> 	
 	</div>	
 </div>
 

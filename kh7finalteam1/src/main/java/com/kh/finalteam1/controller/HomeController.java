@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.MainTrailerDto;
 import com.kh.finalteam1.entity.NoSeriesDto;
@@ -29,11 +31,24 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
+//	@GetMapping("/")
+//	public String home(Model model, HttpSession session) throws JsonProcessingException {	
+//		int clientNo = (int)session.getAttribute("clientNo");
+//		model.addAttribute("mainTrailerList", homeService.getMainTrailer());
+//		model.addAttribute("sliderList", homeService.getSliderList(clientNo));
+//			
+//		return "main/home";
+//	}
+	
 	@GetMapping("/")
-	public String home(Model model) {										
-		model.addAttribute("mainTrailerList", homeService.getMainTrailer());
+	public ModelAndView home(HttpSession session){	
+		ModelAndView mv = new ModelAndView();
 		
-		return "main/home";
+		mv.addObject("mainTrailerList", homeService.getMainTrailer());
+		mv.addObject("sliderList", homeService.getSliderList());
+		mv.setViewName("main/home");
+		
+		return mv;
 	}
 	
 	@GetMapping("/index")

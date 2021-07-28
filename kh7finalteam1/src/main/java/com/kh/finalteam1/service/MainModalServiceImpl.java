@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.finalteam1.entity.ContentDto;
+import com.kh.finalteam1.entity.LikeListDto;
 import com.kh.finalteam1.entity.WishListDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
 import com.kh.finalteam1.repository.ContentDao;
+import com.kh.finalteam1.repository.LikeListDao;
 import com.kh.finalteam1.repository.SeriesDao;
 import com.kh.finalteam1.repository.WatchLogDao;
 import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.vo.MainModalDetailVO;
+import com.kh.finalteam1.vo.SimilarContentVO;
 
 @Service
 public class MainModalServiceImpl implements MainModalService {
@@ -29,6 +32,9 @@ public class MainModalServiceImpl implements MainModalService {
 	
 	@Autowired
 	private WishListDao wishListDao;
+	
+	@Autowired
+	private LikeListDao likeListDao;
 	
 	@Override
 	public MainModalDetailVO getModalDetailVO(int contentNo, int clientNo) {
@@ -47,6 +53,13 @@ public class MainModalServiceImpl implements MainModalService {
 									.contentNo(contentNo)
 								.build();		
 		WishListDto wishListDto = wishListDao.getWishList(parameter);
+		
+		LikeListDto likeParam = LikeListDto.builder()
+								.clientNo(clientNo)
+								.contentNo(contentNo)
+							.build();
+		
+		LikeListDto likeListDto = likeListDao.getLikeList(likeParam);
 				
 		//해당 content의 장르 가져오는 메소드
 		List<String> genreList = getGenre(contentNo);
@@ -57,6 +70,8 @@ public class MainModalServiceImpl implements MainModalService {
 		//해당 content의 출연진 가져오는 메소드
 		List<String> castList = getCast(contentNo);
 		
+		List<SimilarContentVO> similarList = getSimilarList(genreList);
+		
 		MainModalDetailVO mainModalDetailVO = MainModalDetailVO.builder()
 								.contentDto(contentDto)
 								.genreList(genreList)
@@ -64,9 +79,17 @@ public class MainModalServiceImpl implements MainModalService {
 								.castList(castList)
 								.seriesList(seriesList)
 								.wishListDto(wishListDto)
+								.likeListDto(likeListDto)
+								.similarList(similarList)
 							.build();
 		
 		return mainModalDetailVO;
+	}
+	
+	@Override
+	public List<SimilarContentVO> getSimilarList(List<String> genreList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
@@ -104,4 +127,6 @@ public class MainModalServiceImpl implements MainModalService {
 		wishListDao.deleteWishList(wishListDto);
 		
 	}
+
+	
 }

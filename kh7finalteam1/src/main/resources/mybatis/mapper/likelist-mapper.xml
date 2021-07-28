@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="likeList">
+	<insert id="mergeInto" parameterType="LikeListDto">
+		merge into like_list
+		    using dual
+		        on (client_no=#{clientNo} and content_no=#{contentNo}) 
+		    when not matched then
+		        insert (client_no, content_no)
+		            values (#{clientNo}, #{contentNo})
+	</insert>
+	
+	<delete id="delete" parameterType="LikeListDto">
+		delete like_list where client_no=#{clientNo} and content_no=#{contentNo}
+	</delete>
+	
+	<select id="getLikeList" parameterType="LikeListDto" resultType="LikeListDto">
+		select * from like_list where client_no=#{clientNo} and content_no=#{contentNo}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
