@@ -431,7 +431,10 @@ body .bd {
     margin: .5em auto;
     line-height: 50px;
 }
-
+.btn.btn-drop{
+	color: #fff;
+    background-color: #e50914;
+}
 .btn.account-cancel-button, .btn.account-pause-button {
     position: absolute;
     bottom: 10px;
