@@ -13,7 +13,7 @@ public interface ClientDao {
 	boolean changePhone(ClientDto clientDto);
 	ClientDto regitCheck(String email);
 	ClientDto loginCheck(ClientDto clientDto);
-	 void  joinCheck(ClientDto clientDto);
+	void  joinCheck(ClientDto clientDto);
 	boolean changeEmail(ClientDto clientDto);
 	boolean changePassword(ClientUpdatePasswordVO clientVO);	
 	List<ClientGradeListDto> list();//회원 전체 목록 출력(관리자 게시판 사용)

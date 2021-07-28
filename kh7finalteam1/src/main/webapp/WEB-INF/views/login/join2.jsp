@@ -8,9 +8,9 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath }/res/css/join2.css" />
 <title>join2페이지</title>
+
 </head>
 <body>
-
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registration simplicity">
@@ -42,7 +42,8 @@
 											<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
-													<input name="clientId"class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}">
+													<input type="hidden" name="clientId" value="${param.email}" >
+													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}"  disabled required>
 													<label for="id_email" class="placeLabel">이메일 주소</label>
 													</label>
 												</div>
@@ -52,7 +53,7 @@
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="password">
-													<input name="clientPw"class="nfTextField hasText" id="id_password" type="password"value tabindex="0" autocomplete="password" maxlength="61"minlength="4" dir="" dir>
+													<input name="clientPw"class="nfTextField hasText" id="id_password" type="password"value tabindex="0" autocomplete="password" maxlength="61"minlength="4" dir="" dir required>
 													<label for="id_password" class="placeLabel">비밀번호를 추가하세요</label>
 													</label>
 												</div>
@@ -61,8 +62,8 @@
 										<li class="nfFormSpace">
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
-													<label class="input_id" placeholder="이름">
-													<input name="clientName"class="nfTextField hasText" id="id_name" type="text"tabindex="0" autocomplete="name" maxlength="62"dir="" value="">
+													<label class="input_id" placeholder="이름" >
+													<input name="clientName"class="nfTextField hasText" id="id_name" type="text"tabindex="0" autocomplete="name" maxlength="62" dir="" value="" required>
 													<label for="id_name" class="placeLabel">이름</label>
 													</label>
 												</div>
@@ -72,7 +73,7 @@
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_birth" placeholder="생년월일">
-													<input name="clientBirth"class="nfTextField hasText" id="id_birth" type="date"tabindex="0" autocomplete="birth" maxlength="62"minlength="6" dir="" value="">
+													<input name="clientBirth"class="nfTextField hasText" id="id_birth" type="date"tabindex="0" autocomplete="birth" maxlength="62"minlength="6" dir="" value="" required>
 													<label for="id_birth" class="placeLabel">생년월일를 입력해주세요</label>
 													</label>
 												</div>
@@ -82,7 +83,7 @@
 										<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="phone">
-													<input name="clientPhone"class="nfTextField hasText" id="id_phone" type="text"tabindex="0" autocomplete="phone" maxlength="62"minlength="6" dir="" value="">
+													<input name="clientPhone"class="nfTextField hasText" id="id_phone" type="text"tabindex="0" autocomplete="phone" maxlength="62"minlength="6" dir="" value="" required>
 													<label for="id_phone" class="placeLabel">핸드폰번호를 -포함하여 적어주세요</label>
 													</label>
 												</div>
