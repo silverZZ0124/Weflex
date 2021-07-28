@@ -54,4 +54,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from yes_series where content_no = #{contentNo} and content_season = #{season} and content_episode = #{episode}
 	</select>
 	
+	<!-- 연작 있는('Y') 최고 season만 뽑아내기 -->
+	<select id="yesTopseason" parameterType="int" resultType="int">
+		select * from (
+			select content_season from yes_series 
+				where content_no=#{contentNo} 
+				order by content_season desc
+			)
+		where ROWNUM = 1
+	</select>
+	
 </mapper>

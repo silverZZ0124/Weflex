@@ -31,27 +31,46 @@ public class PlayServiceImpl implements PlayService{
 	private WatchLogDao watchLogDao;
 		
 	@Override
-	public PlaylistVO createPlaylist(int contentNo, int clientNo) {
-		int season, episode, playtime;
+	public PlaylistVO createPlaylist(int contentNo, int clientNo, int contentSeason, int contentEpisode) {
+		int season = 0, episode = 0, playtime = 0;
 		String contentUrl = "";
 		String contentSeries = "";
 		
 		ContentDto contentDto = getContent(contentNo);
-		ClientDto clientDto = getClient(clientNo);
-		WatchLogDto watchLogDto = getWatchLog(contentNo, clientNo);
-				
-		if(watchLogDto != null) {			
-			season = watchLogDto.getWatchLogSeason();		
-			episode = watchLogDto.getWatchLogEpisode();
-			playtime = watchLogDto.getWatchLogPlaytime();
-		}else {
-			season = 1;
-			episode = 1;
-			playtime = 0;
-		}
-						
+		WatchLogDto watchLogDto;
+														
 		if(contentDto.getContentSeries().equals("Y")) {
 			contentSeries = "Y";
+			
+			if(contentSeason == -1 && contentEpisode == -1) {
+				watchLogDto = watchLogDao.getWatchLog(contentNo, clientNo);
+				if(watchLogDto != null) {
+					season = watchLogDto.getWatchLogSeason();
+					episode = watchLogDto.getWatchLogEpisode();
+					playtime = watchLogDto.getWatchLogPlaytime();
+				}
+				else {
+					season = 1;
+					episode = 1;
+					playtime = 0;
+				}
+			}
+			else {
+				watchLogDto = watchLogDao.getWatchLog(contentNo, clientNo, contentSeason, contentEpisode);
+				
+				if(watchLogDto != null) {
+					season = watchLogDto.getWatchLogSeason();
+					episode = watchLogDto.getWatchLogEpisode();
+					playtime = watchLogDto.getWatchLogPlaytime();
+				}
+				else {
+					season = contentSeason;
+					episode = contentEpisode;
+					playtime = 0;
+				}
+			}
+			
+			
 			YesSeriesDto yesSeriesDto = seriesDao.yesGet(contentNo, season, episode);
 			contentUrl = yesSeriesDto.getSeriesPath();
 		}
@@ -59,8 +78,19 @@ public class PlayServiceImpl implements PlayService{
 			contentSeries = "N";
 			NoSeriesDto noSeriesDto = seriesDao.noGet(contentNo);
 			contentUrl = noSeriesDto.getSeriesPath();
+			
+			watchLogDto = watchLogDao.getWatchLog(contentNo, clientNo);
+			
+			if(watchLogDto != null) {				 
+				playtime = watchLogDto.getWatchLogPlaytime();
+			}
+			else {
+				playtime = 0;
+			}			
+			season = -1;
+			episode = -1;
 		}
-
+		
 		PlaylistVO playlistVO = PlaylistVO.builder()
 				.contentNo(contentNo)
 				.clientNo(clientNo)

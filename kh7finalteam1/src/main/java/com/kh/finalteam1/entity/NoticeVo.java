@@ -2,17 +2,20 @@ package com.kh.finalteam1.entity;
 
 import java.sql.Date;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class WatchLogDto {
+public class NoticeVo {
+	private int noticeNo;
 	private int clientNo;
-	private int contentNo;
-	private int watchLogSeason;
-	private int watchLogEpisode;
-	private int watchLogPlaytime;
-	private Date watchLogDay;
+	private String noticeName;
+	private String noticeWrite; 
+	private Date noticeDate;
+	private int noticeViewCount;
+	
+	private ClientDto clientDto;
 }

@@ -1,12 +1,17 @@
 package com.kh.finalteam1.repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalteam1.entity.ContentDto;
+import com.kh.finalteam1.vo.ContentListVO;
+import com.kh.finalteam1.vo.HoverModalVO;
 
 @Repository
 public class ContentDaoImpl implements ContentDao {
@@ -44,6 +49,27 @@ public class ContentDaoImpl implements ContentDao {
 	public boolean edit(ContentDto contentDto) {
 		int count = sqlSession.update("content.edit", contentDto);
 		return count>0;
+	}
+
+	@Override
+	public List<ContentListVO> getSliderItem(String contentType, int type, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("contentType", contentType);		
+		map.put("keyword", keyword);
+		
+		List<ContentListVO> list = new ArrayList<ContentListVO>();
+		if(type == 2) {
+			list = sqlSession.selectList("content.getContentList", map);
+		}
+				
+		return list;
+	}
+
+	@Override
+	public HoverModalVO getHoverModalVO(int contentNo) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		return sqlSession.selectOne("content.getHoverModalVO", contentNo);
 	}
 	
 	//이번달 컨텐츠 추가 수

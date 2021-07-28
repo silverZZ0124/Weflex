@@ -70,4 +70,9 @@ public class SeriesDaoImpl implements SeriesDao{
 		return sqlSession.selectOne("series.yesGet", map);
 	}
 
+	@Override
+	public int yesTopSeason(int contentNo) {
+		return sqlSession.selectOne("series.yesTopseason", contentNo);
+	}
+
 }

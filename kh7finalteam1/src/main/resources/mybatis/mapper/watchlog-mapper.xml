@@ -5,18 +5,30 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
  
 <mapper namespace="watchlog"> 
-	<select id="get" parameterType="map" resultType="WatchLogDto">
-		select * from watch_log where content_no=#{contentNo} and client_no = #{clientNo}
+	<select id="getList" parameterType="map" resultType="WatchLogDto">
+		select * from (
+			select * from watch_log 
+				where content_no=#{contentNo} and client_no = #{clientNo}
+				order by watch_log_day desc
+			)
+		where ROWNUM = 1		
 	</select>
+	
+	<select id="get" parameterType="map" resultType="WatchLogDto">
+		select * from watch_log 
+			where content_no=#{contentNo} and client_no = #{clientNo} 
+				and watch_log_season=#{contentSeason} and watch_log_episode=#{contentEpisode}			
+	</select>
+	
 	<insert id="mergeInto" parameterType="WatchLogDto">
 		merge into watch_log
 		    using dual
-		        on (client_no=#{clientNo} and content_no=#{contentNo})
+		        on (client_no=#{clientNo} and content_no=#{contentNo} and watch_log_season=#{watchLogSeason} and watch_log_episode=#{watchLogEpisode})
 		    when matched then
-		        update set watch_log_season=#{watchLogSeason}, watch_log_episode=#{watchLogEpisode}, watch_log_playtime=#{watchLogPlaytime}
+		        update set watch_log_playtime=#{watchLogPlaytime}, watch_log_day=sysdate
 		    when not matched then
-		        insert (client_no, content_no, watch_log_season, watch_log_episode, watch_log_playtime)
-		            values (#{clientNo}, #{contentNo}, #{watchLogSeason}, #{watchLogEpisode}, #{watchLogPlaytime})
+		        insert (client_no, content_no, watch_log_season, watch_log_episode, watch_log_playtime, watch_log_day)
+		            values (#{clientNo}, #{contentNo}, #{watchLogSeason}, #{watchLogEpisode}, #{watchLogPlaytime}, sysdate)
 	</insert>
 </mapper>
 

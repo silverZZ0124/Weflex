@@ -6,7 +6,7 @@ import com.kh.finalteam1.entity.WatchLogDto;
 import com.kh.finalteam1.vo.PlaylistVO;
 
 public interface PlayService {
-	PlaylistVO createPlaylist(int contentNo, int clientNo);
+	PlaylistVO createPlaylist(int contentNo, int clientNo, int contentSeason, int contentEpisode);
 	ContentDto getContent(int contentNo);
 	ClientDto getClient(int clientNo);
 	WatchLogDto getWatchLog(int contentNo, int clientNo);

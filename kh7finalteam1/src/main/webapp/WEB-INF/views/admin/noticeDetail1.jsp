@@ -8,7 +8,7 @@
 
            
 <%
-	request.setCharacterEncoding("UTF-8");
+/* 	request.setCharacterEncoding("UTF-8");
 	int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 	
 	//NoticeVo noticeVo = 
@@ -18,7 +18,7 @@
 	String root = request.getContextPath();
 	
 	String title = "답변하기";
-%>
+ */%>
 <style>
 	th {
 		width:15%;

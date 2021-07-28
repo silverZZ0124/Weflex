@@ -15,11 +15,11 @@
 	</insert> 
 	
 	<delete id="delete" parameterType="WishListDto">
-		delete from wishlist where client_no=#{clientNo} and content_no#{contentNo}
+		delete from wishlist where client_no=#{clientNo} and content_no=#{contentNo}
 	</delete>
 	
-	<select id="get" parameterType="WishListDto">
-		select * from 
+	<select id="get" parameterType="WishListDto" resultType="WishListDto">
+		select * from wishlist where client_no=#{clientNo} and content_no=#{contentNo}
 	</select>
 </mapper>
 

@@ -1,7 +1,9 @@
 package com.kh.finalteam1.restcontroller;
 
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalteam1.entity.ClientGradeListDto;
@@ -90,4 +93,31 @@ public class AdminDataController {
 			session.setAttribute("noSeriesDto", noSeriesDto);
 	}
 
+	@PostMapping("/admin/getGenre")
+	public List<GenreDto> getGenre() {
+		return genreDao.list();
+	}
+	
+	@PostMapping("/admin/getSliderSample")
+	public void getSliderSample(
+			@RequestParam(value="sliderTitle") String sliderTitle,
+			@RequestParam(value="contentType") String contentType,
+			@RequestParam(value="type") String type,
+			@RequestParam(value="keyword") String keyword) {
+		
+		System.out.println(sliderTitle);
+		System.out.println(contentType);
+		System.out.println(type);
+		System.out.println(keyword);
+//		System.out.println(keyword.size());
+//		System.out.println(keyword.get(0));
+	}
+//	@PostMapping("/admin/getSliderSample")
+//	public void getSliderSample(HttpServletRequest request) {
+//		
+//		System.out.println(request.getParameter("sliderTitle"));
+//		System.out.println(request.getParameter("contentType"));
+//		System.out.println(request.getParameter("type"));
+//		System.out.println(request.getParameterValues("keyword"));
+//	}
 }
