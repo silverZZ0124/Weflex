@@ -1,5 +1,8 @@
 package com.kh.finalteam1.repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,4 +24,8 @@ public class WishListDaoImpl implements WishListDao {
 		return sqlSession.delete("wishList.delete", wishListDto) > 0;
 	}
 
+	@Override
+	public WishListDto getWishList(WishListDto wishListDto) {
+		return sqlSession.selectOne("wishList.get", wishListDto);
+	}
 }

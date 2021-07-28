@@ -88,6 +88,7 @@
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/content/contentRegist">컨텐츠 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/genre">장르 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/feature">특징 추가</a>
+                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/homeSetting">홈 화면 설정</a>
                     </div>
                 </div>
                     

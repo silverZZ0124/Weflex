@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/res/css/join3.css"/>
-<title>Weflex</title>
-</head>
+<jsp:include page="/WEB-INF/views/template/loginHeader.jsp"></jsp:include>
 <script>
 	$(function(){
 		$("#join3-next-btn").click(function(){
@@ -22,12 +12,7 @@
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-planSelectionWithContext simplicity">
-				<div class="nfHeader noBorderHeader signupBasicHeader">
-					<a href="/" class="svg-nfLogo signupBasicHeader">
-						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
-					</a>
-					<a href="/signout" class="authLinks signupBasicHeader">로그아웃</a>
-				</div>
+				
 				<div class="simpleContainer" data-transitioned-child="true">
 					<div class="centerContainer contextStep"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
 						<div class="planContainer" >

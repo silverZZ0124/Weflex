@@ -17,16 +17,21 @@ import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
+import com.kh.finalteam1.service.HomeService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	
 	@Autowired
+	private HomeService homeService;
+	
+	@Autowired
 	private ClientDao clientDao;
 	
 	@Autowired
 	private ContentDao contentDao;
+
 	
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -137,5 +142,11 @@ public class AdminController {
 		public String clientAdmin() {
 			return "admin/clientAdmin";
 		}
+		
+	@GetMapping("/homeSetting")
+	public String homeSetting(Model model) {
+		model.addAttribute("sliderList", homeService.getSliderList());
+		return "admin/homeSetting";
+	}
 
 }
