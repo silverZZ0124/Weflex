@@ -56,7 +56,7 @@
                           		<input type="text" name="featureName" id="insert-featureName" class="form-control">
                         	</div>
 	                         <div class="text-center">
-	                         	<button class="btn btn-block btn-light">확인</button>
+	                         	<button class="btn btn-block btn-danger">확인</button>
 	                         </div>
                         </form>
                          
@@ -71,7 +71,7 @@
                           		<input type="text" name="featureName" class="form-control" id="featureName" placeholder="검색어를 입력하세요">
                         	</div>
 	                         <div class="form-group col-lg-3 col-md-12 ">
-	                         	<input type="submit" value="검색" class="btn btn-light">
+	                         	<input type="submit" value="검색" class="btn btn-danger">
 	                         </div>
                         </form>
                      </div>

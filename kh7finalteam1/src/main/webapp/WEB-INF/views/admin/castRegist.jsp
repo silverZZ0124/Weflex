@@ -3,6 +3,9 @@
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include> 
    <style>
+   		.row{
+   			margin-bottom:30%;
+   		}
         .form-control{
             display: inline-block;
             width: 80%;
@@ -43,26 +46,23 @@ $(function(){
 
 <div class = "container-fluid">
 
-        <div class="row mt-3">
+        <div class="row mt-4">
             <div class="col-md-6 offset-sm-3">  
-                <div class="card">
+            	<h2 class="head-regist text-center text-gray-800 mb-4 mt-3">배우명 등록</h2>
                     <form class="form" action="castRegist" method="post">
-                    <div class="card-header"> 
-                           <h5 class="head-regist text-primary">배우명 등록</h5>
-                    </div>
-                    
-                        <div class="card-body">
-                            <div class="buttons">            
-                                <input type="text" name="castName" class="form-control" required> <button type="button" class="btnAdd btn btn-outline-primary">추가</button><br><br>
-                            </div>
+                    	<div class="card">
+	                        <div class="card-body">
+	                            <div class="buttons">            
+	                                <input type="text" name="castName" class="form-control" required> <button type="button" class="btnAdd btn btn-light">추가</button><br><br>
+	                            </div>
+	                        </div>
                         </div>
 
-                       <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-success">등록</button>
+                         <div class="text-right mt-3">
+                            <button type="submit" class="btn btn-danger">등록</button>
                             <button type="reset" class="btn btn-secondary">Reset</button>
-                        </div>    
-                </form>
-            </div>
+                        </div>  
+                	</form>
             </div>
         </div>
     </div>

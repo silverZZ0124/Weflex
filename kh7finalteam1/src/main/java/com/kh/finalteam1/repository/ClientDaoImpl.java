@@ -12,6 +12,7 @@ import com.kh.finalteam1.entity.ClientGradeListDto;
 import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 
 
+
 @Repository
 public class ClientDaoImpl implements ClientDao {
 	@Autowired
@@ -47,7 +48,7 @@ public class ClientDaoImpl implements ClientDao {
 	public void joinCheck(ClientDto clientDto){
 		sqlSession.insert("client.joinCheck",clientDto);
 	}
-
+	@Override
 	public boolean changeEmail(ClientDto clientDto) {
 		return sqlSession.update("client.changeEmail", clientDto) > 0;
 	}

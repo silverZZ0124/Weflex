@@ -117,10 +117,10 @@
                     <div class="col-md-6 offset-md-6 pt-3" >
                         <div class="row">
                             <div class="col-md-6 p-1">
-                                <button type="button" class="btn btn-block btn-outline-primary" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
+                                <button type="button" class="btn btn-block btn-outline-danger" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
-                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
+                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-secondary" id="delete-btn">삭제</a>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
 	     	 </div>
 	     
 		     <div class="text-right mb-4">
-		     	<a href="${pageContext.request.contextPath}/admin/content/" class="btn btn-secondary">목록으로</a>
+		     	<a href="${pageContext.request.contextPath}/admin/content/" class="btn btn-dark">목록으로</a>
 		     </div>
 	     </div>
 	 </div>
