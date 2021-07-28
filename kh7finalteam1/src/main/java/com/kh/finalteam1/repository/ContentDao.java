@@ -14,5 +14,7 @@ public interface ContentDao {
 
 	
 	List<ContentDto> list();
+	int monthContentCount();//이번달 컨텐츠 추가 수
+	int yearContentCount();//올해 컨텐츠 추가 수
 	
 }

@@ -7,12 +7,12 @@
 	
 }
 .pay-page-small-font{
-	font-size: 0.7rem;
+	font-size: 0.8rem;
     font-weight: 800;
 }
 .pay-page-big-font{
 	font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 .red-block-box{
 	display:flex;
@@ -77,12 +77,30 @@
     text-align: center;;
 	border:none;
 	margin-top:10%;
+	border-radius: 3px;
+    box-shadow: 1px 1px 4px 1px rgb(205 205 205);
 }
-
-
-
-
-
+.pay-page-etc-text{
+	text-align:center;
+	margin-top:3%;
+}
+.pay-page-etc-text >div:nth-child(3){
+	font-weight:700;
+}
+.pay-page-etc-text >div:last-child{
+	font-weight:700;
+}
+.pay-info-box{
+	width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 10%;
+    box-shadow: 2px 2px 8px 1px rgb(205 205 205);
+    padding: 1% 0;
+}
+.pay-info-title{
+	font-weight:700;
+}
 
 
 

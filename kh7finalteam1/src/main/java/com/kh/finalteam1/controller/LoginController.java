@@ -30,6 +30,13 @@ public class LoginController {
 	public String join1() {
 		return "login/join1";
 	}
+	
+	@PostMapping("/join1")
+	public String join1(@RequestParam String email, Model model){
+		model.addAttribute("email", email);
+		
+		return "redirect:/join2";
+	}
 
 	@GetMapping("/join2")
 	public String join2() {
@@ -49,15 +56,16 @@ public class LoginController {
 	}
 	
 	@PostMapping("regitCheck")
-	public String regitCheck(@RequestParam String email, Model model ) {
+	public String regitCheck(@RequestParam String email , Model model ) {
 	
 		ClientDto clientDto = clientDao.regitCheck(email);
+		
+		model.addAttribute("email", email);
 		
 		if(clientDto == null) {
 			return "redirect:join1";
 		}
-		else {
-			model.addAttribute("email", email);
+		else {			
 			return "login/login";
 		}
 	}
@@ -66,6 +74,7 @@ public class LoginController {
 		ClientDto client = clientDao.loginCheck(clientDto);
 
 		if(client ==null) {
+
 			return "redirect: login";
 		}
 		else {
@@ -77,6 +86,6 @@ public class LoginController {
 	public String joinCheck(@ModelAttribute ClientDto clientDto) {
 		clientDao.joinCheck(clientDto);
 		
-		return "redirect:/";
+		return "redirect:/join3";
 	}
 }
