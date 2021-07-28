@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/pay.css"/>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join3.css"/>
 
+
  
 	
 
@@ -32,6 +33,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weflex</title>
 </head>
+<script>
+	$(function(){
+		if(location.href==="http://localhost:8080/finalteam1/join1"){
+			$("#login-header-login").show();
+		}
+		else {
+			$("#login-header-login").hide();
+			$("#login-header-logout").show();
+		}
+	});
+</script>
 <body style="background-color:white !important;">
 		<main>
 		<div class="" >
@@ -40,7 +52,8 @@
 						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="margin-bottom:18%;">
 						
 					</a>
-					<a href="/signout" class="authLinks signupBasicHeader">로그아웃</a>
+					<a href="/signout" id="login-header-logout" style="display:none;" class="authLinks signupBasicHeader">로그아웃</a>
+					<a href="/signin" id="login-header-login" style="display:none;" class="authLinks signupBasicHeader">로그인</a>
 				</div>
 	
 		
