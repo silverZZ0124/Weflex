@@ -131,11 +131,11 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ea5f52;">
                                               이번달 회원 증가 수</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${clientMonth}명</div>
                                         </div>
@@ -149,11 +149,11 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-dark shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color:#5a5c69;">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ea5f52;">
                                                  올해 회원 증가 수(2021년)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${clientYear}명</div>
                                         </div>
@@ -196,16 +196,16 @@
  -->					
  						 <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #ea5f52;">
                                                 이번달 추가 된 컨텐츠 수</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${contentMonth}개</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-play fa-2x text-gray-300"></i>
+                                            <i class="fas fa-play-circle fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +224,7 @@
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">${contentYear}개</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-video fa-2x text-gray-300"></i>
+                                            <i class="fas fa-play fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -299,13 +299,13 @@
                                             <i class="fas fa-circle" style="color:#4e82be;"></i> 10대
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle" style="color: #1cc88a"></i> 20대
+                                            <i class="fas fa-circle" style="color: #db835c"></i> 20대
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle" style="color:#36b9cc;"></i> 30대
+                                            <i class="fas fa-circle" style="color:#AA4643;"></i> 30대
                                         </span>
                                          <span class="mr-2">
-                                            <i class="fas fa-circle" style="color:#db835c;"></i> 40대 이상
+                                            <i class="fas fa-circle" style="color:#5a5c69;"></i> 40대 이상
                                         </span>
                                     </div>
                                 </div>
