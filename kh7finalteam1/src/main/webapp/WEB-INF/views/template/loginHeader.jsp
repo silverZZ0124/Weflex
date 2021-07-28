@@ -35,8 +35,8 @@
 <body style="background-color:white !important;">
 		<main>
 		<div class="" >
-		<div class="nfHeader noBorderHeader signupBasicHeader">
-					<a href="/" class="svg-nfLogo signupBasicHeader">
+		<div class="nfHeader noBorderHeader signupBasicHeader"style="background-color:white !important">
+					<a href="#" class="svg-nfLogo signupBasicHeader">
 						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="margin-bottom:18%;">
 						
 					</a>
