@@ -43,11 +43,11 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/admin/">
                   
                 <div class="sidebar-brand-text mx-3">
-                	<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width: 100%;" id="weflex-logo">
+                	<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width:100%;" id="weflex-logo">
                 </div>
                 
                 <div class="sidebar-brand-text mx-3" id="w-logo">
-                	<img alt="w-logo" src="${pageContext.request.contextPath }/res/img/n_logo.png" style="width: 100%;" id="w-logo">
+                	<img alt="w-logo" src="${pageContext.request.contextPath }/res/img/w_logo.png" style="width:100%;" id="w-logo">
                 </div>
             </a>
 
