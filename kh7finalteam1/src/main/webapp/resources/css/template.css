@@ -130,7 +130,7 @@ i{
 	width:98%;
 	margin-left: auto;
 	margin-right: auto;
-	
+	/*margin-bottom:1px;  */
 }
 .slider-title{
 	font-size:1.4rem;
