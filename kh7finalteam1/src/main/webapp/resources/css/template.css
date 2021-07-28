@@ -358,11 +358,17 @@ i{
 	height: 22em;
 	background-color: #2f2f2f;
     min-height: 100%;
-    margin-right: auto;
-    margin-left: auto;
     border-radius:5px;
     flex: 0 0 32%;
     margin-bottom: 2%;
+    overflow: hidden;
+}
+
+#similar-content-wrapper{
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .similar-contents-detail-img-box{
@@ -392,7 +398,7 @@ i{
 .modal-wallpaper-play-btn{
 	position:absolute;
 	margin-left: 12%;
-    margin-top: -11%;
+    margin-top: -14%;
     z-index: 3;
 }
 .wish-insert-btn-inDetail, .wish-delete-btn-inDetail{
