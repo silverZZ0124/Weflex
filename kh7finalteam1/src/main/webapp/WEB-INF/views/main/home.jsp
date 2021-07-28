@@ -244,14 +244,18 @@ $(function(){
 		
 		
 		//슬릭 호버 시 화살표 보임 
-		 $(".slick-slider").hover(function(){
+		 $(".custom-img-slide-box").hover(function(){
+			
 			var arrow=$(this).find(".arrow-img-left");
-			 
-			var X=$(this).offset().left;
-			var Y=$(this).offset().top;
+			var slidebox=$(this).find(".custom-img-slide");
+			
+			var X=$(slidebox).offset().left;
+			var Y=$(slidebox).offset().top;
+			
 
 			
-			var middleY=Y+$(this).height()/2;
+			var middleY=Y+$(slidebox).height()/2;
+			
 
 			var arrowY=(middleY-arrow.height()/2)-Y;
 			
@@ -267,14 +271,15 @@ $(function(){
 			arrow.css("visibility","hidden");  
 		}); 
 		
-		 $(".slick-slider").hover(function(){
+		 $(".custom-img-slide-box").hover(function(){
 				var arrow=$(this).find(".arrow-img-right");
+				var slidebox=$(this).find(".custom-img-slide");
 				 
-				var X=$(this).offset().left;
-				var totalX=X+$(this).width();
-				var Y=$(this).offset().top;
+				var X=$(slidebox).offset().left;
+				var totalX=X+$(slidebox).width();
+				var Y=$(slidebox).offset().top;
 
-				var middleY=Y+$(this).height()/2;
+				var middleY=Y+$(slidebox).height()/2;
 
 				var arrowWidth=$(window).width()-totalX;
 				var arrowY=(middleY-arrow.height()/2)-Y;
@@ -301,6 +306,8 @@ $(function(){
 				}
 
 			});
+		
+		 
 		//화살표 호버 시 커짐 
 		$(".arrow-img").hover(function(){
 			$(this).addClass("arrow-hover");
@@ -944,12 +951,16 @@ $(function(){
 
 	<div style="position: relative;top: -12vw;">
 		<c:forEach var="sliderVO" items="${sliderList }" varStatus="status">
+		<div class="slider-title container-center">${sliderVO.sliderTitle }</div>		
+		<div class="custom-img-slide-box">
 			<div class="container-center slider-box" id="slider1">
-				<div class="slider-title">${sliderVO.sliderTitle }</div>		
+				
+				
 			  	<div class="custom-img-slide">
 			   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
 						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
 					</c:forEach> 	  
+		  		</div>
 		  		</div>
 			</div>
 		</c:forEach> 	
@@ -957,4 +968,16 @@ $(function(){
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
+
+
+
+
+
+
+
+
+
+
 
