@@ -74,7 +74,6 @@
 						</div>
 					</div>
 				</div>
-				
 				<!-- 중단 content 부분 -->
 				<div class="bd">
 					<div class="responsive-account-container">
@@ -90,6 +89,9 @@
 										<h2 class="account-section-heading">멤버십 & 결제 정보
 											<button class="btn account-cancel-button btn-plain btn-small">
 												<span>멤버십 해지</span>
+											</button>
+											<button class="btn account-cancel-button btn-small btn-drop">
+												<span>회원 탈퇴</span>
 											</button>
 										</h2>
 									</header>
