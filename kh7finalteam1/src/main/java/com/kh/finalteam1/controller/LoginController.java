@@ -79,7 +79,7 @@ public class LoginController {
 		}
 		else {
 			session.setAttribute("clientNo", client.getClientNo());
-			return "redirect:/";
+			return "redirect:/home";
 		}
 	}
 	@PostMapping("joinCheck")

@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath }/res/css/join2.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join3.css"/>
+
 
 <title>Weflex</title>
 
@@ -15,12 +17,21 @@
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registration simplicity">
-				<div class="nfHeader noBorderHeader signupBasicHeader">
-					<a href="/finalteam1/index" class="svg-nfLogo signupBasicHeader">
-					<img class="svg-icon svg-icon-netflix-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
+				<div class="" >
+		<div class="nfHeader noBorderHeader signupBasicHeader"style="background-color:white !important">
+					<a href="#" class="svg-nfLogo signupBasicHeader">
+						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="margin-bottom:18%;">
+						
 					</a>
-					<a href="/finalteam1/login" class="authLinks signupBasicHeader">로그인</a>
+					<a href="/signout" id="login-header-logout" style="display:none;" class="authLinks signupBasicHeader">로그아웃</a>
+					<a href="/signin" id="login-header-login" style="display:none;" class="authLinks signupBasicHeader">로그인</a>
 				</div>
+	
+		
+		
+
+		
+		</div>	
 				<div class="simpleContainer" data-transitioned-child="true">
 					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
 						<form action="joinCheck"method="POST" id="joinCheck">

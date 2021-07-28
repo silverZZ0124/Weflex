@@ -36,11 +36,10 @@
 <script>
 	$(function(){
 		if(location.href==="http://localhost:8080/finalteam1/join1"){
-			$("#login-header-login").show();
+			
 		}
 		else {
-			$("#login-header-login").hide();
-			$("#login-header-logout").show();
+			
 		}
 	});
 </script>
@@ -53,7 +52,7 @@
 						
 					</a>
 					<a href="/signout" id="login-header-logout" style="display:none;" class="authLinks signupBasicHeader">로그아웃</a>
-					<a href="/signin" id="login-header-login" style="display:none;" class="authLinks signupBasicHeader">로그인</a>
+					<a href="/signin" id="login-header-login"  class="authLinks signupBasicHeader">로그인</a>
 				</div>
 	
 		

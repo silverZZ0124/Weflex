@@ -16,5 +16,21 @@ public class SimilarContentVO {
 	private String contentInfo;
 	private int seasonCount;
 	private int contentPlayTime;
-	private WishListDto wishListDto;
+	private int clientNo;
+	private int matchingCount;
+	
+	@Override
+	public SimilarContentVO clone() throws CloneNotSupportedException {
+		return SimilarContentVO.builder()
+				.contentNo(this.contentNo)
+				.contentThumbnail(this.contentThumbnail)
+				.contentLimit(this.contentLimit)
+				.contentRelease(this.contentRelease)
+				.contentInfo(this.contentInfo)
+				.seasonCount(this.seasonCount)
+				.contentPlayTime(this.contentPlayTime)
+				.clientNo(this.clientNo)
+				.matchingCount(this.matchingCount)
+			.build();
+	}
 }

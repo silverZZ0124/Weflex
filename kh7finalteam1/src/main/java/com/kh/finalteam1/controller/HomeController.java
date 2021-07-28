@@ -29,8 +29,12 @@ public class HomeController {
 //			
 //		return "main/home";
 //	}
-	
 	@GetMapping("/")
+	public String index() {
+		return "main/index";
+	}
+	
+	@GetMapping("/home")
 	public ModelAndView home(HttpSession session){	
 		ModelAndView mv = new ModelAndView();
 		
@@ -41,10 +45,7 @@ public class HomeController {
 		return mv;
 	}
 	
-	@GetMapping("/index")
-	public String index() {
-		return "main/index";
-	}
+	
 
 	@GetMapping("/play")
 	public String play(@RequestParam int contentNo,

@@ -122,6 +122,7 @@ element.style {
     box-sizing: border-box;
 }
 
+
 div.basicLayout .planContainer, div.basicLayout .regContainer, div.basicLayout .verifyCardContainer {
     max-width: 340px;
 }
@@ -515,7 +516,7 @@ ul.structural>li {
   content: '\f0ac';
 }
 .nfSelectWrapper .selectArrow.prefix .nfSelectPlacement::before, .nfSelectWrapper.selectArrow.prefix .nfSelectPlacement::before {
-    top: 50%;
+    top: 46%;
     left: 15px;
     transform: translateY(-50%);
     font-family: "Font Awesome 5 Free";
@@ -554,7 +555,7 @@ ul.structural>li {
     position: absolute;
     pointer-events: none;
     right: 10px;
-    top: 26%;
+    top: 8%;
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
 	font-size: 18px;

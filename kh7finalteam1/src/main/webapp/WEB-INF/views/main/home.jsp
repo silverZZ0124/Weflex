@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -34,6 +36,10 @@ window.onload = function(){
 	}		
 	
 	function onPlayerReady(event) {
+		if(event.target.getVideoUrl() == "https://www.youtube.com/watch?v=6qaW-KZpmjM"){
+			return;
+		}
+		
 		$("#player").css("visibility", "visible");		
     }
 	
@@ -160,19 +166,20 @@ $(function(){
 		});
 		
 		
-		$(".slider-img").mouseleave(function(){
+		 $(".slider-img").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 		});
 		
-		$("#hoverModal").mouseleave(function(){
+		 $("#hoverModal").mouseleave(function(){
 			$("#hoverModal").modal("hide");
 	
-		});
+		});  
 		
 		$("#hoverModal").on("show.bs.modal",function(){
 			$("body").addClass("overflow-scroll");
 			$("#hoverPlayer").css("visibility", "hidden");
 			$("#hoverModal").css("display", "none");
+			$("#hover-modal-play-btn").val(curContentNo);
 			
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/getHoverModalItem",
@@ -324,6 +331,9 @@ $(function(){
 		//모달이 닫히면 영상 재생 
 		$("#detailModal").on("hidden.bs.modal",function(){
 			videoDomObj.play();
+			$(".similar-contents-box").css("height","700px");
+			$(".wallpaper-less-button").css("display","none");
+			$(".wallpaper-more-button").css("display","block");
     	});
 				
 		//소리 재생 
@@ -450,7 +460,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){		
+				success:function(resp){	
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -548,8 +558,34 @@ $(function(){
   						 				
  						$.fn.initTrailerSeriesSection(1);
  						
- 						$(".modal-series").css("display", "block"); 						
+ 						$(".modal-series").css("display", "block");
  					}
+					
+ 					$("#similar-content-wrapper").empty();
+					for(var i in resp.similarList){
+						var correct = resp.similarList[i].matchingCount / resp.genreList.length * 100;
+						var template = $("#detail-modal-similar-template").html();
+						template = template.replace("{{thumbnail}}", resp.similarList[i].contentThumbnail);
+						template = template.replace("{{correct}}", parseInt(correct));
+						template = template.replace("{{contentRelease}}", resp.similarList[i].contentRelease);
+						template = template.replace("{{contentInfo}}", resp.similarList[i].contentInfo);
+						template = template.replace("{{contentLimit}}", resp.similarList[i].contentLimit);
+						
+						if(resp.similarList[i].clientNo === 0){
+							template = template.replace("{{plusStyle}}", "block");
+							template = template.replace("{{checkStyle}}", "none");
+						}
+						else{
+							template = template.replace("{{plusStyle}}", "none");
+							template = template.replace("{{checkStyle}}", "block");
+						}
+						
+						template = template.replaceAll("{{contentNo}}", resp.similarList[i].contentNo);
+						
+						$("#similar-content-wrapper").append(template);
+					} 
+					
+					$.fn.initSimilarContent();
 				}		
 					
 			});
@@ -566,11 +602,7 @@ $(function(){
 			$(this).css("display","none");
 			$(".wallpaper-more-button").css("display","block");
 		});
-		
-		$(".hover-modal-play-btn").click(function(){
-			location.href="play";
-		});
-		
+				
 		$(".hover-modal-more-button").click(function(){
 			$("#hoverModal").modal("hide");
 		});
@@ -691,7 +723,58 @@ $(function(){
 			
 			$.fn.initEvent();
 		}
+		
+		$.fn.initSimilarContent = function(){
+			$(".wish-insert-btn-inDetail").click(function(){
+				var contentNo = $(this).attr("data-contentNo");
+				var insertBtn = $("#wish-insert-btn"+contentNo);
+				var deleteBtn = $("#wish-delete-btn"+contentNo);
 
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/home/insertWishList",
+					type: "post",
+					dataType: "json",
+					data: {
+						contentNo: contentNo	
+					},
+					success:function(resp){
+						insertBtn.css("display","none");
+						deleteBtn.css("display","block");					
+					}						
+				});
+			});
+			
+			//체크 누르면 +
+			$(".wish-delete-btn-inDetail").click(function(){
+				var contentNo = $(this).attr("data-contentNo");
+				var insertBtn = $("#wish-insert-btn"+contentNo);
+				var deleteBtn = $("#wish-delete-btn"+contentNo);
+				
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/home/deleteWishList",
+					type: "post",
+					dataType: "json",
+					data: {
+						contentNo: contentNo	
+					},
+					success:function(resp){
+						insertBtn.css("display","block");
+						deleteBtn.css("display","none");					
+					}						
+				});
+			});
+			
+			//월페이퍼 호버시 재생버튼 
+			$(".similar-contents-detail-box").hover(function(){
+				var playBtn=$(this).find(".modal-wallpaper-play-btn");
+				playBtn.css("display","block");
+				$(this).css("cursor","pointer");
+			},function(){
+				var playBtn=$(this).find(".modal-wallpaper-play-btn");
+				playBtn.css("display","none");
+				$(this).css("cursor","default");
+			});			
+		};
 	});
 
 </script>
@@ -737,8 +820,42 @@ $(function(){
 </script>
 
 <script id="hover-modal-genre-template" type="text/template">
-<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
+<span style="color:rgb(100,100,100);">•</span>
 <span>{{genre_name}}</span>
+</script>
+
+<script id="detail-modal-similar-template" type="text/template">
+<div class="similar-contents-detail-box">
+	<div class="similar-contents-detail-img-box">
+		<img class="similar-contents-detail-img"src="{{thumbnail}}" >
+		<form action="play" style="display: inline-block;">
+			<input type="hidden" name="contentNo" value="{{contentNo}}">
+			<input type="hidden" name="contentSeason" value="-1">
+			<input type="hidden" name="contentEpisode" value="-1">			
+			<button type="submit" class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+		</form>
+	</div>
+	<div class="similar-contents-detail-text-box">
+
+		<div style="display:flex; justify-content: space-between; align-items: center;">
+			<div>
+				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
+				<div style="margin-right: 5px; display: inline-block;">
+					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+				</div>			
+				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
+			</div>			
+			<div>
+				<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" data-contentNo="{{contentNo}}" id="wish-insert-btn{{contentNo}}"><i class="fas fa-plus"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" data-contentNo="{{contentNo}}" id="wish-delete-btn{{contentNo}}"><i class="fas fa-check"></i></button>
+
+			</div>
+		</div>
+		<div class="modal-wallpaper-text">
+			{{contentInfo}}
+		</div>
+	</div>
+</div>
 </script>
 
 <div class="main-color">
@@ -848,33 +965,7 @@ $(function(){
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-				       		<div style="display:flex; flex-wrap:wrap;">
-				       			
-				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-											<div class="similar-contents-detail-box">
-					       					<div class="similar-contents-detail-img-box">
-					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
-					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-					       					</div>
-					       					<div class="similar-contents-detail-text-box">
-					       						<div style="display:flex;">
-					       							<div>
-					       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
-					       							<div>2020</div>
-						       						</div>
-						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
-					       						</div>
-					       						<div class="modal-wallpaper-text">
-					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
-					       						</div>
-					       					</div>
-					       				</div>
-					       			
-					       				
-									
-				       			</c:forEach>
-				       			
+				       		<div id="similar-content-wrapper">				       			
 				       		</div>
 				       		
 				       </div>
@@ -894,7 +985,7 @@ $(function(){
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급:</span><img class="content-limit" width="25px" height="25px"></div>				       				       			
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급: </span><img class="content-limit" width="25px" height="25px"></div>				       				       			
 				       		</div>
 				       </div>
 				      </div>
@@ -920,7 +1011,12 @@ $(function(){
                 </div>
                 <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
-                    	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	<form action="play" style="display: inline-block;">
+                    		<input type="hidden" name="contentNo" id="hover-modal-play-btn">
+                    		<input type="hidden" name="contentSeason" value="-1">
+                    		<input type="hidden" name="contentEpisode" value="-1">
+                    		<button type="submit" class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	</form>
 	                    <button class="btn btn-outline-light hover-modal-etc-btn wish-delete-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn wish-insert-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn modal-thumbs-up" id="thumbs-up-empty2"><i class="far fa-thumbs-up"></i></button>
@@ -931,7 +1027,7 @@ $(function(){
                     	<div class="modal-trailer-feature" style="margin-top:2%;">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box"><img id="hover-content-limit" src="" width="20" height="20"> </div>
+								<div class="modal-trailer-feature-box"><img id="hover-content-limit" src="" width="25" height="25"> </div>
 								<div class="modal-trailer-feature-box" id="hover-content-season"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
