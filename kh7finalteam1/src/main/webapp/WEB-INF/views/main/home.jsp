@@ -34,7 +34,8 @@ window.onload = function(){
 	}		
 	
 	function onPlayerReady(event) {
-		$("#player").css("visibility", "visible");		
+		console.log(event);
+// 		$("#player").css("visibility", "visible");		
     }
 	
 	function onHoverPlayerReady(event) {
@@ -173,6 +174,7 @@ $(function(){
 			$("body").addClass("overflow-scroll");
 			$("#hoverPlayer").css("visibility", "hidden");
 			$("#hoverModal").css("display", "none");
+			$("#hover-modal-play-btn").val(curContentNo);
 			
 			$.ajax({
 				url: "${pageContext.request.contextPath}/data/home/getHoverModalItem",
@@ -443,7 +445,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){						
+				success:function(resp){	
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -541,34 +543,34 @@ $(function(){
   						 				
  						$.fn.initTrailerSeriesSection(1);
  						
- 						$(".modal-series").css("display", "block"); 
- 						 						
- 						$("#similar-content-wrapper").empty();
- 						for(var i in resp.similarList){
- 							var correct = resp.similarList[i].matchingCount / resp.genreList.length * 100;
- 							var template = $("#detail-modal-similar-template").html();
- 							template = template.replace("{{thumbnail}}", resp.similarList[i].contentThumbnail);
- 							template = template.replace("{{correct}}", parseInt(correct));
- 							template = template.replace("{{contentRelease}}", resp.similarList[i].contentRelease);
- 							template = template.replace("{{contentInfo}}", resp.similarList[i].contentInfo);
- 							template = template.replace("{{contentLimit}}", resp.similarList[i].contentLimit);
- 							
- 							if(resp.similarList[i].clientNo === 0){
- 								template = template.replace("{{plusStyle}}", "block");
- 								template = template.replace("{{checkStyle}}", "none");
- 							}
- 							else{
- 								template = template.replace("{{plusStyle}}", "none");
- 								template = template.replace("{{checkStyle}}", "block");
- 							}
- 							
- 							template = template.replaceAll("{{contentNo}}", resp.similarList[i].contentNo);
- 							
- 							$("#similar-content-wrapper").append(template);
- 						} 
- 						
- 						$.fn.initWishBtn();
+ 						$(".modal-series").css("display", "block");
  					}
+					
+ 					$("#similar-content-wrapper").empty();
+					for(var i in resp.similarList){
+						var correct = resp.similarList[i].matchingCount / resp.genreList.length * 100;
+						var template = $("#detail-modal-similar-template").html();
+						template = template.replace("{{thumbnail}}", resp.similarList[i].contentThumbnail);
+						template = template.replace("{{correct}}", parseInt(correct));
+						template = template.replace("{{contentRelease}}", resp.similarList[i].contentRelease);
+						template = template.replace("{{contentInfo}}", resp.similarList[i].contentInfo);
+						template = template.replace("{{contentLimit}}", resp.similarList[i].contentLimit);
+						
+						if(resp.similarList[i].clientNo === 0){
+							template = template.replace("{{plusStyle}}", "block");
+							template = template.replace("{{checkStyle}}", "none");
+						}
+						else{
+							template = template.replace("{{plusStyle}}", "none");
+							template = template.replace("{{checkStyle}}", "block");
+						}
+						
+						template = template.replaceAll("{{contentNo}}", resp.similarList[i].contentNo);
+						
+						$("#similar-content-wrapper").append(template);
+					} 
+					
+					$.fn.initSimilarContent();
 				}		
 					
 			});
@@ -585,11 +587,7 @@ $(function(){
 			$(this).css("display","none");
 			$(".wallpaper-more-button").css("display","block");
 		});
-		
-		$(".hover-modal-play-btn").click(function(){
-			location.href="play";
-		});
-		
+				
 		$(".hover-modal-more-button").click(function(){
 			$("#hoverModal").modal("hide");
 		});
@@ -711,7 +709,7 @@ $(function(){
 			$.fn.initEvent();
 		}
 		
-		$.fn.initWishBtn = function(){
+		$.fn.initSimilarContent = function(){
 			$(".wish-insert-btn-inDetail").click(function(){
 				var contentNo = $(this).attr("data-contentNo");
 				var insertBtn = $("#wish-insert-btn"+contentNo);
@@ -750,6 +748,17 @@ $(function(){
 					}						
 				});
 			});
+			
+			//월페이퍼 호버시 재생버튼 
+			$(".similar-contents-detail-box").hover(function(){
+				var playBtn=$(this).find(".modal-wallpaper-play-btn");
+				playBtn.css("display","block");
+				$(this).css("cursor","pointer");
+			},function(){
+				var playBtn=$(this).find(".modal-wallpaper-play-btn");
+				playBtn.css("display","none");
+				$(this).css("cursor","default");
+			});			
 		};
 	});
 
@@ -804,7 +813,12 @@ $(function(){
 <div class="similar-contents-detail-box">
 	<div class="similar-contents-detail-img-box">
 		<img class="similar-contents-detail-img"src="{{thumbnail}}" >
-		<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+		<form action="play" style="display: inline-block;">
+			<input type="hidden" name="contentNo" value="{{contentNo}}">
+			<input type="hidden" name="contentSeason" value="-1">
+			<input type="hidden" name="contentEpisode" value="-1">			
+			<button type="submit" class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+		</form>
 	</div>
 	<div class="similar-contents-detail-text-box">
 		<div style="display:flex;">
@@ -998,7 +1012,12 @@ $(function(){
                 </div>
                 <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
-                    	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	<form action="play" style="display: inline-block;">
+                    		<input type="hidden" name="contentNo" id="hover-modal-play-btn">
+                    		<input type="hidden" name="contentSeason" value="-1">
+                    		<input type="hidden" name="contentEpisode" value="-1">
+                    		<button type="submit" class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	</form>
 	                    <button class="btn btn-outline-light hover-modal-etc-btn wish-delete-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn wish-insert-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn modal-thumbs-up" id="thumbs-up-empty2"><i class="far fa-thumbs-up"></i></button>
