@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
+import com.kh.finalteam1.repository.ClientDao;
+import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 
@@ -20,8 +22,18 @@ import com.kh.finalteam1.repository.ProgramFeatureDao;
 @RequestMapping("/admin")
 public class AdminController {
 	
+	@Autowired
+	private ClientDao clientDao;
+	
+	@Autowired
+	private ContentDao contentDao;
+	
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("clientMonth", clientDao.monthMemberCount());
+		model.addAttribute("clientYear", clientDao.yearMemberCount());
+		//content
+		
 		return "admin/index";
 	}
 	

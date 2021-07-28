@@ -28,7 +28,6 @@
   	
 	<!-- Custom styles for this page -->
     <link href="${pageContext.request.contextPath}/res/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">	
-    
 
 </head>
 
@@ -42,11 +41,13 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/admin/">
-                  <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-cogs"></i>
-                </div>
+                  
                 <div class="sidebar-brand-text mx-3">
-                	<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width: 100%;">
+                	<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width: 100%;" id="weflex-logo">
+                </div>
+                
+                <div class="sidebar-brand-text mx-3" id="w-logo">
+                	<img alt="w-logo" src="${pageContext.request.contextPath }/res/img/n_logo.png" style="width: 100%;" id="w-logo">
                 </div>
             </a>
 
@@ -59,6 +60,12 @@
             </div>
 
             <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">	
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/">
+                    <i class="fas fa-fw fa-user-cog"></i>
+                    <span>관리자</span></a>
+            
+            
             <li class="nav-item active">	
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-bullhorn"></i>
@@ -79,14 +86,13 @@
                     </div>
                 </div>
                     
-                    <a class="nav-link" href="#">
-                   <i class="fas fa-fw fa-user"></i>
-                    <span>고객센터 관리</span></a>
-                    
                       <a class="nav-link" href="${pageContext.request.contextPath}/admin/clientAdmin">
                    <i class="fas fa-fw fa-user-cog"></i>
                     <span>회원 관리</span></a>
                     
+                      <a class="nav-link" href="#">
+                   <i class="fas fa-fw fa-user"></i>
+                    <span>고객센터 관리</span></a>                  
                     
                     <a class="nav-link" href="${pageContext.request.contextPath}/">
                    <i class="fas fa-fw fa-home"></i>
