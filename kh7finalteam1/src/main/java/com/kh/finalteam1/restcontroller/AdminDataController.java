@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalteam1.entity.ClientGradeListDto;
+import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.NoSeriesDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
 import com.kh.finalteam1.repository.ClientDao;
+import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
@@ -37,6 +39,14 @@ public class AdminDataController {
 	
 	@Autowired
 	private SeriesDao seriesDao;
+	
+	@Autowired
+	private ContentDao contentDao;
+	
+	@GetMapping("/content/list")
+	public List<ContentDto> contentList(){
+		return contentDao.list();
+	}
 	
 	@GetMapping("/admin/searchGenre")
 	public List<GenreDto> searchGenre(@RequestParam String genreName) {
@@ -79,5 +89,5 @@ public class AdminDataController {
 			log.debug("noSeriesDto = {}" , noSeriesDto);
 			session.setAttribute("noSeriesDto", noSeriesDto);
 	}
-	
+
 }

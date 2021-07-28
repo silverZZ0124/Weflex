@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="mainModalService">
+	<select id="getGenre" parameterType="int" resultType="string">
+		select g.genre_name
+    		from content c, content_genre cg, genre g 
+    		where c.content_no = cg.content_no and cg.genre_no = g.genre_no and c.content_no = #{contentNo}
+	</select>
+	<select id="getFeature" parameterType="int" resultType="string">
+		select f.feature_name
+		    from content c, content_feature cf, program_feature f 
+		    where c.content_no = cf.content_no and cf.feature_no = f.feature_no and c.content_no = #{contentNo}
+	</select>  
+	<select id="getCast" parameterType="int" resultType="string">
+		select c.cast_name from cast c where content_no = #{contentNo}
+	</select> 
+</mapper>
+
+
+
+
+
+
+
+
+

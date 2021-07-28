@@ -4,23 +4,16 @@
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>   
 
-  <!--  
+
 <style>
-	.font-color{
-		color: black;
-	}
-	
-	.form-control{
-		color: black;
+	.form-textarea{
+           min-height: 150px;
+           max-height: 400px;
+       }
+       label{
+		color:#141414;
 	}
 </style>
-	-->
-	<style>
-		.form-textarea{
-            min-height: 150px;
-            max-height: 400px;
-        }
-	</style>
 	
 	<script>
 	
@@ -96,10 +89,10 @@
 
 	
 <div class="container-fluid">
-        <div class="row mt-3">
+        <div class="row mt-3 mb-5">
             <div class="col-md-6 offset-md-3">
                 <div class="text-center mb-3">
-                    <h1>컨텐츠 등록</h1>
+                    <h2 class="text-gray-800">컨텐츠 등록</h2>
                 </div>
             <form action="contentRegist" method="post" class="form" id="form-regist">	
 				<!--  <input type="text" name="contentNo" value="${contentNo}"> -->
@@ -117,7 +110,7 @@
                     <label>연령제한</label>
                     <select class="form-control" name="contentLimit" required>
                       <option value="" selected>선택하세요</option>
-                      <option value="1">전체 이용가</option>
+                      <option value="0">전체 이용가</option>
                       <option value="12">12세 이용가</option>
                       <option value="15">15세 이용가</option>
                       <option value="19">19세 이용가</option>
@@ -176,7 +169,7 @@
                     <input type="text" name="contentTrailer" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">등록</button>
+                <button type="submit" class="btn btn-danger btn-block">등록</button>
                 <button type="reset" class="btn btn-secondary btn-block">초기화</button>
 
             </form>

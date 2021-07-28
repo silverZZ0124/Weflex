@@ -49,4 +49,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from yes_series where content_season=#{contentSeason} and content_no=#{contentNo} order by content_episode asc
 	</select>
 	
+	<!-- 연작 있는('Y') 단일 조회 -->
+	<select id="yesGet" parameterType="map" resultType="YesSeriesDto">
+		select * from yes_series where content_no = #{contentNo} and content_season = #{season} and content_episode = #{episode}
+	</select>
+	
 </mapper>

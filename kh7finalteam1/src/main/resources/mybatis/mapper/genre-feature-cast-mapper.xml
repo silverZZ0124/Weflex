@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="genre-feature-cast"> 
+ 
+ 	<resultMap type="GenreFeatureCastVO" id="GenreFeatureCastVO">
+ 		<result column="content_no" property="contentNo"/>
+		<result column="genre_no" property="genreNo"/>
+		<result column="genre_name" property="genreName"/>
+		<result column="feature_no" property="featureNo"/>
+		<result column="feature_name" property="featureName"/>
+		<result column="cast_name" property="castName"/>
+	</resultMap>
+ 	
+	<!-- 각 컨텐츠에 따른 장르 가져오기 -->
+	<select id="getContentGenre" resultMap="GenreFeatureCastVO" parameterType="int">
+		select CG.content_no, G.genre_no, G.genre_name 
+		from content_genre CG inner join genre G on G.genre_no = CG.genre_no 
+		where CG.content_no=#{contentNo}
+	</select>
+	
+	<!-- 각 컨텐츠에 따른 특징 가져오기 -->
+	<select id="getContentFeature" resultMap="GenreFeatureCastVO" parameterType="int">
+		select CF.content_no, PF.feature_no, PF.feature_name 
+		from content_feature CF inner join program_feature PF on PF.feature_no = CF.feature_no 
+		where CF.content_no=#{contentNo}
+	</select>
+	
+	<!-- 각 컨텐츠에 따른 출연 배우 가져오기 -->
+	<select id="getContentCast" resultMap="GenreFeatureCastVO" parameterType="int">
+		select C.content_no, CA.cast_name 
+		from cast CA inner join content C on C.content_no = CA.content_no 
+		where C.content_no=#{contentNo}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
