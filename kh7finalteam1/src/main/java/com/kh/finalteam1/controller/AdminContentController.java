@@ -234,7 +234,7 @@ public class AdminContentController {
 		int contentNo = contentDao.sequence();
 		contentDto.setContentNo(contentNo);
 		contentDao.insert(contentDto);
-		
+				
 		//새션에 contentNo 저장해서 등록 모든 페이지에서 contentNo 사용 예정
 		session.setAttribute("contentNo", contentNo);
 		

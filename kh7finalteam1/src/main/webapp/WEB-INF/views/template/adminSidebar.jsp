@@ -60,7 +60,7 @@
             
              <!-- Nav Item - Dashboard -->
              <li class="nav-item active">	
-             <a class="nav-link" href="${pageContext.request.contextPath}/">
+             <a class="nav-link" href="${pageContext.request.contextPath}/home">
                    <i class="fas fa-fw fa-home"></i>
                     <span>메인 페이지</span></a>
 
@@ -97,8 +97,11 @@
                     
                       <a class="nav-link" href="#">
                    <i class="fas fa-fw fa-user"></i>
-                    <span>고객센터 관리</span></a>                  
-             
+                    <span>고객센터 관리</span></a>       
+                    
+                     <a class="nav-link" href="${pageContext.request.contextPath}/admin/homeSetting">
+                   <i class="fas fa-fw fa-desktop"></i>
+                    <span>홈 화면 설정</span></a>           
             </li>
 
             <!-- Divider -->
