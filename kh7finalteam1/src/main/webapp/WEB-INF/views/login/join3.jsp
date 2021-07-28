@@ -42,7 +42,7 @@
 											<path fill="currentColor"d="M3.707 12.293l-1.414 1.414L8 19.414 21.707 5.707l-1.414-1.414L8 16.586z">
 											</path>
 											</svg>
-											<spanclass="checkmark-group--text">無약정, 無위약금. 해지도쿨하게 언제든지.</span>
+											<span class="checkmark-group--text">無약정, 無위약금. 해지도쿨하게 언제든지.</span>
 											</li>
 									<li class="checkmark-group--row">
 									<svg viewBox="0 0 24 24"class="checkmark-group--icon" aria-hidden="true">

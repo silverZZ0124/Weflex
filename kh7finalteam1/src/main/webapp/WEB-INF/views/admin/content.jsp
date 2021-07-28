@@ -16,26 +16,20 @@
     }
 </style>
 
-<!-- 컨텐츠 타입 이름 변경 (ex. kd->국내드라마) -->
-<script>
-	$(function(){
-		
-	});
-</script>
 
-<div class="container-fluid">
+<div class="container-fluid" style="color:#141414;">
 
 	<div class="container">
 	    <div class="row justify-content-center">
 	        <div class="col-md-6 text-center mb-3 mt-3">
-	            <h2 class="heading-section">컨텐츠 리스트</h2>
+	            <h2 class="heading-section text-gray-800">컨텐츠 리스트</h2>
 	        </div>
 	    </div>
 	    
 	    <div class="card shadow mb-4 row">
 	        <div class="col-md-12">
 	        	<div class="card-body">
-	                <table class="table table-hover py-4" id="contentTable" style="width:100%">
+	                <table class="table table-hover py-4" id="contentTable" style="width:100%; color:#141414;">
 	                    <thead>
 	                        <tr>
 	                            <th width="15%">컨텐츠 번호</th>

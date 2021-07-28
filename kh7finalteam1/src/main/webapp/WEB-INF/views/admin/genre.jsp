@@ -10,16 +10,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
 <style>
-	#linkeGenreEdit:hover{
-		background-color:lightgray;
+	.card-body{
+		color:#141414 !important;
 	}
 	.link-genre:hover{
-		color:#5a5c69;
-		text-decoration:none;
+		color:#d10914;
 		
 	}
 	.link-genre{
-		color:#5a5c69;
+		color:#141414;
 		display:block;
 	}
 	
@@ -57,7 +56,7 @@
                           		<input type="text" name="genreName" id="insert-genreName" class="form-control input-sm">
                         	</div>
 	                         <div class="text-center">
-	                         	<button class="btn btn-block btn-success">확인</button>
+	                         	<button class="btn btn-block btn-light">확인</button>
 	                         </div>
                         </form>
                          
@@ -72,7 +71,7 @@
                           		<input type="text" name="genreName" class="form-control" id="genreName" placeholder="검색어를 입력하세요">
                         	</div>
 	                         <div class="form-group col-lg-3 col-md-12 ">
-	                         	<input type="submit" value="검색" class="btn btn-success">
+	                         	<input type="submit" value="검색" class="btn btn-light">
 	                         </div>
                         </form>
                      </div>
@@ -177,7 +176,7 @@
     			e.preventDefault();
     			
     			var formdata = $(this).serialize();
-				console.log(formdata);
+				//console.log(formdata);
     			
 	    		$.ajax({
 	    			url : "${pageContext.request.contextPath}/data/admin/searchGenre",
@@ -199,16 +198,20 @@
 	    				cardDiv += "</div>";
 	    				$("#search-genre-card").append(cardDiv);
 	    				
-	    				
-	    				for(var i=0; i < resp.length; i++){
-	    					var content = "";
-	    					content += "<li>";
-	    					content += resp[i].genreName;
-	    					content += "</li>";
-	    	    			
+	    				if(resp.length == 0){
+	    					var content = "<li>없음</li>";
 	    					$("#search-list").append(content);
 	    				}
-	    				
+	    				else{
+		    				for(var i=0; i < resp.length; i++){
+		    					var content = "";
+		    					content += "<li>";
+		    					content += resp[i].genreName;
+		    					content += "</li>";
+		    	    			
+		    					$("#search-list").append(content);
+		    				}
+	    				}
 					}
 	    		});
     		});

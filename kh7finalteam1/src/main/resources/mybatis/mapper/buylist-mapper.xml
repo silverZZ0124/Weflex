@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="buylist">
+
+<select id="sequence" resultType="int">
+	select buy_list_seq.nextval from dual
+</select>
+
+
+<insert id="ready" parameterType="BuyListDto">
+	insert into buy_list values(
+		#{buyNo},
+		#{buyPaymentTid},
+		#{clientNo},
+		#{productNo},
+		'승인',
+		sysdate
+	)
+	
+</insert>
+</mapper>

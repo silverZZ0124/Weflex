@@ -126,7 +126,7 @@ dt {
 
 dd {
   margin-bottom: .5rem;
-  margin-left: 0;
+  margin-left: 1rem;
 }
 
 blockquote {
@@ -4554,6 +4554,7 @@ input[type="button"].btn-block {
   margin-bottom: 0;
   background-color: #f8f9fc;
   border-bottom: 1px solid #e3e6f0;
+  font-weight:bold
 }
 
 .card-header:first-child {
@@ -10024,7 +10025,7 @@ a:focus {
 }
 
 .text-gray-800 {
-  color: #5a5c69 !important;
+  color: #141414 !important;font-weight:bold;
 }
 
 .text-gray-900 {
