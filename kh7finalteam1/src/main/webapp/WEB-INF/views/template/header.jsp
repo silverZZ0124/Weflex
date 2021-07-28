@@ -85,10 +85,10 @@
 		<div class="" >
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style" id="header">
 			<ul class="navbar-nav nav-logo-ul" style="width: 120px; margin-left: 1%;">
-				<li class="nav-item"> <a class="nav-link logo-wrapper" href="../finalteam1/"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
+				<li class="nav-item"> <a class="nav-link logo-wrapper" href="../finalteam1/home"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
 			</ul>
 			<ul class="navbar-nav" style="position: absolute;margin-left: 160px;" id="navbar1-ul">
-				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/">홈</a> </li> 
+				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/home">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
@@ -101,7 +101,7 @@
             	</a>       		
 		          
 		          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink1" id="react-dropdown-menu">
-		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/">홈</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/home">홈</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/tv">TV프로그램</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/movie">영화</a></li>
 		            <li><a class="dropdown-item" href="#">내가 찜한 콘텐츠</a></li>

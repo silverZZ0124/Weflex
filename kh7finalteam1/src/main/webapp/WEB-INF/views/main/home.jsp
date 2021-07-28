@@ -830,11 +830,13 @@ $(function(){
 		</form>
 	</div>
 	<div class="similar-contents-detail-text-box">
+		<div class="modal-feature-percent-text"><span>{{correct}}%</span><span>일치</span></div>
 		<div style="display:flex;">
-			<div>
-				<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
-				<div class="modal-feature-percent-text"><span>{{correct}}%</span><span>일치</span></div>
-				<div>{{contentRelease}}</div>
+				
+				<div style="display:flex;">
+				<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 25px; height:25px;">
+				
+				<div style="margin-left:10px;">{{contentRelease}}</div>
 			</div>
 			<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" data-contentNo="{{contentNo}}" id="wish-insert-btn{{contentNo}}"><i class="fas fa-plus"></i></button>
 			<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" data-contentNo="{{contentNo}}" id="wish-delete-btn{{contentNo}}"><i class="fas fa-check"></i></button>
