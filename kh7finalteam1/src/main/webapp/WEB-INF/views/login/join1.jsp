@@ -4,10 +4,22 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/res/css/join1.css"/>
-<title>join1페이지</title>
+<title>Weflex</title>
 </head>
+
+<script>
+	$(function(){
+		$("#join1-next-btn").click(function(){
+			location.href="${pageContext.request.contextPath }/join2";
+		});
+	});
+</script>
 <body>
 	<div id="appMountPoint">
 		<div class="netflix-sans-font-loaded">
@@ -36,12 +48,14 @@
 							<div id="" class="contextBody contextRow">맞춤형 콘텐츠 서비스, 넷플릭스! 비밀번호를 설정해 다양한 디바이스에서 아무 때나 시청하세요.</div>
 						</div>
 						<div class="submitBtnContainer">
+
 						<a href="/finalteam1/join2">
 						<form action="join1" method="POST">
 							<input type="hidden" value="${param.email }" name="email">
 							<button  type="submit" autocomplete="off" class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"  placeholder="registration_button_continue">다음</button>
 						</form>
 						</a>
+
 						</div>
 					</div>
 				</div>

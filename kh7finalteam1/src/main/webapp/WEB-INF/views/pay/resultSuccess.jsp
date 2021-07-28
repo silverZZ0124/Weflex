@@ -13,7 +13,7 @@
 	<div class="pay-page-big-font text-center">결제가 완료되었습니다!</div>
 	<div style="margin-top:3%;">
 		<div style="text-align:center;">넷플릭스 회원이 되신걸 축하드립니다.</div>
-		<div class="container-center" style="width:50%;margin-top:3%;">
+		<div class="container-center" style="width:300px;margin-top:3%;">
 		<div>
 			<svg viewBox="0 0 24 24"class="checkmark-group--icon" aria-hidden="true">
 			<path fill="currentColor"d="M3.707 12.293l-1.414 1.414L8 19.414 21.707 5.707l-1.414-1.414L8 16.586z"></path>
