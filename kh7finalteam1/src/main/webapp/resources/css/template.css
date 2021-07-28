@@ -244,10 +244,12 @@ i{
 .modal-trailer-feature{
 	display:flex;
 	margin-bottom:5%;
+	height: 20px;
 }
 .modal-feature-percent-text{
 	color:#41A541;
 	font-weight:bold;
+
 }
 .modal-feature-border{
 	border: 1px solid #777;
@@ -261,7 +263,7 @@ i{
 
 }
 .modal-trailer-feature-box{
-	margin:0 0.2rem;
+	margin:auto 0.2rem;
 }
 .modal-series{
 	margin-top: 10%;
@@ -446,7 +448,9 @@ i{
 	position:absolute !important;
 	border-radius:10px;
 }
-
+.hover-modal-genre{
+	word-break: keep-all;
+}
 .hoverModalBox{
 	 background-color:rgb(24,24,24);
 	 overflow:hidden;
@@ -502,7 +506,8 @@ i{
 }
 .member-footer {
     max-width: 980px;
-    margin: -70px auto 0;
+    margin-right: auto;
+    margin-left: auto;
     padding: 0 4%;
     color: grey;
 }
@@ -680,6 +685,7 @@ i{
 	border-radius:5px; 
 	width:100%;
 }
+
 @media screen and (max-width:1300px){
 	.search-page-card {
 	    flex: 0 0 19.5% !important;

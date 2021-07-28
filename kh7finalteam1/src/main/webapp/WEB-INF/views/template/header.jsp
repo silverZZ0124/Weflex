@@ -122,7 +122,7 @@
 			 	<li class="nav-item nav2-item"> <a class="nav-link" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji"></i></a> </li>
 				<li class="nav-item nav2-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
 				<li class="nav-item dropdown">
-         		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+         		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:3px;">
             		<img src="res/img/profile.png" width="25px" height="25px" style="border-radius:15%;">
             	</a>       		
 		          
