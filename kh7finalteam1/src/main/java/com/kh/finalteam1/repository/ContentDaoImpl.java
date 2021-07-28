@@ -46,4 +46,5 @@ public class ContentDaoImpl implements ContentDao {
 		return count>0;
 	}
 	
+	
 }

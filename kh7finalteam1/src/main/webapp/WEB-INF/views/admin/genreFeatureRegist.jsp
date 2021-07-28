@@ -9,10 +9,6 @@
 	cursor: pointer;
 	}
 	
-	input[type=checkbox]{
-		margin-right:0.5rem;
-	}
-	
 	input[type=checkbox]:checked + label {
    color: #4e73df;
 	}
@@ -24,6 +20,7 @@
 	.category-li{
 	list-style-type: none;
 	}
+	
 
 </style>
 <script>
@@ -36,7 +33,7 @@
 			console.log(genre);
 			console.log(feature);
 			
-			if(!genre || !feature){//둘중 하나라도 체크를 하나도 안했으면 데이터 전송을 막음!!!
+			if(!genre && !feature){//둘다 체크를 하나도 안했으면 데이터 전송을 막음!!!
 				e.preventDefault();
 				$("#myModal").modal("show");
 			}
@@ -54,15 +51,15 @@
          	 <div class="col-md-6">
 	             <div class="card shadow mb-4">
 	             	<div class="card-header py-3">
-	                     <h6 class="m-0 font-weight-bold text-dark">장르 등록</h6>
+	                     <h6 class="m-0 font-weight-bold text-primary">장르 등록</h6>
 	                </div>
 	             	<div class="card-body" id="list-result" >
 					<form action="genreFeatureRegist" method="post" id="regist-form">
 	             		<ul class="category-ul" style="overflow-y: scroll; height:550px;">
 	               		<c:forEach var="genreDto" items="${genreList}">
-				    		<li class="category-li">
-				    			<input type="checkbox" name="genreNo" value="${genreDto.genreNo}" class="genre-add"  id="genre-${genreDto.genreNo}">
-				    			<label class="btn-lab" for="genre-${genreDto.genreNo}">${genreDto.genreName}</label>
+				    		<li class="category-li custom-control custom-checkbox">
+				    			<input type="checkbox" name="genreNo" value="${genreDto.genreNo}" class="genre-add custom-control-input"  id="genre-${genreDto.genreNo}">
+				    			<label class="btn-lab custom-control-label" for="genre-${genreDto.genreNo}">${genreDto.genreName}</label>
 				    		</li>
 						</c:forEach>
 
@@ -80,9 +77,9 @@
 	             	<div class="card-body" id="list-result">
 	             		<ul class="category-ul" style="overflow-y: scroll; height:550px;">
 	               		<c:forEach var="featureDto" items="${featureList}">
-				    		<li class="category-li">
-				    				<input type="checkbox" name="featureNo" value="${featureDto.featureNo}" class="feature-add" id="feature-${featureDto.featureNo}">
-				    				<label class="btn-lab" for="feature-${featureDto.featureNo}">${featureDto.featureName}</label>
+				    		<li class="category-li custom-control custom-checkbox"">
+				    				<input type="checkbox" name="featureNo" value="${featureDto.featureNo}" class="feature-add custom-control-input" id="feature-${featureDto.featureNo}">
+				    				<label class="btn-lab custom-control-label" for="feature-${featureDto.featureNo}">${featureDto.featureName}</label>
 				    		</li>
 						</c:forEach>
 						</ul>

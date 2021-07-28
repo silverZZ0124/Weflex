@@ -48,17 +48,17 @@ $(function(){
                 <div class="card">
                     <form class="form" action="castRegist" method="post">
                     <div class="card-header"> 
-                           <h5 class="head-regist">배우명 등록</h5>
+                           <h5 class="head-regist text-primary">배우명 등록</h5>
                     </div>
                     
                         <div class="card-body">
                             <div class="buttons">            
-                                <input type="text" name="castName" class="form-control" required> <button type="button" class="btnAdd btn btn-outline-success">추가</button><br><br>
+                                <input type="text" name="castName" class="form-control" required> <button type="button" class="btnAdd btn btn-outline-primary">추가</button><br><br>
                             </div>
                         </div>
 
                        <div class="card-footer text-right">
-                            <button type="submit" class="btn btn-primary">등록</button>
+                            <button type="submit" class="btn btn-success">등록</button>
                             <button type="reset" class="btn btn-secondary">Reset</button>
                         </div>    
                 </form>

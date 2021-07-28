@@ -176,7 +176,7 @@
                     <input type="text" name="contentTrailer" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">등록</button>
+                <button type="submit" class="btn btn-success btn-block">등록</button>
                 <button type="reset" class="btn btn-secondary btn-block">초기화</button>
 
             </form>

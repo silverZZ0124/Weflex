@@ -62,4 +62,17 @@ public class ClientDaoImpl implements ClientDao {
 	public List<ClientGradeListDto> list() {
 		return sqlSession.selectList("client.grade-list");
 	}
+	
+	//이번달 회원 가입 수
+	@Override
+	public int monthMemberCount() {
+		return sqlSession.selectOne("client.month-clientCount");
+	}
+	
+	//올해 회원 가입 수(2021년)
+	@Override
+	public int yearMemberCount() {
+		return sqlSession.selectOne("client.year-clientCount");
+	}
+	
 }
