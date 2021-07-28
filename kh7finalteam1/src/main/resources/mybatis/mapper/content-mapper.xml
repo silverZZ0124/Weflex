@@ -42,8 +42,7 @@
 			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail}
 		where content_no=#{contentNo}
 	</update> 
-<<<<<<< HEAD
-	 
+		 
 	<select id="getGenreSlider" parameterType="map" resultType="ContentDto">
 		select 
 		    CT.*
@@ -91,8 +90,6 @@
 			where cg.content_no = #{contentNo}
 	</select>
 
-=======
-	
 	<!-- 이번달 컨텐츠 증가 수 -->
 	<select id="month-contentCount" resultType="int">
 		select count(*) from content
@@ -104,5 +101,4 @@
 		select count(*) from content
  		where content_join between (TRUNC(SYSDATE,'YYYY')) and SYSDATE
 	</select>
->>>>>>> refs/remotes/origin/main
 </mapper>
