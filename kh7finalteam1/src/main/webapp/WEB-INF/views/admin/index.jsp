@@ -192,10 +192,10 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 이번달 추가 된 컨텐츠 수</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${contentMonth}개</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                            <i class="fas fa-play fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -211,7 +211,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 올해 추가 된 컨텐츠 수(2021년)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${contentYear}개</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-play-circle fa-2x text-gray-300"></i>

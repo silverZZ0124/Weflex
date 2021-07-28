@@ -46,5 +46,17 @@ public class ContentDaoImpl implements ContentDao {
 		return count>0;
 	}
 	
+	//이번달 컨텐츠 추가 수
+	@Override
+	public int monthContentCount() {
+		return sqlSession.selectOne("content.month-contentCount");
+	}
+	
+	//올해 컨텐츠 추가 수
+	@Override
+	public int yearContentCount() {
+		return sqlSession.selectOne("content.year-contentCount");
+	}
+	
 	
 }
