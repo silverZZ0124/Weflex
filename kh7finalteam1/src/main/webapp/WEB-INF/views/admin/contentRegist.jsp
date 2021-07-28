@@ -20,6 +20,9 @@
             min-height: 150px;
             max-height: 400px;
         }
+        label{
+			color:#141414;
+		}
 	</style>
 	
 	<script>
@@ -99,7 +102,7 @@
         <div class="row mt-3">
             <div class="col-md-6 offset-md-3">
                 <div class="text-center mb-3">
-                    <h1>컨텐츠 등록</h1>
+                    <h1 class="text-gray-800">컨텐츠 등록</h1>
                 </div>
             <form action="contentRegist" method="post" class="form" id="form-regist">	
 				<!--  <input type="text" name="contentNo" value="${contentNo}"> -->
@@ -176,7 +179,7 @@
                     <input type="text" name="contentTrailer" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">등록</button>
+                <button type="submit" class="btn btn-light btn-block">등록</button>
                 <button type="reset" class="btn btn-secondary btn-block">초기화</button>
 
             </form>
