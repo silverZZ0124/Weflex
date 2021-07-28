@@ -15,7 +15,7 @@
 	<insert id="insert" parameterType="ContentDto">
 		insert into content values(
 		#{contentNo} , #{contentName}, #{contentInfo}, #{contentLimit},  #{contentSeries}, 
-		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}, #{contentTrailer}
+		#{contentRelease}, #{contentLogo}, 0, 0, #{contentThumbnail}, #{contentType}, #{contentTrailer}, sysdate
 		)
 	</insert>
 	
@@ -42,5 +42,16 @@
 			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail}
 		where content_no=#{contentNo}
 	</update> 
-	 
+	
+	<!-- 이번달 컨텐츠 증가 수 -->
+	<select id="month-contentCount" resultType="int">
+		select count(*) from content
+		where content_join between (TRUNC(SYSDATE,'MM')) and SYSDATE
+	</select>
+	
+	<!-- 이번년도 컨텐츠 증가 수 -->
+	<select id="year-contentCount" resultType="int">
+		select count(*) from content
+ 		where content_join between (TRUNC(SYSDATE,'YYYY')) and SYSDATE
+	</select>
 </mapper>

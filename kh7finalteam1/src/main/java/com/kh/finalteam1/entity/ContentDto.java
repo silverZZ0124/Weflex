@@ -1,6 +1,8 @@
 package com.kh.finalteam1.entity;
 
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +22,5 @@ public class ContentDto {
 	private String contentThumbnail;
 	private String contentType;
 	private String contentTrailer;
+	private Date contentJoin;
 }

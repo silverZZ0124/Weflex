@@ -43,7 +43,7 @@
 	
 	<!-- 이번달 회원 증가 수 -->
 	<select id="month-clientCount" resultType="int">
-		select count(*) month from client
+		select count(*) from client
 		where client_join between (TRUNC(SYSDATE,'MM')) and SYSDATE
 	</select>
 	
