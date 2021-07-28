@@ -115,10 +115,10 @@
                     <div class="col-md-6 offset-md-6 pt-3">
                         <div class="row">
                             <div class="col-md-6 p-1">
-                                <button type="button" class="btn btn-block btn-outline-primary" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
+                                <button type="button" class="btn btn-block btn-outline-danger" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
-                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-danger" id="delete-btn">삭제</a>
+                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-secondary" id="delete-btn">삭제</a>
                             </div>
                         </div>
                     </div>
@@ -134,10 +134,9 @@
 	     
    	 		
 	     	 <div class="card shadow mb-4">
-	     	 	<div class="card-header py-3">
+	     	 	<div class="card-header">
 	     	 		<div class="row">
-		     	 		<div class="col-md-4">
-				     	 	<div class="dropdown">
+		     	 		<div class="col-md-4 dropdown pb-2">
 							  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 							    시즌 1
 							  </a>
@@ -146,10 +145,9 @@
 								    <li class="dropdown-item ">시즌 ${seasonSize }</li>							  	
 							  	</c:forEach>
 							  </ul>
-							</div>
 		     	 		</div>
-		                <div class="col-md-2 offset-md-6">
-		                	<button class="btn btn-block btn-primary" data-toggle="modal" data-target="#insert-episode-modal">에피소드 추가</button>
+		                <div class="col-md-2 offset-md-6 pt-3 col-sm-12 offset-sm-0">
+		                	<button class="btn btn-block btn-danger" data-toggle="modal" data-target="#insert-episode-modal">에피소드 추가</button>
 		                </div>
 	                </div>
 	            </div>
@@ -177,11 +175,11 @@
 				            			<td>
 				            				<div class="row">
 					                            <div class="col-md-6 p-1">
-					                                <button class="btn btn-block btn-outline-primary episode-modal-btn" data-toggle="modal" 
+					                                <button class="btn btn-block btn-outline-danger episode-modal-btn" data-toggle="modal" 
 					                                data-target="#edit-series-modal"">수정</button>
 					                            </div>
 					                            <div class="col-md-6 p-1">
-					                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn btn-outline-danger">삭제</a>
+					                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn btn-outline-secondary">삭제</a>
 					                            </div>
 					                        </div>
 				            			</td>

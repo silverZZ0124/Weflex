@@ -4,26 +4,16 @@
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>   
 
-  <!--  
+
 <style>
-	.font-color{
-		color: black;
-	}
-	
-	.form-control{
-		color: black;
+	.form-textarea{
+           min-height: 150px;
+           max-height: 400px;
+       }
+       label{
+		color:#141414;
 	}
 </style>
-	-->
-	<style>
-		.form-textarea{
-            min-height: 150px;
-            max-height: 400px;
-        }
-        label{
-			color:#141414;
-		}
-	</style>
 	
 	<script>
 	
@@ -99,10 +89,10 @@
 
 	
 <div class="container-fluid">
-        <div class="row mt-3">
+        <div class="row mt-3 mb-5">
             <div class="col-md-6 offset-md-3">
                 <div class="text-center mb-3">
-                    <h1 class="text-gray-800">컨텐츠 등록</h1>
+                    <h2 class="text-gray-800">컨텐츠 등록</h2>
                 </div>
             <form action="contentRegist" method="post" class="form" id="form-regist">	
 				<!--  <input type="text" name="contentNo" value="${contentNo}"> -->
@@ -179,7 +169,7 @@
                     <input type="text" name="contentTrailer" class="form-control" required>
                 </div>
 
-                <button type="submit" class="btn btn-light btn-block">등록</button>
+                <button type="submit" class="btn btn-danger btn-block">등록</button>
                 <button type="reset" class="btn btn-secondary btn-block">초기화</button>
 
             </form>
