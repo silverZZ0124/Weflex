@@ -3,33 +3,47 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
-  type: 'doughnut',
-  data: {
-    labels: ["10대", "20대", "30대", "40대이상"],
-    datasets: [{
-      data: [55, 25, 10, 10],
-      backgroundColor: ['#4e82be', '#1cc88a', '#36b9cc', '#db835c'],
-      hoverBackgroundColor: ['#4175b1', '#17a673', '#2c9faf', '#d67347'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      caretPadding: 10,
-    },
-    legend: {
-      display: false
-    },
-    cutoutPercentage: 80,
-  },
+$(function(){
+	var ctx = $("#myPieChart");
+	
+	$.ajax({
+		url : "../data/client/age",
+		type:"get",
+		dataType:"json",
+		success:function(count){
+			console.log(count);
+
+	var myPieChart = new Chart(ctx, {
+	  type: 'doughnut',
+	  data: {
+	    labels: ["10대", "20대", "30대", "40대이상"],
+	    datasets: [{
+//	      data: [count.ten, count.twenty, count.thirty, count.forty], 	//DB 
+	      data: [55, 25, 10, 10],//임시 데이터
+	      backgroundColor: ['#4e82be', '#db835c', '#AA4643', '#5a5c69'],
+	      hoverBackgroundColor: ['#0080ff', '#ff7f00', '#dc143c', '#9193a0'],
+	      hoverBorderColor: "rgba(234, 236, 244, 1)",
+	    }],
+	  },
+	  options: {
+	    maintainAspectRatio: false,
+	    tooltips: {
+	      backgroundColor: "rgb(255,255,255)",
+	      bodyFontColor: "#858796",
+	      borderColor: '#dddfeb',
+	      borderWidth: 1,
+	      xPadding: 15,
+	      yPadding: 15,
+	      displayColors: true,
+	      caretPadding: 10,
+	    },
+	    legend: {
+	      display: false,
+	    },
+	    cutoutPercentage: 80,
+	  },
+	});
+	
+		}
+	});
 });
