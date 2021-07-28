@@ -101,4 +101,6 @@
 		select count(*) from content
  		where content_join between (TRUNC(SYSDATE,'YYYY')) and SYSDATE
 	</select>
+	
+	<!-- 티비프로그램(연작있는컨텐츠) 조회 -->
 </mapper>

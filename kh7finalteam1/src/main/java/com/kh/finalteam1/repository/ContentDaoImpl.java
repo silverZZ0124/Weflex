@@ -83,6 +83,11 @@ public class ContentDaoImpl implements ContentDao {
 	public int yearContentCount() {
 		return sqlSession.selectOne("content.year-contentCount");
 	}
-	
+
+	//TV프로그램(장르 검색 안했을때)
+	@Override
+	public List<ContentListVO> tvProgramList() {
+		return sqlSession.selectList("content.tvProgram");
+	}
 	
 }
