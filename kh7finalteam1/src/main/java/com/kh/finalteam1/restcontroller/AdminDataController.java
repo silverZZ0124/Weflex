@@ -127,17 +127,17 @@ public class AdminDataController {
 		return genreDao.list();
 	}
 	
+	@PostMapping("/admin/getFeature")
+	public List<ProgramFeatureDto> getFeature() {
+		return programFeatureDao.list();
+	}
+	
 	@PostMapping("/admin/getSliderSample")
 	public SliderListVO getSliderSample(
 			@RequestParam(value="sliderTitle") String sliderTitle,
 			@RequestParam(value="contentType") String contentType,
 			@RequestParam(value="type") String type,
 			@RequestParam(value="keyword") String keyword) {
-		
-		System.out.println(sliderTitle);
-		System.out.println(contentType);
-		System.out.println(type);
-		System.out.println(keyword);
 		
 		SliderListVO sliderListVO = homeService.getSlider(sliderTitle, contentType, type, keyword);
 		return sliderListVO;

@@ -22,6 +22,10 @@
 		insert into home_slider values(
 			home_slider_seq.nextval, #{sliderTitle}, #{contentType}, #{type}, #{keyword})
 	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from home_slider where home_slider_no = #{homeSliderNo}
+	</delete>
 </mapper>
 
 
