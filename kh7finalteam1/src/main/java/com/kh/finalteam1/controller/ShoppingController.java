@@ -56,8 +56,8 @@ public class ShoppingController {
 	
 	@PostMapping("/confirm")
 	public String confirm(HttpSession session,@RequestParam int no, @ModelAttribute KakaoPayReadyPrepareVO prepareVO) throws URISyntaxException {
-		//int clientNo=(int)session.getAttribute("clientNo");
-		int clientNo=2;
+		int clientNo=(int)session.getAttribute("clientNo");
+		
 		prepareVO.setPartner_user_id(String.valueOf(clientNo));
 		int buyNo=buyListDao.getSequence();
 		prepareVO.setPartner_order_id(String.valueOf(buyNo));
