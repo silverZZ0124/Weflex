@@ -103,7 +103,7 @@ public class HomeController {
 		List<WishListDto> wishList=wishListDao.get(clientNo);
 		model.addAttribute("wishList",wishList);
 	
-		//int no=likeList.get(0).getContentNo();
+	
 		List<ContentDto> contentList=new ArrayList<>();
 		for(int i=0;i<wishList.size();i++) {
 			
