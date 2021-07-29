@@ -135,5 +135,8 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.update("content.decreaseContentLikes", contentNo) > 0;
 	}
 	
-	
+	@Override
+	public ContentDto getList(int no) {
+		return sqlSession.selectOne("content.get",no);
+	}
 }

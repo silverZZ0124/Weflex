@@ -593,7 +593,7 @@ $(function(){
 		});
 				
 		$(".wallpaper-more-button").click(function(){
-			$(".similar-contents-box").css("height","1600px");
+			$(".similar-contents-box").css("height","fit-content");
 			$(this).css("display","none");
 			$(".wallpaper-less-button").css("display","block");
 		});
@@ -838,11 +838,11 @@ $(function(){
 	</div>
 	<div class="similar-contents-detail-text-box">
 
-		<div style="display:flex; justify-content: space-between; align-items: center;">
+		<div style="display:flex; justify-content: space-between; align-items: center;margin-top:3%;">
 			<div>
 				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
 				<div style="margin-right: 5px; display: inline-block;">
-					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 25px;height:25px;">
 				</div>			
 				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
 			</div>			
