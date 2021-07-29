@@ -6,6 +6,7 @@
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {
+      $('.sidebar-brand-text').append('<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width:100%;" id="weflex-logo">');
       $('.sidebar .collapse').collapse('hide');
     };
   });

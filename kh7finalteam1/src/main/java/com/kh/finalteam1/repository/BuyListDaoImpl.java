@@ -1,10 +1,13 @@
 package com.kh.finalteam1.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalteam1.entity.BuyListDto;
+import com.kh.finalteam1.vo.ClientJoinBuyCountVO;
 @Repository
 public class BuyListDaoImpl implements BuyListDao{
 
@@ -19,5 +22,12 @@ public class BuyListDaoImpl implements BuyListDao{
 	@Override
 	public void ready(BuyListDto buyListDto) {
 		sqlSession.insert("buylist.ready",buyListDto);
+	}
+	
+	
+	//월별 결제 건수 조회
+	@Override
+	public ClientJoinBuyCountVO buyCount() {
+		return sqlSession.selectOne("buylist.buy-count");
 	}
 }

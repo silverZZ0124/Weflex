@@ -41,14 +41,13 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/admin/">
-                  
+               
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-cogs"></i>
+                </div>
                 <div class="sidebar-brand-text mx-3">
-                	<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width: 100%;" id="weflex-logo">
-                </div>
-                
-                <div class="sidebar-brand-text mx-3" id="w-logo">
-                	<img alt="w-logo" src="${pageContext.request.contextPath }/res/img/n_logo.png" style="width: 100%;" id="w-logo">
-                </div>
+					<img alt="weflex-logo" src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="width:100%;" id="weflex-logo">
+				</div>
             </a>
 
             <!-- Divider -->
@@ -61,7 +60,7 @@
             
              <!-- Nav Item - Dashboard -->
              <li class="nav-item active">	
-             <a class="nav-link" href="${pageContext.request.contextPath}/">
+             <a class="nav-link" href="${pageContext.request.contextPath}/home">
                    <i class="fas fa-fw fa-home"></i>
                     <span>메인 페이지</span></a>
 
@@ -88,7 +87,6 @@
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/content/contentRegist">컨텐츠 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/genre">장르 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/feature">특징 추가</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/homeSetting">홈 화면 설정</a>
                     </div>
                 </div>
                     
@@ -98,8 +96,11 @@
                     
                       <a class="nav-link" href="#">
                    <i class="fas fa-fw fa-user"></i>
-                    <span>고객센터 관리</span></a>                  
-             
+                    <span>고객센터 관리</span></a>       
+                    
+                     <a class="nav-link" href="${pageContext.request.contextPath}/admin/homeSetting">
+                   <i class="fas fa-fw fa-desktop"></i>
+                    <span>홈 화면 설정</span></a>           
             </li>
 
             <!-- Divider -->
