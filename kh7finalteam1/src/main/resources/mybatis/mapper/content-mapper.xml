@@ -139,5 +139,15 @@
 	</update>
 
 	<!-- 티비프로그램(연작있는컨텐츠) 조회 -->
+	<select id="tvProgram" resultType="ContentListVO">
+		select content_no, content_thumbnail from content where content_series = 'Y'
+	</select>
+	
+	<!-- 영화(연작없는컨텐츠) 조회 -->
+	<select id="movie" resultType="ContentListVO">
+		select content_no, content_thumbnail from content where content_series = 'N'
+	</select>
+	
+	
 
 </mapper>

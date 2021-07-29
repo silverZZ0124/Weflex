@@ -85,11 +85,18 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.selectOne("content.year-contentCount");
 	}
 
-	//TV프로그램(장르 검색 안했을때)
+	//TV프로그램 목록(장르 검색 안했을때)
 	@Override
 	public List<ContentListVO> tvProgramList() {
 		return sqlSession.selectList("content.tvProgram");
 	}
+	
+	//영화 목록
+	@Override
+	public List<ContentListVO> movieList() {
+		return sqlSession.selectList("content.movie");
+	}
+	
 
 	@Override
 	public List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreList, int clientNo, int count) {

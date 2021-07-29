@@ -55,7 +55,10 @@
 		});
 		
 		if(location.href==="http://localhost:8080/finalteam1/tv"){
-			$(".search-nav-style").css("display","block");
+			$(".tv-nav-style").css("display","block");
+		}
+		else if(location.href==="http://localhost:8080/finalteam1/movie"){
+			$(".movie-nav-style").css("display","block");
 		}
 		
 		$("#search-icon").click(function(){
@@ -139,7 +142,7 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style search-nav-style" id="second-header" style="display:none;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style tv-nav-style" id="second-header" style="display:none;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
 				  <li class="nav-item second-nav-title-text" style="color:white;"><div>TV 프로그램</div> </li> 
@@ -171,7 +174,7 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style "  style="display:none;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style movie-nav-style"  style="display:none;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
 				  <li class="nav-item second-nav-title-text" style="color:white;"><div>영화</div> </li> 
