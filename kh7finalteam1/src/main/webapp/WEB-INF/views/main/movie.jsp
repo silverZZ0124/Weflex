@@ -84,7 +84,7 @@
 </script>
 <div class="main-color container-center search-page-body">
 
-	<c:forEach var="contentListVO" items="${tvProgramList }">
+	<c:forEach var="contentListVO" items="${movieList}">
 		<div class="search-page-card"><img src="${contentListVO.contentThumbnail }" class="search-page-card-img"></div>
 	</c:forEach> 
 	

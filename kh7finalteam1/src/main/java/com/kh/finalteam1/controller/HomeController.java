@@ -1,5 +1,7 @@
 package com.kh.finalteam1.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
+import com.kh.finalteam1.vo.ContentListVO;
 import com.kh.finalteam1.vo.PlaylistVO;
 
 @Controller
@@ -20,6 +24,9 @@ public class HomeController {
 	
 	@Autowired
 	private HomeService homeService;
+	
+	@Autowired
+	private ContentDao contentDao;
 	
 //	@GetMapping("/")
 //	public String home(Model model, HttpSession session) throws JsonProcessingException {	
@@ -69,10 +76,21 @@ public class HomeController {
 	}
 	
 	@GetMapping("/tv")
-	public String tv() {
+	public String tv(Model model) {
 		
+		List<ContentListVO> tvProgramList = contentDao.tvProgramList();
+		model.addAttribute("tvProgramList", tvProgramList);
 		return "main/TV";
 
+	}
+	
+	@GetMapping("/movie")
+	public String movie(Model model) {
+		
+		List<ContentListVO> movieList = contentDao.movieList();
+		model.addAttribute("movieList", movieList);
+		return "main/movie";
+		
 	}
 	
 	
