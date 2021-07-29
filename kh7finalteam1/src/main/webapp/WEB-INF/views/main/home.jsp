@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -1051,8 +1049,6 @@ $(function(){
 		<div class="slider-title container-center">${sliderVO.sliderTitle }</div>		
 		<div class="custom-img-slide-box">
 			<div class="container-center slider-box" id="slider1">
-				
-				
 			  	<div class="custom-img-slide">
 			   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
 						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
@@ -1065,16 +1061,3 @@ $(function(){
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-
-
-
-
-
-
-
-
-
-
-

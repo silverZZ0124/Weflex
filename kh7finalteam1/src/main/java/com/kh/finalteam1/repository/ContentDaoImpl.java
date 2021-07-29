@@ -53,13 +53,13 @@ public class ContentDaoImpl implements ContentDao {
 	}
 
 	@Override
-	public List<ContentListVO> getSliderItem(String contentType, int type, String keyword) {
+	public List<ContentListVO> getSliderItem(String contentType, String condition, String keyword) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("contentType", contentType);		
 		map.put("keyword", keyword);
 		
 		List<ContentListVO> list = new ArrayList<ContentListVO>();
-		if(type == 2) {
+		if(condition.equals("genre")) {
 			list = sqlSession.selectList("content.getContentList", map);
 		}
 				

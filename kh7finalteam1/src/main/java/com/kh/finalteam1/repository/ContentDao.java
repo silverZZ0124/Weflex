@@ -14,7 +14,7 @@ public interface ContentDao {
 	ContentDto get(int contentNo);
 	boolean delete(int contentNo);
 	boolean edit(ContentDto contentDto);
-	List<ContentListVO> getSliderItem(String contentType, int type, String keyword);
+	List<ContentListVO> getSliderItem(String contentType, String condition, String keyword);
 	HoverModalVO getHoverModalVO(int contentNo);
 	List<ContentDto> list();
 	int monthContentCount();//이번달 컨텐츠 추가 수
