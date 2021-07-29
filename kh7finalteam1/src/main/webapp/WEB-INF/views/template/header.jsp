@@ -46,11 +46,11 @@
 		$(window).on('scroll',function(){
 			if($(window).scrollTop()){
 				$('#header').removeClass('active-gradation').addClass('active-black'); 
-				$("#second-header").removeClass("active-gradation2").addClass("active-black");
+				$(".second-header").removeClass("active-gradation2").addClass("active-black");
 			}else{ 
 			
 				$('#header').removeClass('active-black').addClass('active-gradation');
-				$("#second-header").removeClass("active-black").addClass("active-gradation2");
+				$(".second-header").removeClass("active-black").addClass("active-gradation2");
 			}
 		});
 		
@@ -61,6 +61,9 @@
 		else if(location.href==="http://localhost:8080/finalteam1/movie"){
 			$(".movie-nav-style").css("display","block");
 
+		}
+		else if(location.href==="http://localhost:8080/finalteam1/wishlist"){
+			$(".wishlist-nav-style").css("display","block");
 		}
 		
 		$("#search-icon").click(function(){
@@ -144,10 +147,10 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style tv-nav-style" id="second-header" style="display:none;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style tv-nav-style second-header"style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="color:white;"><div>TV 프로그램</div> </li> 
+				  <li class="nav-item second-nav-title-text" style="width:185px;"><div>TV 프로그램</div> </li> 
 				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
 								    
 								      <option>장르</option>
@@ -176,10 +179,10 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style movie-nav-style"  style="display:none;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style movie-nav-style second-header"  style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="color:white;"><div>영화</div> </li> 
+				  <li class="nav-item second-nav-title-text" style="width:82px;"><div style="width:100%;">영화</div> </li> 
 				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
 								    
 								      <option>장르</option>
@@ -211,10 +214,10 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style " id="second-header-wishlist" style="display:none;margin-top:60px;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style wishlist-nav-style second-header" style="display:none;margin-top:60px;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="color:white;"><div>내가 찜한 콘텐츠</div> </li> 
+				  <li class="nav-item second-nav-title-text" style="    width: 240px;"><div>내가 찜한 콘텐츠</div> </li> 
 				  
 			</ul> 
 

@@ -22,9 +22,7 @@
 		select * from like_list where client_no=#{clientNo} and content_no=#{contentNo}
 	</select>
 	
-	<select id="get" parameterType="int" resultType="LikeListDto">
-		select * from like_list where client_no=#{clientNo}
-	</select>
+	
 </mapper>
 
 

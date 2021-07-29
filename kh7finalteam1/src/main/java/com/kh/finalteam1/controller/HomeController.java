@@ -12,14 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.kh.finalteam1.entity.ContentDto;
-import com.kh.finalteam1.entity.LikeListDto;
-
+import com.kh.finalteam1.entity.WishListDto;
 import com.kh.finalteam1.repository.ContentDao;
-
-import com.kh.finalteam1.repository.LikeListDao;
-
+import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
 import com.kh.finalteam1.vo.ContentListVO;
@@ -36,7 +32,7 @@ public class HomeController {
 
 	
 	@Autowired
-	private LikeListDao likeListDao;
+	private WishListDao wishListDao;
 	
 
 	@Autowired
@@ -104,15 +100,15 @@ public class HomeController {
 		int clientNo=(int)session.getAttribute("clientNo");
 
 
-		List<LikeListDto> likeList=likeListDao.get(clientNo);
-		model.addAttribute("likeList",likeList);
+		List<WishListDto> wishList=wishListDao.get(clientNo);
+		model.addAttribute("wishList",wishList);
 	
 		//int no=likeList.get(0).getContentNo();
 		List<ContentDto> contentList=new ArrayList<>();
-		for(int i=0;i<likeList.size();i++) {
+		for(int i=0;i<wishList.size();i++) {
 			
 			
-			contentList.add(contentDao.getList(likeList.get(i).getContentNo()));
+			contentList.add(contentDao.getList(wishList.get(i).getContentNo()));
 		}
 		
 		model.addAttribute("contentList", contentList);
