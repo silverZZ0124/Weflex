@@ -57,27 +57,106 @@
 				clearTimeout(timeout);
 			});
 			
-			
-			
 		
-			$("#hoverModal2").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
+			$("#hoverModal").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
 			$("body").removeClass("modal-open");
 			},1000);
-			
 			
 					
 		});
 		
 		
 		$(".search-page-card-img").mouseleave(function(){
-			$("#hoverModal2").modal("hide");
+			$("#hoverModal").modal("hide");
 		});
 		
-		$("#hoverModal2").mouseleave(function(){
-			$("#hoverModal2").modal("hide");
+		$("#hoverModal").mouseleave(function(){
+			$("#hoverModal").modal("hide");
 	
 		});
 		
+		$("#hoverModal").on("show.bs.modal",function(){
+			$("body").addClass("overflow-scroll");
+			$("#hoverPlayer").css("visibility", "hidden");
+			$("#hoverModal").css("display", "none");
+			$("#hover-modal-play-btn").val(curContentNo);
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/getHoverModalItem",
+				type: "post",
+				dataType: "json",
+				data: {
+					contentNo: curContentNo	
+				},
+				success:function(resp){					
+					var youtubeId = resp.contentTrailer.substring(30);
+					var videoUrl = resp.contentTrailer + "?enablejsapi=1&start=00&autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist="+youtubeId;
+					$(".hoverModalVideo").attr("src", videoUrl);
+					
+					$("#hover-content-limit").attr("src", "res/img/content_limit_"+resp.contentLimit+".png")
+					
+					if(resp.wish){
+						$("#modal-plus-btn").css("display", "none");
+						$("#modal-check-btn").css("display", "block");
+					}
+					else{
+						$("#modal-plus-btn").css("display", "block");
+						$("#modal-check-btn").css("display", "none");
+					}	
+					
+					if(resp.like){
+						$(".like-insert-btn").css("display", "none");
+						$(".like-delete-btn").css("display", "block");
+					}
+					else{
+						$(".like-insert-btn").css("display", "block");
+						$(".like-delete-btn").css("display", "none");
+					}	
+										
+					$("#hover-content-season").empty();
+					if(resp.contentSeries === "Y"){
+						$("#hover-content-season").text("시즌 "+resp.seasonCount+"개");
+					}
+					else{
+						$("#hover-content-season").text(resp.contentPlayTime+" 분");
+					}
+					
+					$(".hover-modal-genre").empty();
+					for(var i=0; i<resp.genreList.length; i++){
+						var template;												
+						
+						if(i == 0){
+							template = $("#hover-modal-genre-template-start").html();
+						}
+						else{
+							template = $("#hover-modal-genre-template").html();
+						}
+						
+						template = template.replace("{{genre_name}}", resp.genreList[i].genreName);
+						$(".hover-modal-genre").append(template);
+					}
+					
+					$(".hover-modal-more-button").attr("data-contentno", curContentNo);
+				}	
+			});
+		});
+		
+		$("#hoverModal").on("shown.bs.modal", function(){
+			$("#hoverModal").css("display", "block");
+		});
+		
+		$("#hoverModal").on("hide.bs.modal",function(){
+			$("body").removeClass("overflow-scroll");
+		});
+		
+		$(document).mouseup(function (e){
+
+			var container = $('#detailModal');
+			if( container.has(e.target).length === 0){
+			container.modal("hide");
+			}
+
+		});
 		
 	});
 	
@@ -96,15 +175,21 @@
 	
 	
 <!-- 호버시 팝업될 창 -->
-        <div class="modal fade hoverModal" id="hoverModal2"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content hoverModalBox ">
                
-                <div class="modal-header" id="modal-header2" style="padding:0;display:flex;border:none;">
+                <div class="modal-header" id="modal-header" style="padding:0;display:flex;border:none;">
                     <iframe class="hoverModalVideo" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="modal-body " id="modal-body2"style=" border:none;">
+                <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
+                    	<form action="#" style="display: inline-block;">
+                    		<input type="hidden" name="contentNo" id="hover-modal-play-btn">
+                    		<input type="hidden" name="contentSeason" value="-1">
+                    		<input type="hidden" name="contentEpisode" value="-1">
+                    		<button type="submit" class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	</form>
                     	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
 	                    <button class="btn btn-outline-light hover-modal-etc-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light hover-modal-etc-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
@@ -116,16 +201,13 @@
                     	<div class="modal-trailer-feature" style="margin-top:2%;">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box content-limit"></div>
-								<div class="modal-trailer-feature-box">시즌 3개</div>
+								<div class="modal-trailer-feature-box content-limit"><img id="hover-content-limit" src="" width="25" height="25"> </div>
+								<div class="modal-trailer-feature-box" id="hover-content-season"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
-                    	<div >
-                    		<span>다크</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>흥미진진</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>스릴러</span>
+							
+                    	<div class="hover-modal-genre">
+                    		
                     	</div>
                     	
                     </div>
@@ -156,6 +238,8 @@
 					<div class="modal-btn-box">
 						<form action="play" style="display: inline-block;">
 							<input type="hidden" id="input-content-no" name="contentNo">
+							<input type="hidden" name="contentSeason" value="-1">
+							<input type="hidden" name="contentEpisode" value="-1">
 							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
 						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
@@ -207,35 +291,29 @@
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-				       		<div style="display:flex; flex-wrap:wrap;">
+				       <div style="display:flex; flex-wrap:wrap;">
 				       			
-				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-											<div class="similar-contents-detail-box">
-					       					<div class="similar-contents-detail-img-box">
-					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
-					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-					       					</div>
-					       					<div class="similar-contents-detail-text-box">
-					       						<div style="display:flex;">
-					       							<div>
-					       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
-					       							<div>2020</div>
-						       						</div>
-						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
+				       			<%-- <c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
+									<div class="similar-contents-detail-box">
+				       					<div class="similar-contents-detail-img-box">
+				       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
+				       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+				       					</div>
+				       					<div class="similar-contents-detail-text-box">
+				       						<div style="display:flex;">
+				       							<div>
+				       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
+				       							<div>2020</div>
 					       						</div>
-					       						<div class="modal-wallpaper-text">
-					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
-					       						</div>
-					       					</div>
-					       				</div>
-					       			
-					       				
-									
-				       			</c:forEach>
-				       			
+					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
+				       						</div>
+				       						<div class="modal-wallpaper-text">
+				       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
+				       						</div>
+				       					</div>
+				       				</div>
+				       			</c:forEach> --%>
 				       		</div>
-				       		
 				       </div>
 				       
 				       <div style="position: absolute;width: 100%;">
@@ -246,7 +324,7 @@
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button "><i class="fas fa-chevron-down"></i></button>
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-less-button " style="display:none;"><i class="fas fa-chevron-up"></i></button>
 					       	</div>
-				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
+				       		<h3 style="margin-bottom:2%"><span id="detail-modal-contentName"></span> 상세 정보</h3>
 				       		<div style="font-size:0.8rem;">
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>

@@ -119,13 +119,25 @@
 	</select>
 	
 	<select id="getAllSimilarContentVO" parameterType="map" resultType="SimilarContentVO">	
-	    select R.content_no, R.content_thumbnail, R.content_limit, R.content_release, R.content_info, R.content_type, WL.client_no 
+	    select R.content_no, R.content_thumbnail, R.content_limit, R.content_release, R.content_info, R.content_type, R.content_likes, WL.client_no 
 	        from content R
 		        left outer join wishlist WL on R.content_no = WL.content_no
 	        where R.content_type = #{contentType} and (WL.client_no = #{clientNo} or WL.client_no is null) and not(R.content_no = #{contentNo})
-	        order by R.content_no 
+	        order by R.content_likes desc
 	</select>
 	
+	<update id="updateContentViews" parameterType="int">
+		UPDATE content SET content_views = content_views+1 WHERE content_no = #{contentNo}
+	</update>
+	
+	<update id="increaseContentLikes" parameterType="int">
+		UPDATE content SET content_likes = content_likes+1 WHERE content_no = #{contentNo}
+	</update>
+	
+	<update id="decreaseContentLikes" parameterType="int">
+		UPDATE content SET content_likes = content_likes-1 WHERE content_no = #{contentNo}
+	</update>
+
 	<!-- 티비프로그램(연작있는컨텐츠) 조회 -->
 	<select id="tvProgram" resultType="ContentListVO">
 		select content_no, content_thumbnail from content where content_series = 'Y'
@@ -137,4 +149,5 @@
 	</select>
 	
 	
+
 </mapper>

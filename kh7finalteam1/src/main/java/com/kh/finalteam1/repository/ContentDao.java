@@ -23,4 +23,7 @@ public interface ContentDao {
 	List<ContentListVO> movieList(); //영화
 	List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreList, int clientNo, int count);
 	List<SimilarContentVO> getSimilarListAll(int contentNo, String contentType, int clientNo);
+	boolean updateContentViews(int contentNo);
+	boolean increaseContentLikes(int contentNo);
+	boolean decreaseContentLikes(int contentNo);
 }
