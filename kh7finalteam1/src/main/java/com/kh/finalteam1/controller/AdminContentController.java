@@ -211,14 +211,14 @@ public class AdminContentController {
 	public String contentRegist() {
 		return "admin/contentRegist";
 	}
-	
+		
 	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록
 	@PostMapping("/contentRegist")
 	public String contentRegist(@ModelAttribute ContentDto contentDto, HttpSession session) {
 		int contentNo = contentDao.sequence();
 		contentDto.setContentNo(contentNo);
-		contentDao.insert(contentDto);
-				
+		contentDao.insert(contentDto);		
+		
 		//새션에 contentNo 저장해서 등록 모든 페이지에서 contentNo 사용 예정
 		session.setAttribute("contentNo", contentNo);
 		
@@ -227,12 +227,12 @@ public class AdminContentController {
 		
 		if(yesSeriesDto != null) {
 			yesSeriesDto.setContentNo(contentNo);
-			seriesDao.yesInsert(yesSeriesDto);
+			seriesDao.yesInsert(yesSeriesDto);			
 			session.removeAttribute("yesSeriesDto");
 		}
 		else if(noSeriesDto != null) {
 			noSeriesDto.setContentNo(contentNo);
-			seriesDao.noInsert(noSeriesDto);
+			seriesDao.noInsert(noSeriesDto);			
 			session.removeAttribute("noSeriesDto");
 		}
 
