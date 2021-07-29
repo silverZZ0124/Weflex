@@ -138,10 +138,7 @@ $(function(){
  	$("#exampleModalToggle4").on("show.bs.modal", function(e){
  		type = $(e.relatedTarget).attr("data-type");
  		
- 		if(type==="cast"){
- 			$("#exampleModalToggleLabel4").text("어떤 배우를 찾으시나요?");
- 		}
- 		else if(type === "genre"){
+		if(type === "genre"){
  			$("#exampleModalToggleLabel4").text("어떤 장르를 찾으시나요?");
  			
  			$.ajax({
@@ -162,11 +159,25 @@ $(function(){
 			});
  		}
  		else if(type === "program_feature"){
- 			$("#exampleModalToggleLabel4").text("어떤 특징을 찾으시나요? (최대 4개)");
+ 			$("#exampleModalToggleLabel4").text("어떤 특징을 찾으시나요?");
+ 			
+ 			$.ajax({
+				url: "${pageContext.request.contextPath}/data/admin/getFeature",
+				type: "post",
+				dataType: "json",
+				success:function(resp){
+					$("#modal4-body").empty();
+					
+					for(var i in resp){
+						var template = $("#feature-btn-template").html();
+						template = template.replace("{{featureName}}", resp[i].featureName);
+						$("#modal4-body").append(template);
+					}
+					
+					$.fn.initFeatureBtn();
+				}						
+			});
  		}
- 		else if(type === "content"){
- 			$("#exampleModalToggleLabel4").text("어떤 제목을 찾으시나요?");
- 		} 	
  	});
  	
  	$("#exampleModalToggle5").on("show.bs.modal", function(e){
@@ -253,7 +264,7 @@ $(function(){
  		
  		$("#regit-form").submit();
  	});
- 	 	
+ 	 	 	
  	$.fn.initGenreBtn = function(){
  		$(".genre-btn").click(function(){
  			if($(this).hasClass("unselected-genre-btn")){
@@ -291,11 +302,53 @@ $(function(){
  				$("#modal4-next-btn").attr("disabled", true);
  		}); 		
  	};
+ 	
+ 	$.fn.initFeatureBtn = function(){
+ 		$(".feature-btn").click(function(){
+ 			if($(this).hasClass("unselected-feature-btn")){
+ 				$(".selected-feature-btn").each(function(){
+ 					$(this).removeClass("btn-primary");
+ 	 	 			$(this).addClass("btn-outline-primary");
+ 	 	 			$(this).removeClass("selected-feature-btn");
+ 	 	 			$(this).addClass("unselected-feature-btn");
+ 				});
+ 				
+ 				$(this).removeClass("btn-outline-primary");
+ 	 			$(this).addClass("btn-primary");
+ 	 			$(this).removeClass("unselected-feature-btn");
+ 	 			$(this).addClass("selected-feature-btn");
+ 	 			
+ 	 			keyword = $(this).text();
+ 			}
+ 			else if($(this).hasClass("selected-feature-btn")){
+ 				$(this).removeClass("btn-primary");
+ 	 			$(this).addClass("btn-outline-primary");
+ 	 			$(this).removeClass("selected-feature-btn");
+ 	 			$(this).addClass("unselected-feature-btn");
+ 	 			
+ 	 			keyword = ""; 	 			
+ 			}
+ 			 			
+ 			var count = 0;
+ 			$(".selected-feature-btn").each(function(){
+ 				count++; 				
+ 			});
+ 			
+ 			if(count > 0)
+ 				$("#modal4-next-btn").attr("disabled", false);
+ 			else
+ 				$("#modal4-next-btn").attr("disabled", true);
+ 		}); 		
+ 	};
 });
 </script>
 
 <script id="genre-btn-template" type="text/template">
 <button class="btn btn-outline-primary genre-btn unselected-genre-btn" style="margin: 5px 0;">{{genreName}}</button>
+</script>
+
+<script id="feature-btn-template" type="text/template">
+<button class="btn btn-outline-primary feature-btn unselected-feature-btn" style="margin: 5px 0;">{{featureName}}</button>
 </script>
 
 <script id="result-template-header" type="text/template">
@@ -366,7 +419,13 @@ $(function(){
 						<div class="container-center slider-box" id="slider1">
 							<div class="slider-title">
 								<div style="display: inline-block; color: #858796;">${sliderVO.sliderTitle }</div>
-								<div class="change-btn-wrapper"><a class="btn btn-outline-light" data-bs-toggle="modal" href="#exampleModalToggle" role="button" data-status="update" data-sliderNo="${sliderVO.homeSliderNo }">변경</a></div>
+								<div class="change-btn-wrapper">
+									<a class="btn btn-outline-light" data-bs-toggle="modal" href="#exampleModalToggle" role="button" data-status="update" data-sliderNo="${sliderVO.homeSliderNo }">변경</a>
+									<form action="deleteHomeSlider" method="post" style="display: inline-block;">
+										<input type="hidden" name="homeSliderNo" value="${sliderVO.homeSliderNo }">
+										<button class="btn btn-outline-danger home-slider-delete-btn">삭제</button>
+									</form>	
+								</div>														
 							</div>		
 						  	<div class="custom-img-slide">
 						   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
@@ -450,11 +509,6 @@ $(function(){
       </div>
       <div class="modal-body">
       	<div style="width: 70%; margin:auto; display: block;">
-      		<button class="btn btn-outline-secondary modal3-next-btn" style="width: 100%; margin: 10px 0;"
-      			data-bs-toggle="modal" data-bs-target="#exampleModalToggle4" data-bs-dismiss="modal"
-      			data-type="cast">출연진으로 찾기</button>
-      	</div>
-      	<div style="width: 70%; margin:auto; display: block;">
       		<button class="btn btn-outline-secondary modal3-next-btn" style="width: 100%; margin: 10px 0;" 
       			data-bs-toggle="modal" data-bs-target="#exampleModalToggle4" data-bs-dismiss="modal"
       			data-type="genre">장르로 찾기</button>
@@ -463,11 +517,6 @@ $(function(){
       		<button class="btn btn-outline-secondary modal3-next-btn" style="width: 100%; margin: 10px 0;"
       			data-bs-toggle="modal" data-bs-target="#exampleModalToggle4" data-bs-dismiss="modal"
       			data-type="program_feature">프로그램 특성으로 찾기</button>
-      	</div>
-      	<div style="width: 70%; margin:auto; display: block;">
-      		<button class="btn btn-outline-secondary modal3-next-btn" style="width: 100%; margin: 10px 0;"
-      			data-bs-toggle="modal" data-bs-target="#exampleModalToggle4" data-bs-dismiss="modal"
-      			data-type="content">제목으로 찾기</button>
       	</div>
         <div class="modal-footer">
 	      	<button class="btn btn-secondary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">뒤로</button>	        

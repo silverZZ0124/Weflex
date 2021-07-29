@@ -153,6 +153,12 @@ public class AdminController {
 		return "admin/homeSetting";
 	}
 	
+	@PostMapping("/deleteHomeSlider")
+	public String deleteHomeSlider(@RequestParam int homeSliderNo) {
+		homeSliderDao.deleteHomeSlider(homeSliderNo);
+		return "redirect: homeSetting";
+	}
+	
 	@PostMapping("/homeSetting")
 	public String homeSetting(@RequestParam int homeSliderNo,
 			@RequestParam String sliderTitle,

@@ -60,7 +60,10 @@ public class ContentDaoImpl implements ContentDao {
 		
 		List<ContentListVO> list = new ArrayList<ContentListVO>();
 		if(condition.equals("genre")) {
-			list = sqlSession.selectList("content.getContentList", map);
+			list = sqlSession.selectList("content.getGenreContentList", map);
+		}
+		else if(condition.equals("program_feature")) {
+			list = sqlSession.selectList("content.getFeatureContentList", map);
 		}
 				
 		return list;

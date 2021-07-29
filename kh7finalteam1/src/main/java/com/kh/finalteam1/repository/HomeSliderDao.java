@@ -17,4 +17,6 @@ public interface HomeSliderDao {
 			String contentType,
 			String type,
 			String keyword);
+	
+	boolean deleteHomeSlider(int homeSliderNo);
 }
