@@ -1,5 +1,6 @@
 package com.kh.finalteam1.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,14 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.kh.finalteam1.entity.ContentDto;
-import com.kh.finalteam1.entity.MainTrailerDto;
-import com.kh.finalteam1.entity.NoSeriesDto;
-import com.kh.finalteam1.entity.YesSeriesDto;
+import com.kh.finalteam1.entity.LikeListDto;
 import com.kh.finalteam1.repository.ContentDao;
-import com.kh.finalteam1.repository.MainTrailerDao;
-import com.kh.finalteam1.repository.SeriesDao;
+import com.kh.finalteam1.repository.LikeListDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
 import com.kh.finalteam1.vo.PlaylistVO;
@@ -30,6 +27,13 @@ public class HomeController {
 	
 	@Autowired
 	private HomeService homeService;
+	
+	
+	@Autowired
+	private LikeListDao likeListDao;
+	
+	@Autowired
+	private ContentDao contentDao;
 	
 //	@GetMapping("/")
 //	public String home(Model model, HttpSession session) throws JsonProcessingException {	
@@ -84,6 +88,65 @@ public class HomeController {
 
 	}
 	
-	
+	@GetMapping("/wishlist")
+	public String wishlist(HttpSession session, Model model) {
+		int clientNo=(int)session.getAttribute("clientNo");
 
+		List<LikeListDto> likeList=likeListDao.get(clientNo);
+		model.addAttribute("likeList",likeList);
+	
+		//int no=likeList.get(0).getContentNo();
+		List<ContentDto> contentList=new ArrayList<>();
+		for(int i=0;i<likeList.size();i++) {
+			
+			
+			contentList.add(contentDao.getList(likeList.get(i).getContentNo()));
+		}
+		
+		model.addAttribute("contentList", contentList);
+		return "main/wishlist";
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -12,6 +12,7 @@ public interface ContentDao {
 	int sequence();
 	void insert(ContentDto contentDto);
 	ContentDto get(int contentNo);
+	ContentDto getList(int no);
 	boolean delete(int contentNo);
 	boolean edit(ContentDto contentDto);
 	List<ContentListVO> getSliderItem(String contentType, int type, String keyword);

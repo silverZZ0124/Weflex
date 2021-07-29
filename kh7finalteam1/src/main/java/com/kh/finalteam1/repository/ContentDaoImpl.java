@@ -107,5 +107,8 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.selectList("content.getAllSimilarContentVO", map);
 	}
 	
-	
+	@Override
+	public ContentDto getList(int no) {
+		return sqlSession.selectOne("content.get",no);
+	}
 }

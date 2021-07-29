@@ -55,7 +55,9 @@
 		});
 		
 		if(location.href==="http://localhost:8080/finalteam1/tv"){
-			$(".search-nav-style").css("display","block");
+			$("#second-header").css("display","block");
+		}else if(location.href==="http://localhost:8080/finalteam1/wishlist"){
+			$("#second-header-wishlist").css("display","block");
 		}
 		
 		$("#search-icon").click(function(){
@@ -91,7 +93,7 @@
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/home">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
-				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
+				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/wishlist">내가 찜한 콘텐츠</a> </li>	 
 				   <li class="nav-item"> <a class="nav-link" href="admin/">관리자 페이지</a> </li>	 
 			</ul> 
 			<ul class="navbar-nav" style="position: absolute;margin-left: 130px;">
@@ -104,7 +106,7 @@
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/home">홈</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/tv">TV프로그램</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/movie">영화</a></li>
-		            <li><a class="dropdown-item" href="#">내가 찜한 콘텐츠</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/wishlist">내가 찜한 콘텐츠</a></li>
 		            <li><a class="dropdown-item" href="admin/">관리자 페이지</a></li>
 		           
 		          </ul>
@@ -202,6 +204,15 @@
 								  
 								  </select> </li> 
 				 
+			</ul> 
+
+		</nav>
+		
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style " id="second-header-wishlist" style="display:none;margin-top:60px;">
+			
+			<ul class="navbar-nav" style="position: absolute;height:100%;">
+				  <li class="nav-item second-nav-title-text" style="color:white;"><div>내가 찜한 콘텐츠</div> </li> 
+				  
 			</ul> 
 
 		</nav>
