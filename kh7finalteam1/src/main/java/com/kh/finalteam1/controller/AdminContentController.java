@@ -121,8 +121,8 @@ public class AdminContentController {
 	public String noContentEdit(
 			@ModelAttribute ContentDto contentDto,
 			@ModelAttribute NoSeriesDto noSeriesDto,
-			@RequestParam List<Integer> genreNo, 
-			@RequestParam List<Integer> featureNo,
+			@RequestParam(required = false) List<Integer> genreNo, 
+			@RequestParam(required = false) List<Integer> featureNo,
 			@RequestParam List<String> castName) {
 		
 		int contentNo = contentDto.getContentNo();
@@ -135,8 +135,16 @@ public class AdminContentController {
 		contentDao.edit(contentDto);
 		seriesDao.noEdit(noSeriesDto);
 		
-		contentGenreService.regist(contentNo, genreNo);
-		contentFeatureService.regist(contentNo, featureNo);
+		if(genreNo != null && featureNo != null) {//장르, 특징 둘다 있다면
+			contentGenreService.regist(contentNo, genreNo);
+			contentFeatureService.regist(contentNo, featureNo);
+		}
+		else if(genreNo != null) {//장르는 있고 특징이 없다면
+			contentGenreService.regist(contentNo, genreNo);
+		}
+		else if(featureNo != null) {//특징만 있다면(장르는 x)
+			contentFeatureService.regist(contentNo, featureNo);
+		}
 		
 		List<CastDto> castList = new ArrayList<>();
 		
@@ -156,8 +164,8 @@ public class AdminContentController {
 	@PostMapping("/yesContentEdit")
 	public String yesContentEdit(
 			@ModelAttribute ContentDto contentDto,
-			@RequestParam List<Integer> genreNo, 
-			@RequestParam List<Integer> featureNo,
+			@RequestParam(required = false) List<Integer> genreNo, 
+			@RequestParam(required = false) List<Integer> featureNo,
 			@RequestParam List<String> castName) {
 		
 		int contentNo = contentDto.getContentNo();
@@ -169,8 +177,16 @@ public class AdminContentController {
 		contentFeatureDao.deleteAll(contentNo);
 		castDao.deleteAll(contentNo);
 		
-		contentGenreService.regist(contentNo, genreNo);
-		contentFeatureService.regist(contentNo, featureNo);
+		if(genreNo != null && featureNo != null) {//장르, 특징 둘다 있다면
+			contentGenreService.regist(contentNo, genreNo);
+			contentFeatureService.regist(contentNo, featureNo);
+		}
+		else if(genreNo != null) {//장르는 있고 특징이 없다면
+			contentGenreService.regist(contentNo, genreNo);
+		}
+		else if(featureNo != null) {//특징만 있다면(장르는 x)
+			contentFeatureService.regist(contentNo, featureNo);
+		}
 		
 		List<CastDto> castList = new ArrayList<>();
 		

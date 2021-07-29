@@ -20,11 +20,11 @@
 		border-radius:5px;
 		color:#141414;
 	}
-	.btn-close{
+	.genre-btn-close, .feature-btn-close, .cast-btn-close{
 		background-color:lightgray;
 		border:none;
 	}
-	.btn-close:hover{
+	.genre-btn-close:hover, .feature-btn-close:hover, .cast-btn-close:hover{
 		color:gray;
 	}
 	label{
@@ -50,7 +50,7 @@
 	            	<div class="thumnail-img col-md-6 text-left">
 	            		<div style="position:relative">
 		            		<img alt="${contentDto.contentName }" src="${contentDto.contentThumbnail }" style="width:100%;"><br>
-		            		<img alt="${contentDto.contentName }" src="${contentDto.contentLogo }" style="width:40%; position:absolute; top:0; left:0; transform:translateY(100%);">
+		            		
 	            		</div>
 	            		
 	            	</div>
@@ -80,22 +80,25 @@
 								</c:choose>
 							</dd>
 						
+							<c:if test="${not empty contentGenreList }">
+								<dt>장르</dt> 
+								<dd>
+									<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
+										<span>${genreFeatureCastVO.genreName}</span>
+										<c:if test="${status.last eq false}">,</c:if>
+									</c:forEach>
+								</dd>
+							</c:if>
 						
-							<dt>장르</dt> 
-							<dd>
-								<c:forEach var="genreFeatureCastVO" items="${contentGenreList }" varStatus="status">
-									<span>${genreFeatureCastVO.genreName}</span>
-									<c:if test="${status.last eq false}">,</c:if>
-								</c:forEach>
-							</dd>
-						
-							<dt>특징</dt> 
-							<dd>
-								<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }" varStatus="status">
-									<span>${genreFeatureCastVO.featureName}</span>
-									<c:if test="${status.last eq false}">,</c:if>
-								</c:forEach>
-							</dd>
+							<c:if test="${not empty contentFeatureList }">
+								<dt>특징</dt> 
+								<dd>
+									<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }" varStatus="status">
+										<span>${genreFeatureCastVO.featureName}</span>
+										<c:if test="${status.last eq false}">,</c:if>
+									</c:forEach>
+								</dd>
+							</c:if>
 							
 							<dt>출연</dt> 
 							<dd>
@@ -118,7 +121,7 @@
                                 <button type="button" class="btn btn-block btn-outline-danger" id="edit-content-btn" data-toggle="modal" data-target="#edit-content-modal">수정</button>
                             </div>
                             <div class="col-md-6 p-1">
-                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-secondary" id="delete-btn">삭제</a>
+                                <a href="contentDelete?contentNo=${contentDto.contentNo }" class="btn btn-block btn btn-outline-secondary delete-btn">삭제</a>
                             </div>
                         </div>
                     </div>
@@ -168,7 +171,7 @@
 				            		<tr>
 				            			<td style="display:none">${yesSeriesDto.contentNo }</td>		
 	    								<td style="display:none">${yesSeriesDto.seriesPath }</td>
-				            			<td>${yesSeriesDto.contentSeason }</td>
+				            			<td >${yesSeriesDto.contentSeason }</td>
 				            			<td>${yesSeriesDto.contentEpisode }</td>
 				            			<td>${yesSeriesDto.episodeInfo }</td>
 				            			<td>${yesSeriesDto.contentPlaytime }</td>
@@ -179,7 +182,7 @@
 					                                data-target="#edit-series-modal"">수정</button>
 					                            </div>
 					                            <div class="col-md-6 p-1">
-					                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn btn-outline-secondary">삭제</a>
+					                                <a href="episodeDelete?contentNo=${yesSeriesDto.contentNo}&contentSeason=${yesSeriesDto.contentSeason}&contentEpisode=${yesSeriesDto.contentEpisode}" class="btn btn-block btn-outline-secondary delete-btn">삭제</a>
 					                            </div>
 					                        </div>
 				            			</td>
@@ -223,14 +226,20 @@
 					                    <label>컨텐츠 소개</label>
 					                    <textarea name="contentInfo" class="form-control form-textarea">${contentDto.contentInfo}</textarea>
 					                </div>
+					                
+					                <div class="form-group">
+					                    <label>트레일러 영상 주소</label>
+					                    <input type="text" name="contentTrailer" class="form-control" value="${contentDto.contentTrailer}">
+					                </div>
 									
 					                <div class="form-group">
 					                    <label>연령제한</label>
 					                    <select class="form-control" name="contentLimit" required>
 					                      <option value="" >선택하세요</option>
-					                      <option value="1">전체 이용가</option>
+					                      <option value="0">전체 이용가</option>
 					                      <option value="12">12세 이용가</option>
 					                      <option value="15">15세 이용가</option>
+					                      <option value="18">18세 이용가</option>
 					                      <option value="19">19세 이용가</option>
 					                    </select>
 					                  </div>
@@ -303,8 +312,8 @@
 					                    <input type="text" name="contentThumbnail" class="form-control" value="${contentDto.contentThumbnail}">
 					                </div>
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary" id="yesContent-edit">확인</button>                        
-					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                    <button type="submit" class="btn btn-danger" id="yesContent-edit">확인</button>                        
+					                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
 				            
@@ -359,8 +368,8 @@
 					
 					                 
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary" id="episodeEdit-btn">확인</button>                        
-					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                    <button type="submit" class="btn btn-danger" id="episodeEdit-btn">확인</button>                        
+					                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
 				            
@@ -417,8 +426,8 @@
 					
 					                 
 					                <div class="modal-footer">
-					                    <button type="submit" class="btn btn-primary" id="insert-episode-btn">확인</button>                        
-					                    <button class="btn btn-danger" data-dismiss="modal">취소</button>
+					                    <button type="submit" class="btn btn-danger" id="insert-episode-btn">확인</button>                        
+					                    <button class="btn btn-dark" data-dismiss="modal">취소</button>
 					                </div>
 					            </form>
 				            
@@ -514,7 +523,7 @@
 	<tr>
     	<td style="display:none">{{contentNo}}</td>		
 	    <td style="display:none">{{seriesPath}}</td>
-	    <td>{{contentSeason}}</td>
+	    <td class="">{{contentSeason}}</td>
 	    <td>{{contentEpisode}}</td>
 	    <td>{{EpisodeInfo}}</td>
 	    <td>{{contentPlaytime}}</td>
@@ -524,7 +533,7 @@
 	                <button class="btn btn-block btn-outline-primary" id="episode-modal-btn" data-toggle="modal" data-target="#edit-series-modal">수정</button>
 	            </div>
 	            <div class="col-md-6 p-1">
-	                <a href="episodeDelete?contentNo=#no&contentSeason=#season&contentEpisode=#episode" class="btn btn-block btn btn-outline-danger">삭제</a>
+	                <a href="episodeDelete?contentNo=#no&contentSeason=#season&contentEpisode=#episode" class="btn btn-block btn-outline-danger delete-btn">삭제</a>
 	            </div>
 	        </div>
 	    </td>
@@ -563,17 +572,17 @@
 			
 			/* input type="hidden" name 통일하여 컨트롤러로 배열 값 전달  */
 			<c:forEach var="genreFeatureCastVO" items="${contentGenreList }">
-				$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'><input name='genreNo' type='hidden' value='${genreFeatureCastVO.genreNo}'>${genreFeatureCastVO.genreName}<button class='btn-close'>&times;</button></span>");
-				$("select[name='contentGenre'] option[value*='${genreFeatureCastVO.genreNo}']").prop('disabled',true);
+				$("#this-content-genre").append("<span class='genreBox p-2 mr-2 mb-2'><input name='genreNo' type='hidden' value='${genreFeatureCastVO.genreNo}'>${genreFeatureCastVO.genreName}<button class='genre-btn-close'>&times;</button></span>");
+				$("select[name='contentGenre'] option[value='${genreFeatureCastVO.genreNo}']").prop('disabled',true);
 			</c:forEach>
 			
 			<c:forEach var="genreFeatureCastVO" items="${contentFeatureList }">
-				$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'><input name='featureNo' type='hidden' value='${genreFeatureCastVO.featureNo}'>${genreFeatureCastVO.featureName}<button class='btn-close'>&times;</button></span>");
-				$("select[name='contentFeature'] option[value*='${genreFeatureCastVO.featureNo}']").prop('disabled',true);
+				$("#this-content-feature").append("<span class='featureBox p-2 mr-2 mb-2'><input name='featureNo' type='hidden' value='${genreFeatureCastVO.featureNo}'>${genreFeatureCastVO.featureName}<button class='feature-btn-close'>&times;</button></span>");
+				$("select[name='contentFeature'] option[value='${genreFeatureCastVO.featureNo}']").prop('disabled',true);
 			</c:forEach>
 			
 			<c:forEach var="genreFeatureCastVO" items="${contentCastList }">
-				$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'><input name='castName' type='hidden' value='${genreFeatureCastVO.castName}'>${genreFeatureCastVO.castName}<button class='btn-close'>&times;</button></span>");
+				$("#this-content-cast").append("<span class='castBox p-2 mr-2 mb-2'><input name='castName' type='hidden' value='${genreFeatureCastVO.castName}'>${genreFeatureCastVO.castName}<button class='cast-btn-close'>&times;</button></span>");
 			</c:forEach>
 		});
 		
@@ -586,10 +595,10 @@
 			genreDiv += "<span class='genreBox p-2 mr-2 mb-2'>";
 			genreDiv += selectedGenreName;
 			genreDiv += '<input type="hidden" name="genreNo" value="'+selectedGenreNo+'">';
-			genreDiv += "<button class='btn-close'>&times;</button></span>";
+			genreDiv += "<button class='genre-btn-close'>&times;</button></span>";
 			$("#this-content-genre").append(genreDiv);
 			
-			$("select[name='contentGenre'] option[value*='"+selectedGenreNo+"']").prop('disabled',true);
+			$("select[name='contentGenre'] option[value='"+selectedGenreNo+"']").prop('disabled',true);
 			
 		});
 		
@@ -601,10 +610,10 @@
 			featureDiv += "<span class='featureBox p-2 mr-2 mb-2'>";
 			featureDiv += selectedFeatureName;
 			featureDiv += '<input type="hidden" name="featureNo" value="'+selectedFeatureNo+'">';
-			featureDiv += "<button class='btn-close'>&times;</button></span>";
+			featureDiv += "<button class='feature-btn-close'>&times;</button></span>";
 			$("#this-content-feature").append(featureDiv);
 			
-			$("select[name='contentFeature'] option[value*='"+selectedFeatureNo+"']").prop('disabled',true);
+			$("select[name='contentFeature'] option[value='"+selectedFeatureNo+"']").prop('disabled',true);
 			
 		});
 		
@@ -629,7 +638,7 @@
 				castDiv += "<span class='castBox p-2 mr-2 mb-2'>";
 				castDiv += castName;
 				castDiv += '<input type="hidden" name="castName" value="'+castName+'">';
-				castDiv += "<button class='btn-close'>&times;</button></span>";
+				castDiv += "<button class='cast-btn-close'>&times;</button></span>";
 				$("#this-content-cast").append(castDiv);
 				
 				$(this).val("");
@@ -639,20 +648,10 @@
 		/* 수정 값 유효성 검사 */
 		$("#yesContent-edit").click(function(e){
 			/* 
-				장르, 특징, 배우가 입력 되었는지 검사.  
+				배우가 입력 되었는지 검사.  
 				아무것도 없으면 입력하라는 메세지
 			*/
-			if($("#this-content-genre").children().length == 0){
-				window.alert("장르를 입력하세요");
-				$("select[name='contentGenre']").focus();
-				e.preventDefault();
-			}
-			else if($("#this-content-feature").children().length == 0){
-				window.alert("특징을 입력하세요");
-				$("select[name='contentFeature']").focus();
-				e.preventDefault();
-			}
-			else if($("#this-content-cast").children().length == 0){
+			if($("#this-content-cast").children().length == 0){
 				window.alert("배우를 입력하세요");
 				$("input[name='contentCast']").focus();
 				e.preventDefault();
@@ -716,13 +715,32 @@
 			}
 		});
 		
+		
 		$("#insert-episode-btn").click(function(e){
+			
 			var contentSeason = $("#insert-contentSeason").val();
 			var contentEpisode = $("#insert-contentEpisode").val();
 			var episodeInfo = $("#insert-episodeInfo").val();
 			var seriesPath = $("#insert-seriesPath").val();
 			var contentPlaytime = $("#insert-contentPlaytime").val();
 			
+			/* 입력한 시즌, 회차가 있는지 검사 */
+			var seriesArr = new Array();
+			<c:forEach items="${yesSeriesList}" var="yesSeriesDto">
+				seriesArr.push({contentSeason:"${yesSeriesDto.contentSeason}",
+								contentEpisode:"${yesSeriesDto.contentEpisode}"});
+			</c:forEach>
+			
+			for(var i=0; i<seriesArr.length;i++){
+				if(contentSeason==seriesArr[i].contentSeason && contentEpisode==seriesArr[i].contentEpisode){
+					window.alert("이미 존재하는 회차 입니다. 다시 입력하세요");
+					$("#insert-contentSeason").focus();
+					e.preventDefault();
+				}
+			}
+			
+			
+			/* 유효성 검사 */
 			if(contentSeason.length == 0 || contentSeason.length>3){
 				window.alert("잘못된 값입니다. 다시 입력하세요.");
 				$("#insert-contentSeason").val("");
@@ -754,11 +772,31 @@
 				e.preventDefault();
 			}
 		});
+		
+		$(".delete-btn").click(function(e){
+			if (!window.confirm("정말 삭제하시겠습니까?")) {
+				e.preventDefault();
+			}
+		});
 	});
 </script>
 <script>
 	$(function(){
-		$(document).on("click",".btn-close",function(e){
+		$(document).on("click",".genre-btn-close",function(e){
+			e.preventDefault();
+			$(this).parents("span").remove();
+			var no = $(this).prev("input").val();
+			$("select[name='contentGenre'] option[value='"+no+"']").prop('disabled',false);
+		});
+		
+		$(document).on("click",".feature-btn-close",function(e){
+			e.preventDefault();
+			$(this).parents("span").remove();
+			var no = $(this).prev("input").val();
+			$("select[name='contentFeature'] option[value='"+no+"']").prop('disabled',false);
+		});
+		
+		$(document).on("click",".cast-btn-close",function(e){
 			e.preventDefault();
 			$(this).parents("span").remove();
 		});
