@@ -21,4 +21,7 @@ public interface ContentDao {
 	int yearContentCount();//올해 컨텐츠 추가 수
 	List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreList, int clientNo, int count);
 	List<SimilarContentVO> getSimilarListAll(int contentNo, String contentType, int clientNo);
+	boolean updateContentViews(int contentNo);
+	boolean increaseContentLikes(int contentNo);
+	boolean decreaseContentLikes(int contentNo);
 }

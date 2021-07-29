@@ -109,15 +109,5 @@ public class AdminDataController {
 		System.out.println(contentType);
 		System.out.println(type);
 		System.out.println(keyword);
-//		System.out.println(keyword.size());
-//		System.out.println(keyword.get(0));
 	}
-//	@PostMapping("/admin/getSliderSample")
-//	public void getSliderSample(HttpServletRequest request) {
-//		
-//		System.out.println(request.getParameter("sliderTitle"));
-//		System.out.println(request.getParameter("contentType"));
-//		System.out.println(request.getParameter("type"));
-//		System.out.println(request.getParameterValues("keyword"));
-//	}
 }

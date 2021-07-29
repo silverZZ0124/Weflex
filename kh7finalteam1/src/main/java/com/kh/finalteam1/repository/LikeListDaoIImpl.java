@@ -12,13 +12,13 @@ public class LikeListDaoIImpl implements LikeListDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public void insertLikeList(LikeListDto likeListDto) {
-		sqlSession.insert("likeList.mergeInto", likeListDto);
+	public boolean insertLikeList(LikeListDto likeListDto) {
+		return sqlSession.insert("likeList.mergeInto", likeListDto) > 0;
 	}
 
 	@Override
-	public void deleteLikeList(LikeListDto likeListDto) {
-		sqlSession.insert("likeList.delete", likeListDto);
+	public boolean deleteLikeList(LikeListDto likeListDto) {
+		return sqlSession.insert("likeList.delete", likeListDto) > 0;
 	}
 
 	@Override

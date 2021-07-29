@@ -106,6 +106,21 @@ public class ContentDaoImpl implements ContentDao {
 		
 		return sqlSession.selectList("content.getAllSimilarContentVO", map);
 	}
+
+	@Override
+	public boolean updateContentViews(int contentNo) {
+		return sqlSession.update("content.updateContentViews", contentNo) > 0;
+	}
+
+	@Override
+	public boolean increaseContentLikes(int contentNo) {
+		return sqlSession.update("content.increaseContentLikes", contentNo) > 0;
+	}
+
+	@Override
+	public boolean decreaseContentLikes(int contentNo) {
+		return sqlSession.update("content.decreaseContentLikes", contentNo) > 0;
+	}
 	
 	
 }

@@ -67,6 +67,12 @@ public class HomeDataController {
 		watchLogDao.insertWatchLog(watchLogDto);
 	}
 	
+	@PostMapping("/updateContentViews")
+	public void updateContentViews(@RequestParam int contentNo) {		
+		contentDao.updateContentViews(contentNo);
+		System.out.println(contentNo);
+	}
+	
 	@PostMapping("/getContent")
 	public MainModalDetailVO getContent(@RequestParam int contentNo, HttpSession session) throws CloneNotSupportedException {		
 		MainModalDetailVO mainModalDetailVO = mainModalService.getModalDetailVO(contentNo, getClientNo(session));
@@ -90,7 +96,10 @@ public class HomeDataController {
 									.clientNo(getClientNo(session))
 									.contentNo(contentNo)
 								.build();
-		likeListDao.insertLikeList(likeListDto);		
+		
+		if(likeListDao.insertLikeList(likeListDto)) {
+			contentDao.increaseContentLikes(contentNo);
+		}
 	}
 	
 	@PostMapping("/deleteLikeList")
@@ -99,7 +108,10 @@ public class HomeDataController {
 									.clientNo(getClientNo(session))
 									.contentNo(contentNo)
 								.build();
-		likeListDao.deleteLikeList(likeListDto);		
+		
+		if(likeListDao.deleteLikeList(likeListDto)) {
+			contentDao.decreaseContentLikes(contentNo);
+		}
 	}
 	
 	public int getClientNo(HttpSession session) {
