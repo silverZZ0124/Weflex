@@ -256,8 +256,7 @@ window.onload = function(){
 				       <div class="similar-contents-box">
 			       		   <h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 			       		   <c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-			       		   <div style="display:flex; flex-wrap:wrap;">
-			       		</div>
+			       		   <div id="similar-content-wrapper"></div>
 				       </div>
 				       
 				       <div style="position: absolute;width: 100%;">

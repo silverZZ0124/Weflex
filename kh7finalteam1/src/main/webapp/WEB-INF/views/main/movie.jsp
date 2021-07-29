@@ -253,35 +253,7 @@ window.onload = function(){
 				       <div class="similar-contents-box">
 				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-				       		<div style="display:flex; flex-wrap:wrap;">
-				       			
-				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-											<div class="similar-contents-detail-box">
-					       					<div class="similar-contents-detail-img-box">
-					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
-					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-					       					</div>
-					       					<div class="similar-contents-detail-text-box">
-					       						<div style="display:flex;">
-					       							<div>
-					       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
-					       							<div>2020</div>
-						       						</div>
-						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
-					       						</div>
-					       						<div class="modal-wallpaper-text">
-					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
-					       						</div>
-					       					</div>
-					       				</div>
-					       			
-					       				
-									
-				       			</c:forEach>
-				       			
-				       		</div>
-				       		
+				       		<div id="similar-content-wrapper"></div>
 				       </div>
 				       
 				       <div style="position: absolute;width: 100%;">
