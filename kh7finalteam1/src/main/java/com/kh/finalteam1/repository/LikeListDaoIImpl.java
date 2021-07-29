@@ -29,8 +29,5 @@ public class LikeListDaoIImpl implements LikeListDao {
 		return sqlSession.selectOne("likeList.getLikeList", likeListDto);
 	}
 	
-	@Override
-	public List<LikeListDto> get(int clientNo) {
-		return sqlSession.selectList("likeList.get",clientNo);
-	}
+	
 }

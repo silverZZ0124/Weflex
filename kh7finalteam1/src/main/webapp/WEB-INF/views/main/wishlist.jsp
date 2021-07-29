@@ -2,82 +2,127 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+  <script src="${pageContext.request.contextPath }/res/js/main-event.js"></script>
+  <script>
 
-<script>
-	$(function(){
-		$(".search-page-card-img").hover(function(){
-			$(this).css("cursor","pointer");
-		});
-		
-		var timeout;
-		var modalX;
-		var modalY;
-		var img;
-		//마우스 호버 시 모달 팝업 	
-		$(".search-page-card-img").mouseenter(function(){
-			
-			img = $(this);
-			timeout=setTimeout(function(){
-				
-				var modalWidth=img.width()*1.4;
-				var modalVideoHeight=img.height()*1.4*1.05;
-				
+var player;
+var hoverPlayer;
 
-				$("#hoverModal2").css("width",modalWidth+"px");
-				$("#modal-header2").css("height",modalVideoHeight+"px");
-				
-				/* $("#hoverModal").css("height",modalHeight+"px"); */
-				
-
-				$("#hoverModal2").modal({backdrop: false});
-				
-				$("#hoverModal2").modal("show");
-				var imgX=img.offset().left;
-				var imgY=img.offset().top;
-				
-				
-				var imgMiddleX=imgX+(img.width()/2);
-				var imgMiddleY=imgY+(img.height()/2);
-
-				var modalHeight=$("#hoverModal2").height();
-				modalX=imgMiddleX-modalWidth/2;
-				modalY=imgMiddleY-modalHeight/2;
-
-				if(modalX<0) modalX=10;
-				if((modalX+$("#hoverModal2").width())>$(window).width()){
-					modalX=$(window).width()-$("#hoverModal2").width()-10;
-				}
-				
-				
-				
-			$(".search-page-card-img").mouseleave(function(){
-				clearTimeout(timeout);
-			});
-			
-			
-			
-		
-			$("#hoverModal2").css("transform","translate3d("+modalX+"px,"+modalY+"px,0px)"); 	
-			$("body").removeClass("modal-open");
-			},1000);
-			
-			
-					
-		});
-		
-		
-		$(".search-page-card-img").mouseleave(function(){
-			$("#hoverModal2").modal("hide");
-		});
-		
-		$("#hoverModal2").mouseleave(function(){
-			$("#hoverModal2").modal("hide");
+window.onload = function(){			
 	
-		});
-		
-		
-	});
+	function onYouTubeIframeAPIReady() {
+	    player = new YT.Player('player', {
+	        events: {	  
+	        	'onReady': onPlayerReady,
+	            'onStateChange': onPlayerStateChange
+	          }
+	    });
+	    
+	    hoverPlayer = new YT.Player('hoverPlayer', {
+	        events: {	  
+	        	'onReady': onHoverPlayerReady,
+	            'onStateChange': onPlayerStateChange
+	          }
+	    });
+	}		
 	
+	function onPlayerReady(event) {
+		if(event.target.getVideoUrl() == "https://www.youtube.com/watch?v=6qaW-KZpmjM"){
+			return;
+		}
+		
+		$("#player").css("visibility", "visible");		
+    }
+	
+	function onHoverPlayerReady(event) {
+		$("#hoverPlayer").css("visibility", "visible");		
+    }
+	
+	function onPlayerStateChange(event) {
+	}	
+	
+	onYouTubeIframeAPIReady();
+}
+
+</script>
+  
+<script id="episode-list-template" type="text/template">
+<div class="trailer-series-section-box">
+	<div class="trailer-series-section">
+		<div class="trailer-series-section-index">{{index}}</div>
+		<div class="trailer-series-section-thumbnail-box">
+			<img src="{{contentThumbnail}}"
+				class="trailer-series-section-thumbnail">
+			<form action="play" >
+		        <input type="hidden" name="contentNo" value="{{contentNo}}">
+		        <input type="hidden" name="contentSeason" value="{{contentSeason}}">
+		        <input type="hidden" name="contentEpisode" value="{{contentEpisode}}">
+		        <button type="submit" class="btn btn-outline-light modal-etc-btn series-play-btn"	style="display: none;">
+			        <i class="fas fa-play"></i>
+		        </button>
+	        </form>
+		</div>
+
+		<div class="trailer-series-section-info-box">
+			<div class="trailer-series-section-info-title">
+				<div>제 {{contentIndex}}화</div>
+				<div style="margin-left: auto;">{{contentPlaytime}}분</div>
+			</div>
+			<div class="trailer-series-section-info-text">{{episodeInfo}}</div>
+		</div>
+	</div>
+</div>
+</script>
+
+<script id="select-template-header" type="text/template">
+<select class="selectpicker main-color series-select-box-title">
+</script>	
+
+<script id="select-template-footer" type="text/template">    
+</select>
+</script>
+
+<script id="hover-modal-genre-template-start" type="text/template">
+<span>{{genre_name}}</span>
+</script>
+
+<script id="hover-modal-genre-template" type="text/template">
+<span style="color:rgb(100,100,100);">•</span>
+<span>{{genre_name}}</span>
+</script>
+
+<script id="detail-modal-similar-template" type="text/template">
+<div class="similar-contents-detail-box">
+	<div class="similar-contents-detail-img-box">
+		<img class="similar-contents-detail-img"src="{{thumbnail}}" >
+		<form action="play" style="display: inline-block;">
+			<input type="hidden" name="contentNo" value="{{contentNo}}">
+			<input type="hidden" name="contentSeason" value="-1">
+			<input type="hidden" name="contentEpisode" value="-1">			
+			<button type="submit" class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+		</form>
+	</div>
+	<div class="similar-contents-detail-text-box">
+
+		<div style="display:flex; justify-content: space-between; align-items: center;">
+			<div>
+				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
+				<div style="margin-right: 5px; display: inline-block;">
+					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+				</div>			
+				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
+			</div>			
+			<div>
+				<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" data-contentNo="{{contentNo}}" id="wish-insert-btn{{contentNo}}"><i class="fas fa-plus"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" data-contentNo="{{contentNo}}" id="wish-delete-btn{{contentNo}}"><i class="fas fa-check"></i></button>
+
+			</div>
+		</div>
+		<div class="modal-wallpaper-text">
+			{{contentInfo}}
+		</div>
+	</div>
+</div>
 </script>
 <div class="main-color container-center search-page-body">
 
@@ -88,7 +133,7 @@
 
 
 	<c:forEach var="contentDto" items="${contentList}">
-		<div class="search-page-card"><img src="${contentDto.contentThumbnail }" class="search-page-card-img"></div>
+		<div class="search-page-card"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div>
 
 	</c:forEach> 
 	
@@ -100,36 +145,38 @@
 	
 	
 <!-- 호버시 팝업될 창 -->
-        <div class="modal fade hoverModal" id="hoverModal2"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade hoverModal" id="hoverModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content hoverModalBox ">
                
-                <div class="modal-header" id="modal-header2" style="padding:0;display:flex;border:none;">
-                    <iframe class="hoverModalVideo" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="modal-header" id="modal-header" style="padding:0;display:flex;border:none;">
+                    <iframe class="hoverModalVideo" id="hoverPlayer" src="https://www.youtube.com/embed/6a3vhKbJKAE?autoplay=1&loop=1&mute=1&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="modal-body " id="modal-body2"style=" border:none;">
+                <div class="modal-body " id="modal-body"style=" border:none;">
                     <div class="hover-modal-btn-box">
-                    	<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
-	                    <button class="btn btn-outline-light hover-modal-etc-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-up" ><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn modal-thumbs-down"><i class="far fa-thumbs-down"></i></button>
-						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button "data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
+                    	<form action="play" style="display: inline-block;">
+                    		<input type="hidden" name="contentNo" id="hover-modal-play-btn">
+                    		<input type="hidden" name="contentSeason" value="-1">
+                    		<input type="hidden" name="contentEpisode" value="-1">
+                    		<button type="submit" class="btn btn-outline-light hover-modal-etc-btn hover-modal-play-btn"><i class="fas fa-play"></i></button>
+                    	</form>
+                    	<button class="btn btn-outline-light hover-modal-etc-btn wish-delete-btn" id="modal-check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn wish-insert-btn" id="modal-plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-insert-btn modal-thumbs-up" id="thumbs-up-empty2"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn like-delete-btn modal-thumbs-up" id="thumbs-up-full2" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light hover-modal-etc-btn hover-modal-more-button" data-bs-toggle="modal" data-bs-target="#detailModal"><i class="fas fa-chevron-down"></i></button>
                     </div>
                     <div>
                     	<div class="modal-trailer-feature" style="margin-top:2%;">
 								<div class="modal-feature-percent-text modal-trailer-feature-box"><span>64%</span><span>일치</span></div>
 								<div id="content-release" class="modal-trailer-feature-box "></div>
-								<div class="modal-trailer-feature-box content-limit"></div>
-								<div class="modal-trailer-feature-box">시즌 3개</div>
+								<div class="modal-trailer-feature-box content-limit"><img id="hover-content-limit" src="" width="25" height="25"> </div>
+								<div class="modal-trailer-feature-box" id="hover-content-season"></div>
 								<div class="modal-feature-border modal-trailer-feature-box">HD</div>
 							</div>
-                    	<div >
-                    		<span>다크</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>흥미진진</span>
-                    		<span style="color:rgb(100,100,100);">&ensp;•&ensp;</span>
-                    		<span>스릴러</span>
+							
+                    	<div class="hover-modal-genre">
+                    		
                     	</div>
                     	
                     </div>
@@ -160,6 +207,8 @@
 					<div class="modal-btn-box">
 						<form action="play" style="display: inline-block;">
 							<input type="hidden" id="input-content-no" name="contentNo">
+							<input type="hidden" name="contentSeason" value="-1">
+							<input type="hidden" name="contentEpisode" value="-1">
 							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
 						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
@@ -209,37 +258,10 @@
 				       <%--  </c:if> --%>
 				       
 				       <div class="similar-contents-box">
-				       		<h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
-				       		<c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-				       		<div style="display:flex; flex-wrap:wrap;">
-				       			
-				       			<c:forEach var="i" begin="1" end="${wallpaperNo}" step="1">
-				       				
-											<div class="similar-contents-detail-box">
-					       					<div class="similar-contents-detail-img-box">
-					       						<img class="similar-contents-detail-img"src="https://occ-0-988-1007.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABWbhnfZaOzPIyEiVP-se8Ijsy4-W38jRqFzWQ_y9EXrd3iCyOlhsIJ1v30XBp_xdXQJTBo9TQeLs5iLJcHSN4SnqAZXshQnahJXpBwm_XsEJdrRmoRJDrGGd1biF.jpg?r=a95" >
-					       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
-					       					</div>
-					       					<div class="similar-contents-detail-text-box">
-					       						<div style="display:flex;">
-					       							<div>
-					       							<div class="modal-feature-percent-text"><span>64%</span><span>일치</span></div>
-					       							<div>2020</div>
-						       						</div>
-						       						<button class="btn btn-outline-light modal-etc-btn modal-wallpaper-plus-btn"><i class="fas fa-plus"></i></button>
-					       						</div>
-					       						<div class="modal-wallpaper-text">
-					       							세상을 차단하고 방 안에 틀어박힌 10대 소년. 현수가 세상 밖으로 나온다. 인간이 괴물로 변했다. 그래도 살아야 한다. 아직은 사람이니까. 이웃들과 함께 싸워야 한다.
-					       						</div>
-					       					</div>
-					       				</div>
-					       			
-					       				
-									
-				       			</c:forEach>
-				       			
-				       		</div>
-				       		
+			       		   <h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
+			       		   <c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
+			       		   <div style="display:flex; flex-wrap:wrap;">
+			       		</div>
 				       </div>
 				       
 				       <div style="position: absolute;width: 100%;">
@@ -250,7 +272,7 @@
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button "><i class="fas fa-chevron-down"></i></button>
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-less-button " style="display:none;"><i class="fas fa-chevron-up"></i></button>
 					       	</div>
-				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
+				       		<h3 style="margin-bottom:2%"><span id="detail-modal-contentName"></span> 상세 정보</h3>
 				       		<div style="font-size:0.8rem;">
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>

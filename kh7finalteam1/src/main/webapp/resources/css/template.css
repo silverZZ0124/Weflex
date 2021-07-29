@@ -655,10 +655,9 @@ i{
 }
 .second-nav-title-text{
 	color: white;
-    margin-left:-7%;
+	margin-left:1%;
     font-size: 2rem;
     font-weight: 600;
-    width: 250px;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;

@@ -8,5 +8,5 @@ public interface LikeListDao {
 	boolean insertLikeList(LikeListDto likeListDto);
 	boolean deleteLikeList(LikeListDto likeListDto);
 	LikeListDto getLikeList(LikeListDto likeListDto);
-	List<LikeListDto> get(int clientNo);
+	
 }
