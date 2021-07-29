@@ -114,9 +114,12 @@ $(function(){
  	});
  	
  	$("#modal4-next-btn").click(function(){
+ 		keyword = [];
+ 		
  		$(".selected-genre-btn").each(function(){ 			
  			keyword.push($(this).text());
- 		}); 		
+ 		}); 	
+ 		console.log(keyword);
  	});
  	
  	$("#exampleModalToggle4").on("show.bs.modal", function(e){
@@ -154,16 +157,7 @@ $(function(){
  	});
  	
  	$("#exampleModalToggle5").on("show.bs.modal", function(e){
- 		var objParams = {
- 			"sliderTitle" : sliderTitle,
- 			"contentType" : contentType,
- 			"type" : type,
- 			"keyword" : keyword
- 		};
- 		
- 		console.log(objParams);
- 	
- 		
+
  		$.ajax({
 			url: "${pageContext.request.contextPath}/data/admin/getSliderSample",
 			type: "post",			
@@ -188,12 +182,18 @@ $(function(){
  	 			$(this).addClass("btn-primary");
  	 			$(this).removeClass("unselected-genre-btn");
  	 			$(this).addClass("selected-genre-btn");
+ 	 			
+ 	 			if(!keyword.includes($(this).text()))
+ 	 				keyword.push($(this).text());
  			}
  			else if($(this).hasClass("selected-genre-btn")){
  				$(this).removeClass("btn-primary");
  	 			$(this).addClass("btn-outline-primary");
  	 			$(this).removeClass("selected-genre-btn");
  	 			$(this).addClass("unselected-genre-btn");
+ 	 			
+ 	 			if(keyword.includes($(this).text()))
+ 	 				keyword.splice(keyword.indexOf($(this).text()), 1); 	
  			}
  			
  			var count = 0;

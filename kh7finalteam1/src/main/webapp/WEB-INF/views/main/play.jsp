@@ -53,6 +53,7 @@
 		}		
 		
 		function onPlayerReady(event) {
+			
 	    }
 		
 		function onPlayerStateChange(event) {
@@ -63,6 +64,9 @@
 				endFlag = true;
 			}
 			
+			if(event.data === 1){
+				$.fn.updateContentViews();
+			}				
 		}
 	
 		onYouTubeIframeAPIReady();
@@ -75,7 +79,8 @@
 			$.fn.insertWatchLog(0);
 		else
 			$.fn.insertWatchLog(parseInt(player.getCurrentTime()));
-	}
+	};
+	
  $(function(){
 	 
 	 var video=$("#page-video");
@@ -162,6 +167,17 @@
 					watchLogSeason: '${playlistVO.contentSeason}',
 					watchLogEpisode: '${playlistVO.contentEpisode}',
 					watchLogPlaytime: curTime}							
+		});
+	};
+	
+	$.fn.updateContentViews = function(){		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/data/home/updateContentViews",
+			type : "post",
+			dataType : "json",
+			data : {
+				contentNo: '${playlistVO.contentNo}'
+			}							
 		});
 	};
 		
