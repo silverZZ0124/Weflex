@@ -45,7 +45,19 @@ window.onload = function(){
 }
 
 </script>
-  
+  <script>
+  	$(function(){
+  		var hoverImg;
+  		$(".search-page-card-img-tohide").mouseenter(function(){
+  			hoverImg=$(this);
+  			$("#modal-check-btn").click(function(){
+  				$(".hoverModal").hide();
+  				hoverImg.css("display","none");
+  			});
+  			
+  		});
+  	});
+  </script>
 <script id="episode-list-template" type="text/template">
 <div class="trailer-series-section-box">
 	<div class="trailer-series-section">
@@ -133,7 +145,7 @@ window.onload = function(){
 
 
 	<c:forEach var="contentDto" items="${contentList}">
-		<div class="search-page-card"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div>
+		<div class="search-page-card  search-page-card-img-tohide"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div>
 
 	</c:forEach> 
 	
