@@ -39,7 +39,8 @@
 		update content set 
 			content_name=#{contentName}, content_info=#{contentInfo}, content_limit=#{contentLimit}, 
 			content_type=#{contentType},  content_release=#{contentRelease},
-			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail}
+			content_logo=#{contentLogo}, content_thumbnail=#{contentThumbnail},
+			content_trailer=#{contentTrailer}
 		where content_no=#{contentNo}
 	</update> 
 		 
@@ -124,4 +125,6 @@
 	        where R.content_type = #{contentType} and (WL.client_no = #{clientNo} or WL.client_no is null) and not(R.content_no = #{contentNo})
 	        order by R.content_no 
 	</select>
+	
+	<!-- 티비프로그램(연작있는컨텐츠) 조회 -->
 </mapper>
