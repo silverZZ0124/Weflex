@@ -45,7 +45,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	  data: {
 	    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	    datasets: [{
-	      label: "결제건수",
+	      label: "결제 수",
 	      backgroundColor: "#d10914",//"#4e82be",//"#4e73df",
 	      hoverBackgroundColor: "#f51b27",//"#0080ff",
 	      borderColor: "#4e82be",
