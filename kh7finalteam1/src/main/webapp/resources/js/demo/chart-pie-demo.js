@@ -20,8 +20,8 @@ $(function(){
 	    datasets: [{
 //	      data: [count.ten, count.twenty, count.thirty, count.forty], 	//DB 
 	      data: [55, 25, 10, 10],//임시 데이터
-	      backgroundColor: ['#4e82be', '#db835c', '#AA4643', '#5a5c69'],
-	      hoverBackgroundColor: ['#0080ff', '#ff7f00', '#dc143c', '#9193a0'],
+	      backgroundColor: ['#2e80de', '#ff7f50', '#d10914', '#6e7286'],//4e82be db835c AA4643 5a5c69
+	      hoverBackgroundColor: ['#1e90ff', '#ff9f40', '#f51b27', '#9193a0'],
 	      hoverBorderColor: "rgba(234, 236, 244, 1)",
 	    }],
 	  },
