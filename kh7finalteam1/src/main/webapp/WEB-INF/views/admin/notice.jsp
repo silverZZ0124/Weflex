@@ -35,21 +35,22 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-wrap">
-                        <table class="table table-responsive-md table-hover content-table" id="noticeTable" style="width:100%">
+                        <table class="table table-responsive-md table-hover" id="noticeTable" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>번호</th>
+                                    <th width="15%">번호</th>
                                     <th>제목</th>
                                     <th>작성자</th>
-                                    <th>작성일</th>
-                                    <th>조회</th>
+                                    <th width="20%">작성일</th>
+                                    <th width="13%">조회</th>
                                 </tr>
                             </thead>
                             
-							<div>            
-								<a onClick="location.href='noticeWrite?clientNo=${noticeVo.clientNo}'"  class="btn btn-success">공지글쓰기</a>            
-							</div>
+							
                         </table>
+                        <div>            
+							<a onClick="location.href='noticeWrite?clientNo=${noticeVo.clientNo}'"  class="btn btn-primary">공지글쓰기</a>            
+						</div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->
