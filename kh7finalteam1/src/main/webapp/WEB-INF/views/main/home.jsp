@@ -460,7 +460,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){	
+				success:function(resp){						
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -471,6 +471,7 @@ $(function(){
  					$("#content-logo").attr("src", resp.contentDto.contentLogo);
  					$("#content-info").text(resp.contentDto.contentInfo);
  					$("#content-release").text(resp.contentDto.contentRelease);
+ 					$("#detail-modal-contentName").text(resp.contentDto.contentName);
  					var imgSrc = "res/img/content_limit_"+resp.contentDto.contentLimit+".png";
  					$(".content-limit").attr("src", imgSrc);
  					
@@ -978,7 +979,7 @@ $(function(){
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button "><i class="fas fa-chevron-down"></i></button>
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-less-button " style="display:none;"><i class="fas fa-chevron-up"></i></button>
 					       	</div>
-				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
+				       		<h3 style="margin-bottom:2%"><span id="detail-modal-contentName"></span> 상세 정보</h3>
 				       		<div style="font-size:0.8rem;">
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>

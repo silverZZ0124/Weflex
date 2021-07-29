@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.finalteam1.entity.ClientDto;
 import com.kh.finalteam1.entity.ClientGradeDto;
 import com.kh.finalteam1.entity.ClientGradeListDto;
+import com.kh.finalteam1.vo.ClientAgeCountVO;
+import com.kh.finalteam1.vo.ClientJoinBuyCountVO;
 import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 
 
@@ -74,6 +76,18 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public int yearMemberCount() {
 		return sqlSession.selectOne("client.year-clientCount");
+	}
+	
+	//10~40대별 나이대별 회원 수 출력
+	@Override
+	public ClientAgeCountVO ageCount() {
+		return sqlSession.selectOne("client.age-count");
+	}
+	
+	//올 해 가입 한 회원 수 출력(월별)
+	@Override
+	public ClientJoinBuyCountVO joinCount() {
+		return sqlSession.selectOne("client.join-count");
 	}
 	
 }

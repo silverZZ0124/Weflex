@@ -138,10 +138,10 @@ public class AdminController {
 	
 	
 	//회원 관리
-		@GetMapping("/clientAdmin")
-		public String clientAdmin() {
-			return "admin/clientAdmin";
-		}
+	@GetMapping("/clientAdmin")
+	public String clientAdmin() {
+		return "admin/clientAdmin";
+	}
 		
 	@GetMapping("/homeSetting")
 	public String homeSetting(Model model) {

@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.LikeListDto;
+
 import com.kh.finalteam1.repository.ContentDao;
+
 import com.kh.finalteam1.repository.LikeListDao;
+
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
+import com.kh.finalteam1.vo.ContentListVO;
 import com.kh.finalteam1.vo.PlaylistVO;
 
 @Controller
@@ -28,10 +33,12 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
+
 	
 	@Autowired
 	private LikeListDao likeListDao;
 	
+
 	@Autowired
 	private ContentDao contentDao;
 	
@@ -83,14 +90,19 @@ public class HomeController {
 	}
 	
 	@GetMapping("/tv")
-	public String tv() {
+	public String tv(Model model) {
+		
+		List<ContentListVO> tvProgramList = contentDao.tvProgramList();
+		model.addAttribute("tvProgramList", tvProgramList);
 		return "main/TV";
 
 	}
 	
+
 	@GetMapping("/wishlist")
 	public String wishlist(HttpSession session, Model model) {
 		int clientNo=(int)session.getAttribute("clientNo");
+
 
 		List<LikeListDto> likeList=likeListDao.get(clientNo);
 		model.addAttribute("likeList",likeList);
@@ -106,7 +118,14 @@ public class HomeController {
 		model.addAttribute("contentList", contentList);
 		return "main/wishlist";
 	}
-
+	@GetMapping("/movie")
+	public String movie(Model model) {
+		
+		List<ContentListVO> movieList = contentDao.movieList();
+		model.addAttribute("movieList", movieList);
+		return "main/movie";
+		
+	}
 	
 	
 	

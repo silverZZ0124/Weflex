@@ -52,6 +52,34 @@
 		select count(*) from client
  		where client_join between (TRUNC(SYSDATE,'YYYY')) and SYSDATE
 	</select>
+	
+	<!-- 10~40대 연령대별 회원수 (다중 count) -->
+	<select id="age-count" resultType="ClientAgeCountVO">
+		select 
+		    (select count(*) from client where client_birth between '2003-01-01' and '2012-12-31') ten,
+		    (select count(*) from client where client_birth between '1993-01-01' and '2002-12-31') twenty,
+		    (select count(*) from client where client_birth between '1983-01-01' and '1992-12-31') thirty,
+		     (select count(*) from client where client_birth between '1973-01-01' and '1982-12-31') forty
+		from dual
+	</select>
+	
+	<!-- 매달 회원 수 -->
+	<select id="join-count" resultType="ClientJoinBuyCountVO">
+		select 
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-01')) jan,
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-02')) feb,
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-03')) mar,
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-04')) apr,
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-05')) may,
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-06')) jun,
+		    (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-07')) jul,
+            (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-08')) aug,
+            (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-09')) sep,
+            (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-10')) oct,
+            (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-11')) nov,
+            (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-12')) dec
+		from dual
+	</select>
 
 </mapper>
 

@@ -21,11 +21,14 @@ import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.NoSeriesDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.entity.YesSeriesDto;
+import com.kh.finalteam1.repository.BuyListDao;
 import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
+import com.kh.finalteam1.vo.ClientAgeCountVO;
+import com.kh.finalteam1.vo.ClientJoinBuyCountVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -92,6 +95,27 @@ public class AdminDataController {
 			log.debug("noSeriesDto = {}" , noSeriesDto);
 			session.setAttribute("noSeriesDto", noSeriesDto);
 	}
+	
+	//10~40대별 회원 수 출력
+	@GetMapping("/client/age")
+	public ClientAgeCountVO ageCount() {
+		return clientDao.ageCount();
+	}
+	
+	//올 해 가입 한 회원 수 출력(월별)
+	@GetMapping("/client/join")
+	public ClientJoinBuyCountVO joinCount()	{
+		return clientDao.joinCount();
+	}
+	
+	@Autowired
+	private BuyListDao buyListDao;
+	
+	//월별 결제 건수 조회
+	@GetMapping("/client/payment")
+	public ClientJoinBuyCountVO payment(){
+		return buyListDao.buyCount();
+	}
 
 	@PostMapping("/admin/getGenre")
 	public List<GenreDto> getGenre() {
@@ -109,15 +133,6 @@ public class AdminDataController {
 		System.out.println(contentType);
 		System.out.println(type);
 		System.out.println(keyword);
-//		System.out.println(keyword.size());
-//		System.out.println(keyword.get(0));
 	}
-//	@PostMapping("/admin/getSliderSample")
-//	public void getSliderSample(HttpServletRequest request) {
-//		
-//		System.out.println(request.getParameter("sliderTitle"));
-//		System.out.println(request.getParameter("contentType"));
-//		System.out.println(request.getParameter("type"));
-//		System.out.println(request.getParameterValues("keyword"));
-//	}
 }
+

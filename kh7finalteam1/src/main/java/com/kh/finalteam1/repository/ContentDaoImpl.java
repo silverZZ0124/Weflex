@@ -85,6 +85,19 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.selectOne("content.year-contentCount");
 	}
 
+	//TV프로그램 목록(장르 검색 안했을때)
+	@Override
+	public List<ContentListVO> tvProgramList() {
+		return sqlSession.selectList("content.tvProgram");
+	}
+	
+	//영화 목록
+	@Override
+	public List<ContentListVO> movieList() {
+		return sqlSession.selectList("content.movie");
+	}
+	
+
 	@Override
 	public List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreList, int clientNo, int count) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -105,6 +118,21 @@ public class ContentDaoImpl implements ContentDao {
 		map.put("clientNo", clientNo);
 		
 		return sqlSession.selectList("content.getAllSimilarContentVO", map);
+	}
+
+	@Override
+	public boolean updateContentViews(int contentNo) {
+		return sqlSession.update("content.updateContentViews", contentNo) > 0;
+	}
+
+	@Override
+	public boolean increaseContentLikes(int contentNo) {
+		return sqlSession.update("content.increaseContentLikes", contentNo) > 0;
+	}
+
+	@Override
+	public boolean decreaseContentLikes(int contentNo) {
+		return sqlSession.update("content.decreaseContentLikes", contentNo) > 0;
 	}
 	
 	@Override
