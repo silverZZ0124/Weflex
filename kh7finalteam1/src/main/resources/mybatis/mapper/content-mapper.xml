@@ -54,7 +54,7 @@
 		where GR.genre_name = #{keyword} and CT.content_type = #{contentType}
 	</select>
 	
-	<select id="getContentList" parameterType="map" resultType="ContentListVO">
+	<select id="getGenreContentList" parameterType="map" resultType="ContentListVO">
 		select 
 		    CT.content_no, CT.content_thumbnail
 		from 
@@ -62,6 +62,16 @@
 		        inner join content_genre CTGR on CT.content_no = CTGR.content_no
 		        inner join genre GR on CTGR.genre_no = GR.genre_no
 		where GR.genre_name = #{keyword} and CT.content_type = #{contentType}
+	</select>
+	
+	<select id="getFeatureContentList" parameterType="map" resultType="ContentListVO">
+		select 
+		    CT.content_no, CT.content_thumbnail
+		from 
+		    content CT
+		        inner join content_feature CTFT on CT.content_no = CTFT.content_no
+		        inner join program_feature FT on CTFT.feature_no = FT.feature_no
+		where FT.feature_name = #{keyword} and CT.content_type = #{contentType}
 	</select>
 	
 	<resultMap type="HoverModalVO" id="hoverModal">

@@ -58,7 +58,7 @@ public class HomeController {
 		mv.addObject("mainTrailerList", homeService.getMainTrailer());
 		mv.addObject("sliderList", homeService.getSliderList());
 		mv.setViewName("main/home");
-		
+				
 		return mv;
 	}
 	

@@ -44,4 +44,9 @@ public class HomeSliderDaoImpl implements HomeSliderDao {
 		return sqlSession.update("homeSlider.insert", map) > 0; 
 	}
 
+	@Override
+	public boolean deleteHomeSlider(int homeSliderNo) {
+		return sqlSession.delete("homeSlider.delete", homeSliderNo) > 0;
+	}
+
 }

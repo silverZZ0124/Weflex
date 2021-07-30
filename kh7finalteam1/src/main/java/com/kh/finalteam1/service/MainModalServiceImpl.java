@@ -125,9 +125,7 @@ public class MainModalServiceImpl implements MainModalService {
 		
 		if(list.size() < 12) {
 			temp = contentDao.getSimilarListAll(contentNo, contentType, clientNo);
-			for(SimilarContentVO v : temp)
-				System.out.println(v);
-			
+
 			for(SimilarContentVO vo : temp) {
 				if(!list.contains(vo)) {
 					list.add(vo);
@@ -163,7 +161,7 @@ public class MainModalServiceImpl implements MainModalService {
 									.clientNo(clientNo)
 									.contentNo(contentNo)
 								.build();
-		
+
 		wishListDao.insertWishList(wishListDto);
 	}
 
