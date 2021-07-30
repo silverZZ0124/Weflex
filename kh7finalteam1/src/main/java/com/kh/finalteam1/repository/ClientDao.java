@@ -18,7 +18,9 @@ public interface ClientDao {
 	void  joinCheck(ClientDto clientDto);
 	boolean changeEmail(ClientDto clientDto);
 	boolean changePassword(ClientUpdatePasswordVO clientVO);	
-	
+	void updateExpire(int clientNo);
+	void updateGradeStandard(int clientNo);
+	void updateGradePremium(int clientNo);
 	
 	List<ClientGradeListDto> list();//회원 전체 목록 출력(관리자 게시판 사용)
 	int monthMemberCount();//이번달 회원 가입 수
