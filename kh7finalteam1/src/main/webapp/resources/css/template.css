@@ -604,7 +604,9 @@ i{
 .copy-text:first-child {
     margin-top: 0px;
 }
-
+.second-header{
+	margin-top:60px;
+}
 #header{
 	font-size: 1.2rem;
 }

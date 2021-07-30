@@ -52,7 +52,7 @@ window.onload = function(){
   			hoverImg=$(this);
   			$("#modal-check-btn").click(function(){
   				$(".hoverModal").hide();
-  				hoverImg.css("display","none");
+  				hoverImg.fadeOut(500);
   			});
   			
   		});
@@ -62,7 +62,7 @@ window.onload = function(){
 		isCheck=1;
 		$("#detailModal").on("hidden.bs.modal",function(){
 			if(isCheck==1){
-				hoverImg.css("display","none");
+				hoverImg.fadeOut(500);
 				ischeck=0;
 			}
 		});

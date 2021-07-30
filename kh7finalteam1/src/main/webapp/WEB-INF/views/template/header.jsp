@@ -214,7 +214,7 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style wishlist-nav-style second-header" style="display:none;margin-top:60px;z-index: 1;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style wishlist-nav-style second-header" style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
 				  <li class="nav-item second-nav-title-text"><div>내가 찜한 콘텐츠</div> </li> 
