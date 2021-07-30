@@ -120,7 +120,7 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;">
+			<div id="input-box" style="display:none; position:absolute; right:20%; margin-bottom:5px;">
 				<form class="form-inline" action="">
 					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르"> 
 				</form> 
