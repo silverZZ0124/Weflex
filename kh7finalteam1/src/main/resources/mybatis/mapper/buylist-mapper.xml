@@ -17,10 +17,20 @@
 		#{buyPaymentTid},
 		#{clientNo},
 		#{productNo},
-		'승인',
+		'준비',
 		sysdate
 	)
 </insert>
+
+<update id="approve" parameterType="int">
+		update buy_list 
+		set buy_payment_status='승인'
+		where buy_no = #{buyNo}
+	</update>
+
+<select id="get" parameterType="int" resultType="BuyListDto">
+	SELECT * FROM BUY_LIST WHERE buy_NO =#{buyNo}
+</select>
 
 <!-- 월별 결제 건수 조회 -->
 <select id="buy-count" resultType="ClientJoinBuyCountVO">

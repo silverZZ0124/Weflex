@@ -37,12 +37,12 @@
 				
 				<div class="ms-auto">
 					<a class="text-white custom-a-tag" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-						회원이름 
+						${clientName} 
 						<span style="padding-left: 10px;"><i class="fas fa-caret-down" style="color:red; font-size:1.5rem;"></i></span>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-end cumstom-help-dropdown" aria-labelledby="navbarDarkDropdownMenuLink" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
-						<li><a class="dropdown-item" href="#">넷플릭스에서 로그아웃</a></li>						
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath }/logout">넷플릭스에서 로그아웃</a></li>						
 					</ul>
 				</div>
 			</div>
@@ -51,21 +51,21 @@
 				<a href="${pageContext.request.contextPath }/help">고객 센터</a>
 			</div>
 			
-			<div class="search-wrapper">
-				<form>
-					<div class="input-group">
-						<span class="input-group-text" id="basic-addon1" style="background-color: white;"><i class="fas fa-search"></i></span>
-						<input type="text" class="form-control" id="form-control-search" placeholder="어떤 도움이 필요하세요?" aria-label="Username" aria-describedby="basic-addon1">
-					</div>
-				</form>
-			</div>
+<!-- 			<div class="search-wrapper"> -->
+<!-- 				<form> -->
+<!-- 					<div class="input-group"> -->
+<!-- 						<span class="input-group-text" id="basic-addon1" style="background-color: white;"><i class="fas fa-search"></i></span> -->
+<!-- 						<input type="text" class="form-control" id="form-control-search" placeholder="어떤 도움이 필요하세요?" aria-label="Username" aria-describedby="basic-addon1"> -->
+<!-- 					</div> -->
+<!-- 				</form> -->
+<!-- 			</div> -->
 		</div>	
 	</div>
 	
 	<!-- 고객센터 중단 -->
 	<div class="container-fluid custom-middle-container">
 		<div class="row custom-inner-container">
-			<h2 style="padding: 0; font-weight: 700;">회원이름 님, 안녕하세요.</h2>
+			<h2 style="padding: 0; font-weight: 700;">${clientName} 님, 안녕하세요.</h2>
 		</div>
 		
 		<div class="row custom-inner-container custom-middle-second-container" >
@@ -73,19 +73,19 @@
 			
 			<div class="d-flex flex-row help-card-wrapper">
 				<div class="help-card">
-					<a href="#">
+					<a href="${pageContext.request.contextPath }/help/node/2">
 						<i class="far fa-file-alt"></i>
 						<span>계정 보안을 유지하는 방법</span>
 					</a>
 				</div>
 				<div class="help-card">
-					<a href="#">
+					<a href="${pageContext.request.contextPath }/help/node/3">
 						<i class="far fa-file-alt"></i>
 						<span>넷플릭스 자녀 보호 기능</span>
 					</a>					
 				</div>
 				<div class="help-card">
-					<a href="#">
+					<a href="${pageContext.request.contextPath }/help/node/1">
 						<i class="far fa-file-alt"></i>
 						<span>멤버십 변경 방법</span>
 					</a>					
@@ -101,33 +101,33 @@
 				<div class="category">
 					<h2>내 계정 관리</h2>
 					<ul>
-						<li><a href="#">멤버십 및 요금</a></li>
-						<li><a href="#">내 계정에 새로운 로그인이 발생했다는 이메일을 수신했습니다.</a></li>
-						<li><a href="#">시청 기록에서 콘텐츠를 숨기는 방법</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/4">멤버십 및 요금</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/5">내 계정에 새로운 로그인이 발생했다는 이메일을 수신했습니다.</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/6">시청 기록에서 콘텐츠를 숨기는 방법</a></li>
 					</ul>
 				</div>
 				<div class="category">
 					<h2>시청 불가</h2>
 					<ul>
-						<li><a href="#">타인의 내 계정 사용을 중단시키는 방법</a></li>
-						<li><a href="#">HTML5 플레이어와 Silverlight에 대한 넷플릭스 시스템 요구 사항</a></li>
-						<li><a href="#">'넷플릭스에 연결하는 데 문제가 있습니다(3.1).'라는 넷플릭스 메시지가 표시됩니다.</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/12">타인의 내 계정 사용을 중단시키는 방법</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/13">HTML5 플레이어와 Silverlight에 대한 넷플릭스 시스템 요구 사항</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/14">'넷플릭스에 연결하는 데 문제가 있습니다(3.1).'라는 넷플릭스 메시지가 표시됩니다.</a></li>
 					</ul>
 				</div>
 				<div class="category">
 					<h2>결제 문의</h2>
 					<ul>
-						<li><a href="#">청구 및 결제</a></li>
-						<li><a href="#">'최근 결제에 문제가 있어 계정이 보류 중입니다.'라는 Netflix 메시지가 표시됩니다.</a></li>
-						<li><a href="#">넷플릭스 기프트카드</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/7">청구 및 결제</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/8">'최근 결제에 문제가 있어 계정이 보류 중입니다.'라는 Netflix 메시지가 표시됩니다.</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/11">넷플릭스 기프트카드</a></li>
 					</ul>
 				</div>
 				<div class="category">
 					<h2>넷플릭스 시청</h2>
 					<ul>
-						<li><a href="#">프로필 생성 및 수정 방법</a></li>
-						<li><a href="#">TV에서 넷플릭스를 시청하는 방법</a></li>
-						<li><a href="#">TV 프로그램 및 영화를 저장하여 오프라인 상태에서 시청하는 방법</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/15">프로필 생성 및 수정 방법</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/16">TV에서 넷플릭스를 시청하는 방법</a></li>
+						<li><a href="${pageContext.request.contextPath }/help/node/17">TV 프로그램 및 영화를 저장하여 오프라인 상태에서 시청하는 방법</a></li>
 					</ul>
 				</div>			
 			</div>

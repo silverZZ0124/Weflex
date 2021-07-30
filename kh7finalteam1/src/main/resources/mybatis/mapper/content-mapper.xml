@@ -149,6 +149,13 @@
 	</update>
 
 	<!-- 티비프로그램(연작있는컨텐츠) 조회 -->
+	
+	
+	<!-- 조건(문자열 위치) 검색(컨텐츠명) -->
+	<select id="search" parameterType="string" resultType="ContentListVO">
+		select * from content where instr(content_name, #{keyword}) > 0
+	</select>
+	
 	<select id="tvProgram" resultType="ContentListVO">
 		select content_no, content_thumbnail from content where content_series = 'Y'
 	</select>

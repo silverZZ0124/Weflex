@@ -29,4 +29,7 @@ public interface ContentDao {
 	boolean decreaseContentLikes(int contentNo);
 	List<ContentListVO> tvGenreList(int genreNo); //TV프로그램(장르 검색 했을때)
 	List<ContentListVO> movieGenreList(int genreNo); //영화(장르 검색 했을때)
+	
+	List<ContentListVO> search(String keyword);//검색기능(조건검색:컨텐츠명)
+	
 }

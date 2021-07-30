@@ -74,6 +74,7 @@
 		$("#profile-img").hover(function(){
 			$(".dropdown-menu").show();
 		});
+		
 	});
 </script>
 <style>
@@ -111,9 +112,11 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:20%; margin-bottom:5px;">
-				<form class="form-inline" action="">
-					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르"> 
+
+			<div id="input-box" style="display:none; position:absolute; right:17%; margin-bottom:5px;">
+				<form class="form-inline" action="search" method="get" id="form-search">
+					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르" name="keyword"> 
+
 				</form> 
 			</div>
 			<ul class="navbar-nav nav-var-right" style="margin-left: auto;margin-right: 4%;padding-right: 0;">
@@ -128,7 +131,7 @@
 		          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark dropdown-left" aria-labelledby="navbarDarkDropdownMenuLink">
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/help">고객센터</a></li>
-		            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/logout">로그아웃</a></li>
 		          </ul>
 		          
        		 	</li>		

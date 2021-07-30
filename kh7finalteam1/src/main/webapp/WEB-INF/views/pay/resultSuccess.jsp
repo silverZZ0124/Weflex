@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/loginHeader.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join3.css"/>
 <script>
 	$(function(){
 		$("#start-weflex-btn").click(function(){

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.finalteam1.entity.CastDto;
+import com.kh.finalteam1.vo.CastListVO;
 import com.kh.finalteam1.vo.GenreFeatureCastVO;
 
 @Repository
@@ -30,6 +31,12 @@ public class CastDaoImpl implements CastDao{
 	public boolean deleteAll(int contentNo) {
 		int count = sqlSession.delete("cast.delete", contentNo);
 		return count>0;
+	}
+	
+	//검색기능(조건검색:배우명)
+	@Override
+	public List<CastListVO> search(String keyword) {
+		return sqlSession.selectList("cast.search", keyword);
 	}
 
 }
