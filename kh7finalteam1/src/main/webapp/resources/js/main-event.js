@@ -382,7 +382,7 @@ $(function(){
 	});
 	
 	$(".wallpaper-more-button").click(function(){
-		$(".similar-contents-box").css("height","1600px");
+		$(".similar-contents-box").css("height","fit-content");
 		$(this).css("display","none");
 		$(".wallpaper-less-button").css("display","block");
 	});
