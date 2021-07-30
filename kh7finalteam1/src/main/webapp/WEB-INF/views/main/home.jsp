@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -593,7 +591,7 @@ $(function(){
 		});
 				
 		$(".wallpaper-more-button").click(function(){
-			$(".similar-contents-box").css("height","1600px");
+			$(".similar-contents-box").css("height","fit-content");
 			$(this).css("display","none");
 			$(".wallpaper-less-button").css("display","block");
 		});
@@ -838,11 +836,11 @@ $(function(){
 	</div>
 	<div class="similar-contents-detail-text-box">
 
-		<div style="display:flex; justify-content: space-between; align-items: center;">
+		<div style="display:flex; justify-content: space-between; align-items: center;margin-top:3%;">
 			<div>
 				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
 				<div style="margin-right: 5px; display: inline-block;">
-					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 25px;height:25px;">
 				</div>			
 				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
 			</div>			
@@ -1051,8 +1049,6 @@ $(function(){
 		<div class="slider-title container-center">${sliderVO.sliderTitle }</div>		
 		<div class="custom-img-slide-box">
 			<div class="container-center slider-box" id="slider1">
-				
-				
 			  	<div class="custom-img-slide">
 			   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
 						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
@@ -1065,16 +1061,3 @@ $(function(){
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-
-
-
-
-
-
-
-
-
-
-

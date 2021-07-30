@@ -72,9 +72,8 @@ public class LoginController {
 	@PostMapping("loginCheck")
 	public String loginCheck(@ModelAttribute ClientDto clientDto, HttpSession session) {
 		ClientDto client = clientDao.loginCheck(clientDto);
-
+		
 		if(client ==null) {
-
 			return "redirect: login";
 		}
 		else {

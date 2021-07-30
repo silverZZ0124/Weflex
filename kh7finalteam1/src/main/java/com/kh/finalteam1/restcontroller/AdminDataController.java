@@ -27,8 +27,10 @@ import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
+import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.vo.ClientAgeCountVO;
 import com.kh.finalteam1.vo.ClientJoinBuyCountVO;
+import com.kh.finalteam1.vo.SliderListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,6 +50,9 @@ public class AdminDataController {
 	
 	@Autowired
 	private ContentDao contentDao;
+	
+	@Autowired
+	private HomeService homeService;
 	
 	@GetMapping("/content/list")
 	public List<ContentDto> contentList(){
@@ -122,17 +127,20 @@ public class AdminDataController {
 		return genreDao.list();
 	}
 	
+	@PostMapping("/admin/getFeature")
+	public List<ProgramFeatureDto> getFeature() {
+		return programFeatureDao.list();
+	}
+	
 	@PostMapping("/admin/getSliderSample")
-	public void getSliderSample(
+	public SliderListVO getSliderSample(
 			@RequestParam(value="sliderTitle") String sliderTitle,
 			@RequestParam(value="contentType") String contentType,
 			@RequestParam(value="type") String type,
 			@RequestParam(value="keyword") String keyword) {
 		
-		System.out.println(sliderTitle);
-		System.out.println(contentType);
-		System.out.println(type);
-		System.out.println(keyword);
+		SliderListVO sliderListVO = homeService.getSlider(sliderTitle, contentType, type, keyword);
+		return sliderListVO;
 	}
 }
 
