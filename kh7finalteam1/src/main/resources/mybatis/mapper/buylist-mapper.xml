@@ -17,7 +17,7 @@
 		#{buyPaymentTid},
 		#{clientNo},
 		#{productNo},
-		'승인',
+		'준비',
 		sysdate
 	)
 </insert>
