@@ -75,7 +75,7 @@
 		});
 		
 		
-		$('html').click(function(e){
+		$("html").click(function(e){
 			if(!$(e.target).hasClass("search-div")){
 				$("#input-box").hide(500);
 			}
@@ -126,7 +126,7 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;" class="search-div">
+			<div id="input-box" style="display:none; position:absolute; right:17%; margin-bottom:5px;" class="search-div">
 				<form class="form-inline search-div" action="search" method="get" id="form-search">
 					<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목,사람,장르" name="keyword"> 
 				</form> 
