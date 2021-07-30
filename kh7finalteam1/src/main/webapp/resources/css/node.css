@@ -42,11 +42,12 @@ body{
 }
 
 .mainLogo{
-    width: 115px;
+    width: 90px;
     display: block;
     position: relative;
-    height: 48px;
-    top: -9px;
+    height: 28px;
+    top: 3px;
+    margin: 0 12px 20px 0;
 }
 
 .helpcenter-logo{
