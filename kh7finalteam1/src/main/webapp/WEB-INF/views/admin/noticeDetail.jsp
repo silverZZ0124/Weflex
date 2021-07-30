@@ -16,7 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <div class="container my-1">
 	<div class="row">
-		<table class="table">
+		<table class="table table-active">
 			<thead>
 				<tr class="table-active">
 					<th scope="col" style="width: 60%">${noticeVo.noticeName}<br>
