@@ -21,8 +21,10 @@ import com.kh.finalteam1.entity.YesSeriesDto;
 import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.NoticeDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
+import com.kh.finalteam1.vo.NoticeVo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +44,9 @@ public class AdminDataController {
 	
 	@Autowired
 	private ContentDao contentDao;
+
+	@Autowired
+	private NoticeDao noticeDao;
 	
 	@GetMapping("/content/list")
 	public List<ContentDto> contentList(){
@@ -90,4 +95,8 @@ public class AdminDataController {
 			session.setAttribute("noSeriesDto", noSeriesDto);
 	}
 	
+	@GetMapping("/notice/list")
+	public List<NoticeVo> noticeList(){
+		return noticeDao.noticeList();
+	}
 }
