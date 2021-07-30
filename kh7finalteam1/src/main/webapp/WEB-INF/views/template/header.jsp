@@ -120,7 +120,7 @@
 			</ul> 
 			
 
-			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;">
+			<div id="input-box" style="display:none; position:absolute; right:17%; margin-bottom:5px;">
 				<form class="form-inline" action="search" method="get" id="form-search">
 					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르" name="keyword"> 
 
