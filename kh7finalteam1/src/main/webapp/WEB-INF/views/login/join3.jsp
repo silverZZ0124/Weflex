@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/template/loginHeader.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join3.css"/>
 <script>
 	$(function(){
 		$("#join3-next-btn").click(function(){
@@ -14,7 +15,7 @@
 			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-planSelectionWithContext simplicity">
 				
 				<div class="simpleContainer" data-transitioned-child="true">
-					<div class="centerContainer contextStep"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
+					<div class="centerContainer contextStep"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:420px;">
 						<div class="planContainer" >
 							<div class="stepLogoContainer">
 								<span class="stepLogo planStepLogo">
@@ -23,7 +24,7 @@
 							<div class="stepHeader-container" >
 								<div class="stepHeader" data-a11y-focus="true" tabindex="0">
 									<span id="" class="stepIndicator" >
-									<b>2</b>
+									<b>3</b>
 									/
 									<b>3단계</b>
 									</span>

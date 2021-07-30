@@ -18,37 +18,16 @@
     padding-bottom: 0;
 }
 
+.basicLayout{
+	width: 100%;
+}
+
 div.basicLayout .nfHeader {
     border-bottom: 1px solid #e6e6e6;
 }
 
 div.basicLayout .nfHeader, div.basicLayout .simpleContainer {
     background-color: #fff;
-}
-.nfHeader.signupBasicHeader {
-    height: 75px;
-}
-.noBorderHeader {
-    background-color: transparent;
-    border-bottom: 0;
-    position: relative;
-}
-.nfHeader {
-    background-color: #f3f3f3;
-    border-bottom: solid 1px #ccc;
-    height: 90px;
-}
-
-.svg-nfLogo.signupBasicHeader {
-    margin-left: -9px;
-    margin-top: 0px;
-}
-.svg-nfLogo {
-    text-decoration: none;
-    vertical-align: middle;
-    fill: #e50914;
-    display: inline-block;
-    line-height: 90px;
 }
 
 .authLinks.signupBasicHeader {
@@ -124,7 +103,7 @@ element.style {
 
 
 div.basicLayout .planContainer, div.basicLayout .regContainer, div.basicLayout .verifyCardContainer {
-    max-width: 340px;
+    max-width: 420px;
 }
 .planContainer, .regContainer, .verifyCardContainer, .verifyCardPageContainer {
     text-align: center;
@@ -561,18 +540,8 @@ ul.structural>li {
 	font-size: 18px;
 	color: #333;
 }
-.svg-nfLogo .svg-icon-netflix-logo {	    
-	 width: 153px;
-	 padding-top: 11px;
-	 padding-left: 28px;
-}
+
 @media screen and (max-width: 740px){
-	.nfHeader.signupBasicHeader {
-	    height: 75px;
-	}
-	.svg-nfLogo {
-	    line-height: 75px;
-	}
 	.authLinks {
 	    font-size: 16px;
 	    line-height: 75px;
@@ -580,18 +549,10 @@ ul.structural>li {
 
 	.footer-link-item {
     width: 32%;
-}
-	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 153px;
-	    padding-top: 11px;
-	    padding-left: 28px;
-	}
+	}	
 }
 
 @media only screen and (max-width: 600px){
-div.basicLayout .paymentContainer, div.basicLayout .planContainer, div.basicLayout .regContainer, div.basicLayout .verifyCardContainer {
-    text-align: left;
-}
 div.basicLayout .planContainer .stepLogoContainer, div.basicLayout .regContainer .stepLogoContainer {
     margin-top: 30%;
 }
@@ -600,12 +561,7 @@ div.basicLayout .planContainer .stepLogoContainer .stepLogo, div.basicLayout .re
 }
 }
 @media screen and (max-width: 500px){
-	.nfHeader.signupBasicHeader {
-	    height: 45px;
-	}
-	.svg-nfLogo {
-	    line-height: 45px;
-	}
+	
 	.authLinks.signupBasicHeader {
 	    margin: 0 10px;
 	}
@@ -613,9 +569,7 @@ div.basicLayout .planContainer .stepLogoContainer .stepLogo, div.basicLayout .re
 	    font-size: 14px;
 	    line-height: 45px;
 	}
-	.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 75px;
-	}
+	
 
 	.footer-link-item {
     width: 49%;

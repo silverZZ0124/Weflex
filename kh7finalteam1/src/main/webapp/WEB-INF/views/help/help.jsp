@@ -37,12 +37,12 @@
 				
 				<div class="ms-auto">
 					<a class="text-white custom-a-tag" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-						회원이름 
+						${clientName} 
 						<span style="padding-left: 10px;"><i class="fas fa-caret-down" style="color:red; font-size:1.5rem;"></i></span>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-end cumstom-help-dropdown" aria-labelledby="navbarDarkDropdownMenuLink" >
 						<li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
-						<li><a class="dropdown-item" href="#">넷플릭스에서 로그아웃</a></li>						
+						<li><a class="dropdown-item" href="${pageContext.request.contextPath }/logout">넷플릭스에서 로그아웃</a></li>						
 					</ul>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 	<!-- 고객센터 중단 -->
 	<div class="container-fluid custom-middle-container">
 		<div class="row custom-inner-container">
-			<h2 style="padding: 0; font-weight: 700;">회원이름 님, 안녕하세요.</h2>
+			<h2 style="padding: 0; font-weight: 700;">${clientName} 님, 안녕하세요.</h2>
 		</div>
 		
 		<div class="row custom-inner-container custom-middle-second-container" >
