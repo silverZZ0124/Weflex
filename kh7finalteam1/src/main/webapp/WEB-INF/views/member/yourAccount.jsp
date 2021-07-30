@@ -49,7 +49,7 @@
 					<div id="hdPinTarget" class="member-header">
 						<div id="hd">
 							<div>
-								<a href="${pageContext.request.contextPath }" class="svg-nfLogo logo">
+								<a href="${pageContext.request.contextPath }/home" class="svg-nfLogo logo">
 									<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 								</a>
 							</div>
@@ -81,7 +81,7 @@
 							<h1 class="account-header account-header-inline">계정</h1>
 							<div class="account-section-membersince">
 								<div class="account-section-membersince--svg"></div>
-								멤버십 시작: 5월 2021
+								멤버십 시작: ${clientDto.clientJoin }
 							</div>
 							<div class="responsive-account-content">
 								<div class="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
@@ -144,6 +144,7 @@
 														</div>
 														<div class="account-section-item">
 															${nextExpire }
+
 														</div>
 													</div>
 													<div class="account-section-group -thin">

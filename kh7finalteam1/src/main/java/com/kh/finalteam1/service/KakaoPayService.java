@@ -3,6 +3,7 @@ package com.kh.finalteam1.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.kh.finalteam1.repository.BuyListDao;
 import com.kh.finalteam1.vo.KakaoPayApprovePrepareVO;
 import com.kh.finalteam1.vo.KakaoPayApproveVO;
 import com.kh.finalteam1.vo.KakaoPayCancelPrepareVO;
@@ -24,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KakaoPayService implements PayService{
 
+	@Autowired
+	private BuyListDao buyListDao;
 	
 	public static final String cid = "TC0ONETIME";
 	public static final String adminKey = "df5be5245fd0d82318cd236ce2893b15";
@@ -102,6 +106,8 @@ public class KakaoPayService implements PayService{
 		KakaoPayApproveVO approveVO = 
 				template.postForObject(uri, entity, KakaoPayApproveVO.class);
 		log.debug("approveVO = {}", approveVO);
+		
+		buyListDao.approve(Integer.parseInt(kakaoPayApprovePrepareVO.getPartner_order_id()));
 		return approveVO;
 	}
 
