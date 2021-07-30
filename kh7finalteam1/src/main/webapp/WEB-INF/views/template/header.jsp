@@ -92,7 +92,7 @@
 		<main>
 		<div class="" >
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style" id="header">
-			<ul class="navbar-nav nav-logo-ul" style="width: 120px; margin-left: 1%;">
+			<ul class="navbar-nav nav-logo-ul" style="width: 120px;">
 				<li class="nav-item"> <a class="nav-link logo-wrapper" href="../finalteam1/home"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
 			</ul>
 			<ul class="navbar-nav" style="position: absolute;margin-left: 160px;" id="navbar1-ul">
@@ -120,12 +120,12 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;">
+			<div id="input-box" style="display:none; position:absolute; right:20%; margin-bottom:5px;">
 				<form class="form-inline" action="">
 					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르"> 
 				</form> 
 			</div>
-			<ul class="navbar-nav nav-var-right" style="position:absolute; right:50px;">
+			<ul class="navbar-nav nav-var-right" style="margin-left: auto;margin-right: 4%;padding-right: 0;">
 				
 			 	<li class="nav-item nav2-item"> <a class="nav-link" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji"></i></a> </li>
 				<li class="nav-item nav2-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
@@ -150,7 +150,7 @@
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style tv-nav-style second-header"style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="width:185px;"><div>TV 프로그램</div> </li> 
+				  <li class="nav-item second-nav-title-text"><div>TV 프로그램</div> </li> 
 				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
 								    
 								      <option>장르</option>
@@ -182,7 +182,7 @@
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style movie-nav-style second-header"  style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="width:82px;"><div style="width:100%;">영화</div> </li> 
+				  <li class="nav-item second-nav-title-text"><div style="width:100%;">영화</div> </li> 
 				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
 								    
 								      <option>장르</option>
@@ -214,10 +214,10 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style wishlist-nav-style second-header" style="display:none;margin-top:60px;z-index: 1;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style wishlist-nav-style second-header" style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="    width: 240px;"><div>내가 찜한 콘텐츠</div> </li> 
+				  <li class="nav-item second-nav-title-text"><div>내가 찜한 콘텐츠</div> </li> 
 				  
 			</ul> 
 

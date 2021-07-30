@@ -16,7 +16,7 @@ $(function(){
 	//마우스 호버 시 모달 팝업 	
 	$(".search-page-card-img").mouseenter(function(){
 		curContentNo = $(this).attr("data-contentNo");	
-		img = $(this);
+		img = $(this); 
 		timeout=setTimeout(function(){
 			
 			var modalWidth=img.width()*1.4;

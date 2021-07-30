@@ -58,7 +58,7 @@ public class HomeController {
 		mv.addObject("mainTrailerList", homeService.getMainTrailer());
 		mv.addObject("sliderList", homeService.getSliderList());
 		mv.setViewName("main/home");
-		
+				
 		return mv;
 	}
 	
@@ -103,7 +103,7 @@ public class HomeController {
 		List<WishListDto> wishList=wishListDao.get(clientNo);
 		model.addAttribute("wishList",wishList);
 	
-		//int no=likeList.get(0).getContentNo();
+	
 		List<ContentDto> contentList=new ArrayList<>();
 		for(int i=0;i<wishList.size();i++) {
 			

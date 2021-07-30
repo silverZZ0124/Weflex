@@ -45,7 +45,30 @@ window.onload = function(){
 }
 
 </script>
-  
+  <script>
+  	$(function(){
+  		var hoverImg;
+  		$(".search-page-card-img-tohide").mouseenter(function(){
+  			hoverImg=$(this);
+  			$("#modal-check-btn").click(function(){
+  				$(".hoverModal").hide();
+  				hoverImg.fadeOut(500);
+  			});
+  			
+  		});
+  		
+  		var isCheck=0;
+	$("#check-btn").click(function(){
+		isCheck=1;
+		$("#detailModal").on("hidden.bs.modal",function(){
+			if(isCheck==1){
+				hoverImg.fadeOut(500);
+				ischeck=0;
+			}
+		});
+	  		});
+  	});
+  </script>
 <script id="episode-list-template" type="text/template">
 <div class="trailer-series-section-box">
 	<div class="trailer-series-section">
@@ -133,7 +156,7 @@ window.onload = function(){
 
 
 	<c:forEach var="contentDto" items="${contentList}">
-		<div class="search-page-card"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div>
+		<div class="search-page-card  search-page-card-img-tohide"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div>
 
 	</c:forEach> 
 	
@@ -211,10 +234,10 @@ window.onload = function(){
 							<input type="hidden" name="contentEpisode" value="-1">
 							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
-						<button class="btn btn-outline-light modal-etc-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="thumbs-up-empty"><i class="far fa-thumbs-up"></i></button>
-						<button class="btn btn-outline-light modal-etc-btn" id="thumbs-up-full" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn wish-delete-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn wish-insert-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-insert-btn" id="thumbs-up-empty"><i class="far fa-thumbs-up"></i></button>
+						<button class="btn btn-outline-light modal-etc-btn like-delete-btn" id="thumbs-up-full" style="display:none;"><i class="fas fa-thumbs-up"></i></button>
 						
 					</div>
 				
@@ -260,7 +283,7 @@ window.onload = function(){
 				       <div class="similar-contents-box">
 			       		   <h3 style="margin-bottom:2%">비슷한 콘텐츠</h3>
 			       		   <c:set var="wallpaperNo" value="4" /> <!-- 비슷한 콘텐츠 수 받아오기(12개 고정) -->
-			       		   <div style="display:flex; flex-wrap:wrap;">
+			       		  <div id="similar-content-wrapper"></div>
 			       		</div>
 				       </div>
 				       
@@ -294,6 +317,6 @@ window.onload = function(){
 	</div>
 	
 </div>
-
+			
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
