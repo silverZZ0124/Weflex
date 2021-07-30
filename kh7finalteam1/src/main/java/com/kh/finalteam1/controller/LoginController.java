@@ -1,6 +1,11 @@
 package com.kh.finalteam1.controller;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.mapper.Mapper;
@@ -8,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +28,8 @@ public class LoginController {
 	private ClientDao clientDao; 
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@CookieValue(required = false) String email, Model model) {
+		model.addAttribute("email", email);
 		return "login/login"; 
 	}
 
@@ -70,13 +77,33 @@ public class LoginController {
 		}
 	}
 	@PostMapping("loginCheck")
-	public String loginCheck(@ModelAttribute ClientDto clientDto, HttpSession session) {
+	public String loginCheck(@ModelAttribute ClientDto clientDto, 
+			@RequestParam(required = false) boolean loginInfo, 
+			HttpSession session,
+			HttpServletResponse response) throws UnsupportedEncodingException {
 		ClientDto client = clientDao.loginCheck(clientDto);
+
+		Cookie checkCookie = new Cookie("loginInfo", "true");
+		if(loginInfo) 						
+			checkCookie.setMaxAge(86400);
+		else
+			checkCookie.setMaxAge(0);
 		
+		response.addCookie(checkCookie);		
+				
 		if(client ==null) {
 			return "redirect: login";
 		}
 		else {
+			Cookie emailCookie = new Cookie("email", client.getClientId());
+			
+			if(loginInfo) 
+				emailCookie.setMaxAge(86400);
+			else
+				emailCookie.setMaxAge(0);
+			
+			response.addCookie(emailCookie);
+			
 			session.setAttribute("clientNo", client.getClientNo());
 			return "redirect:/home";
 		}
@@ -87,4 +114,12 @@ public class LoginController {
 		
 		return "redirect:/join3";
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("clientNo");
+
+		return "redirect: login";
+	}
+	
 }

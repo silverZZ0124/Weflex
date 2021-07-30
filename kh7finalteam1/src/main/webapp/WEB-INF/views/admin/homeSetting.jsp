@@ -137,7 +137,7 @@ $(function(){
  	
  	$("#exampleModalToggle4").on("show.bs.modal", function(e){
  		type = $(e.relatedTarget).attr("data-type");
- 		
+
 		if(type === "genre"){
  			$("#exampleModalToggleLabel4").text("어떤 장르를 찾으시나요?");
  			
@@ -181,6 +181,8 @@ $(function(){
  	});
  	
  	$("#exampleModalToggle5").on("show.bs.modal", function(e){
+ 		$("#modal5-back-btn").attr("data-type", type);
+ 		
  		$.ajax({
 			url: "${pageContext.request.contextPath}/data/admin/getSliderSample",
 			type: "post",			
@@ -193,11 +195,19 @@ $(function(){
 	 			keyword : keyword
 			},
 			success:function(resp){
+				console.log(resp);
 				$("#modal5-body").empty();
 				
 				var template = $("#slider-template-header").html();
 				template = template.replace("{{sliderTitle}}", resp.sliderTitle);
 				
+				if(resp.contentList.length <= 0){
+					template += '<div style="display: inline-block; color: #141414;"><h4>미리보기 결과가 없습니다</h4></div>';
+					template += $("#slider-template-footer").html();
+					$("#modal5-body").append(template);
+					return;
+				}			
+								
 				for(var i in resp.contentList){
 					var tempTemplate = $("#slider-template-body").html();
 					tempTemplate = tempTemplate.replace("{{contentThumbnail}}", resp.contentList[i].contentThumbnail);
@@ -555,7 +565,7 @@ $(function(){
 			
       </div>      
       <div class="modal-footer">
-      	<button class="btn btn-secondary" data-bs-target="#exampleModalToggle4" data-bs-toggle="modal" data-bs-dismiss="modal">뒤로</button>
+      	<button class="btn btn-secondary" id="modal5-back-btn" data-bs-target="#exampleModalToggle4" data-bs-toggle="modal" data-type="" data-bs-dismiss="modal">뒤로</button>
       	<form action="homeSetting" method="post" id="regit-form">
       		<input type="hidden" name="homeSliderNo">
       		<input type="hidden" name="sliderTitle">
