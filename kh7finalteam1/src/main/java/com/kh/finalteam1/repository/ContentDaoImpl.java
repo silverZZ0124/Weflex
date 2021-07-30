@@ -128,5 +128,11 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.update("content.decreaseContentLikes", contentNo) > 0;
 	}
 	
+	//검색기능(조건검색:컨텐츠명)
+	@Override
+	public List<ContentListVO> search(String keyword) {
+		return sqlSession.selectList("content.search", keyword);
+	}
+	
 	
 }

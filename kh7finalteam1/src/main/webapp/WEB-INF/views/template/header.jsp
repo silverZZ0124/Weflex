@@ -73,7 +73,6 @@
 		
 		
 	
-	
 		
 	});
 </script>
@@ -113,8 +112,8 @@
 			</ul> 
 			
 			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;">
-				<form class="form-inline" action="">
-					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르"> 
+				<form class="form-inline" action="search" method="get" id="form-search">
+					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르" name="keyword"> 
 				</form> 
 			</div>
 			<ul class="navbar-nav nav-var-right" style="position:absolute; right:50px;">

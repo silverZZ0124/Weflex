@@ -1,5 +1,7 @@
 package com.kh.finalteam1.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.finalteam1.repository.CastDao;
+import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
+import com.kh.finalteam1.vo.CastListVO;
+import com.kh.finalteam1.vo.ContentListVO;
 import com.kh.finalteam1.vo.PlaylistVO;
 
 @Controller
@@ -75,6 +81,23 @@ public class HomeController {
 
 	}
 	
+	@Autowired
+	private ContentDao contentDao;
 	
-
+	@Autowired
+	private CastDao castDao;
+	
+	@GetMapping("/search")
+	public String search(@RequestParam String keyword, Model model) {
+		System.out.println("킹덤 = " + keyword);
+		List<ContentListVO> contentList = contentDao.search(keyword);
+		List<CastListVO> castList = castDao.search(keyword);
+		
+		model.addAttribute("keyword", keyword);
+		
+		model.addAttribute("contentList", contentList);
+		model.addAttribute("castList", castList);
+		return "main/search";
+	}
+	
 }

@@ -25,4 +25,7 @@ public interface ContentDao {
 	boolean updateContentViews(int contentNo);
 	boolean increaseContentLikes(int contentNo);
 	boolean decreaseContentLikes(int contentNo);
+	
+	List<ContentListVO> search(String keyword);//검색기능(조건검색:컨텐츠명)
+	
 }

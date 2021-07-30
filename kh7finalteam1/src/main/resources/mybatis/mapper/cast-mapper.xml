@@ -19,4 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from cast where content_no = #{contentNo}
 	</delete>
 	
+	<!-- 조건(문자열 위치) 검색(배우명) -->
+	<select id="search" parameterType="string" resultType="CastListVO">
+		select 
+   			 C.content_no, C.content_thumbnail, CA.cast_name
+		from
+    		content C
+	    inner join cast CA on C.content_no = CA.content_no
+	    where instr(cast_name, #{keyword}) > 0
+	</select>
+	
 </mapper>
