@@ -10,4 +10,9 @@ public interface GenreDao {
 	List<GenreDto> get(String genreName);
 	boolean delete(String genreName);
 	boolean edit(GenreDto genreDto);
+	
+	//tv프로그램 검색용
+	List<GenreDto> tvGenreList();
+	//영화 검색용
+	List<GenreDto> movieGenreList();
 }

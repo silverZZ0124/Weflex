@@ -56,6 +56,13 @@
 			}
 		});
 		
+		$("#contentResist").click(function(e){
+			if($("input:checkbox[name='genreNo']").is(":checked")==false){
+				alert("장르를 선택하세요.");
+				e.preventDefault();
+			}
+		});
+		
 	});
 
 </script>
@@ -104,7 +111,7 @@
 	             </div>
              </div>
                 <div class="text-center mb-5" style="width: 100%">
-							<button type="submit" class="btn btn-danger">등록</button>
+							<button type="submit" class="btn btn-danger" id="contentResist">등록</button>
 							<button type="reset" class="btn btn-secondary">초기화</button>
 				</div>
 				</form>

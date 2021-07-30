@@ -5,16 +5,16 @@ $(function(){
 	var contentThumbnail;
 	var curContentNo;
 	
-	$(".search-page-card-img").hover(function(){
+	$(document).on("hover",".search-page-card-img",function(){
 		$(this).css("cursor","pointer");
-	});
+	}); 
 	
 	var timeout;
 	var modalX;
 	var modalY;
 	var img;
 	//마우스 호버 시 모달 팝업 	
-	$(".search-page-card-img").mouseenter(function(){
+	$(document).on("mouseenter",".search-page-card-img",function(){
 		curContentNo = $(this).attr("data-contentNo");	
 		img = $(this); 
 		timeout=setTimeout(function(){

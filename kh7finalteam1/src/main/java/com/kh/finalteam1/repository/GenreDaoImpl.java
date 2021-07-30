@@ -40,5 +40,15 @@ public class GenreDaoImpl implements GenreDao{
 		int count = sqlSession.update("genre.edit", genreDto);
 		return count>0;
 	}
+	
+	@Override
+	public List<GenreDto> tvGenreList() {
+		return sqlSession.selectList("content-genre.getTvGenre");
+	}
+
+	@Override
+	public List<GenreDto> movieGenreList() {
+		return sqlSession.selectList("content-genre.getMovieGenre");
+	}
 
 }
