@@ -11,6 +11,10 @@
     padding-bottom: 0;
 }
 
+.basicLayout{
+	width: 100%;
+} 
+
 .svg-nfLogo.signupBasicHeader {
     margin-left: -9px;
     margin-top: 0px;
@@ -471,15 +475,8 @@ ul>li {
 	font-size: 18px;
 	color: #333;
 }
-.svg-nfLogo .svg-icon-netflix-logo {	    
-	 width: 153px;
-	 padding-top: 11px;
-	 padding-left: 28px;
-}
+
 @media screen and (max-width: 740px){
-	.svg-nfLogo {
-	    line-height: 75px;
-	}
 	.authLinks {
 	    font-size: 16px;
 	    line-height: 75px;
@@ -490,17 +487,9 @@ ul>li {
 	.footer-link-item {
     width: 32%;
 	}
-		.svg-nfLogo .svg-icon-netflix-logo {	    
-	    width: 153px;
-	    padding-top: 11px;
-	    padding-left: 28px;
-	}
 }
 
 @media only screen and (max-width: 600px){
-	div.basicLayout .paymentContainer, div.basicLayout .planContainer, div.basicLayout .regContainer, div.basicLayout .verifyCardContainer {
-	    text-align: left;
-	}
 	.regContainer .stepLogoContainer {
 	    margin-top: 30%;
 	}
@@ -512,9 +501,6 @@ ul>li {
 @media screen and (max-width: 500px){
 	.svg-nfLogo {
 	 line-height: 45px;
-	 }
-	.svg-nfLogo .svg-icon-netflix-logo {	    
-	  width: 75px;
 	 }
 	.authLinks.signupBasicHeader {
 	 margin: 0 10px;
