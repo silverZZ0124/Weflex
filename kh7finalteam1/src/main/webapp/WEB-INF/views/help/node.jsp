@@ -30,7 +30,7 @@
 			<div class="d-flex inner-container">
 				<div class="d-flex branding">
 					<a class="logo" href="#">
-						<img class="mainLogo" src="${pageContext.request.contextPath}/res/img/Netflix_Logo_RGB.png" width="165px" height="70px">
+						<img class="mainLogo" src="${pageContext.request.contextPath}/res/img/weflex_logo.png" >
 						<img class="subLogo" src="${pageContext.request.contextPath}/res/img/n_logo.png" width="32px" height="32px">
 					</a>
 					
@@ -39,11 +39,11 @@
 				<div class="actions">
 					<div class="ms-auto">
 						<a class="custom-a-tag account-dropdown" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
-							회원이름 							
+							${clientName } 							
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end cumstom-help-dropdown" aria-labelledby="navbarDarkDropdownMenuLink" >
-							<li><a class="dropdown-item" href="#">계정</a></li>
-							<li><a class="dropdown-item" href="#">넷플릭스에서 로그아웃</a></li>						
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/yourAccount">계정</a></li>
+							<li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">넷플릭스에서 로그아웃</a></li>						
 						</ul>
 					</div>
 				</div>
@@ -138,15 +138,9 @@
             el: document.querySelector('#left-pane-content'),
             viewer: true,
             height: '500px',
-            initialValue: ""
+            initialValue: content
         });
         
-        $(function(){
-        	//$("#left-pane-content").text(content);
-        	console.log(viewer);
-        	viewer.markdownValue =  content;    
-        	console.log(viewer);
-        });
     </script>
 	
 <!-- 	 -->

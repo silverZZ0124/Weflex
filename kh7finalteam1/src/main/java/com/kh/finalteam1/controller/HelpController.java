@@ -37,10 +37,14 @@ public class HelpController {
 	}
 	
 	@GetMapping("/node/{qnaBoardNo}")
-	public String node(@PathVariable("qnaBoardNo") int quaBoardNo, Model model) {
-		QnaBoardDto qnaBoardDto = qnaBoardDao.findQna(quaBoardNo);
-		model.addAttribute("qnaBoardDto", qnaBoardDto);
+	public String node(@PathVariable("qnaBoardNo") int quaBoardNo, HttpSession session, Model model) {
+		int clientNo = (int)session.getAttribute("clientNo");
+		ClientDto clientDto = clientDao.findClient(clientNo);
 		
+		QnaBoardDto qnaBoardDto = qnaBoardDao.findQna(quaBoardNo);
+		
+		model.addAttribute("qnaBoardDto", qnaBoardDto);
+		model.addAttribute("clientName", clientDto.getClientName());
 		return "help/node";
 	}
 	
