@@ -34,7 +34,7 @@
 		                //console.log(formdata);
 	
 	                $.ajax({
-	                        url : "${pageContext.request.contextPath}/data/series/yes",
+	                        url : "${pageContext.request.contextPath}/data/admin/series/yes",
 	                        type : "post",
 	                        data:formdata,
 	                        success:function(resp){
@@ -56,7 +56,7 @@
 		            	 //console.log(formdata);
 	        	
 	            	 $.ajax({
-	                     url : "${pageContext.request.contextPath}/data/series/no",
+	                     url : "${pageContext.request.contextPath}/data/admin/series/no",
 	                     type : "post",
 	                     data:formdata,
 	                     success:function(resp){

@@ -271,8 +271,12 @@ public class AdminContentController {
 		int contentNo = (Integer)session.getAttribute("contentNo");
 		//int contentNo = 1;
 		
-		if(featureNo != null) {//특징만 있다면(장르는 x)
-		contentFeatureService.regist(contentNo, featureNo);
+		if(genreNo != null && featureNo != null) {
+			contentGenreService.regist(contentNo, genreNo);
+			contentFeatureService.regist(contentNo, featureNo);
+		}
+		else if(genreNo != null) {
+			contentGenreService.regist(contentNo, genreNo);
 		}
 		
 		return "redirect:/admin/content/castRegist";
