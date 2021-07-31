@@ -17,6 +17,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
+
+
 <style>
 	footer{
 		position: fixed;
@@ -230,8 +232,8 @@ $(function(){
 						//pauseOnHover : true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
 						vertical : false,		// 세로 방향 슬라이드 옵션
 						//prevArrow : "<button type='button' class='slick-prev slick-btn'>p</button>",		// 이전 화살표 모양 설정
-						prevArrow : '<button class="modal-slider-arrow modal-slider-arrow-left"><i class="fas fa-chevron-left"></i></buttn>',		// 이전 화살표 모양 설정
-						nextArrow : '<button class="modal-slider-arrow modal-slider-arrow-right"><i class="fas fa-chevron-right"></i></buttn>',		// 다음 화살표 모양 설정
+						prevArrow : '<button class="modal-slider-arrow modal-slider-arrow-left"><i class="fas fa-chevron-left"></i></button>',		// 이전 화살표 모양 설정
+						nextArrow : '<button class="modal-slider-arrow modal-slider-arrow-right"><i class="fas fa-chevron-right"></i></button>',		// 다음 화살표 모양 설정
 						//dotsClass : "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
 						draggable : false, 	//드래그 가능 여부 
 						responsive: [ // 반응형 웹 구현 옵션
