@@ -109,11 +109,10 @@ public class HomeController {
 	//검색 기능 구현
 	@GetMapping("/search")
 	public String search(@RequestParam String keyword, Model model) {
-		System.out.println("킹덤 = " + keyword);
+		//System.out.println("킹덤 = " + keyword);
 		List<ContentListVO> contentList = contentDao.search(keyword);
 		
 		model.addAttribute("keyword", keyword);
-		
 		model.addAttribute("contentList", contentList);
 		return "main/search";
 	}
