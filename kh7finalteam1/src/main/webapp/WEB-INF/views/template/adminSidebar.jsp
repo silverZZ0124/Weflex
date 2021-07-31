@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NetFlix Setting</title>
+    <title>Weflex Setting</title>
 
     <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/res/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,14 @@
   	
 	<!-- Custom styles for this page -->
     <link href="${pageContext.request.contextPath}/res/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">	
-
+	
+	<!-- Bootstrap core JavaScript-->
+	<script src="${pageContext.request.contextPath}/res/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Core plugin JavaScript-->
+	<script src="${pageContext.request.contextPath}/res/vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+ 
 </head>
 
 <body id="page-top">
@@ -121,3 +128,6 @@
 
         </ul>
         <!-- End of Sidebar -->
+        
+<!-- Custom scripts for all pages-->
+<script src="${pageContext.request.contextPath}/res/js/sb-admin-2.min.js"></script>

@@ -2,6 +2,8 @@ package com.kh.finalteam1.restcontroller;
 
 import java.sql.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,9 @@ public class MemberDataController {
 	private ClientDao clientDao;
 	
 	@PostMapping("/changePhone")
-	public void changePhone(@RequestParam String phoneNumber) {
+	public void changePhone(@RequestParam String phoneNumber, HttpSession session) {
 		ClientDto clientDto = ClientDto.builder()
-								.clientNo(2)
+								.clientNo(getClientNo(session))
 								.clientPhone(phoneNumber)
 							.build();
 		
@@ -32,9 +34,9 @@ public class MemberDataController {
 	}
 	
 	@PostMapping("/changeEmail")
-	public void changeEmail(@RequestParam String email) {
+	public void changeEmail(@RequestParam String email, HttpSession session) {
 		ClientDto clientDto = ClientDto.builder()
-								.clientNo(2)
+								.clientNo(getClientNo(session))
 								.clientId(email)
 							.build();
 		
@@ -44,9 +46,9 @@ public class MemberDataController {
 	}
 	
 	@PostMapping("/changePassword")
-	public void changePassword(@RequestParam String currentPassword, @RequestParam String newPassword) {
+	public void changePassword(@RequestParam String currentPassword, @RequestParam String newPassword, HttpSession session) {
 		ClientUpdatePasswordVO clientVO = ClientUpdatePasswordVO.builder()
-											.clientNo(2)
+											.clientNo(getClientNo(session))
 											.clientPw(currentPassword)
 											.clientNewPw(newPassword)
 										.build();
@@ -54,22 +56,9 @@ public class MemberDataController {
 		if(!clientDao.changePassword(clientVO)) {
 			throw new AjaxException("에러에러");
 		}
+	}	
+	
+	public int getClientNo(HttpSession session) {
+		return (int)session.getAttribute("clientNo");
 	}
-	
-/*	@PostMapping("/regitCheck")
-	public boolean regitCheck(
-													 @RequestParam String clientPw,
-													 @RequestParam String clientName,
-													 @RequestParam Date clientBirth,
-													 @RequestParam String clientPhone) {
-
-		System.out.println(clientPw);
-		System.out.print(clientName);
-		System.out.print(clientBirth);
-		System.out.print(clientPhone);
-		
-		return false;
-		}
-		*/
-	
 }

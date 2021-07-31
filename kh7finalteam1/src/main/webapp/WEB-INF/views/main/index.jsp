@@ -264,7 +264,7 @@
 						</ul>
 						
 						<!-- 맨 아래 form -->
-						<form class="cta-form email-form">
+						<form action="regitCheck" method="post" class="cta-form email-form">
 							<h3 class="email-form-title">
 								시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.
 							</h3>
@@ -274,7 +274,7 @@
 										<div class="nfInput nfInputResponsive">
 											<div class="nfInputPlacement">
 												<label class="input_id" placeholder="email">
-													<input type="text" class="nfTextField hasText" id="id_email_faq" maxlength="50" minlength="5" placeholder="이메일 주소">													
+													<input type="text" name="email" class="nfTextField hasText" id="id_email_faq" maxlength="50" minlength="5" placeholder="이메일 주소">													
 												</label>
 											</div>
 										</div>

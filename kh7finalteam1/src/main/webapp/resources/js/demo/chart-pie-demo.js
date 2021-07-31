@@ -7,7 +7,7 @@ $(function(){
 	var ctx = $("#myPieChart");
 	
 	$.ajax({
-		url : "../data/client/age",
+		url : "../data/admin/client/age",
 		type:"get",
 		dataType:"json",
 		success:function(count){
