@@ -53,7 +53,7 @@ public class LoginController {
 	@GetMapping("join3")
 	public String join3(HttpSession session, @RequestParam(required = false) String clientNo) {
 		if(clientNo != null) {
-			session.setAttribute("clientNo", clientNo);			
+			session.setAttribute("clientNo", Integer.parseInt(clientNo));			
 		}
 		return "login/join3";
 	}
