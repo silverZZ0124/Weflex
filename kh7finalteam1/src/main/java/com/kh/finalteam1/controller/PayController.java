@@ -79,6 +79,7 @@ public class PayController {
 		int clientNo=(int)session.getAttribute("clientNo");
 		clientDao.updateExpire(clientNo);
 
+		//String buyNo=(String)session.getAttribute("partner_order_id");
 		String buyNo=(String)session.getAttribute("partner_order_id");
 
 		BuyListDto buyListDto=buyListDao.get(Integer.parseInt(buyNo));
