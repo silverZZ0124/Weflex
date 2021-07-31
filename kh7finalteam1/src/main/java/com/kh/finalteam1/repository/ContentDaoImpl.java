@@ -94,12 +94,23 @@ public class ContentDaoImpl implements ContentDao {
 		return sqlSession.selectList("content.tvProgram");
 	}
 	
+	//TV프로그램 목록(장르 검색 했을때)
+	@Override
+	public List<ContentListVO> tvGenreList(int genreNo) {
+		return sqlSession.selectList("content.tvProgramSearch", genreNo);
+	}
+	
 	//영화 목록
 	@Override
 	public List<ContentListVO> movieList() {
 		return sqlSession.selectList("content.movie");
 	}
 	
+	//영화 목록(장르 검색 했을때)
+	@Override
+	public List<ContentListVO> movieGenreList(int genreNo) {
+		return sqlSession.selectList("content.movieProgramSearch", genreNo);
+	}
 
 	@Override
 	public List<SimilarContentVO> getSimilarList(int contentNo, String contentType, List<String> genreList, int clientNo, int count) {
@@ -149,4 +160,6 @@ public class ContentDaoImpl implements ContentDao {
 	public ContentDto getList(int no) {
 		return sqlSession.selectOne("content.get",no);
 	}
+
+	
 }

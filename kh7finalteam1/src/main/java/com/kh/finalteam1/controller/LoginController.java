@@ -2,15 +2,12 @@ package com.kh.finalteam1.controller;
 
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -39,20 +36,25 @@ public class LoginController {
 	}
 	
 	@PostMapping("/join1")
-	public String join1(@RequestParam String email, Model model){
-		model.addAttribute("email", email);
-		
+	public String join1(@RequestParam(required = false) String email, Model model){
+		if(email != null) {
+			model.addAttribute("email", email);
+		}
 		return "redirect:/join2";
 	}
 
 	@GetMapping("/join2")
 	public String join2() {
+		
 		return "login/join2";
 	}
 
 
 	@GetMapping("join3")
-	public String join3() {
+	public String join3(HttpSession session, @RequestParam(required = false) String clientNo) {
+		if(clientNo != null) {
+			session.setAttribute("clientNo", clientNo);			
+		}
 		return "login/join3";
 	}
 
@@ -108,11 +110,15 @@ public class LoginController {
 			return "redirect:/home";
 		}
 	}
+	
 	@PostMapping("joinCheck")
 	public String joinCheck(@ModelAttribute ClientDto clientDto) {
+		
 		clientDao.joinCheck(clientDto);
 		
-		return "redirect:/join3";
+		ClientDto client = clientDao.regitCheck(clientDto.getClientId());
+		return "redirect:/join3?clientNo="+client.getClientNo();
+		
 	}
 	
 	@GetMapping("/logout")
