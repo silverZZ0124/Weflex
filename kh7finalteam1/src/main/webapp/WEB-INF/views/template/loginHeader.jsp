@@ -23,6 +23,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weflex</title>
 </head>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="isLogin" value="${not empty clientNo}"></c:set>
+
 <script>
 	$(function(){
 		if(location.href==="http://localhost:8080/finalteam1/join1"){
@@ -31,17 +35,24 @@
 		else {
 			
 		}
+		
 	});
 </script>
 <body style="background-color:white !important;">
 		<main>
 		<div class="" >
 			<div class="nfHeader noBorderHeader signupBasicHeader"style="background-color:white !important">
-				<a href="#" class="svg-nfLogo signupBasicHeader">
+				<a href="${pageContext.request.contextPath}/" class="svg-nfLogo signupBasicHeader">
 					<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="margin-bottom:18%;">			
 				</a>
-				<a href="/signout" id="login-header-logout" style="display:none;" class="authLinks signupBasicHeader">로그아웃</a>
-				<a href="${pageContext.request.contextPath}/login" id="login-header-login"  class="authLinks signupBasicHeader">로그인</a>
+				<c:choose>
+					<c:when test="${isLogin}">
+						<a href="${pageContext.request.contextPath}/logout" id="login-header-logout" class="authLinks signupBasicHeader">로그아웃</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/login" id="login-header-login"  class="authLinks signupBasicHeader">로그인</a>
+					</c:otherwise>
+				</c:choose>
 			</div>	
 		</div>		
 			<section style="background-color:white !important;">

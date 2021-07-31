@@ -80,8 +80,8 @@
 						
 						<div class="hybrid-login-form-other">
 							<div class="login-signup-now">
-								Netflix 회원이 아닌가요? 
-								<a href="#" >지금 가입하세요.</a>
+								Weflex 회원이 아닌가요? 
+								<a href="${pageContext.request.contextPath}/" >지금 가입하세요.</a>
 							</div>
 						</div>
 					</div>
