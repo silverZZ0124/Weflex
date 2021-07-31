@@ -69,6 +69,7 @@
 		$("#search-icon").click(function(){
 			if($("#input-box").css("display")=="none"){
 				$("#input-box").show(500);
+				$("input[name=keyword]").focus();
 			}else{
 				$("#input-box").hide(500);
 			}
@@ -76,9 +77,13 @@
 		
 		
 		$("html").click(function(e){
-			if(!$(e.target).hasClass("search-div")){
-				$("#input-box").hide(500);
-			}
+			var keyword = $("input[name=keyword]").val();
+
+			//if(!keyword){
+				if(!$(e.target).hasClass("search-div")){
+					$("#input-box").hide(500);
+				}	
+			//}
 		}); 
 		
 		

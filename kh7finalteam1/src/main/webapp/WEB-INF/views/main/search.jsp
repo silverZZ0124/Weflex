@@ -4,7 +4,15 @@
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <script>history.scrollRestoration = "auto"</script>
-
+<style>
+	.search-not {
+		display: inline-block;
+	}
+	
+	.search-info{
+		margin-left:20px;
+	}
+</style>
 <div class="main-color container-center search-page-body">
 <%-- 
 	<div style="position: relative;top: -12vw;">
@@ -24,14 +32,30 @@
 		</c:forEach> 	
 	</div>	
 --%>
+	<c:if test="${empty contentList}">
+			<div class="row">
+				<div class="col text-center">
+						<div class="search-not text-left">
+							<p>입력하신 검색어 "${keyword}"(와)과 일치하는 결과가 없습니다.</p>
+							<p>추천검색어
+							<ul class="search-info">
+								<li>다른 키워드를 입력해 보세요.</li>
+								<li>TV 프로그램이나 영화를 찾고 있으신가요?</li>
+								<li>영화 제목, TV 프로그램 제목, 또는 배우나 감독의 이름으로 검색해 보세요.</li>
+								<li>코미디, 로맨스, 스포츠 또는 드라마와 같은 장르명으로 검색해 보세요.</li>
+							</ul>
+						</div>
+				</div>
+		</div>
+	</c:if>
+		
 
-	<c:forEach var="contentListVO" items="${contentList}">
-		<div class="search-page-card"><img src="${contentListVO.contentThumbnail}" data-contentNo="${contentListVO.contentNo }" class="search-page-card-img"></div>
-	</c:forEach> 
+
+		<c:forEach var="contentListVO" items="${contentList}">
+			<div class="search-page-card"><img src="${contentListVO.contentThumbnail}" data-contentNo="${contentListVO.contentNo }" class="search-page-card-img"></div>
+		</c:forEach> 
 	
-	<c:forEach var="castListVO" items="${castList}">
-		<div class="search-page-card"><img src="${castListVO.contentThumbnail}" data-contentNo="${castListVO.contentNo }" class="search-page-card-img"></div>
-	</c:forEach> 
+	
 <%-- 
 	<c:forEach var="i" begin="1" end="24" step="1">
 		<div class="search-page-card"><img src="res/img/slider_img1.jpeg" class="search-page-card-img"></div>
@@ -46,6 +70,9 @@
 						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
 	</c:forEach> 
 --%>
+
+	
+
 </div>
 
 

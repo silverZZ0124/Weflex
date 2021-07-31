@@ -19,7 +19,6 @@ import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
-import com.kh.finalteam1.vo.CastListVO;
 import com.kh.finalteam1.vo.ContentListVO;
 import com.kh.finalteam1.vo.PlaylistVO;
 
@@ -95,20 +94,19 @@ public class HomeController {
 		return "main/TV";
 
 	}
-		
+	
 	@Autowired
 	private CastDao castDao;
 	
+	//검색 기능 구현
 	@GetMapping("/search")
 	public String search(@RequestParam String keyword, Model model) {
 		System.out.println("킹덤 = " + keyword);
 		List<ContentListVO> contentList = contentDao.search(keyword);
-		List<CastListVO> castList = castDao.search(keyword);
 		
 		model.addAttribute("keyword", keyword);
 		
 		model.addAttribute("contentList", contentList);
-		model.addAttribute("castList", castList);
 		return "main/search";
 	}
 	

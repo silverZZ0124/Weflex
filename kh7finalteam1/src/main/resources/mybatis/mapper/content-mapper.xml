@@ -154,6 +154,19 @@
 	<!-- 조건(문자열 위치) 검색(컨텐츠명) -->
 	<select id="search" parameterType="string" resultType="ContentListVO">
 		select * from content where instr(content_name, #{keyword}) > 0
+		union
+		select distinct
+		    content.*
+		from content 
+		    inner join content_genre on content.content_no = content_genre.content_no 
+		    inner join genre on content_genre.genre_no = genre.genre_no
+		where instr(UPPER(genre_name), UPPER(#{keyword})) > 0
+		union
+		select distinct 
+		    content.*
+		from content
+		    inner join cast on content.content_no = cast.content_no
+		where instr(cast_name, #{keyword}) > 0
 	</select>
 	
 	<select id="tvProgram" resultType="ContentListVO">
