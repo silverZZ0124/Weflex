@@ -261,6 +261,7 @@ public class AdminContentController {
 	private ContentFeatureService contentFeatureService;
 	
 	//특징만 있는 컨텐츠가 존재하므로 required=false
+	//장르 필수 , 특징 선택
 	@PostMapping("/genreFeatureRegist")
 	public String genreFeatureRegist(
 			@RequestParam List<Integer> genreNo, @RequestParam(required = false) List<Integer> featureNo,
