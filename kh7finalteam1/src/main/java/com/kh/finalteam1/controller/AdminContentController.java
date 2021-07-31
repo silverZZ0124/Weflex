@@ -121,7 +121,7 @@ public class AdminContentController {
 	public String noContentEdit(
 			@ModelAttribute ContentDto contentDto,
 			@ModelAttribute NoSeriesDto noSeriesDto,
-			@RequestParam(required = false) List<Integer> genreNo, 
+			@RequestParam List<Integer> genreNo, 
 			@RequestParam(required = false) List<Integer> featureNo,
 			@RequestParam List<String> castName) {
 		
@@ -135,14 +135,7 @@ public class AdminContentController {
 		contentDao.edit(contentDto);
 		seriesDao.noEdit(noSeriesDto);
 		
-		if(genreNo != null && featureNo != null) {//장르, 특징 둘다 있다면
-			contentGenreService.regist(contentNo, genreNo);
-			contentFeatureService.regist(contentNo, featureNo);
-		}
-		else if(genreNo != null) {//장르는 있고 특징이 없다면
-			contentGenreService.regist(contentNo, genreNo);
-		}
-		else if(featureNo != null) {//특징만 있다면(장르는 x)
+		if(featureNo != null) {//특징만 있다면(장르는 x)
 			contentFeatureService.regist(contentNo, featureNo);
 		}
 		
@@ -164,7 +157,7 @@ public class AdminContentController {
 	@PostMapping("/yesContentEdit")
 	public String yesContentEdit(
 			@ModelAttribute ContentDto contentDto,
-			@RequestParam(required = false) List<Integer> genreNo, 
+			@RequestParam List<Integer> genreNo, 
 			@RequestParam(required = false) List<Integer> featureNo,
 			@RequestParam List<String> castName) {
 		
@@ -177,14 +170,7 @@ public class AdminContentController {
 		contentFeatureDao.deleteAll(contentNo);
 		castDao.deleteAll(contentNo);
 		
-		if(genreNo != null && featureNo != null) {//장르, 특징 둘다 있다면
-			contentGenreService.regist(contentNo, genreNo);
-			contentFeatureService.regist(contentNo, featureNo);
-		}
-		else if(genreNo != null) {//장르는 있고 특징이 없다면
-			contentGenreService.regist(contentNo, genreNo);
-		}
-		else if(featureNo != null) {//특징만 있다면(장르는 x)
+		if(featureNo != null) {//특징만 있다면(장르는 x)
 			contentFeatureService.regist(contentNo, featureNo);
 		}
 		
@@ -274,10 +260,10 @@ public class AdminContentController {
 	@Autowired
 	private ContentFeatureService contentFeatureService;
 	
-	//장르만 있거나, 특징만 있는 컨텐츠가 존재하므로 required=false
+	//특징만 있는 컨텐츠가 존재하므로 required=false
 	@PostMapping("/genreFeatureRegist")
 	public String genreFeatureRegist(
-			@RequestParam(required = false) List<Integer> genreNo, @RequestParam(required = false) List<Integer> featureNo,
+			@RequestParam List<Integer> genreNo, @RequestParam(required = false) List<Integer> featureNo,
 			HttpSession session) {
 		
 		log.debug("genreNoList = {}", genreNo);
@@ -285,14 +271,7 @@ public class AdminContentController {
 		int contentNo = (Integer)session.getAttribute("contentNo");
 		//int contentNo = 1;
 		
-		if(genreNo != null && featureNo != null) {//장르, 특징 둘다 있다면
-		contentGenreService.regist(contentNo, genreNo);
-		contentFeatureService.regist(contentNo, featureNo);
-		}
-		else if(genreNo != null) {//장르는 있고 특징이 없다면
-		contentGenreService.regist(contentNo, genreNo);
-		}
-		else if(featureNo != null) {//특징만 있다면(장르는 x)
+		if(featureNo != null) {//특징만 있다면(장르는 x)
 		contentFeatureService.regist(contentNo, featureNo);
 		}
 		

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.finalteam1.entity.ContentDto;
+import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.WishListDto;
 import com.kh.finalteam1.repository.CastDao;
 import com.kh.finalteam1.repository.ContentDao;
+import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
@@ -38,6 +40,9 @@ public class HomeController {
 
 	@Autowired
 	private ContentDao contentDao;
+	
+	@Autowired
+	private GenreDao genreDao;
 	
 //	@GetMapping("/")
 //	public String home(Model model, HttpSession session) throws JsonProcessingException {	
@@ -90,7 +95,10 @@ public class HomeController {
 	public String tv(Model model) {
 		
 		List<ContentListVO> tvProgramList = contentDao.tvProgramList();
+		List<GenreDto> tvGenreList = genreDao.tvGenreList();
+		
 		model.addAttribute("tvProgramList", tvProgramList);
+		model.addAttribute("tvGenreList", tvGenreList);
 		return "main/TV";
 
 	}
@@ -134,7 +142,10 @@ public class HomeController {
 	public String movie(Model model) {
 		
 		List<ContentListVO> movieList = contentDao.movieList();
+		List<GenreDto> movieGenreList = genreDao.movieGenreList();
+		
 		model.addAttribute("movieList", movieList);
+		model.addAttribute("movieGenreList", movieGenreList);
 		return "main/movie";
 		
 	}

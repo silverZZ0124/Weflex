@@ -25,7 +25,7 @@
 		select * from client where client_id=#{clientId} and client_pw=#{clientPw}
 	</select>
 	<insert id="joinCheck" parameterType="ClientDto" >
-		insert into client values(client_seq.nextval , 4 ,#{clientId} , #{clientPw}, #{clientName} , #{clientBirth}, #{clientPhone}, sysdate, sysdate)	
+		insert into client values(client_seq.nextval , 1 ,#{clientId} , #{clientPw}, #{clientName} , #{clientBirth}, #{clientPhone}, sysdate, sysdate)	
 	</insert>
 
 	<update id="changePassword" parameterType="ClientUpdatePasswordVO">
@@ -80,6 +80,18 @@
             (select count(*) from client where to_char(client_join, 'YY-MM') in ('21-12')) dec
 		from dual
 	</select>
+	
+	<update id="updateExpire" parameterType="int"> 
+		UPDATE client SET CLIENT_EXPIRE =CLIENT_EXPIRE +30 WHERE CLIENT_NO =#{clientNo}
+	</update>
+	
+	<update id="updateStandard" parameterType="int"> 
+		UPDATE client SET GRADE_NO =2 WHERE CLIENT_NO = #{clientNo}
+	</update>
+	
+	<update id="updatePremium" parameterType="int"> 
+		UPDATE client SET GRADE_NO =3 WHERE CLIENT_NO = #{clientNo}
+	</update>
 
 </mapper>
 

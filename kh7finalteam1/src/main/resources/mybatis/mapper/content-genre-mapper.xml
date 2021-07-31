@@ -22,4 +22,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="int">
 		delete from content_genre where content_no = #{contentNo}
 	</delete>
+	
+	<select id="getTvGenre" resultType="GenreDto">
+		select distinct genre_name, G.genre_no from content_genre CG 
+		inner join genre G on CG.genre_no = G.genre_no 
+		inner join content C on CG.content_no = C.content_no 
+		where C.content_series = 'Y'
+		order by genre_name asc
+	</select>
+	
+	<select id="getMovieGenre" resultType="GenreDto">
+		select distinct genre_name, G.genre_no from content_genre CG 
+		inner join genre G on CG.genre_no = G.genre_no 
+		inner join content C on CG.content_no = C.content_no 
+		where C.content_series = 'N' 
+		order by genre_name asc
+	</select>
 </mapper>

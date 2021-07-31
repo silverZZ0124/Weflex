@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NetFlix Setting</title>
+    <title>WeFlex Setting</title>
 
     <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/res/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

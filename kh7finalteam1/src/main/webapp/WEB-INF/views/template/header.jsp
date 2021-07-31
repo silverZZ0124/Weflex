@@ -13,10 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- 	<link rel="stylesheet" type="text/css" href="/plugin/slick/slick.css"/> -->
 	<!-- <link rel="stylesheet" type="text/css" href="https://slick/slick-theme.css"/> -->
- 
-	
-
-	
 	    
     <!-- Custom styles for this template -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -91,9 +87,6 @@
 			$(".dropdown-menu").show();
 		});
 		
-		
-	
-		
 	});
 </script>
 <style>
@@ -148,7 +141,7 @@
 		          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark dropdown-left" aria-labelledby="navbarDarkDropdownMenuLink">
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/help">고객센터</a></li>
-		            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/logout">로그아웃</a></li>
 		          </ul>
 		          
        		 	</li>		
@@ -162,29 +155,11 @@
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
 				  <li class="nav-item second-nav-title-text"><div>TV 프로그램</div> </li> 
-				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
-								    
-								      <option>장르</option>
-								      <option>한국 드라마</option>
-								      <option>미국 드라마</option>  
-								      <option>영국 드라마</option>
-								      <option>아시아 드라마</option>
-								      <option>버라이어티/예능</option>
-								      <option>애니메이션</option>
-								      <option>코미디</option>
-								      <option>로맨스</option>
-								      <option>드라마</option>
-								      <option>액션</option>
-								      <option>스릴러</option>
-								      <option>SF/판타지</option>
-								      <option>호러</option>
-								      <option>키즈</option>
-								      <option>청춘/하이틴</option>
-								      <option>다큐시리즈</option>
-								      
-								      
-								  
-								  </select> </li> 
+				  <li class="nav-item second-nav-select-box"> 
+					  <select class="selectpicker main-color tv-page-title-select-box" id="tv-genre-selectbox">
+					      <option>장르</option>
+					  </select> 
+				  </li> 
 				 
 			</ul> 
 
@@ -194,32 +169,11 @@
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
 				  <li class="nav-item second-nav-title-text"><div style="width:100%;">영화</div> </li> 
-				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
-								    
-								      <option>장르</option>
-								      <option>한국</option>
-								      <option>미국 영화</option>  
-								      <option>외국 작품</option>
-								      <option>영화제 수상작</option>
-								      <option>인디</option>
-								      <option>어린이/가족</option>
-								      <option>애니메이션</option>
-								      <option>액션</option>
-								      <option>코미디</option>
-								      <option>로맨스</option>
-								      <option>스릴러</option>
-								      <option>호러</option>
-								      <option>SF</option>
-								      <option>판타지</option>
-								      <option>드라마</option>
-								      <option>범죄</option>
-								      <option>다큐멘터리</option>
-								      <option>음악/뮤지컬</option>
-								      <option>고전</option>
-								      
-								      
-								  
-								  </select> </li> 
+				  <li class="nav-item second-nav-select-box"> 
+					  <select class="selectpicker main-color tv-page-title-select-box" id="movie-genre-selectbox">
+					      <option>장르</option>
+					  </select> 
+				  </li> 
 				 
 			</ul> 
 

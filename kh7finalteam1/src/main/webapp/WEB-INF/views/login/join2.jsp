@@ -1,45 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css"href="${pageContext.request.contextPath }/res/css/join2.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join3.css"/>
-
-
-<title>Weflex</title>
-
-</head>
-<body>
-	<div id="appMountPoint">
-		<div class="netflix-sans-font-loaded">
-			<div class="basicLayout notMobile modernInApp hasExtendedDiacritics signupSimplicity-registration simplicity">
-				<div class="" >
-		<div class="nfHeader noBorderHeader signupBasicHeader"style="background-color:white !important">
-					<a href="#" class="svg-nfLogo signupBasicHeader">
-						<img class="svg-icon svg-icon-netflix-logo"src="${pageContext.request.contextPath }/res/img/weflex_logo.png" style="margin-bottom:18%;">
-						
-					</a>
-					<a href="/signout" id="login-header-logout" style="display:none;" class="authLinks signupBasicHeader">로그아웃</a>
-					<a href="/signin" id="login-header-login" style="display:none;" class="authLinks signupBasicHeader">로그인</a>
-				</div>
-	
-		
-		
+<jsp:include page="/WEB-INF/views/template/loginHeader.jsp"></jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join2.css"/>
 
 		
 		</div>	
 				<div class="simpleContainer" data-transitioned-child="true">
-					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:340px;">
+					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:400px;">
 						<form action="joinCheck"method="POST" id="joinCheck">
 							<div class="regFormContainer">
 								<div class="stepHeader-container" >
 									<div class="stepHeader" data-a11y-focus="true" tabindex="0">
 										<span id="" class="stepIndicator" >
-										<b>1</b>
+										<b>2</b>
 										/
 										<b>3단계</b>
 										</span>
@@ -55,7 +29,7 @@
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
 													<input type="hidden" name="clientId" value="${param.email}" >
-													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}"  disabled required>
+													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}" disabled required>
 													<label for="id_email" class="placeLabel">이메일 주소</label>
 													</label>
 												</div>

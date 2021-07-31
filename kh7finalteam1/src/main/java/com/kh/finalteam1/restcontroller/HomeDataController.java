@@ -1,28 +1,22 @@
 package com.kh.finalteam1.restcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kh.finalteam1.entity.ClientDto;
-import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.LikeListDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.entity.WatchLogDto;
 import com.kh.finalteam1.entity.WishListDto;
-import com.kh.finalteam1.entity.YesSeriesDto;
-import com.kh.finalteam1.error.AjaxException;
-import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.LikeListDao;
@@ -31,7 +25,7 @@ import com.kh.finalteam1.repository.SeriesDao;
 import com.kh.finalteam1.repository.WatchLogDao;
 import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.service.MainModalService;
-import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
+import com.kh.finalteam1.vo.ContentListVO;
 import com.kh.finalteam1.vo.HoverModalVO;
 import com.kh.finalteam1.vo.MainModalDetailVO;
 
@@ -163,5 +157,17 @@ public class HomeDataController {
 			hoverModalVO.setLike(false);
 		
 		return hoverModalVO;
+	}
+	
+	@GetMapping("/getTvGenreList")
+	public List<ContentListVO> getTvGenreList(@RequestParam int genreNo) {
+		List<ContentListVO> tvGenreList = contentDao.tvGenreList(genreNo);
+		return tvGenreList;
+	}
+	
+	@GetMapping("/getMovieGenreList")
+	public List<ContentListVO> getMovieGenreList(@RequestParam int genreNo) {
+		List<ContentListVO> movieGenreList = contentDao.movieGenreList(genreNo);
+		return movieGenreList;
 	}
 }

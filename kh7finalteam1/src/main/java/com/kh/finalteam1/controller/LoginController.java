@@ -1,13 +1,16 @@
 package com.kh.finalteam1.controller;
 
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +25,8 @@ public class LoginController {
 	private ClientDao clientDao; 
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@CookieValue(required = false) String email, Model model) {
+		model.addAttribute("email", email);
 		return "login/login"; 
 	}
 
@@ -32,20 +36,25 @@ public class LoginController {
 	}
 	
 	@PostMapping("/join1")
-	public String join1(@RequestParam String email, Model model){
-		model.addAttribute("email", email);
-		
+	public String join1(@RequestParam(required = false) String email, Model model){
+		if(email != null) {
+			model.addAttribute("email", email);
+		}
 		return "redirect:/join2";
 	}
 
 	@GetMapping("/join2")
 	public String join2() {
+		
 		return "login/join2";
 	}
 
 
 	@GetMapping("join3")
-	public String join3() {
+	public String join3(HttpSession session, @RequestParam(required = false) String clientNo) {
+		if(clientNo != null) {
+			session.setAttribute("clientNo", clientNo);			
+		}
 		return "login/join3";
 	}
 
@@ -70,21 +79,53 @@ public class LoginController {
 		}
 	}
 	@PostMapping("loginCheck")
-	public String loginCheck(@ModelAttribute ClientDto clientDto, HttpSession session) {
+	public String loginCheck(@ModelAttribute ClientDto clientDto, 
+			@RequestParam(required = false) boolean loginInfo, 
+			HttpSession session,
+			HttpServletResponse response) throws UnsupportedEncodingException {
 		ClientDto client = clientDao.loginCheck(clientDto);
+
+		Cookie checkCookie = new Cookie("loginInfo", "true");
+		if(loginInfo) 						
+			checkCookie.setMaxAge(86400);
+		else
+			checkCookie.setMaxAge(0);
 		
+		response.addCookie(checkCookie);		
+				
 		if(client ==null) {
 			return "redirect: login";
 		}
 		else {
+			Cookie emailCookie = new Cookie("email", client.getClientId());
+			
+			if(loginInfo) 
+				emailCookie.setMaxAge(86400);
+			else
+				emailCookie.setMaxAge(0);
+			
+			response.addCookie(emailCookie);
+			
 			session.setAttribute("clientNo", client.getClientNo());
 			return "redirect:/home";
 		}
 	}
+	
 	@PostMapping("joinCheck")
 	public String joinCheck(@ModelAttribute ClientDto clientDto) {
+		
 		clientDao.joinCheck(clientDto);
 		
-		return "redirect:/join3";
+		ClientDto client = clientDao.regitCheck(clientDto.getClientId());
+		return "redirect:/join3?clientNo="+client.getClientNo();
+		
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("clientNo");
+
+		return "redirect: login";
+	}
+	
 }

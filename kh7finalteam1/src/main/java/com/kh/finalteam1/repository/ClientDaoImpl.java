@@ -90,4 +90,22 @@ public class ClientDaoImpl implements ClientDao {
 		return sqlSession.selectOne("client.join-count");
 	}
 	
+	@Override
+	public void updateExpire(int clientNo) {
+		sqlSession.update("client.updateExpire",clientNo);
+	
+	}
+	
+	@Override
+	public void updateGradeStandard(int clientNo) {
+		sqlSession.update("client.updateStandard",clientNo);
+	
+	}
+	
+	@Override
+	public void updateGradePremium(int clientNo) {
+		sqlSession.update("client.updatePremium",clientNo);
+	
+	}
+	
 }
