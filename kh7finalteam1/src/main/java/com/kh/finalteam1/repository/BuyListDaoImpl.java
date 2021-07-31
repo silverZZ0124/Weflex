@@ -40,4 +40,9 @@ public class BuyListDaoImpl implements BuyListDao{
 	public ClientJoinBuyCountVO buyCount() {
 		return sqlSession.selectOne("buylist.buy-count");
 	}
+	
+	@Override
+	public List<BuyListDto> list(int clientNo){
+		return sqlSession.selectList("buylist.list",clientNo);
+	}
 }

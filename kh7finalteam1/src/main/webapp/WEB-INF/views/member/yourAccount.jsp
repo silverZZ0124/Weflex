@@ -17,7 +17,7 @@
     	var contextPath = "${pageContext.request.contextPath}";
     </script>    
 <meta charset="UTF-8">
-<title>Netflix</title>
+<title>Weflex</title>
 	<script>
 		$(function(){
 			$("#profileSelector").hover(function(){	
@@ -40,6 +40,7 @@
 			$("#move-logout").click(function(){
 				location.replace(contextPath + "/logout");
 			});
+			
 						
 		});
 	</script>
@@ -153,10 +154,10 @@
 													</div>
 													<div class="account-section-group -thin">
 														<div class="account-section-item">
-															<form class="account-section-form" >
+															<form class="account-section-form" action="pay/payHistory">
 																<input type="hidden" >
 																<button class="account-section-link" type="submit">																
-																	결제 정보 관리
+																	결제 이력 보기
 																</button>
 															</form>
 														</div>

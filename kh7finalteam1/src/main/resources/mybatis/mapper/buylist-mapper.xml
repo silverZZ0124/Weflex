@@ -49,4 +49,10 @@
             (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-12')) dec
 		from dual
 </select>
+
+<select id="list" resultType="BuyListDto" parameterType="int">
+	select * from buy_list where client_no = #{clientNo}
+		order by buy_no desc
+</select>
+
 </mapper>
