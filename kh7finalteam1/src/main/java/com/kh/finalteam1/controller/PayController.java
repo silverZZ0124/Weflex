@@ -1,6 +1,8 @@
 package com.kh.finalteam1.controller;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalteam1.entity.BuyListDto;
+import com.kh.finalteam1.entity.ProductDto;
 import com.kh.finalteam1.repository.BuyListDao;
 import com.kh.finalteam1.repository.ClientDao;
+import com.kh.finalteam1.repository.ProductDao;
 import com.kh.finalteam1.service.PayService;
 import com.kh.finalteam1.vo.KakaoPayApprovePrepareVO;
 import com.kh.finalteam1.vo.KakaoPayApproveVO;
@@ -35,6 +39,9 @@ public class PayController {
 	
 	@Autowired
 	private BuyListDao buyListDao;
+	
+	@Autowired
+	private ProductDao productDao;
 
 	@GetMapping("/confirm")
 	public String confirm() {
@@ -71,9 +78,9 @@ public class PayController {
 		
 		int clientNo=(int)session.getAttribute("clientNo");
 		clientDao.updateExpire(clientNo);
-		System.out.println(clientNo);
+
 		String buyNo=(String)session.getAttribute("partner_order_id");
-		System.out.println(buyNo);
+
 		BuyListDto buyListDto=buyListDao.get(Integer.parseInt(buyNo));
 		if(buyListDto.getProductNo()==1) {
 			clientDao.updateGradeStandard(clientNo);
@@ -96,4 +103,23 @@ public class PayController {
 		model.addAttribute("searchVO", searchVO);
 		return "pay/resultSuccess";
 	}
-  }
+	
+	
+	@GetMapping("/payHistory")
+	public String payHistory(HttpSession session, Model model) {
+		int clientNo=(int)session.getAttribute("clientNo");
+		List<BuyListDto> buyList=buyListDao.list(clientNo);
+		model.addAttribute("list", buyListDao.list(clientNo));
+		
+		List<ProductDto> productList=new ArrayList<>();
+		for(int i=0;i<buyList.size();i++) {
+			productList.add(productDao.get(buyList.get(i).getProductNo()));
+		}
+		
+		
+		model.addAttribute("productList",productList);
+;		return "pay/payHistory";
+	}
+	
+
+}

@@ -12,6 +12,7 @@ public interface BuyListDao {
 	void ready(BuyListDto buyListDto);
 	void approve(int buyNo);
 	BuyListDto get(int clientNo);
+	List<BuyListDto> list(int clientNo);
 	
 	//월별 결제 건수 조회
 	ClientJoinBuyCountVO buyCount();
