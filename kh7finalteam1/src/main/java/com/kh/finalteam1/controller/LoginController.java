@@ -25,8 +25,15 @@ public class LoginController {
 	private ClientDao clientDao; 
 	
 	@GetMapping("/login")
-	public String login(@CookieValue(required = false) String email, Model model) {
-		model.addAttribute("email", email);
+	public String login(@RequestParam(required = false) String email, @CookieValue(required = false) String emailCookie, Model model) {
+		if(email != null) {
+			System.out.println("null인가");
+			model.addAttribute("email", email);
+		}
+		else {
+			model.addAttribute("email", emailCookie);
+		}
+
 		return "login/login"; 
 	}
 
@@ -53,7 +60,7 @@ public class LoginController {
 	@GetMapping("join3")
 	public String join3(HttpSession session, @RequestParam(required = false) String clientNo) {
 		if(clientNo != null) {
-			session.setAttribute("clientNo", clientNo);			
+			session.setAttribute("clientNo", Integer.parseInt(clientNo));			
 		}
 		return "login/join3";
 	}
@@ -94,11 +101,11 @@ public class LoginController {
 		response.addCookie(checkCookie);		
 				
 		if(client ==null) {
-			return "redirect: login";
+			return "redirect: login?email="+clientDto.getClientId();
 		}
 		else {
-			Cookie emailCookie = new Cookie("email", client.getClientId());
-			
+			Cookie emailCookie = new Cookie("emailCookie", client.getClientId());
+
 			if(loginInfo) 
 				emailCookie.setMaxAge(86400);
 			else

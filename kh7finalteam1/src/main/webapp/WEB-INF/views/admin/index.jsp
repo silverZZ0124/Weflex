@@ -3,6 +3,9 @@
 
 <jsp:include page="/WEB-INF/views/template/adminSidebar.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/template/adminTopbar.jsp"></jsp:include>
+
+
+
 <style>
 	.card-header{
 	font-size : 2rem;
@@ -246,5 +249,15 @@
             <!-- End of Main Content -->
             
             
+
+
+
+<!-- Page level plugins -->
+<script src="${pageContext.request.contextPath}/res/vendor/chart.js/Chart.min.js"></script>   
+        
+<!-- Page level custom scripts -->
+<script src="${pageContext.request.contextPath}/res/js/demo/chart-area-demo.js"></script>
+<script src="${pageContext.request.contextPath}/res/js/demo/chart-pie-demo.js"></script>
+<script src="${pageContext.request.contextPath}/res/js/demo/chart-bar-demo.js"></script>
 
     <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

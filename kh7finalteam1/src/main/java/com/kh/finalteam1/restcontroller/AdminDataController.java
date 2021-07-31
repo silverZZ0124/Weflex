@@ -35,7 +35,7 @@ import com.kh.finalteam1.vo.SliderListVO;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/data")
+@RequestMapping("/data/admin")
 @Slf4j
 public class AdminDataController {
 	
@@ -59,19 +59,19 @@ public class AdminDataController {
 		return contentDao.list();
 	}
 	
-	@GetMapping("/admin/searchGenre")
+	@GetMapping("/searchGenre")
 	public List<GenreDto> searchGenre(@RequestParam String genreName) {
 		return genreDao.get(genreName);
 		
 	}
 	
-	@GetMapping("/admin/searchFeature")
+	@GetMapping("/searchFeature")
 	public List<ProgramFeatureDto> searchFeature(@RequestParam String featureName) {
 		return programFeatureDao.get(featureName);
 		
 	}
 	
-	@GetMapping("/admin/content/selectSeason")
+	@GetMapping("/content/selectSeason")
 	public List<YesSeriesDto> selectSeason(@ModelAttribute YesSeriesDto yesSeriesDto) {
 		return seriesDao.yesSeason(yesSeriesDto);
 		
@@ -122,17 +122,17 @@ public class AdminDataController {
 		return buyListDao.buyCount();
 	}
 
-	@PostMapping("/admin/getGenre")
+	@PostMapping("/getGenre")
 	public List<GenreDto> getGenre() {
 		return genreDao.list();
 	}
 	
-	@PostMapping("/admin/getFeature")
+	@PostMapping("/getFeature")
 	public List<ProgramFeatureDto> getFeature() {
 		return programFeatureDao.list();
 	}
 	
-	@PostMapping("/admin/getSliderSample")
+	@PostMapping("/getSliderSample")
 	public SliderListVO getSliderSample(
 			@RequestParam(value="sliderTitle") String sliderTitle,
 			@RequestParam(value="contentType") String contentType,
