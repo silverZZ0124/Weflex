@@ -178,6 +178,6 @@
 	</div>
 </div>
 
-	
-	<jsp:include page="/WEB-INF/views/admin/seriesModal.jsp"></jsp:include>
-    <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
+
+<jsp:include page="/WEB-INF/views/admin/seriesModal.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
