@@ -400,17 +400,17 @@
 				장르, 특징, 배우가 입력 되었는지 검사.  
 				아무것도 없으면 입력하라는 메세지
 			*/
-			/* if($("#this-content-genre").children().length == 0){
+			if($("#this-content-genre").children().length == 0){
 				window.alert("장르를 입력하세요");
 				$("select[name='contentGenre']").focus();
 				e.preventDefault();
 			}
-			else if($("#this-content-feature").children().length == 0){
+			/*else if($("#this-content-feature").children().length == 0){
 				window.alert("특징을 입력하세요");
 				$("select[name='contentFeature']").focus();
 				e.preventDefault();
 			} */
-			if($("#this-content-cast").children().length == 0){
+			else if($("#this-content-cast").children().length == 0){
 				window.alert("배우를 입력하세요");
 				$("input[name='contentCast']").focus();
 				e.preventDefault();

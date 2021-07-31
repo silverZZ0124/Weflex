@@ -29,7 +29,7 @@
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
 													<input type="hidden" name="clientId" value="${param.email}" >
-													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}"  disabled required>
+													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}" disabled required>
 													<label for="id_email" class="placeLabel">이메일 주소</label>
 													</label>
 												</div>
