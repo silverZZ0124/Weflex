@@ -32,7 +32,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 		var ctx = $("#myAreaChart");
 		
 		$.ajax({
-			url : "../data/client/join",
+			url : "../data/admin/client/join",
 			type:"get",
 			dataType:"json",
 			success:function(count){

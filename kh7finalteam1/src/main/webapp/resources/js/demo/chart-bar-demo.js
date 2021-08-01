@@ -33,7 +33,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	var ctx = $("#myBarChart");
 	
 	$.ajax({
-		url : "../data/client/payment",
+		url : "../data/admin/client/payment",
 		type:"get",
 		dataType:"json",
 		success:function(count){

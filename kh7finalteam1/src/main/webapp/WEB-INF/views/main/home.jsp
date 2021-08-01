@@ -15,7 +15,7 @@ var seriesArray = new Array();
 var contentThumbnail;
 var curContentNo;
 
-window.onload = function(){			
+window.onload = function(){		
 	
 	function onYouTubeIframeAPIReady() {
 	    player = new YT.Player('player', {
@@ -51,7 +51,7 @@ window.onload = function(){
 	onYouTubeIframeAPIReady();
 }
 
-$(function(){
+$(function(){	
 	var video=$("#main-video");
 	var videoDomObj = video.get(0);
 	var numSlick=0;
@@ -314,12 +314,12 @@ $(function(){
 		
 		 
 		//화살표 호버 시 커짐 
-		$(".arrow-img").hover(function(){
-			$(this).addClass("arrow-hover");
-			$(this).css("cursor","pointer");
-		},function(){
-			$(this).removeClass("arrow-hover");
-		});
+// 		$(".arrow-img").hover(function(){
+// 			$(this).addClass("arrow-hover");
+// 			$(this).css("cursor","pointer");
+// 		},function(){
+// 			$(this).removeClass("arrow-hover");
+// 		});
 		
 		//버튼 누르면(모달 팝업 시) 영상 일시정지
 		$(".main-btn").click(function(){	
@@ -774,6 +774,8 @@ $(function(){
 				$(this).css("cursor","default");
 			});			
 		};
+		
+		
 	});
 
 </script>
