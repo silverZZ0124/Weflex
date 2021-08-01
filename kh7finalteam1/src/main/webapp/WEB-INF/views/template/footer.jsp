@@ -3,6 +3,7 @@
 	<link rel="stylesheet" href="res/css/common.css"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 	</section>
+	</main>
 	<footer class="member-footer">
 		<div class="d-flex social-links">
 			<a class="social-link" href="#"><i class="fab fa-facebook-square"></i></a>
@@ -108,6 +109,6 @@
 			<span class="member-footer-copyright-instance">{5f78ce3e-1345-41de-8c27-0ff371b88f7c}</span>
 		</div>
 	</footer>
-	</main>
+	
 </body>
 </html>
