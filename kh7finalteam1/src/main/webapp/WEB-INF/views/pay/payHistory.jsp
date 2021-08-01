@@ -5,11 +5,20 @@
 <jsp:include page="/WEB-INF/views/template/loginHeader.jsp"></jsp:include>
 <style>
 .pay-history-detail-text{
-	width: 250px;
+	width: 400px;
     margin-top: 3%;
     display: flex;
-    justify-content: space-evenly;
+    text-align:center;
+    font-size: 0.9rem;
 }
+.pay-history-detail-title{
+	color: rgb(204,204,204);
+	border-bottom:1px solid rgb(204,204,204);
+}
+.pay-history-detail{
+	border-bottom:1px solid rgb(204,204,204);
+}
+
 </style>
 <script>
 	$(function(){
@@ -24,24 +33,38 @@
 	<div style="margin-top:3%;">
 		<div style="text-align:center;">결제 정보를 확인하세요.</div>
 		<div class="container-center pay-history-detail-text">
-			<div>
+			<div class="pay-history-detail">
+				
+			</div>
+			<div style="width:100px;">
+				<div class="pay-history-detail-title">날짜</div>
 				<c:forEach var="buyListDto" items="${list }">
-					<div>
-						<span>${buyListDto.buyPaymentDate}</span>
+					<div class="pay-history-detail">
+						<span style="color:rgb(55,126,247);justify-content: space-between;">${buyListDto.buyPaymentDate}</span>
 					</div>
 				</c:forEach>
 			</div>
-			<div>
+			<div style="width:100px; text-align:center;">
+				<div class="pay-history-detail-title">설명</div>
 				<c:forEach var="productDto" items="${productList }">
-					<div>
-						<span>${productDto.productName }</span>
+					<div class="pay-history-detail">
+						<span style="justify-content: space-between;">${productDto.productName }</span>
 					</div>
 				</c:forEach>
 			</div>
-			<div>
+			<div style="width:100px;">
+				<div class="pay-history-detail-title">가격</div>
 				<c:forEach var="productDto" items="${productList }">
-					<div>
-						<span>${productDto.productPrice }</span>
+					<div class="pay-history-detail">
+						<span style="justify-content: space-between;">${productDto.productPrice }</span>
+					</div>
+				</c:forEach>
+			</div>
+			<div style="width:100px;">
+				<div class="pay-history-detail-title">결제수단</div>
+				<c:forEach var="buyListDto" items="${list }">
+					<div class="pay-history-detail">
+						<span style="justify-content: space-between;">카카오페이</span>
 					</div>
 				</c:forEach>
 			</div>
