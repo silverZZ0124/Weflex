@@ -27,7 +27,7 @@ $(document).ready(function() {
 		},
 	 
 		ajax:{
-	  		url : "../data/client/list",
+	  		url : "../data/admin/client/list",
 	  		type : "get",
 	  		dataType : "json",
 	  		dataSrc : '',

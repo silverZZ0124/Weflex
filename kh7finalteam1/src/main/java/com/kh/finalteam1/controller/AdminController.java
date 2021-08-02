@@ -16,6 +16,7 @@ import com.kh.finalteam1.entity.ProgramFeatureDto;
 import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.HomeSliderDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.service.HomeService;
 
@@ -31,6 +32,9 @@ public class AdminController {
 	
 	@Autowired
 	private ContentDao contentDao;
+	
+	@Autowired
+	private HomeSliderDao homeSliderDao;
 
 	
 	@RequestMapping("/")
@@ -138,15 +142,38 @@ public class AdminController {
 	
 	
 	//회원 관리
-		@GetMapping("/clientAdmin")
-		public String clientAdmin() {
-			return "admin/clientAdmin";
-		}
+	@GetMapping("/clientAdmin")
+	public String clientAdmin() {
+		return "admin/clientAdmin";
+	}
 		
 	@GetMapping("/homeSetting")
 	public String homeSetting(Model model) {
 		model.addAttribute("sliderList", homeService.getSliderList());
 		return "admin/homeSetting";
+	}
+	
+	@PostMapping("/deleteHomeSlider")
+	public String deleteHomeSlider(@RequestParam int homeSliderNo) {
+		homeSliderDao.deleteHomeSlider(homeSliderNo);
+		return "redirect: homeSetting";
+	}
+	
+	@PostMapping("/homeSetting")
+	public String homeSetting(@RequestParam int homeSliderNo,
+			@RequestParam String sliderTitle,
+			@RequestParam String contentType,
+			@RequestParam String type,
+			@RequestParam String keyword) {
+		
+		if(homeSliderNo == 0) {
+			homeSliderDao.insertHomeSlider(sliderTitle, contentType, type, keyword);
+		}
+		else {
+			homeSliderDao.updateHomeSlider(homeSliderNo, sliderTitle, contentType, type, keyword);
+		}
+		
+		return "redirect: homeSetting";
 	}
 
 }

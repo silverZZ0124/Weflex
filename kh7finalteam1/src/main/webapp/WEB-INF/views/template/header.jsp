@@ -13,10 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- 	<link rel="stylesheet" type="text/css" href="/plugin/slick/slick.css"/> -->
 	<!-- <link rel="stylesheet" type="text/css" href="https://slick/slick-theme.css"/> -->
- 
-	
-
-	
 	    
     <!-- Custom styles for this template -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -46,34 +42,50 @@
 		$(window).on('scroll',function(){
 			if($(window).scrollTop()){
 				$('#header').removeClass('active-gradation').addClass('active-black'); 
-				$("#second-header").removeClass("active-gradation2").addClass("active-black");
+				$(".second-header").removeClass("active-gradation2").addClass("active-black");
 			}else{ 
 			
 				$('#header').removeClass('active-black').addClass('active-gradation');
-				$("#second-header").removeClass("active-black").addClass("active-gradation2");
+				$(".second-header").removeClass("active-black").addClass("active-gradation2");
 			}
 		});
 		
 		if(location.href==="http://localhost:8080/finalteam1/tv"){
-			$(".search-nav-style").css("display","block");
+
+			$(".tv-nav-style").css("display","block");
+		}
+		else if(location.href==="http://localhost:8080/finalteam1/movie"){
+			$(".movie-nav-style").css("display","block");
+
+		}
+		else if(location.href==="http://localhost:8080/finalteam1/wishlist"){
+			$(".wishlist-nav-style").css("display","block");
 		}
 		
 		$("#search-icon").click(function(){
 			if($("#input-box").css("display")=="none"){
 				$("#input-box").show(500);
+				$("input[name=keyword]").focus();
 			}else{
 				$("#input-box").hide(500);
 			}
 		});
 		
 		
+		$("html").click(function(e){
+			var keyword = $("input[name=keyword]").val();
+
+			if(!keyword){
+				if(!$(e.target).hasClass("search-div")){
+					$("#input-box").hide(500);
+				}	
+			}
+		}); 
+		
+		
 		$("#profile-img").hover(function(){
 			$(".dropdown-menu").show();
 		});
-		
-		
-	
-	
 		
 	});
 </script>
@@ -81,17 +93,17 @@
 
 </style>
 <body>
-		<main>
+	<main>
 		<div class="" >
 		<nav class="navbar navbar-dark navbar-expand-sm nav-style" id="header">
-			<ul class="navbar-nav nav-logo-ul" style="width: 120px; margin-left: 1%;">
+			<ul class="navbar-nav nav-logo-ul" style="width: 120px;">
 				<li class="nav-item"> <a class="nav-link logo-wrapper" href="../finalteam1/home"><img src="res/img/weflex_logo.png" style="width: 100%;"></a> </li> 
 			</ul>
 			<ul class="navbar-nav" style="position: absolute;margin-left: 160px;" id="navbar1-ul">
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/home">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
-				  <li class="nav-item"> <a class="nav-link" href="#">내가 찜한 콘텐츠</a> </li>	 
+				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/wishlist">내가 찜한 콘텐츠</a> </li>	 
 				   <li class="nav-item"> <a class="nav-link" href="admin/">관리자 페이지</a> </li>	 
 			</ul> 
 			<ul class="navbar-nav" style="position: absolute;margin-left: 130px;">
@@ -104,7 +116,7 @@
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/home">홈</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/tv">TV프로그램</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/movie">영화</a></li>
-		            <li><a class="dropdown-item" href="#">내가 찜한 콘텐츠</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/wishlist">내가 찜한 콘텐츠</a></li>
 		            <li><a class="dropdown-item" href="admin/">관리자 페이지</a></li>
 		           
 		          </ul>
@@ -112,14 +124,15 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:180px; margin-bottom:5px;">
-				<form class="form-inline" action="">
-					<input class="form-control mr-sm-3 search-box" type="text" placeholder="제목,사람,장르"> 
+			<div id="input-box" style="display:none; position:absolute; right:17.5%; margin-bottom:5px;" class="search-div">
+				<form class="form-inline search-div" action="search" method="get" id="form-search">
+					<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목,사람,장르 + Enter" name="keyword"> 
 				</form> 
 			</div>
-			<ul class="navbar-nav nav-var-right" style="position:absolute; right:50px;">
+			
+			<ul class="navbar-nav nav-var-right" style="margin-left: auto;margin-right: 4%;padding-right: 0;">
 				
-			 	<li class="nav-item nav2-item"> <a class="nav-link" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji"></i></a> </li>
+			 	<li class="nav-item nav2-item"> <a class="nav-link search-div" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji search-div"></i></a> </li>
 				<li class="nav-item nav2-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
 				<li class="nav-item dropdown">
          		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:3px;">
@@ -129,7 +142,7 @@
 		          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark dropdown-left" aria-labelledby="navbarDarkDropdownMenuLink">
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
 		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/help">고객센터</a></li>
-		            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+		            <li><a class="dropdown-item" href="${pageContext.request.contextPath }/logout">로그아웃</a></li>
 		          </ul>
 		          
        		 	</li>		
@@ -139,69 +152,39 @@
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style search-nav-style" id="second-header" style="display:none;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style tv-nav-style second-header"style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="color:white;"><div>TV 프로그램</div> </li> 
-				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
-								    
-								      <option>장르</option>
-								      <option>한국 드라마</option>
-								      <option>미국 드라마</option>  
-								      <option>영국 드라마</option>
-								      <option>아시아 드라마</option>
-								      <option>버라이어티/예능</option>
-								      <option>애니메이션</option>
-								      <option>코미디</option>
-								      <option>로맨스</option>
-								      <option>드라마</option>
-								      <option>액션</option>
-								      <option>스릴러</option>
-								      <option>SF/판타지</option>
-								      <option>호러</option>
-								      <option>키즈</option>
-								      <option>청춘/하이틴</option>
-								      <option>다큐시리즈</option>
-								      
-								      
-								  
-								  </select> </li> 
+				  <li class="nav-item second-nav-title-text"><div>TV 프로그램</div> </li> 
+				  <li class="nav-item second-nav-select-box"> 
+					  <select class="selectpicker main-color tv-page-title-select-box" id="tv-genre-selectbox">
+					      <option>장르</option>
+					  </select> 
+				  </li> 
 				 
 			</ul> 
 
 		</nav>
 		
-		<nav class="navbar navbar-dark navbar-expand-sm nav-style "  style="display:none;">
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style movie-nav-style second-header"  style="display:none;z-index: 1;">
 			
 			<ul class="navbar-nav" style="position: absolute;height:100%;">
-				  <li class="nav-item second-nav-title-text" style="color:white;"><div>영화</div> </li> 
-				  <li class="nav-item second-nav-select-box"> <select class="selectpicker main-color tv-page-title-select-box">
-								    
-								      <option>장르</option>
-								      <option>한국</option>
-								      <option>미국 영화</option>  
-								      <option>외국 작품</option>
-								      <option>영화제 수상작</option>
-								      <option>인디</option>
-								      <option>어린이/가족</option>
-								      <option>애니메이션</option>
-								      <option>액션</option>
-								      <option>코미디</option>
-								      <option>로맨스</option>
-								      <option>스릴러</option>
-								      <option>호러</option>
-								      <option>SF</option>
-								      <option>판타지</option>
-								      <option>드라마</option>
-								      <option>범죄</option>
-								      <option>다큐멘터리</option>
-								      <option>음악/뮤지컬</option>
-								      <option>고전</option>
-								      
-								      
-								  
-								  </select> </li> 
+				  <li class="nav-item second-nav-title-text"><div style="width:100%;">영화</div> </li> 
+				  <li class="nav-item second-nav-select-box"> 
+					  <select class="selectpicker main-color tv-page-title-select-box" id="movie-genre-selectbox">
+					      <option>장르</option>
+					  </select> 
+				  </li> 
 				 
+			</ul> 
+
+		</nav>
+		
+		<nav class="navbar navbar-dark navbar-expand-sm nav-style wishlist-nav-style second-header" style="display:none;z-index: 1;">
+			
+			<ul class="navbar-nav" style="position: absolute;height:100%;">
+				  <li class="nav-item second-nav-title-text"><div>내가 찜한 콘텐츠</div> </li> 
+				  
 			</ul> 
 
 		</nav>

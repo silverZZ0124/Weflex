@@ -21,6 +21,10 @@
 	<select id="get" parameterType="WishListDto" resultType="WishListDto">
 		select * from wishlist where client_no=#{clientNo} and content_no=#{contentNo}
 	</select>
+	
+	<select id="getWishList" parameterType="int" resultType="WishListDto">
+		select * from wishlist where client_no=#{clientNo}
+	</select>
 </mapper>
 
 

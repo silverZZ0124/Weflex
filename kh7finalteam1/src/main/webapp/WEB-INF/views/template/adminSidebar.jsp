@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
 
@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NetFlix Setting</title>
+    <title>WeFlex Setting</title>
 
     <!-- Custom fonts for this template-->
     <link href="${pageContext.request.contextPath}/res/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,17 @@
   	
 	<!-- Custom styles for this page -->
     <link href="${pageContext.request.contextPath}/res/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">	
-
+	
+	<!-- Bootstrap core JavaScript-->
+	<script src="${pageContext.request.contextPath}/res/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- Core plugin JavaScript-->
+	<script src="${pageContext.request.contextPath}/res/vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+	<!-- Custom scripts for all pages-->
+	<script src="${pageContext.request.contextPath}/res/js/sb-admin-2.min.js"></script>
+	
+ 
 </head>
 
 <body id="page-top">
@@ -87,7 +97,6 @@
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/content/contentRegist">컨텐츠 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/genre">장르 추가</a>
                         <a class="collapse-item" href="${pageContext.request.contextPath}/admin/feature">특징 추가</a>
-                        <a class="collapse-item" href="${pageContext.request.contextPath}/admin/homeSetting">홈 화면 설정</a>
                     </div>
                 </div>
                     
@@ -122,3 +131,4 @@
 
         </ul>
         <!-- End of Sidebar -->
+        

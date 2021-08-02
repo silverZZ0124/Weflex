@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.finalteam1.entity.ContentDto;
+import com.kh.finalteam1.entity.HomeSliderDto;
 import com.kh.finalteam1.entity.MainTrailerDto;
 import com.kh.finalteam1.repository.ContentDao;
+import com.kh.finalteam1.repository.HomeSliderDao;
 import com.kh.finalteam1.repository.MainTrailerDao;
 import com.kh.finalteam1.repository.SeriesDao;
 import com.kh.finalteam1.vo.ContentListVO;
@@ -45,6 +47,9 @@ public class HomeServiceImpl implements HomeService {
 	@Autowired
 	private SeriesDao seriesDao;
 	
+	@Autowired
+	private HomeSliderDao homeSliderDao;
+	
 	@Override
 	public MainTrailerDto getMainTrailer() {
 		List<MainTrailerDto> mainTrailerList = mainTrailerDao.list();
@@ -58,18 +63,21 @@ public class HomeServiceImpl implements HomeService {
 	public List<SliderListVO> getSliderList(){
 		List<SliderListVO> list = new ArrayList<SliderListVO>();
 		
-		list.add(getSlider("TV 프로그램·호러인 외국 드라마", ContentType.FOREIGN_DRAMA, GENRE, "TV 프로그램·호러"));
-		list.add(getSlider("한국 드라마", ContentType.KOREA_DRAMA, GENRE, "TV 드라마·로맨스"));
-		list.add(getSlider("한국 드라마", ContentType.KOREA_DRAMA, GENRE, "한국 드라마"));
-		list.add(getSlider("미국 드라마 나와라", ContentType.FOREIGN_DRAMA, GENRE, "미국 TV 프로그램"));
-		list.add(getSlider("한국 스릴러 영화", ContentType.KOREA_MOVIE, GENRE, "스릴러 영화"));
+		List<HomeSliderDto> homeSliderDtoList = homeSliderDao.list();
 		
+		for(HomeSliderDto dto : homeSliderDtoList) {
+			SliderListVO temp = getSlider(dto.getHomeSliderTitle(), dto.getHomeSliderType(), 
+					dto.getHomeSliderCondition(), dto.getHomeSliderKeyword());
+			temp.setHomeSliderNo(dto.getHomeSliderNo());
+			list.add(temp);
+		}
+				
 		return list;
 	}
 
 	@Override
-	public SliderListVO getSlider(String sliderTitle, String contentType, int type, String keyword){		
-		List<ContentListVO> contentDtoList = contentDao.getSliderItem(contentType, type, keyword);
+	public SliderListVO getSlider(String sliderTitle, String contentType, String condition, String keyword){		
+		List<ContentListVO> contentDtoList = contentDao.getSliderItem(contentType, condition, keyword);
 						
 		SliderListVO sliderListVO = SliderListVO.builder()
 										.sliderTitle(sliderTitle)
@@ -78,4 +86,5 @@ public class HomeServiceImpl implements HomeService {
 		return sliderListVO;
 	}
 
+	
 }

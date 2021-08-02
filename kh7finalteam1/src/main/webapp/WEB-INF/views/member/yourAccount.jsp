@@ -17,7 +17,7 @@
     	var contextPath = "${pageContext.request.contextPath}";
     </script>    
 <meta charset="UTF-8">
-<title>Netflix</title>
+<title>Weflex</title>
 	<script>
 		$(function(){
 			$("#profileSelector").hover(function(){	
@@ -36,6 +36,11 @@
 			$("#move-help").click(function(){
 				location.replace(contextPath + "/help");
 			});
+			
+			$("#move-logout").click(function(){
+				location.replace(contextPath + "/logout");
+			});
+			
 						
 		});
 	</script>
@@ -56,7 +61,7 @@
 					<div id="hdPinTarget" class="member-header">
 						<div id="hd">
 							<div>
-								<a href="${pageContext.request.contextPath }" class="svg-nfLogo logo">
+								<a href="${pageContext.request.contextPath }/home" class="svg-nfLogo logo">
 									<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 								</a>
 							</div>
@@ -72,7 +77,7 @@
 											<ul class="links structural">
 												<li><a id="move-account" href="${pageContext.request.contextPath }/yourAccount">계정</a></li>
 												<li><a id="move-help" href="${pageContext.request.contextPath }/help">고객 센터</a></li>
-												<li><a id="move-logout" href="/">넷플릭스에서 로그아웃</a></li>
+												<li><a id="move-logout" href="${pageContext.request.contextPath }/logout">넷플릭스에서 로그아웃</a></li>
 											</ul>
 										</div>
 									</div>
@@ -88,7 +93,7 @@
 							<h1 class="account-header account-header-inline">계정</h1>
 							<div class="account-section-membersince">
 								<div class="account-section-membersince--svg"></div>
-								멤버십 시작: 5월 2021
+								멤버십 시작: ${clientDto.clientJoin }
 							</div>
 							<div class="responsive-account-content">
 								<div class="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
@@ -151,33 +156,18 @@
 														</div>
 														<div class="account-section-item">
 															${nextExpire }
+
 														</div>
 													</div>
 													<div class="account-section-group -thin">
 														<div class="account-section-item">
-															<form class="account-section-form" >
+															<form class="account-section-form" action="pay/payHistory">
 																<input type="hidden" >
 																<button class="account-section-link" type="submit">																
-																	결제 정보 관리
+																	결제 이력 보기
 																</button>
 															</form>
 														</div>
-														<!-- <div class="account-section-item">
-															<form class="account-section-form" >
-																<input type="hidden" >
-																<button class="account-section-link" type="submit">																
-																	결제 상세 정보
-																</button>
-															</form>
-														</div>
-														<div class="account-section-item">
-															<form class="account-section-form" >
-																<input type="hidden" >
-																<button class="account-section-link" type="submit">																
-																	결제일 변경
-																</button>
-															</form>
-														</div> -->
 													</div>
 												</div>
 											</div>											
@@ -195,25 +185,37 @@
 												<div class="account-section-group">
 													<div class="account-section-item">
 														<c:choose>
+															<c:when test="${clientGradeDto.gradeName eq 'normal'}">
+																<b>일반회원</b>
+															</c:when>
 															<c:when test="${clientGradeDto.gradeName eq 'standard'}">
 																<b>스탠다드</b>
-															</c:when>	
+															</c:when>
+															<c:when test="${clientGradeDto.gradeName eq 'premium'}">
+																<b>프리미엄</b>
+															</c:when>
+															<c:when test="${clientGradeDto.gradeName eq 'counselor'}">
+																<b>상담사</b>
+															</c:when>
+															<c:when test="${clientGradeDto.gradeName eq 'admin'}">
+																<b>관리자</b>
+															</c:when>		
 															<c:otherwise>
 																<b>등급이 잘못되었습니다.</b>
 															</c:otherwise>														
 														</c:choose>
 													</div>
 												</div>
-												<div class="account-section-group">
-													<div class="account-section-item">
-														<form class="account-section-form" >
-															<input type="hidden" >
-															<button class="account-section-link" type="submit">																
-																멤버십 변경
-															</button>
-														</form>
-													</div>
-												</div>
+<!-- 												<div class="account-section-group"> -->
+<!-- 													<div class="account-section-item"> -->
+<!-- 														<form class="account-section-form" > -->
+<!-- 															<input type="hidden" > -->
+<!-- 															<button class="account-section-link" type="submit">																 -->
+<!-- 																멤버십 변경 -->
+<!-- 															</button> -->
+<!-- 														</form> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
 											</div>
 										</div>
 									</section>

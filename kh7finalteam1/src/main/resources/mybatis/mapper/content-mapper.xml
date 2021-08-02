@@ -54,7 +54,7 @@
 		where GR.genre_name = #{keyword} and CT.content_type = #{contentType}
 	</select>
 	
-	<select id="getContentList" parameterType="map" resultType="ContentListVO">
+	<select id="getGenreContentList" parameterType="map" resultType="ContentListVO">
 		select 
 		    CT.content_no, CT.content_thumbnail
 		from 
@@ -62,6 +62,16 @@
 		        inner join content_genre CTGR on CT.content_no = CTGR.content_no
 		        inner join genre GR on CTGR.genre_no = GR.genre_no
 		where GR.genre_name = #{keyword} and CT.content_type = #{contentType}
+	</select>
+	
+	<select id="getFeatureContentList" parameterType="map" resultType="ContentListVO">
+		select 
+		    CT.content_no, CT.content_thumbnail
+		from 
+		    content CT
+		        inner join content_feature CTFT on CT.content_no = CTFT.content_no
+		        inner join program_feature FT on CTFT.feature_no = FT.feature_no
+		where FT.feature_name = #{keyword} and CT.content_type = #{contentType}
 	</select>
 	
 	<resultMap type="HoverModalVO" id="hoverModal">
@@ -119,12 +129,67 @@
 	</select>
 	
 	<select id="getAllSimilarContentVO" parameterType="map" resultType="SimilarContentVO">	
-	    select R.content_no, R.content_thumbnail, R.content_limit, R.content_release, R.content_info, R.content_type, WL.client_no 
+	    select R.content_no, R.content_thumbnail, R.content_limit, R.content_release, R.content_info, R.content_type, R.content_likes, WL.client_no 
 	        from content R
 		        left outer join wishlist WL on R.content_no = WL.content_no
 	        where R.content_type = #{contentType} and (WL.client_no = #{clientNo} or WL.client_no is null) and not(R.content_no = #{contentNo})
-	        order by R.content_no 
+	        order by R.content_likes desc
 	</select>
 	
+	<update id="updateContentViews" parameterType="int">
+		UPDATE content SET content_views = content_views+1 WHERE content_no = #{contentNo}
+	</update>
+	
+	<update id="increaseContentLikes" parameterType="int">
+		UPDATE content SET content_likes = content_likes+1 WHERE content_no = #{contentNo}
+	</update>
+	
+	<update id="decreaseContentLikes" parameterType="int">
+		UPDATE content SET content_likes = content_likes-1 WHERE content_no = #{contentNo}
+	</update>
+
 	<!-- 티비프로그램(연작있는컨텐츠) 조회 -->
+	
+	
+	<!-- 조건(문자열 위치) 검색(컨텐츠명) -->
+	<select id="search" parameterType="string" resultType="ContentListVO">
+		select * from content where instr(content_name, #{keyword}) > 0
+		union
+		select distinct
+		    content.*
+		from content 
+		    inner join content_genre on content.content_no = content_genre.content_no 
+		    inner join genre on content_genre.genre_no = genre.genre_no
+		where instr(UPPER(genre_name), UPPER(#{keyword})) > 0
+		union
+		select distinct 
+		    content.*
+		from content
+		    inner join cast on content.content_no = cast.content_no
+		where instr(cast_name, #{keyword}) > 0
+	</select>
+	
+	<select id="tvProgram" resultType="ContentListVO">
+		select content_no, content_thumbnail from content where content_series = 'Y'
+	</select>
+	
+	<!-- 티비프로그램(연작있는컨텐츠) 장르 검색 조회  -->
+	<select id="tvProgramSearch" resultType="ContentListVO">
+		select C.content_no, C.content_thumbnail from content C 
+		inner join content_genre CG on C.content_no = CG.content_no 
+		where CG.genre_no=#{genreNo} and C.content_series='Y'
+	</select>
+	
+	<!-- 영화(연작없는컨텐츠) 조회 -->
+	<select id="movie" resultType="ContentListVO">
+		select content_no, content_thumbnail from content where content_series = 'N'
+	</select>
+	
+	<!-- 영화(연작없는컨텐츠) 장르 검색 조회  -->
+	<select id="movieProgramSearch" resultType="ContentListVO">
+		select C.content_no, C.content_thumbnail from content C 
+		inner join content_genre CG on C.content_no = CG.content_no 
+		where CG.genre_no=#{genreNo} and C.content_series='N'
+	</select>
+
 </mapper>

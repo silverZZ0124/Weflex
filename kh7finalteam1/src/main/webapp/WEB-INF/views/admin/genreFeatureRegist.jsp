@@ -54,6 +54,17 @@
 				e.preventDefault();
 				$("#myModal").modal("show");
 			}
+			else if(!genre){//장르는 체크가 안되어있으면 데이터 전송을 막음(장르 필수)
+				e.preventDefault();
+				$("#myModal").modal("show");
+			}
+		});
+		
+		$("#contentResist").click(function(e){
+			if($("input:checkbox[name='genreNo']").is(":checked")==false){
+				alert("장르를 선택하세요.");
+				e.preventDefault();
+			}
 		});
 		
 	});
@@ -104,7 +115,7 @@
 	             </div>
              </div>
                 <div class="text-center mb-5" style="width: 100%">
-							<button type="submit" class="btn btn-danger">등록</button>
+							<button type="submit" class="btn btn-danger" id="contentResist">등록</button>
 							<button type="reset" class="btn btn-secondary">초기화</button>
 				</div>
 				</form>
@@ -126,7 +137,7 @@
 		
 		      <!-- Modal body -->
 		      <div class="modal-body">
-		        장르와 특징을 체크해주세요!!
+		        장르는 필수입니다!!
 		      </div>
 		
 		      <!-- Modal footer -->

@@ -13,4 +13,5 @@ public interface CastDao {
 
 	//수정할때 모두 삭제
 	boolean deleteAll(int contentNo);
+	
 }

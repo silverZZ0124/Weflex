@@ -56,14 +56,14 @@ i{
 	color:white;
 }
 .nav-style{
-	padding:1px 0; 
+	padding:1px 5%; 
 	width:100%; 
 	height:60px;
 	position:fixed;
 	z-index:5;
 	
 }
-.search-nav-style{
+.tv-nav-style, .movie-nav-style{
 
 	margin-top:60px;
 	height:60px;
@@ -140,7 +140,7 @@ i{
 }
 .main-trailer-over-box{
 	position: absolute;
-	margin-left: 2.5%;
+	margin-left: 5%;
     max-width: 30%;
     top: 14%;
 
@@ -237,7 +237,7 @@ i{
 }
 .main-btn-etc-box{
 	position: absolute;
-    right: -217%;
+    right: -200%;
 }
 .modal-trailer-feature{
 	display:flex;
@@ -604,7 +604,9 @@ i{
 .copy-text:first-child {
     margin-top: 0px;
 }
-
+.second-header{
+	margin-top:60px;
+}
 #header{
 	font-size: 1.2rem;
 }
@@ -655,18 +657,18 @@ i{
 }
 .second-nav-title-text{
 	color: white;
-    margin-left:-7%;
     font-size: 2rem;
     font-weight: 600;
-    width: 250px;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
+    width:fit-content;
 }
 .second-nav-select-box{
 	width: 150px;
     margin-top: auto;
     margin-bottom: auto;
+    margin-left:50px;
 }
 .tv-page-title-select-box{
 	padding: 0.2rem 0;
@@ -678,6 +680,7 @@ i{
 	display:flex;
 	flex-wrap:wrap;
 	margin-bottom: 0%;
+/* 	min-height:1000px; */
 	
 }
 .search-page-card{

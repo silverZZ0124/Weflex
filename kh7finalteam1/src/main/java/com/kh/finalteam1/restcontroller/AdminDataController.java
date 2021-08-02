@@ -27,13 +27,15 @@ import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
+import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.vo.ClientAgeCountVO;
 import com.kh.finalteam1.vo.ClientJoinBuyCountVO;
+import com.kh.finalteam1.vo.SliderListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/data")
+@RequestMapping("/data/admin")
 @Slf4j
 public class AdminDataController {
 	
@@ -49,24 +51,27 @@ public class AdminDataController {
 	@Autowired
 	private ContentDao contentDao;
 	
+	@Autowired
+	private HomeService homeService;
+	
 	@GetMapping("/content/list")
 	public List<ContentDto> contentList(){
 		return contentDao.list();
 	}
 	
-	@GetMapping("/admin/searchGenre")
+	@GetMapping("/searchGenre")
 	public List<GenreDto> searchGenre(@RequestParam String genreName) {
 		return genreDao.get(genreName);
 		
 	}
 	
-	@GetMapping("/admin/searchFeature")
+	@GetMapping("/searchFeature")
 	public List<ProgramFeatureDto> searchFeature(@RequestParam String featureName) {
 		return programFeatureDao.get(featureName);
 		
 	}
 	
-	@GetMapping("/admin/content/selectSeason")
+	@GetMapping("/content/selectSeason")
 	public List<YesSeriesDto> selectSeason(@ModelAttribute YesSeriesDto yesSeriesDto) {
 		return seriesDao.yesSeason(yesSeriesDto);
 		
@@ -117,31 +122,25 @@ public class AdminDataController {
 		return buyListDao.buyCount();
 	}
 
-	@PostMapping("/admin/getGenre")
+	@PostMapping("/getGenre")
 	public List<GenreDto> getGenre() {
 		return genreDao.list();
 	}
 	
-	@PostMapping("/admin/getSliderSample")
-	public void getSliderSample(
+	@PostMapping("/getFeature")
+	public List<ProgramFeatureDto> getFeature() {
+		return programFeatureDao.list();
+	}
+	
+	@PostMapping("/getSliderSample")
+	public SliderListVO getSliderSample(
 			@RequestParam(value="sliderTitle") String sliderTitle,
 			@RequestParam(value="contentType") String contentType,
 			@RequestParam(value="type") String type,
 			@RequestParam(value="keyword") String keyword) {
 		
-		System.out.println(sliderTitle);
-		System.out.println(contentType);
-		System.out.println(type);
-		System.out.println(keyword);
-//		System.out.println(keyword.size());
-//		System.out.println(keyword.get(0));
+		SliderListVO sliderListVO = homeService.getSlider(sliderTitle, contentType, type, keyword);
+		return sliderListVO;
 	}
-//	@PostMapping("/admin/getSliderSample")
-//	public void getSliderSample(HttpServletRequest request) {
-//		
-//		System.out.println(request.getParameter("sliderTitle"));
-//		System.out.println(request.getParameter("contentType"));
-//		System.out.println(request.getParameter("type"));
-//		System.out.println(request.getParameterValues("keyword"));
-//	}
 }
+

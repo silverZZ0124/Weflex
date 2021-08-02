@@ -50,4 +50,26 @@
 	<annotation-driven/>
 	<resources location="/resources/" mapping="/res/**"></resources>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/login"/>
+			<exclude-mapping path="/logout"/>
+			<exclude-mapping path="/join*"/>
+			<exclude-mapping path="/regitCheck"/>
+			<exclude-mapping path="/loginCheck"/>
+			<exclude-mapping path="/shop/**"/>
+			<exclude-mapping path="/admin/"/>
+			<exclude-mapping path="/admin/**"/>
+			<exclude-mapping path="/data/admin/**"/>
+			<beans:bean class="com.kh.finalteam1.interceptor.ClientLoginInterceptor"></beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<mapping path="/data/admin/**"/>
+			<beans:bean class="com.kh.finalteam1.interceptor.AdminLoginInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 </beans:beans>

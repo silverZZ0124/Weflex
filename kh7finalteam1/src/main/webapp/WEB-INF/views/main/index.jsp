@@ -14,6 +14,25 @@
         
 	<meta charset="UTF-8">
 	<title>위플렉스 대한민국 - 인터넷으로 TV프로그램과 영화를 시청하세요</title>
+	
+	<script>
+		$(function(){
+			$(".start-btn").click(function(e){
+				var id = $(this).attr("data-input-id");
+				var inputEl = $("#"+id);
+				var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+				
+				console.log(inputEl.val());
+				if(!regex.test(inputEl.val())){
+					inputEl.css("border", "3px solid #b92d2b");
+					inputEl.val("");
+					inputEl.attr("placeholder", "올바른 이메일 형식을 입력해주세요");
+					e.preventDefault();
+				}
+			});
+		});
+	</script>
+	
 </head>
 <body>
 	<div class="basicLayout">
@@ -60,14 +79,14 @@
 										<div class="nfInput nfInputResponsive">
 											<div class="nfInputPlacement">
 												<label class="input_id" placeholder="email">
-													<input  type="email" id="id_email_hero_fuji"  name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소" required>													
+													<input type="email" id="id_email_hero_fuji"  name="email" class="nfTextField hasText" maxlength="50" minlength="5" placeholder="이메일 주소" required>													
 												</label>
 											</div>
 										</div>
 									</li>
 								</ul>
 								<div class="our-story-cta-container cta-link-wrapper">
-									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom"  type="submit">
+									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom start-btn" data-input-id="id_email_hero_fuji" type="submit">
 										<span class="cta-btn-txt" >시작하기</span>
 										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i>
 										</span>									
@@ -264,7 +283,7 @@
 						</ul>
 						
 						<!-- 맨 아래 form -->
-						<form class="cta-form email-form">
+						<form action="regitCheck" method="post" class="cta-form email-form">
 							<h3 class="email-form-title">
 								시청할 준비가 되셨나요? 멤버십을 등록하거나 재시작하려면 이메일 주소를 입력하세요.
 							</h3>
@@ -274,14 +293,14 @@
 										<div class="nfInput nfInputResponsive">
 											<div class="nfInputPlacement">
 												<label class="input_id" placeholder="email">
-													<input type="text" class="nfTextField hasText" id="id_email_faq" maxlength="50" minlength="5" placeholder="이메일 주소">													
+													<input type="text" name="email" class="nfTextField hasText" id="id_email_faq" maxlength="50" minlength="5" placeholder="이메일 주소">													
 												</label>
 											</div>
 										</div>
 									</li>
 								</ul>
 								<div class="our-story-cta-container cta-link-wrapper">
-									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom" type="submit">
+									<button class="btn btn-red nmhp-cta nmhp-cta-extra-large btn-none btn-custom start-btn" data-input-id="id_email_faq" type="submit">
 										<span class="cta-btn-txt">시작하기</span>
 										<span class="chevron-right-arrow"><i class="fas fa-angle-right"></i></span>											
 									</button>

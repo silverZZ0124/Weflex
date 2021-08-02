@@ -34,7 +34,7 @@
 		                //console.log(formdata);
 	
 	                $.ajax({
-	                        url : "${pageContext.request.contextPath}/data/series/yes",
+	                        url : "${pageContext.request.contextPath}/data/admin/series/yes",
 	                        type : "post",
 	                        data:formdata,
 	                        success:function(resp){
@@ -56,7 +56,7 @@
 		            	 //console.log(formdata);
 	        	
 	            	 $.ajax({
-	                     url : "${pageContext.request.contextPath}/data/series/no",
+	                     url : "${pageContext.request.contextPath}/data/admin/series/no",
 	                     type : "post",
 	                     data:formdata,
 	                     success:function(resp){
@@ -178,6 +178,6 @@
 	</div>
 </div>
 
-	
-	<jsp:include page="/WEB-INF/views/admin/seriesModal.jsp"></jsp:include>
-    <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>
+
+<jsp:include page="/WEB-INF/views/admin/seriesModal.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

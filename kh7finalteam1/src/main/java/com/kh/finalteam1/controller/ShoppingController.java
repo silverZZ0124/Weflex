@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.finalteam1.entity.BuyListDto;
+import com.kh.finalteam1.entity.ClientDto;
 import com.kh.finalteam1.entity.ProductDto;
 import com.kh.finalteam1.repository.BuyListDao;
+import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ProductDao;
 import com.kh.finalteam1.service.PayService;
 import com.kh.finalteam1.vo.KakaoPayApprovePrepareVO;
 import com.kh.finalteam1.vo.KakaoPayApproveVO;
 import com.kh.finalteam1.vo.KakaoPayReadyPrepareVO;
 import com.kh.finalteam1.vo.KakaoPayReadyVO;
-import com.kh.finalteam1.vo.KakaoPaySearchVO;
 
 
 
@@ -32,6 +33,8 @@ public class ShoppingController {
 
 	@Autowired
 	private ProductDao productDao;
+	
+	
 	
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -55,9 +58,12 @@ public class ShoppingController {
 	private BuyListDao buyListDao;
 	
 	@PostMapping("/confirm")
-	public String confirm(HttpSession session,@RequestParam int no, @ModelAttribute KakaoPayReadyPrepareVO prepareVO) throws URISyntaxException {
-		//int clientNo=(int)session.getAttribute("clientNo");
-		int clientNo=2;
+	public String confirm(HttpSession session, @RequestParam int no, @ModelAttribute KakaoPayReadyPrepareVO prepareVO) throws URISyntaxException {
+		System.out.println("start");
+		System.out.println(session.getAttribute("clientNo"));
+		int clientNo=(int)session.getAttribute("clientNo");
+		
+		System.out.println("end");
 		prepareVO.setPartner_user_id(String.valueOf(clientNo));
 		int buyNo=buyListDao.getSequence();
 		prepareVO.setPartner_order_id(String.valueOf(buyNo));
@@ -79,8 +85,31 @@ public class ShoppingController {
 		
 	}
 	
+	@GetMapping("/success")
+	public String success(
+			HttpSession session,
+			@ModelAttribute KakaoPayApprovePrepareVO prepareVO) throws URISyntaxException {
+		
+		
+		
+		//세션에서 데이터를 추출 후 삭제
+		prepareVO.setPartner_order_id((String)session.getAttribute("partner_order_id"));
+		prepareVO.setPartner_user_id((String)session.getAttribute("partner_user_id"));
+		prepareVO.setTid((String)session.getAttribute("tid"));
+		
+		session.removeAttribute("partner_order_id");
+		session.removeAttribute("partner_user_id");
+		session.removeAttribute("tid");
+		
+		KakaoPayApproveVO approveVO = payService.approve(prepareVO);
+		
+		
+		
+		//결제 정보 조회 페이지 또는 결제 성공 알림페이지로 리다이렉트 한다
+		return "redirect:result_success?tid="+approveVO.getTid();
+	}
 	
-	
+
 }
 
 

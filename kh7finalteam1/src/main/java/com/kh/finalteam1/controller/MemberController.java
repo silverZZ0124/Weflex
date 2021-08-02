@@ -21,9 +21,9 @@ public class MemberController {
 	private ClientDao clientDao;
 	
 	@RequestMapping("/yourAccount")
-	public String yourAccount(Model model) {
+	public String yourAccount(HttpSession session,Model model) {
 		//세션에서 회원 번호를 받아서 진행
-		int clientNo = 2;
+		int clientNo=(int)session.getAttribute("clientNo");
 		ClientDto clientDto = clientDao.findClient(clientNo);
 		ClientGradeDto clientGradeDto = clientDao.getGrade(clientDto.getGradeNo());
 		

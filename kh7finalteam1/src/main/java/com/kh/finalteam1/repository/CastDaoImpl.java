@@ -31,5 +31,6 @@ public class CastDaoImpl implements CastDao{
 		int count = sqlSession.delete("cast.delete", contentNo);
 		return count>0;
 	}
+	
 
 }

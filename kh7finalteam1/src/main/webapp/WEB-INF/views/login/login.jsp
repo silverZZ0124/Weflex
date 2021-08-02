@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%--<% String errMsg = (String)session.getAttribute("errMsg");
  if(errMsg == null) errMsg = "";
  session.invalidate();
@@ -27,7 +28,7 @@
 					srcset="https://assets.nflxext.com/ffe/siteui/vlv3/b8e09d9c-d1e7-4800-afd9-810e41ace684/6d68acdf-6efa-4f03-9513-ef482daff117/KR-ko-20210607-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/b8e09d9c-d1e7-4800-afd9-810e41ace684/6d68acdf-6efa-4f03-9513-ef482daff117/KR-ko-20210607-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/b8e09d9c-d1e7-4800-afd9-810e41ace684/6d68acdf-6efa-4f03-9513-ef482daff117/KR-ko-20210607-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w">				
 			</div>
 			<div class="nfHeader login-header signupBasicHeader">
-				<a href="/finalteam1/index" class="svg-nfLogo signupBasicHeader">
+				<a href="${pageContext.request.contextPath }" class="svg-nfLogo signupBasicHeader">
 					<img class="logo_img" src="${pageContext.request.contextPath }/res/img/weflex_logo.png">
 				</a>
 			</div>
@@ -42,7 +43,7 @@
 									<div class="nfInputPlacement">
 										<div class="nfEmailPhoneControls">
 											<label class="input_id">
-												<input type="text"  name="clientId" class="nfTextField hasText"  value="${param.email}" placeholder="이메일 주소">
+												<input type="text"  name="clientId" class="nfTextField hasText"  value="${email}" placeholder="이메일 주소">												
 											</label>
 										</div>
 									</div>
@@ -59,20 +60,28 @@
 								<button class="btn login-button btn-submit btn-small" type="submit">로그인</button>
 								<div class="hybrid-login-form-help">
 									<div class="ui-binary-input login-remember-me">
-										<input type="checkbox" id="bxid_rememberMe_true" checked="checked">
+										<c:choose>
+											<c:when test="${cookie.loginInfo != null }">
+												<input type="checkbox" id="bxid_rememberMe_true" name="loginInfo" checked>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" id="bxid_rememberMe_true" name="loginInfo">
+											</c:otherwise>
+										</c:choose>										
+												
 										<label for="bxid_rememberMe_true">
 											<span class="login-remember-me-label-text">로그인 정보 저장</span>
 										</label>
 									</div>
-									<a href="#" class="link login-help-link">도움이 필요하신가요?</a>
+									<a href="${pageContext.request.contextPath}/join1" class="link login-help-link">회원가입</a>
 								</div>
 							</form>
 						</div>
 						
 						<div class="hybrid-login-form-other">
 							<div class="login-signup-now">
-								Netflix 회원이 아닌가요? 
-								<a href="#" >지금 가입하세요.</a>
+								Weflex 회원이 아닌가요? 
+								<a href="${pageContext.request.contextPath}/" >지금 가입하세요.</a>
 							</div>
 						</div>
 					</div>

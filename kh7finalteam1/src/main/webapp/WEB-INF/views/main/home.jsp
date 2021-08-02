@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,7 +15,7 @@ var seriesArray = new Array();
 var contentThumbnail;
 var curContentNo;
 
-window.onload = function(){			
+window.onload = function(){		
 	
 	function onYouTubeIframeAPIReady() {
 	    player = new YT.Player('player', {
@@ -53,7 +51,7 @@ window.onload = function(){
 	onYouTubeIframeAPIReady();
 }
 
-$(function(){
+$(function(){	
 	var video=$("#main-video");
 	var videoDomObj = video.get(0);
 	var numSlick=0;
@@ -316,12 +314,12 @@ $(function(){
 		
 		 
 		//화살표 호버 시 커짐 
-		$(".arrow-img").hover(function(){
-			$(this).addClass("arrow-hover");
-			$(this).css("cursor","pointer");
-		},function(){
-			$(this).removeClass("arrow-hover");
-		});
+// 		$(".arrow-img").hover(function(){
+// 			$(this).addClass("arrow-hover");
+// 			$(this).css("cursor","pointer");
+// 		},function(){
+// 			$(this).removeClass("arrow-hover");
+// 		});
 		
 		//버튼 누르면(모달 팝업 시) 영상 일시정지
 		$(".main-btn").click(function(){	
@@ -460,7 +458,7 @@ $(function(){
 				data: {
 					contentNo: curContentNo	
 				},
-				success:function(resp){	
+				success:function(resp){						
 				 	detailModalPlayerReady = false;
 				 	
 				 	var youtubeId = resp.contentDto.contentTrailer.substring(30);
@@ -471,6 +469,7 @@ $(function(){
  					$("#content-logo").attr("src", resp.contentDto.contentLogo);
  					$("#content-info").text(resp.contentDto.contentInfo);
  					$("#content-release").text(resp.contentDto.contentRelease);
+ 					$("#detail-modal-contentName").text(resp.contentDto.contentName);
  					var imgSrc = "res/img/content_limit_"+resp.contentDto.contentLimit+".png";
  					$(".content-limit").attr("src", imgSrc);
  					
@@ -592,7 +591,7 @@ $(function(){
 		});
 				
 		$(".wallpaper-more-button").click(function(){
-			$(".similar-contents-box").css("height","1600px");
+			$(".similar-contents-box").css("height","fit-content");
 			$(this).css("display","none");
 			$(".wallpaper-less-button").css("display","block");
 		});
@@ -775,6 +774,8 @@ $(function(){
 				$(this).css("cursor","default");
 			});			
 		};
+		
+		
 	});
 
 </script>
@@ -837,11 +838,11 @@ $(function(){
 	</div>
 	<div class="similar-contents-detail-text-box">
 
-		<div style="display:flex; justify-content: space-between; align-items: center;">
+		<div style="display:flex; justify-content: space-between; align-items: center;margin-top:3%;">
 			<div>
 				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>{{correct}}%</span><span>일치</span></div>
 				<div style="margin-right: 5px; display: inline-block;">
-					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 20px;">
+					<img src="res/img/content_limit_{{contentLimit}}.png" style="width: 25px;height:25px;">
 				</div>			
 				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
 			</div>			
@@ -978,7 +979,7 @@ $(function(){
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-more-button "><i class="fas fa-chevron-down"></i></button>
 					       		<button class="btn btn-outline-light modal-etc-btn wallpaper-less-button " style="display:none;"><i class="fas fa-chevron-up"></i></button>
 					       	</div>
-				       		<h3 style="margin-bottom:2%">작품이름 상세 정보</h3>
+				       		<h3 style="margin-bottom:2%"><span id="detail-modal-contentName"></span> 상세 정보</h3>
 				       		<div style="font-size:0.8rem;">
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">감독:</span><span>aa</span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>
@@ -1050,8 +1051,6 @@ $(function(){
 		<div class="slider-title container-center">${sliderVO.sliderTitle }</div>		
 		<div class="custom-img-slide-box">
 			<div class="container-center slider-box" id="slider1">
-				
-				
 			  	<div class="custom-img-slide">
 			   		<c:forEach var="contentListVO" items="${sliderList[status.index].contentList }" varStatus="stat">
 						<div><img class="slider-img" src="${contentListVO.contentThumbnail }" data-contentNo="${contentListVO.contentNo }"></div>
@@ -1064,16 +1063,3 @@ $(function(){
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-
-
-
-
-
-
-
-
-
-
-
