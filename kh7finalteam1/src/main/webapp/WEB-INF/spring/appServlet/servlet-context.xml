@@ -60,6 +60,9 @@
 			<exclude-mapping path="/regitCheck"/>
 			<exclude-mapping path="/loginCheck"/>
 			<exclude-mapping path="/shop/**"/>
+
+			<exclude-mapping path="/pay/**"/>
+
 			<exclude-mapping path="/admin/"/>
 			<exclude-mapping path="/admin/**"/>
 			<exclude-mapping path="/data/admin/**"/>

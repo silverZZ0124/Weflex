@@ -135,8 +135,12 @@ public class AdminContentController {
 		contentDao.edit(contentDto);
 		seriesDao.noEdit(noSeriesDto);
 		
-		if(featureNo != null) {//특징만 있다면(장르는 x)
+		if(genreNo != null && featureNo != null) {//장르와 특징 둘다 입력할 경우
+			contentGenreService.regist(contentNo, genreNo);
 			contentFeatureService.regist(contentNo, featureNo);
+		}
+		else if(genreNo != null) {//장르만 입력할 경우(특징 x)
+			contentGenreService.regist(contentNo, genreNo);
 		}
 		
 		List<CastDto> castList = new ArrayList<>();
@@ -170,8 +174,12 @@ public class AdminContentController {
 		contentFeatureDao.deleteAll(contentNo);
 		castDao.deleteAll(contentNo);
 		
-		if(featureNo != null) {//특징만 있다면(장르는 x)
+		if(genreNo != null && featureNo != null) {//장르와 특징 둘다 입력할 경우
+			contentGenreService.regist(contentNo, genreNo);
 			contentFeatureService.regist(contentNo, featureNo);
+		}
+		else if(genreNo != null) {//장르만 입력할 경우(특징 x)
+			contentGenreService.regist(contentNo, genreNo);
 		}
 		
 		List<CastDto> castList = new ArrayList<>();
@@ -272,11 +280,11 @@ public class AdminContentController {
 		int contentNo = (Integer)session.getAttribute("contentNo");
 		//int contentNo = 1;
 		
-		if(genreNo != null && featureNo != null) {
+		if(genreNo != null && featureNo != null) {//장르와 특징 둘다 입력할 경우
 			contentGenreService.regist(contentNo, genreNo);
 			contentFeatureService.regist(contentNo, featureNo);
 		}
-		else if(genreNo != null) {
+		else if(genreNo != null) {//장르만 입력할 경우(특징 x)
 			contentGenreService.regist(contentNo, genreNo);
 		}
 		

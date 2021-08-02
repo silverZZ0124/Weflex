@@ -165,6 +165,40 @@ window.onload = function(){
 </div>
 </script>
 
+<script id="detail-modal-similar-fake-template" type="text/template">
+<div class="similar-contents-detail-box fake-img" style="visibility: hidden;">
+	<div class="similar-contents-detail-img-box">
+		<img class="similar-contents-detail-img" src="res/img/slider_img2.png" >
+		<form action="play" style="display: inline-block;">
+			<input type="hidden" name="contentNo" >
+			<input type="hidden" name="contentSeason" value="-1">
+			<input type="hidden" name="contentEpisode" value="-1">			
+			<button type="submit" class="btn btn-outline-light modal-etc-btn modal-wallpaper-play-btn" style="display:none;"><i class="fas fa-play"></i></button>
+		</form>
+	</div>
+	<div class="similar-contents-detail-text-box">
+
+		<div style="display:flex; justify-content: space-between; align-items: center;margin-top:3%;">
+			<div>
+				<div class="modal-feature-percent-text" style="margin-right: 5px; display: inline-block;"><span>-1%</span><span>일치</span></div>
+				<div style="margin-right: 5px; display: inline-block;">
+					<img src="res/img/content_limit_12.png" style="width: 25px;height:25px;">
+				</div>			
+				<div style="margin-right: 5px; display: inline-block;">{{contentRelease}}</div>
+			</div>			
+			<div>
+				<button class="btn btn-outline-light modal-etc-btn wish-insert-btn-inDetail" style="display: {{plusStyle}};" ><i class="fas fa-plus"></i></button>
+				<button class="btn btn-outline-light modal-etc-btn wish-delete-btn-inDetail" style="display: {{checkStyle}};" ><i class="fas fa-check"></i></button>
+
+			</div>
+		</div>
+		<div class="modal-wallpaper-text">
+			fake
+		</div>
+	</div>
+</div>
+</script>
+
 <!-- 검색된 장르에 따라 컨텐츠 화면 출력 -->
 <script>
 	$(function(){
