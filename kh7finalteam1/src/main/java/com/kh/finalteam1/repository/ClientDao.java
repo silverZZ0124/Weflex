@@ -18,6 +18,7 @@ public interface ClientDao {
 	void  joinCheck(ClientDto clientDto);
 	boolean changeEmail(ClientDto clientDto);
 	boolean changePassword(ClientUpdatePasswordVO clientVO);	
+	boolean clientDelete(int clientNo);
 	void updateExpire(int clientNo);
 	void updateGradeStandard(int clientNo);
 	void updateGradePremium(int clientNo);

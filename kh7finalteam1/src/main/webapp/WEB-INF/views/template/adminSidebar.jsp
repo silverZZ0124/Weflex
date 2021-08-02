@@ -35,6 +35,9 @@
 	<!-- Core plugin JavaScript-->
 	<script src="${pageContext.request.contextPath}/res/vendor/jquery-easing/jquery.easing.min.js"></script>
 	
+	<!-- Custom scripts for all pages-->
+	<script src="${pageContext.request.contextPath}/res/js/sb-admin-2.min.js"></script>
+	
  
 </head>
 
@@ -129,5 +132,3 @@
         </ul>
         <!-- End of Sidebar -->
         
-<!-- Custom scripts for all pages-->
-<script src="${pageContext.request.contextPath}/res/js/sb-admin-2.min.js"></script>

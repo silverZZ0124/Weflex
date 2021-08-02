@@ -21,7 +21,6 @@ import com.kh.finalteam1.repository.GenreDao;
 import com.kh.finalteam1.repository.WishListDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.service.PlayService;
-import com.kh.finalteam1.vo.CastListVO;
 import com.kh.finalteam1.vo.ContentListVO;
 import com.kh.finalteam1.vo.PlaylistVO;
 
@@ -103,40 +102,43 @@ public class HomeController {
 		return "main/TV";
 
 	}
-		
+	
 	@Autowired
 	private CastDao castDao;
 	
+	//검색 기능 구현
 	@GetMapping("/search")
 	public String search(@RequestParam String keyword, Model model) {
-		System.out.println("킹덤 = " + keyword);
+		//System.out.println("킹덤 = " + keyword);
 		List<ContentListVO> contentList = contentDao.search(keyword);
-		List<CastListVO> castList = castDao.search(keyword);
 		
 		model.addAttribute("keyword", keyword);
-		
 		model.addAttribute("contentList", contentList);
-		model.addAttribute("castList", castList);
 		return "main/search";
 	}
 	
+//	@GetMapping("/wishlist")
+//	public String wishlist(HttpSession session, Model model) {
+//		int clientNo=(int)session.getAttribute("clientNo");
+//
+//
+//		List<WishListDto> wishList=wishListDao.get(clientNo);
+//		model.addAttribute("wishList",wishList);
+//	
+//	
+//		List<ContentDto> contentList=new ArrayList<>();
+//		for(int i=0;i<wishList.size();i++) {
+//			
+//			
+//			contentList.add(contentDao.getList(wishList.get(i).getContentNo()));
+//		}
+//		
+//		model.addAttribute("contentList", contentList);
+//		return "main/wishlist";
+//	}
+	
 	@GetMapping("/wishlist")
-	public String wishlist(HttpSession session, Model model) {
-		int clientNo=(int)session.getAttribute("clientNo");
-
-
-		List<WishListDto> wishList=wishListDao.get(clientNo);
-		model.addAttribute("wishList",wishList);
-	
-	
-		List<ContentDto> contentList=new ArrayList<>();
-		for(int i=0;i<wishList.size();i++) {
-			
-			
-			contentList.add(contentDao.getList(wishList.get(i).getContentNo()));
-		}
-		
-		model.addAttribute("contentList", contentList);
+	public String wishlist() {
 		return "main/wishlist";
 	}
 	

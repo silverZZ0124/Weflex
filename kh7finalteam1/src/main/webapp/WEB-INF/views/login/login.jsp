@@ -73,7 +73,7 @@
 											<span class="login-remember-me-label-text">로그인 정보 저장</span>
 										</label>
 									</div>
-									<a href="" class="link login-help-link">도움이 필요하신가요?</a>
+									<a href="${pageContext.request.contextPath}/join1" class="link login-help-link">회원가입</a>
 								</div>
 							</form>
 						</div>

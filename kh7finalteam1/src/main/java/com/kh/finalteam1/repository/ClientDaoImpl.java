@@ -89,6 +89,11 @@ public class ClientDaoImpl implements ClientDao {
 	public ClientJoinBuyCountVO joinCount() {
 		return sqlSession.selectOne("client.join-count");
 	}
+
+	@Override
+	public boolean clientDelete(int clientNo) {//회원 탈퇴
+		return sqlSession.delete("client.exit",clientNo) > 0;
+	}
 	
 	@Override
 	public void updateExpire(int clientNo) {

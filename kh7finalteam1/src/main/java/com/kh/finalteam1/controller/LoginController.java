@@ -27,7 +27,6 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login(@RequestParam(required = false) String email, @CookieValue(required = false) String emailCookie, Model model) {
 		if(email != null) {
-			System.out.println("null인가");
 			model.addAttribute("email", email);
 		}
 		else {
@@ -44,8 +43,11 @@ public class LoginController {
 	
 	@PostMapping("/join1")
 	public String join1(@RequestParam(required = false) String email, Model model){
-		if(email != null) {
+		if(!email.equals("")) {
 			model.addAttribute("email", email);
+		}
+		else {
+			model.addAttribute("email", "null");
 		}
 		return "redirect:/join2";
 	}

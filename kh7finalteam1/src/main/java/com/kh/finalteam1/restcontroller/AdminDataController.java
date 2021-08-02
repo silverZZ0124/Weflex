@@ -1,9 +1,7 @@
 package com.kh.finalteam1.restcontroller;
 
-import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.finalteam1.entity.ClientGradeListDto;
@@ -25,11 +22,13 @@ import com.kh.finalteam1.repository.BuyListDao;
 import com.kh.finalteam1.repository.ClientDao;
 import com.kh.finalteam1.repository.ContentDao;
 import com.kh.finalteam1.repository.GenreDao;
+import com.kh.finalteam1.repository.NoticeDao;
 import com.kh.finalteam1.repository.ProgramFeatureDao;
 import com.kh.finalteam1.repository.SeriesDao;
 import com.kh.finalteam1.service.HomeService;
 import com.kh.finalteam1.vo.ClientAgeCountVO;
 import com.kh.finalteam1.vo.ClientJoinBuyCountVO;
+import com.kh.finalteam1.vo.NoticeVo;
 import com.kh.finalteam1.vo.SliderListVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +52,9 @@ public class AdminDataController {
 	
 	@Autowired
 	private HomeService homeService;
+	
+	@Autowired
+	private NoticeDao noticeDao;
 	
 	@GetMapping("/content/list")
 	public List<ContentDto> contentList(){
@@ -141,6 +143,11 @@ public class AdminDataController {
 		
 		SliderListVO sliderListVO = homeService.getSlider(sliderTitle, contentType, type, keyword);
 		return sliderListVO;
+	}
+	
+	@GetMapping("/notice/list")
+	public List<NoticeVo> noticeList(){
+		return noticeDao.noticeList();
 	}
 }
 

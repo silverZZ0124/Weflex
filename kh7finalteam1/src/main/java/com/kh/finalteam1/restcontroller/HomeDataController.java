@@ -1,5 +1,6 @@
 package com.kh.finalteam1.restcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.finalteam1.entity.ContentDto;
 import com.kh.finalteam1.entity.GenreDto;
 import com.kh.finalteam1.entity.LikeListDto;
 import com.kh.finalteam1.entity.ProgramFeatureDto;
@@ -169,5 +171,18 @@ public class HomeDataController {
 	public List<ContentListVO> getMovieGenreList(@RequestParam int genreNo) {
 		List<ContentListVO> movieGenreList = contentDao.movieGenreList(genreNo);
 		return movieGenreList;
+	}
+	
+	@PostMapping("/getWishlist")
+	public List<ContentDto> getWishlist(HttpSession session){
+		int clientNo = (int)session.getAttribute("clientNo");
+		
+		List<WishListDto> wishList=wishListDao.get(clientNo);	
+	
+		List<ContentDto> contentList = new ArrayList<ContentDto>();
+		for(int i=0;i<wishList.size();i++) {
+			contentList.add(contentDao.getList(wishList.get(i).getContentNo()));
+		}
+		return contentList;
 	}
 }

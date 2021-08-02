@@ -5,7 +5,162 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/join2.css"/>
 
 		
-		</div>	
+</div>	
+	<script>
+		var emailFlag = false;
+		var passwordFlag = false;
+		var nameFlag= false;
+		var birthFlag = false;
+		var phoneFlag = false;
+		
+		$(function(){
+			if($("#id_email").attr("disabled") == "disabled")
+				emailFlag = true;
+			
+			$("#id_email").on("propertychange change keyup paste input", function(){				
+				var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+				
+				$("#email-input-error").text("정확한 이메일 주소를 입력하세요. 예: name@example.com");
+				if(regex.test($(this).val())){
+					$(this).css("border-color", "#5fa53f");					
+					$("#email-input-error").css("display", "none");
+					emailFlag = true;
+				}
+				else{
+					$(this).css("border-color", "#b92d2b");
+					$("#email-input-error").css("display", "block");
+					emailFlag = false;
+				}
+			});
+			
+			$("#id_email").blur(function(){
+				if(!emailFlag)
+					return;
+				
+				$.ajax({
+					url: "${pageContext.request.contextPath}/data/member/emailCheck",
+					type: "post",
+					dataType: "json",
+					data: {
+						email: $(this).val()	
+					},
+					success:function(resp){		
+						//null 이면 true  email 사용 가능 , false면 email 사용 불가능
+						if(!resp){
+							$("#id_email").css("border-color", "#b92d2b");
+							$("#email-input-error").text("이미 사용중인 이메일 입니다");
+							$("#email-input-error").css("display", "block");
+							emailFlag = false;
+						}
+						else{
+							emailFlag = true;
+						}
+					}	
+				});
+			});
+			
+			$("#id_password").on("propertychange change keyup paste input", function(){				
+				var regex = /^(?=.*[A-Za-z])(?=.*[@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,16}$/;
+				
+				if(regex.test($(this).val())){
+					$(this).css("border-color", "#5fa53f");					
+					$("#password-input-error").css("display", "none");
+					passwordFlag = true;
+				}
+				else{
+					$(this).css("border-color", "#b92d2b");
+					$("#password-input-error").css("display", "block");
+					passwordFlag = false;
+				}
+			});
+			
+			$("#id_name").on("propertychange change keyup paste input", function(){				
+				var regex = /^(?=.*[가-힣])[가-힣]{2,5}$/;
+				
+				if(regex.test($(this).val())){
+					$(this).css("border-color", "#5fa53f");					
+					$("#name-input-error").css("display", "none");
+					nameFlag = true;
+				}
+				else{
+					$(this).css("border-color", "#b92d2b");
+					$("#name-input-error").css("display", "block");
+					nameFlag = false;
+				}
+			});
+			
+			$("#id_birth").change(function(){
+				var selDate = $(this).val();
+				var selDateArr = selDate.split('-');
+				
+				var selDateCompare = new Date(selDateArr[0], selDateArr[1]-1, selDateArr[2]);
+				
+				var today = new Date();
+				var todayCompare = new Date(today.getFullYear(), today.getMonth(), today.getDate());				
+				
+				if(selDateCompare.getTime() > todayCompare.getTime()){
+					$(this).css("border-color", "#b92d2b");
+					$("#birth-input-error").css("display", "block");
+					birthFlag = false;
+				}
+				else{
+					$(this).css("border-color", "#5fa53f");
+					$("#birth-input-error").css("display", "none");
+					birthFlag = true;
+				}
+			});
+			
+			$("#id_phone").on("propertychange change keyup paste input", function(){				
+				var regex = /^\d{3}-\d{3,4}-\d{4}$/;
+				
+				if(regex.test($(this).val())){
+					$(this).css("border-color", "#5fa53f");					
+					$("#phone-input-error").css("display", "none");
+					phoneFlag = true;
+				}
+				else{
+					$(this).css("border-color", "#b92d2b");
+					$("#phone-input-error").css("display", "block");
+					phoneFlag = false;
+				}
+			});
+			
+			$("#regit-btn").click(function(e){
+				if(!emailFlag){
+					$("#id_email").focus();
+					e.preventDefault();
+					return false;
+				}
+				
+				if(!passwordFlag){
+					$("#id_password").focus();
+					e.preventDefault();
+					return false;
+				}
+				
+				if(!nameFlag){
+					$("#id_name").focus();
+					e.preventDefault();
+					return false;
+				}
+				
+				if(!phoneFlag){
+					$("#id_phone").focus();
+					e.preventDefault();
+					return false;
+				}
+				
+				if(!birthFlag){
+					$("#id_birth").focus();
+					e.preventDefault();
+					return false;
+				}
+				
+				return true;
+			});
+		});
+	</script>
+
 				<div class="simpleContainer" data-transitioned-child="true">
 					<div class="centerContainer"style="display: block; transform: none; opacity: 1; transition-duration: 250ms;min-width:400px;">
 						<form action="joinCheck"method="POST" id="joinCheck">
@@ -17,7 +172,15 @@
 										/
 										<b>3단계</b>
 										</span>
-										<h1 class="stepTitle">비밀번호를 설정해 멤버십을시작하세요.</h1>
+										<c:choose>
+											<c:when test="${param.email ne 'null'}">
+												<h1 class="stepTitle">비밀번호를 설정해 멤버십을시작하세요.</h1>								
+											</c:when>														
+											<c:otherwise>
+												<h1 class="stepTitle">이메일과 비밀번호를 설정해 멤버십을시작하세요.</h1>
+											</c:otherwise>
+										</c:choose>	
+										
 									</div>
 								</div>
 								<div>
@@ -28,9 +191,17 @@
 											<div class="nfInput nfInputOversize">
 												<div class="nfInputPlacement">
 													<label class="input_id" placeholder="email">
-													<input type="hidden" name="clientId" value="${param.email}" >
-													<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}" disabled required>
+													<c:choose>
+														<c:when test="${param.email ne 'null'}">
+															<input type="hidden" name="clientId" value="${param.email}" >
+															<input class="nfTextField hasText" id="id_email" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" value="${param.email}" disabled required>															
+														</c:when>														
+														<c:otherwise>
+															<input class="nfTextField hasText" id="id_email" name="clientId" type="email"tabindex="0" autocomplete="email" maxlength="50"minlength="5" dir="ltr" required>
+														</c:otherwise>
+													</c:choose>													
 													<label for="id_email" class="placeLabel">이메일 주소</label>
+													<div class="inputError" id="email-input-error">정확한 이메일 주소를 입력하세요. 예: name@example.com</div>
 													</label>
 												</div>
 											</div>
@@ -42,6 +213,7 @@
 													<input name="clientPw"class="nfTextField hasText" id="id_password" type="password"value tabindex="0" autocomplete="password" maxlength="61"minlength="4" dir="" dir required>
 													<label for="id_password" class="placeLabel">비밀번호를 추가하세요</label>
 													</label>
+													<div class="inputError" id="password-input-error">비밀번호는 하나 이상의 특수문자를 포함해  6~16자 사이여야 합니다</div>
 												</div>
 										</div>
 										</li>
@@ -52,6 +224,7 @@
 													<input name="clientName"class="nfTextField hasText" id="id_name" type="text"tabindex="0" autocomplete="name" maxlength="62" dir="" value="" required>
 													<label for="id_name" class="placeLabel">이름</label>
 													</label>
+													<div class="inputError" id="name-input-error">이름은 한글로 2~5자 사이여야 합니다</div>
 												</div>
 										</div>
 										</li>
@@ -62,6 +235,7 @@
 													<input name="clientBirth"class="nfTextField hasText" id="id_birth" type="date"tabindex="0" autocomplete="birth" maxlength="62"minlength="6" dir="" value="" required>
 													<label for="id_birth" class="placeLabel">생년월일를 입력해주세요</label>
 													</label>
+													<div class="inputError" id="birth-input-error">잘못된 생년월일 입니다</div>
 												</div>
 										</div>
 										</li>
@@ -72,6 +246,7 @@
 													<input name="clientPhone"class="nfTextField hasText" id="id_phone" type="text"tabindex="0" autocomplete="phone" maxlength="62"minlength="6" dir="" value="" required>
 													<label for="id_phone" class="placeLabel">핸드폰번호를 -포함하여 적어주세요</label>
 													</label>
+													<div class="inputError" id="phone-input-error">잘못된 핸드폰번호 입니다</div>
 												</div>
 										</div>
 										</li>
@@ -79,7 +254,7 @@
 								</div>
 							</div>
 							<div class="submitBtnContainer">
-								<button type="submit" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="regForm_agree_next_registration_button">회원가입하기</button>
+								<button type="submit" id="regit-btn" autocomplete="off"class="nf-btn nf-btn-primary nf-btn-solid nf-btn-oversize"placeholder="regForm_agree_next_registration_button">회원가입하기</button>
 							</div>
 						</form>
 					</div>
