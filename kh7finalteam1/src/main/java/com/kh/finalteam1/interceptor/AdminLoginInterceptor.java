@@ -17,29 +17,29 @@ public class AdminLoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("AdminLoginInterceptor");
-//		Integer clientNo = (Integer)request.getSession().getAttribute("clientNo");
-//		
-//		if(clientNo == null) {
-//			response.sendRedirect(request.getContextPath()+"/login");
-//			return false;
-//		}
-//		else {
-//			ClientDto clientDto = clientDao.findClient(clientNo);
-//			
-//			if(clientDto.getGradeNo() < 4){				
-//				String referer = request.getHeader("Referer");
-//				if(referer == null)
-//					response.sendRedirect(request.getContextPath()+"/home");
-//				else					
-//					response.sendRedirect(request.getHeader("Referer"));
-//				
-//				return false;
-//			}
-//			else
-//				return true;
-//				
-//		}		
-		return true;
+		Integer clientNo = (Integer)request.getSession().getAttribute("clientNo");
+		
+		if(clientNo == null) {
+			response.sendRedirect(request.getContextPath()+"/login");
+			return false;
+		}
+		else {
+			ClientDto clientDto = clientDao.findClient(clientNo);
+			
+			if(clientDto.getGradeNo() < 4){				
+				String referer = request.getHeader("Referer");
+				if(referer == null)
+					response.sendRedirect(request.getContextPath()+"/home");
+				else					
+					response.sendRedirect(request.getHeader("Referer"));
+				
+				return false;
+			}
+			else
+				return true;
+				
+		}		
+//		return true;
 	}
 	
 }

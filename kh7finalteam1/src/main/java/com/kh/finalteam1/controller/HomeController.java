@@ -117,23 +117,28 @@ public class HomeController {
 		return "main/search";
 	}
 	
+//	@GetMapping("/wishlist")
+//	public String wishlist(HttpSession session, Model model) {
+//		int clientNo=(int)session.getAttribute("clientNo");
+//
+//
+//		List<WishListDto> wishList=wishListDao.get(clientNo);
+//		model.addAttribute("wishList",wishList);
+//	
+//	
+//		List<ContentDto> contentList=new ArrayList<>();
+//		for(int i=0;i<wishList.size();i++) {
+//			
+//			
+//			contentList.add(contentDao.getList(wishList.get(i).getContentNo()));
+//		}
+//		
+//		model.addAttribute("contentList", contentList);
+//		return "main/wishlist";
+//	}
+	
 	@GetMapping("/wishlist")
-	public String wishlist(HttpSession session, Model model) {
-		int clientNo=(int)session.getAttribute("clientNo");
-
-
-		List<WishListDto> wishList=wishListDao.get(clientNo);
-		model.addAttribute("wishList",wishList);
-	
-	
-		List<ContentDto> contentList=new ArrayList<>();
-		for(int i=0;i<wishList.size();i++) {
-			
-			
-			contentList.add(contentDao.getList(wishList.get(i).getContentNo()));
-		}
-		
-		model.addAttribute("contentList", contentList);
+	public String wishlist() {
 		return "main/wishlist";
 	}
 	

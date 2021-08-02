@@ -18,29 +18,29 @@ public class ClientLoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-//		if(isResourceHandler(handler)) {			
-//			return true;
-//		}
-//
-//		Integer clientNo = (Integer)request.getSession().getAttribute("clientNo");
-//		
-//		if(clientNo == null) {
-//			System.out.println("회원 정보 없음");
-//			response.sendRedirect(request.getContextPath()+"/login");
-//			return false;
-//		}
-//		else {
-//			ClientDto clientDto = clientDao.findClient(clientNo);
-//
-//			if(clientDto.getGradeNo() < 2) {
-//				response.sendRedirect(request.getContextPath()+"/join3");				
-//				return false;
-//			}
-//			else {
-//				return true;
-//			}			
-//		}		
-		return true;
+		if(isResourceHandler(handler)) {			
+			return true;
+		}
+
+		Integer clientNo = (Integer)request.getSession().getAttribute("clientNo");
+		
+		if(clientNo == null) {
+			System.out.println("회원 정보 없음");
+			response.sendRedirect(request.getContextPath()+"/login");
+			return false;
+		}
+		else {
+			ClientDto clientDto = clientDao.findClient(clientNo);
+
+			if(clientDto.getGradeNo() < 2) {
+				response.sendRedirect(request.getContextPath()+"/join3");				
+				return false;
+			}
+			else {
+				return true;
+			}			
+		}		
+//		return true;
 	}
 	
 	public boolean isResourceHandler(Object handler) {
