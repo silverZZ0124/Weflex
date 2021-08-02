@@ -126,7 +126,7 @@
 			
 			<div id="input-box" style="display:none; position:absolute; right:17.5%; margin-bottom:5px;" class="search-div">
 				<form class="form-inline search-div" action="search" method="get" id="form-search">
-					<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목,사람,장르 + Enter" name="keyword"> 
+					<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword"> 
 				</form> 
 			</div>
 			
