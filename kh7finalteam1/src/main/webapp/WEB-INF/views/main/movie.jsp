@@ -3,7 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<style>
+  #movie-genre-selectbox::-webkit-scrollbar {
+    width: 10px;
+  }
+  #movie-genre-selectbox::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  #movie-genre-selectbox::-webkit-scrollbar-track {
+    background-color: #141414;
+    border-radius: 10px;
+  }
+</style>
 <script src="${pageContext.request.contextPath }/res/js/main-event.js"></script>
 <script>
 
