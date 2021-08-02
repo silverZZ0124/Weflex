@@ -29,7 +29,7 @@
 		<div class="global-header">
 			<div class="d-flex inner-container">
 				<div class="d-flex branding">
-					<a class="logo" href="#">
+					<a class="logo" href="${pageContext.request.contextPath }/home">
 						<img class="mainLogo" src="${pageContext.request.contextPath}/res/img/weflex_logo.png" >
 						<img class="subLogo" src="${pageContext.request.contextPath}/res/img/n_logo.png" width="32px" height="32px">
 					</a>
