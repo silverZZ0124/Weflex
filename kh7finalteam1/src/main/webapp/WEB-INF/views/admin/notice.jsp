@@ -7,7 +7,6 @@
 
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/style.css">
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
@@ -16,6 +15,9 @@
     {
         cursor:pointer;
     }
+    .card{
+    	margin-bottom:15%;
+    }
 </style>
 
 <script>
@@ -23,19 +25,19 @@
 		
 	});
 </script>
-<div class="container-fluid">
+<div class="container-fluid" style="color:#141414;">
 
     <section class="ftco-section pt-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">공지사항</h2>
+                    <h2 class="heading-section text-gray-800">공지사항</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row card">
                 <div class="col-md-12">
-                    <div class="table-wrap">
-                        <table class="table table-responsive-md table-hover text-center" id="noticeTable" style="width:100%">
+                    <div class="card-body table-wrap">
+                        <table class="table table-responsive-md table-hover text-center" id="noticeTable" style="width:100%; color:#141414;">
                             <thead>
                                 <tr>
                                     <th class="col-md-1">번호</th>
@@ -48,8 +50,8 @@
                             
 							
                         </table>
-                        <div>            
-							<a onClick="location.href='write'"  class="btn btn-primary">공지글쓰기</a>            
+                        <div class="col-md-2 offset-md-10 my-3 p-0 text-right">            
+							<a onClick="location.href='write'"  class="btn btn-danger">공지글쓰기</a>            
 						</div>
                     </div>
                 </div>
