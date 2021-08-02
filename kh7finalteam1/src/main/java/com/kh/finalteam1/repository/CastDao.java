@@ -3,7 +3,6 @@ package com.kh.finalteam1.repository;
 import java.util.List;
 
 import com.kh.finalteam1.entity.CastDto;
-import com.kh.finalteam1.vo.CastListVO;
 import com.kh.finalteam1.vo.GenreFeatureCastVO;
 
 public interface CastDao {
@@ -15,6 +14,4 @@ public interface CastDao {
 	//수정할때 모두 삭제
 	boolean deleteAll(int contentNo);
 	
-	//검색기능(조건검색:배우명)
-	List<CastListVO> search(String keyword);
 }
