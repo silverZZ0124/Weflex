@@ -31,6 +31,9 @@
 	<update id="changePassword" parameterType="ClientUpdatePasswordVO">
 		update client set client_pw = #{clientNewPw} where client_no = #{ clientNo} and client_pw = #{clientPw}
 	</update>
+	<delete id ="exit" parameterType="int">
+		delete client where client_no=#{clientNo}
+	</delete>
 	
 	<!-- 회원 목록 (관리자 페이지 이용) -->
 	<select id="grade-list" resultType="ClientGradeListDto">
