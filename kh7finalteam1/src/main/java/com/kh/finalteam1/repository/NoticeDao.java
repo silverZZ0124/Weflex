@@ -15,4 +15,8 @@ public interface NoticeDao {
 	NoticeVo noticeGet(int noticeNo);
 	
 	void noticeInsert(NoticeDto noticeDto);
+	
+	void noticeUpdate(NoticeDto noticeDto);
+	
+	void noticeCount(int noticeNo);
 }
