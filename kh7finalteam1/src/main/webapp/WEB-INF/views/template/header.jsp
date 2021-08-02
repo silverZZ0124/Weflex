@@ -126,17 +126,22 @@
        		 	</li>
 			</ul> 
 			
-			
+
 			<ul class="navbar-nav nav-var-right" style="margin-left: auto;padding-right: 0;">
 
 				<li id="input-box" class="search-div">
 					<form class="form-inline search-div" action="search" method="get" id="form-search">
-						<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword"> 
-				
+
+						<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword" style="width:100%;"> 
+			
 					</form> 
 				</li>
 
+
 			 	<li class="nav-item nav2-item"> <a class="nav-link search-div" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji search-div"></i></a> </li>
+
+
+
 
 
 				<li class="nav-item dropdown">
