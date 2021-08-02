@@ -13,8 +13,13 @@
 	 -->
 	<insert id="insert" parameterType="NoticeDto">
 		insert into notice values
-		(notice_seq.nextval, #{clientNo}, #{noticeName}, #{noticeWrite}, sysdate, 0)
+		(notice_seq.nextval, #{clientNo}, #{noticeName}, sysdate, 0, #{noticeWrite})
 	</insert>
+	
+	<select id="update" parameterType="NoticeDto">
+		update notice set noticeName = #{noticeName}, noticeWrite = #{noticeWrite}
+		where notice_no  = #{noticeNo}
+	</select>
 	
 	<select id="list" resultType="NoticeVo">
 		select n.*, c.client_name from notice n
@@ -36,4 +41,8 @@
 		where notice_no = #{noticeNo}
 	</select>
 	 
+	<select id="count" parameterType="int">
+		update notice set notice_view_count = notice_view_count + 1 
+		where notice_no  = #{noticeNo}
+	</select>
 </mapper>
