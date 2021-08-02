@@ -11,6 +11,7 @@ import com.kh.finalteam1.vo.ClientUpdatePasswordVO;
 
 public interface ClientDao {
 	ClientDto findClient(int clientNo);
+	ClientDto findClient(String email);
 	ClientGradeDto getGrade(int gradeNo);
 	boolean changePhone(ClientDto clientDto);
 	ClientDto regitCheck(String email);

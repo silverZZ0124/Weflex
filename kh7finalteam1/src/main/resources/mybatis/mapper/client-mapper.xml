@@ -8,6 +8,11 @@
 	<select id="findClient" parameterType="int" resultType="ClientDto">
 		select * from client where client_no = #{clientNo}
 	</select> 
+	
+	<select id="findEmail" parameterType="string" resultType="ClientDto">
+		select * from client where client_id = #{email}
+	</select>
+	
 	<select id="getGrade" parameterType="int" resultType="ClientGradeDto">
 		select * from client_grade where grade_no = #{gradeNo}
 	</select>
