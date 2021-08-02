@@ -46,27 +46,137 @@ window.onload = function(){
 
 </script>
   <script>
-  	$(function(){
-  		var hoverImg;
-  		$(".search-page-card-img-tohide").mouseenter(function(){
-  			hoverImg=$(this);
-  			$("#modal-check-btn").click(function(){
-  				$(".hoverModal").hide();
-  				hoverImg.fadeOut(500);
-  			});
+  	$(function(){  		
+  		var hoverImg;  		  		
+  		var isCheck=0;	
+  		var contentList;
+  		var fakeImgCount;
+  		var rowCount;
+  		var initFlag = false;
+  		
+  		$(window).resize(function(){
+  			var width = $(window).width();
+  			var tempCount = 0;
   			
+  			if(width > 1300)
+  				tempCount = 6;
+  			else if(width <= 1300 && width > 1100)
+  				tempCount = 5;
+  			else if(width <= 1100 && width > 830)
+  				tempCount = 4;
+  			else if(width <= 830 && width > 600)
+  				tempCount = 3;
+  			else
+  				tempCount = 2;
+  			
+  			if(tempCount != rowCount){
+  				rowCount = tempCount;
+  				if(initFlag)
+  					$.fn.initFakeImageCard();
+  			}  			
   		});
   		
-  		var isCheck=0;
-	$("#check-btn").click(function(){
-		isCheck=1;
-		$("#detailModal").on("hidden.bs.modal",function(){
-			if(isCheck==1){
-				hoverImg.fadeOut(500);
-				ischeck=0;
-			}
-		});
+  		$.fn.removeContent = function(contentNo){
+  			for(var i in contentList){
+  				if(contentList[i].contentNo == contentNo){
+  					contentList.splice(i);
+  					break;
+  				}
+  			}
+  		}
+  		
+  		$.fn.addFakeImageCard = function(){
+  			if(fakeImgCount == rowCount - 1){
+  				fakeImgCount = 0;
+  				$("div").remove(".fake-img");
+  				return;
+  			}
+  			
+  			var template = $("#fake-img-cards").html();
+			$(".wishlist-page-body").append(template);
+			fakeImgCount++;
+  		}
+		
+		$.fn.toHideEvent = function(){
+			$(".search-page-card-img-tohide").mouseenter(function(){
+	  			hoverImg=$(this);
 	  		});
+			
+			$("#modal-check-btn").click(function(){  				
+  				var contentNo = hoverImg.find("img").attr("data-contentNo");
+  				$.fn.removeContent(contentNo);
+  				
+  				hoverImg.fadeOut(500);
+				setTimeout(function(){
+					$.fn.addFakeImageCard();	
+				}, 500);
+  				  				
+  				$(".hoverModal").hide();
+  			});
+			
+			$("#check-btn").click(function(){
+				isCheck=1;				
+	  		});
+			
+			$("#detailModal").on("hidden.bs.modal",function(){
+				if(isCheck==1){
+					var contentNo = hoverImg.find("img").attr("data-contentNo");
+	  				$.fn.removeContent(contentNo);
+					hoverImg.fadeOut(500);
+					setTimeout(function(){
+						$.fn.addFakeImageCard();	
+					}, 500);
+					
+					ischeck=0;
+				}
+			});
+		};
+		
+		$.fn.initFakeImageCard = function(){
+			$("div").remove(".fake-img");
+			
+			var count = rowCount - (contentList.length % rowCount);
+			
+			if(count == rowCount)
+				return;
+			
+			for(var i=0; i<count; i++){
+				var template = $("#fake-img-cards").html();
+				$(".wishlist-page-body").append(template);
+			}
+			
+			fakeImgCount = count;
+		};
+		
+		$.fn.initImageCard = function(){
+			
+			$.ajax({
+				url: "${pageContext.request.contextPath}/data/home/getWishlist",
+				type: "post",
+				dataType: "json",
+				data: {
+				},
+				success:function(resp){
+					contentList = resp;
+					
+					$(".wishlist-page-body").empty();
+					
+					for(var i in resp){						
+						var template = $("#img-cards").html();
+						template = template.replace("{{contentThumbnail}}", resp[i].contentThumbnail);
+						template = template.replace("{{contentNo}}", resp[i].contentNo);
+						$(".wishlist-page-body").append(template);
+					}
+					
+					$.fn.initFakeImageCard();
+					$.fn.toHideEvent();
+					initFlag = true;
+				}	
+			});
+		};
+		
+		$(window).resize();
+		$.fn.initImageCard();
   	});
   </script>
 <script id="episode-list-template" type="text/template">
@@ -147,6 +257,15 @@ window.onload = function(){
 	</div>
 </div>
 </script>
+
+<script id="img-cards" type="text/template">
+<div class="search-page-card  search-page-card-img-tohide"><img src="{{contentThumbnail}}" class="search-page-card-img" data-contentNo="{{contentNo}}"></div>
+</script>
+
+<script id="fake-img-cards" type="text/template">
+<div class="search-page-card  fake-img" style="visibility:hidden;"><img src="res/img/slider_img1.jpeg" class="search-page-card-img" ></div>
+</script>
+
 <style>
 .wishlish-page-body{
 	width: 90%;
@@ -162,10 +281,10 @@ window.onload = function(){
 </style>
 <div class="main-color container-center search-page-body wishlist-page-body">
 
-	<c:forEach var="contentDto" items="${contentList}">
-		<div class="search-page-card  search-page-card-img-tohide"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div>
+<%-- 	<c:forEach var="contentDto" items="${contentList}"> --%>
+<%-- 		<div class="search-page-card  search-page-card-img-tohide"><img src="${contentDto.contentThumbnail }" class="search-page-card-img" data-contentNo="${contentDto.contentNo }"></div> --%>
 
-	</c:forEach> 
+<%-- 	</c:forEach>  --%>
 	
 	
 	<%-- <c:forEach var="j" begin="1" end="5" step="1">
