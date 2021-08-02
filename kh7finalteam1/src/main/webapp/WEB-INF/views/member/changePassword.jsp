@@ -34,7 +34,7 @@
 			});
 			
 			$("#id_newPassword").on("propertychange change keyup paste input", function(){				
-				var regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!%*#?&]{6,16}$/;
+				var regex = /^(?=.*[A-Za-z])(?=.*[@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,16}$/;
 				
 				if(regex.test($(this).val())){
 					$(this).css("border-color", "#5fa53f");					
@@ -199,7 +199,7 @@
 												<label for="id_newPassword" class="placeLabel">새 비밀번호(6~16자)</label>
 											</label>
 										</div>
-										<div class="inputError" id="newPassword_inputError">비밀번호는 6~16자 사이여야 합니다.</div>
+										<div class="inputError" id="newPassword_inputError">비밀번호는 하나 이상의 특수문자를 포함해  6~16자 사이여야 합니다</div>
 									</div>
 								</li>
 								<li class="nfFormSpace">

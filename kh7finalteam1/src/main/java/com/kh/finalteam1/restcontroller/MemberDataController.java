@@ -35,6 +35,12 @@ public class MemberDataController {
 	
 	@PostMapping("/changeEmail")
 	public void changeEmail(@RequestParam String email, HttpSession session) {
+		ClientDto tempDto = clientDao.findClient(email);
+		
+		if(tempDto != null) {
+			throw new AjaxException("에러에러");
+		}
+		
 		ClientDto clientDto = ClientDto.builder()
 								.clientNo(getClientNo(session))
 								.clientId(email)
