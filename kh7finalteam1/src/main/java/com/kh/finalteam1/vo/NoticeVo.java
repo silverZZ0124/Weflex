@@ -2,7 +2,7 @@ package com.kh.finalteam1.vo;
 
 import java.sql.Date;
 
-import com.kh.finalteam1.entity.ClientDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,9 +14,9 @@ public class NoticeVo {
 	private int noticeNo;
 	private int clientNo;
 	private String noticeName;
-	private String noticeWrite; 
+	private String noticeWrite;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date noticeDate;
 	private int noticeViewCount;
-	
-	private ClientDto clientDto;
+	private String clientName;
 }
