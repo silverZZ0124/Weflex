@@ -58,6 +58,11 @@ public class MemberDataController {
 		}
 	}	
 	
+	@PostMapping("/emailCheck")
+	public boolean emailCheck(@RequestParam String email) {		
+		return clientDao.regitCheck(email) == null;
+	}
+	
 	public int getClientNo(HttpSession session) {
 		return (int)session.getAttribute("clientNo");
 	}
