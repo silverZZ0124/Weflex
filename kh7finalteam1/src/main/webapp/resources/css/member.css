@@ -424,6 +424,17 @@ body .bd {
     box-shadow: 0 1px 0 rgb(0 0 0 / 20%);
 }
 
+.btn-plain:hover{
+	text-decoration: none;
+	color: #000;
+}
+
+.btn-drop{
+	background: #e50914;	
+	color: #fff;
+}
+
+
 .btn.btn-small {
     display: block;
     width: 100%;
@@ -433,7 +444,7 @@ body .bd {
 }
 .btn.btn-drop{
 	color: #fff;
-    background-color: #e50914;
+    background: #e50914;
 }
 .btn.account-cancel-button, .btn.account-pause-button {
     position: absolute;
@@ -1079,7 +1090,7 @@ ul.structural li.phone-number .inputError {
 	}
 	.account-section-group {
 	    float: left;
-	    width: 50%;
+	    width: 49%;
 	    background-color: inherit;
 	}
 	.account-section-group+.account-section-group {
@@ -1098,27 +1109,7 @@ ul.structural li.phone-number .inputError {
 	    border-top: none;
 	    padding: 0;
 	}
-	.account-subsection~.account-subsection {
-	    padding-top: 15px;
-	}
-	.account-subsection~.account-subsection.light-divider {
-	    border-color: #e5e5e5;
-	}
-	.account-section-group.-wide {
-	    width: 66%;
-	}
-	.account-section-group.payment-details {
-	    padding-bottom: 12px;
-	}
-	.account-section-group.-thin {
-	    width: 34%;
-	}
-	.account-subsection~.account-subsection .u-ta-right-desktop {
-	    text-align: right;
-	}
-	.footer-divider {
-	    border-top: 1px solid #e6e6e6;
-	}
+
 	.nf-btn.nf-btn-small {
 	    display: inline-block;
 	    font-size: 13px;

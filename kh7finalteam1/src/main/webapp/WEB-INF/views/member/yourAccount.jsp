@@ -44,6 +44,13 @@
 						
 		});
 	</script>
+	<script>
+	$(function(){
+		$("btn-client").click(function(){
+			location.href="${pageContext.request.contextPath }/memberShipdrop/";
+		});
+	});
+	</script>
 </head>
 <body>
 	<div id="appMountPoint">
@@ -91,13 +98,13 @@
 							<div class="responsive-account-content">
 								<div class="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
 									<header class="account-section-header collapsable-section-toggle">
-										<h2 class="account-section-heading">멤버십 & 결제 정보
+										<h2 class="account-section-heading">멤버십 정보
 											<button class="btn account-cancel-button btn-plain btn-small">
 												<span>멤버십 해지</span>
 											</button>
-											<button class="btn account-cancel-button btn-small btn-drop">
+											<a href="${pageContext.request.contextPath }/memberShipdrop" class="btn account-cancel-button btn-small btn-drop">
 												<span>회원 탈퇴</span>
-											</button>
+											</a>
 										</h2>
 									</header>
 									<section class="collapsable-section-content account-section-content">

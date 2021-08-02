@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 			<!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -19,6 +21,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+<%-- 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -27,7 +30,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">Ã—</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -38,9 +41,8 @@
             </div>
         </div>
     </div>
+--%>
 
-
-	
 </body>
 
 </html> 
