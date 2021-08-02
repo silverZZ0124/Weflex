@@ -24,6 +24,11 @@ public class ClientDaoImpl implements ClientDao {
 	public ClientDto findClient(int clientNo) {
 		return sqlSession.selectOne("client.findClient", clientNo);		 
 	}
+	
+	@Override
+	public ClientDto findClient(String email) {
+		return sqlSession.selectOne("client.findEmail", email);	
+	}
 
 	@Override
 	public ClientGradeDto getGrade(int gradeNo) {		
@@ -112,5 +117,4 @@ public class ClientDaoImpl implements ClientDao {
 		sqlSession.update("client.updatePremium",clientNo);
 	
 	}
-	
 }

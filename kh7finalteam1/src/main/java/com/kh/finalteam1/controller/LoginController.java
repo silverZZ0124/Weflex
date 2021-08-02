@@ -116,6 +116,8 @@ public class LoginController {
 			response.addCookie(emailCookie);
 			
 			session.setAttribute("clientNo", client.getClientNo());
+			session.setAttribute("gradeNo", client.getGradeNo());
+			System.out.println(session.getAttribute("gradeNo"));
 			return "redirect:/home";
 		}
 	}
