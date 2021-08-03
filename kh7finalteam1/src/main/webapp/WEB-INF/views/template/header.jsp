@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -103,8 +103,10 @@
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/home">홈</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/tv">TV프로그램</a> </li> 
 				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/movie">영화</a> </li> 
-				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/wishlist">내가 찜한 콘텐츠</a> </li>	 
-				   <li class="nav-item"> <a class="nav-link" href="admin/">관리자 페이지</a> </li>	 
+				  <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath }/wishlist">내가 찜한 콘텐츠</a> </li>
+				  <c:if test="${gradeNo > 3 }">	 
+				  	<li class="nav-item"> <a class="nav-link" href="admin/">관리자 페이지</a> </li>
+				  </c:if>	 
 			</ul> 
 			<ul class="navbar-nav" style="position: absolute;margin-left: 130px;">
 				  <li class="nav-item dropdown"  id="navbar1-ul-dropdown">
@@ -124,16 +126,24 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:17.5%; margin-bottom:5px;" class="search-div">
-				<form class="form-inline search-div" action="search" method="get" id="form-search">
-					<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword"> 
-				</form> 
-			</div>
+
+			<ul class="navbar-nav nav-var-right" style="margin-left: auto;padding-right: 0;">
+
+				<li id="input-box" class="search-div">
+					<form class="form-inline search-div" action="search" method="get" id="form-search">
+
+						<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword" style="width:100%;"> 
 			
-			<ul class="navbar-nav nav-var-right" style="margin-left: auto;margin-right: 4%;padding-right: 0;">
-				
+					</form> 
+				</li>
+
+
 			 	<li class="nav-item nav2-item"> <a class="nav-link search-div" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji search-div"></i></a> </li>
-				<li class="nav-item nav2-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
+
+
+
+
+
 				<li class="nav-item dropdown">
          		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:3px;">
             		<img src="res/img/profile.png" width="25px" height="25px" style="border-radius:15%;">
@@ -148,7 +158,6 @@
        		 	</li>		
   	
 			</ul>
-			
 
 		</nav>
 		
