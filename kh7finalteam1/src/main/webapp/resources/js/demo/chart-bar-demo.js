@@ -43,17 +43,17 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	var myBarChart = new Chart(ctx, {
 	  type: 'bar',
 	  data: {
-	    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
 	    datasets: [{
 	      label: "결제 수",
 	      backgroundColor: "#d10914",//"#4e82be",//"#4e73df",
 	      hoverBackgroundColor: "#f51b27",//"#0080ff",
 	      borderColor: "#4e82be",
-//	      data: [
-//			count.jan, count.feb, count.mar, count.apr, count.may, count.jun, 
-//  			count.jul, count.aug, count.sep, count.oct, count.nov, count.dec
-//  		],	//DB
-	      data: [40, 32, 51, 41, 98, 149, 421, 531, 625, 78, 921, 984],
+	      data: [
+			count.jan, count.feb, count.mar, count.apr, count.may, count.jun, 
+  			count.jul, count.aug
+  		],	//DB
+//	      data: [40, 32, 51, 41, 98, 149, 421, 531, 625, 78, 921, 984],
 	    }],
 	  },
 	  options: {
@@ -76,7 +76,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	          drawBorder: false
 	        },
 	        ticks: {
-	          maxTicksLimit: 12
+	          maxTicksLimit: 8
 	        },
 	        maxBarThickness: 25,
 	      }],

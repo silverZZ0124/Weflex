@@ -117,7 +117,6 @@
                     </div>
                     
                     <div class="modal-body">
-                        <button class="close" data-dismiss="modal">&times;</button>
                         <div class="conatiner-fluid">
                             <div class="row">
                                 <div class="col" id="input-modal-content">#</div>
@@ -125,7 +124,7 @@
                         </div>                    
                     </div>
 
-                    <div class="modal-footer row"> 
+                    <div class="modal-footer"> 
                         <div class="col-md-3 offset-md-9">   
                         <button class="btn btn-secondary btn-block" data-dismiss="modal">확인</button>
                         </div>

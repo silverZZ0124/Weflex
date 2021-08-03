@@ -41,7 +41,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	var myLineChart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
-	    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
 	    datasets: [{
 	      label: "회원 수",
 	      lineTension: 0.3,
@@ -55,11 +55,11 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	      pointHoverBorderColor: "rgba(209, 9, 20, 1)",
 	      pointHitRadius: 10,
 	      pointBorderWidth: 2,
-//	      data: [
-//	    	  			count.jan, count.feb, count.mar, count.apr, count.may, count.jun, 
-//	    	  			count.jul, count.aug, count.sep, count.oct, count.nov, count.dec
-//	    	  		], //DB
-	      data: [0, 100, 500, 150, 100, 200, 150, 250, 200, 300, 250, 400],
+	      data: [
+	    	  			count.jan, count.feb, count.mar, count.apr, count.may, count.jun, 
+	    	  			count.jul, count.aug
+	    	  		], //DB
+//	      data: [0, 100, 500, 150, 100, 200, 150, 250, 200, 300, 250, 400],
 	    }],
 	  },
 	  options: {
@@ -82,7 +82,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 	          drawBorder: true
 	        },
 	        ticks: {
-	          maxTicksLimit: 7
+	          maxTicksLimit: 8
 	        }
 	      }],
 	      yAxes: [{

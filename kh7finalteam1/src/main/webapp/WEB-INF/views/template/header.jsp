@@ -126,16 +126,24 @@
        		 	</li>
 			</ul> 
 			
-			<div id="input-box" style="display:none; position:absolute; right:17.5%; margin-bottom:5px;" class="search-div">
-				<form class="form-inline search-div" action="search" method="get" id="form-search">
-					<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword"> 
-				</form> 
-			</div>
+
+			<ul class="navbar-nav nav-var-right" style="margin-left: auto;padding-right: 0;">
+
+				<li id="input-box" class="search-div">
+					<form class="form-inline search-div" action="search" method="get" id="form-search">
+
+						<input class="form-control mr-sm-3 search-box search-div" type="text" placeholder="제목, 사람, 장르" name="keyword" style="width:100%;"> 
 			
-			<ul class="navbar-nav nav-var-right" style="margin-left: auto;margin-right: 4%;padding-right: 0;">
-				
+					</form> 
+				</li>
+
+
 			 	<li class="nav-item nav2-item"> <a class="nav-link search-div" id="search-icon" href="#"><i class="fas fa-search fa-lg nav-emoji search-div"></i></a> </li>
-				<li class="nav-item nav2-item"> <a class="nav-link" href="#"><i class="fas fa-bell fa-lg nav-emoji"></i></a> </li>
+
+
+
+
+
 				<li class="nav-item dropdown">
          		 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-bottom:3px;">
             		<img src="res/img/profile.png" width="25px" height="25px" style="border-radius:15%;">
@@ -150,7 +158,6 @@
        		 	</li>		
   	
 			</ul>
-			
 
 		</nav>
 		

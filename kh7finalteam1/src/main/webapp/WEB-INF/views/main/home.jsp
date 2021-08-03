@@ -972,7 +972,7 @@ $(function(){
 	  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg detail-modal">
 	    <div class="modal-content">
 	     
-	      <div class="modal-body main-color" style="padding:0px; border:none;">
+	      <div class="modal-body main-color" style="padding:0px; border:none;" id="detail-modal-body">
 			<button type="button" class="btn-close btn-close-white modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
 			<div style="position:relative;" class="detail-modal-video-box">
 	        	<!-- <video width="100%" height="80%"  autoplay loop muted  style="z-index:-5"> -->
@@ -1059,7 +1059,7 @@ $(function(){
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">출연:</span><span class="content-cast"></span></div><br>
 				       			<!-- <div class="modal-contents-detail-info-text"><span style="color: #777;">각본:</span><span></span></div> -->
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">장르:</span><span class="content-genre"></span></div><br>
-				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-cast"></span></div><br>
+				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">영화 특징:</span><span class="content-feature"></span></div><br>
 				       			<div class="modal-contents-detail-info-text"><span style="color: #777;">관람 등급: </span><img class="content-limit" width="25px" height="25px"></div>				       				       			
 				       		</div>
 				       </div>

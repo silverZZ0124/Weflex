@@ -38,6 +38,15 @@
 	list-style-type: none;
 	}
 	
+	#genre-list-result{
+		overflow:hidden;
+		white-space: nowrap;
+	}
+	#feature-list-result{
+		overflow:hidden;
+		white-space: nowrap;
+	}
+	
 
 </style>
 <script>
@@ -82,7 +91,7 @@
 	                     <h6 class="m-0 font-weight-bold text-primary">장르 등록</h6>
 	                </div>
 					<form action="genreFeatureRegist" method="post" id="regist-form">
-	             	<div class="card-body" id="list-result" >
+	             	<div class="card-body" id="genre-list-result" >
 	             		<ul class="category-ul" style="overflow-y: scroll; height:550px;">
 	               		<c:forEach var="genreDto" items="${genreList}">
 				    		<li class="category-li custom-control custom-checkbox text-primary">
@@ -102,7 +111,7 @@
 	             	<div class="card-header py-3">
 	                     <h6 class="m-0 font-weight-bold text-primary">특징 등록</h6>
 	                </div>
-	             	<div class="card-body" id="list-result">
+	             	<div class="card-body" id="feature-list-result">
 	             		<ul class="category-ul" style="overflow-y: scroll; height:550px;">
 	               		<c:forEach var="featureDto" items="${featureList}">
 				    		<li class="category-li custom-control custom-checkbox text-primary">

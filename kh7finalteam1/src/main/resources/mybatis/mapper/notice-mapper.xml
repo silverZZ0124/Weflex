@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+ 
+<mapper namespace="notice">
+
+	<!-- <resultMap type="com.kh.finalteam1.vo.NoticeVo" id="client">
+    	<result column="client_no" property="clientNo"/>
+    	<result column="client_name" property="clientName"/>
+	</resultMap>
+	 -->
+	<insert id="insert" parameterType="NoticeDto">
+		insert into notice values
+		(notice_seq.nextval, #{clientNo}, #{noticeName}, sysdate, 0, #{noticeWrite})
+	</insert>
+	
+	<select id="update" parameterType="NoticeDto">
+		update notice set notice_name = #{noticeName}, notice_write = #{noticeWrite}
+		where notice_no  = #{noticeNo}
+	</select>
+	
+	<select id="list" resultType="NoticeVo">
+		select n.*, c.client_name from notice n
+		inner join client c on n.client_no = c.client_no
+		order by notice_no desc
+	</select>
+	
+	<select id="search" resultType="NoticeVo" parameterType="int">
+		select * from genre where instr(notice_no,#{noticeNo})>0
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from notice where notice_no=#{noticeNO} 
+	</delete>
+	
+	<select id="get" parameterType="int" resultType="NoticeVo">
+		select n.*, c.client_name from notice n
+		inner join client c on n.client_no = c.client_no
+		where notice_no = #{noticeNo}
+	</select>
+	 
+	<update id="count" parameterType="int">
+		update notice set notice_view_count = notice_view_count + 1 
+		where notice_no  = #{noticeNo}
+	</update>
+	
+	
+</mapper>

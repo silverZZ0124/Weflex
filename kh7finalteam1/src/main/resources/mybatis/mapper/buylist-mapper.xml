@@ -35,19 +35,15 @@
 <!-- 월별 결제 건수 조회 -->
 <select id="buy-count" resultType="ClientJoinBuyCountVO">
 	select 
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-01')) jan,
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-02')) feb,
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-03')) mar,
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-04')) apr,
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-05')) may,
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-06')) jun,
-		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-07')) jul,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-08')) aug,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-09')) sep,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-10')) oct,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-11')) nov,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-12')) dec
-		from dual
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-01') and buy_payment_status ='승인') jan,
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-02') and buy_payment_status ='승인') feb,
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-03') and buy_payment_status ='승인') mar,
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-04') and buy_payment_status ='승인') apr,
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-05') and buy_payment_status ='승인') may,
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-06') and buy_payment_status ='승인') jun,
+		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-07') and buy_payment_status ='승인') jul,
+            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-08') and buy_payment_status ='승인') aug
+		from dual 
 </select>
 
 <select id="list" resultType="BuyListDto" parameterType="int">
