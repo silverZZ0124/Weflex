@@ -20,35 +20,54 @@
  <section class="ftco-section pt-5">
  			<div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">공지사항</h2>
+                    <h2 class="heading-section text-gray-800">공지사항</h2>
                 </div>
             </div>
-<div class="container my-1 border-top">
+<div class="container my-1">
 	<div class="row">
-		<table class="table table-active">
-			<thead>
-				<tr class="table-active border-bottom">
-					<th class="col-md-8">${noticeVo.noticeName}<br>
-						${noticeVo.clientName}</th>
-					<th class="col-md-4" class="text-right">조회수 ${noticeVo.noticeViewCount}
-						<br> ${noticeVo.noticeDate}</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr class="table table-active">
-					<td colspan="2" class="col-md-12 pt-5 content"><pre><br>${noticeVo.noticeWrite}<br><br></pre></td>
-				</tr>
-			</tbody>
-			
-		</table>
-		<div class="col-md-12"><pre><br>${noticeVo.noticeWrite}<br><br></pre></div>
-		<c:if test="${noticeVo.clientNo eq 10}">
-    		<a onClick="location.href='noticeEdit?noticeNo=${noticeVo.noticeNo}'"  class="btn btn-primary">글 수정</a> 
-    		<a onClick="location.href='noticeDelete?noticeNo=${noticeVo.noticeNo}'"  class="btn btn-danger">삭제</a> 
+		<div class="col-md-10 offset-md-1">
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-active">
+					<thead>
+						<tr class="table-active border-bottom">
+							<th class="col-md-8">${noticeVo.noticeName}<br>
+								${noticeVo.clientName}</th>
+							<th class="col-md-4" class="text-right">조회수 ${noticeVo.noticeViewCount}
+								<br> ${noticeVo.noticeDate}</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr class="table table-active">
+							<td colspan="2" class="col-md-12 pt-5 content"><pre><br>${noticeVo.noticeWrite}<br><br></pre></td>
+						</tr>
+					</tbody>
+					
+				</table>
+				</div>
+			</div>
+		</div>
+		</div>
+		<%-- <div class="col-md-12"><pre><br>${noticeVo.noticeWrite}<br><br></pre></div> --%>
+		
+		<c:if test="${noticeVo.clientNo eq sessionScope.clientNo}">
+			<div class="col-md-10 offset-md-1 text-right py-3 pr-0">
+    		<a onClick="location.href='noticeEdit?noticeNo=${noticeVo.noticeNo}'"  class="btn btn-danger">글 수정</a> 
+    		<a onClick="location.href='noticeDelete?noticeNo=${noticeVo.noticeNo}'"  class="btn btn-secondary">삭제</a>
+    		<a href="${pageContext.request.contextPath}/admin/notice/list" class="btn btn-outline-dark">목록으로</a>
+    		</div> 
 		</c:if>
-	</div>
+	
 </div>
 </section>
-
+<script>
+	$(function(){
+		var clientNo = "<c:out value='${sessionScope.clientNo}'/>";
+		var noticeVo = "<c:out value='${noticeVo.clientNo}'/>";
+		console.log("세션"+clientNo);
+		console.log("작성자"+noticeVo);
+		
+	});
+</script>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <style>
-    table#contentTable tbody tr:hover 
+    table#noticeTable tbody tr:hover 
     {
         cursor:pointer;
     }
