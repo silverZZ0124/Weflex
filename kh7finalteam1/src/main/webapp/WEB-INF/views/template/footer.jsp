@@ -104,7 +104,7 @@
 			<div class="copy-text">
 				<div class="copy-text-block">대표자 : 양진선</div>
 			</div>
-			<div class="copy-text">
+			<div class="copy-text" style="    padding-bottom: 30px;">
 				<div class="copy-text-block">Copyright © 1998-2020 KH Information Educational Institute All Right Reserved</div>
 			</div>
 			
