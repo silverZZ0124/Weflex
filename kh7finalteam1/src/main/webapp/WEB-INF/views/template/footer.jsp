@@ -86,27 +86,28 @@
 		
 		<div class="member-footer-copyright">
 			<div class="copy-text">
-				<div class="copy-text-block">넷플릭스서비시스코리아 유한회사 통신판매업신고번호: 제2018-서울종로-0426호 전화번호: 080-001-9587</div>
+				<div class="copy-text-block">기관명 : KH정보교육원 당산지원</div>
 			</div>
 			<div class="copy-text">
-				<div class="copy-text-block">대표: 레지널드 숀 톰프슨</div>
+				<div class="copy-text-block">(07212) 서울특별시 영등포구 선유동2로 57 이레빌딩(구관) 19F,20F</div>
 			</div>
 			<div class="copy-text">
-				<div class="copy-text-block">이메일 주소: korea@netflix.com</div>
+				<div class="copy-text-block">TEL. 02)1544-9970  </div>
 			</div>
 			<div class="copy-text">
-				<div class="copy-text-block">주소: 대한민국 서울특별시 종로구 우정국로 26, 센트로폴리스 A동 20층 우편번호 03161</div>
+				<div class="copy-text-block">FAX. 02)2163-8560</div>
 			</div>
+			
 			<div class="copy-text">
 				<div class="copy-text-block">사업자등록번호: 165-87-00119</div>
 			</div>
 			<div class="copy-text">
-				<div class="copy-text-block">클라우드 호스팅: Amazon Web Services Inc.</div>
+				<div class="copy-text-block">대표자 : 양진선</div>
 			</div>
 			<div class="copy-text">
-				<div class="copy-text-block">공정거래위원회 웹사이트</div>
+				<div class="copy-text-block">Copyright © 1998-2020 KH Information Educational Institute All Right Reserved</div>
 			</div>
-			<span class="member-footer-copyright-instance">{5f78ce3e-1345-41de-8c27-0ff371b88f7c}</span>
+			
 		</div>
 	</footer>
 	
