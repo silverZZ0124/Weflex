@@ -50,7 +50,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/admin/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath }/home">
                
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-cogs"></i>
@@ -70,7 +70,7 @@
             
              <!-- Nav Item - Dashboard -->
              <li class="nav-item active">	
-             <a class="nav-link" href="${pageContext.request.contextPath}/home">
+             <a class="nav-link" href="${pageContext.request.contextPath}/admin/">
                    <i class="fas fa-fw fa-home"></i>
                     <span>메인 페이지</span></a>            
             
