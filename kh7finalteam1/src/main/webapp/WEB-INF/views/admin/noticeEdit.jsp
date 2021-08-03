@@ -26,8 +26,9 @@
         <div class="row mt-3">
             <div class="col-md-6 offset-md-3">
             <form action="noticeEdit" method="post" class="form" id="form-regist">	
-				<div > 
+				<div>
 					<div class="form-group">
+						<input type="hidden" name="noticeNo" value="${noticeVo.noticeNo}"> 
 	                    <label>제목</label>
 	                    <input type="text" name="noticeName" class="form-control" value="${noticeVo.noticeName}" required>
                     </div>

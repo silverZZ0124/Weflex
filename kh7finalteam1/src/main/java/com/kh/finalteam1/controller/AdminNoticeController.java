@@ -75,7 +75,7 @@ public class AdminNoticeController {
 		int clientNo = (Integer)session.getAttribute("clientNo");
 		noticeDto.setClientNo(clientNo);
 		noticeDao.noticeUpdate(noticeDto);
-		return "admin/notice";
+		return "redirect:noticeDetail?noticeNo="+noticeDto.getNoticeNo();
 	}
 	
 	@RequestMapping("/noticeDelete")
