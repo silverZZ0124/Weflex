@@ -31,10 +31,9 @@
 				<table class="table">
 					<thead style="color:#141414">
 						<tr class="border-bottom">
-							<th class="col-md-8">${noticeVo.noticeName}<br>
-								${noticeVo.clientName}</th>
-							<th class="col-md-4" class="text-right">조회수 ${noticeVo.noticeViewCount}
-								<br> ${noticeVo.noticeDate}</th>
+							<th class="col-md-7">${noticeVo.noticeName}</th>
+							<th class="col-md-5 text-right">${noticeVo.clientName} | ${noticeVo.noticeDate} | 조회수 ${noticeVo.noticeViewCount}
+							</th>
 						</tr>
 					</thead>
 					
