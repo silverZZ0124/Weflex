@@ -88,7 +88,8 @@ window.onload = function(){
   		$.fn.addFakeImageCard = function(){
   			if(fakeImgCount == rowCount - 1){
   				fakeImgCount = 0;
-  				$("div").remove(".fake-img");
+   				$("div").remove(".wish-fake-img");
+  				console.log("add");
   				return;
   			}
   			
@@ -133,7 +134,7 @@ window.onload = function(){
 		};
 		
 		$.fn.initFakeImageCard = function(){
-			$("div").remove(".fake-img");
+ 			$("div").remove(".wish-fake-img");
 			
 			var count = rowCount - (contentList.length % rowCount);
 			
@@ -263,7 +264,7 @@ window.onload = function(){
 </script>
 
 <script id="fake-img-cards" type="text/template">
-<div class="search-page-card  fake-img" style="visibility:hidden;"><img src="res/img/slider_img1.jpeg" class="search-page-card-img" ></div>
+<div class="search-page-card  wish-fake-img" style="visibility: hidden;"><img src="res/img/slider_img1.jpeg" class="search-page-card-img" ></div>
 </script>
 
 <style>

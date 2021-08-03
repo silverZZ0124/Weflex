@@ -569,7 +569,7 @@ $(function(){
 		
 		$.fn.initFakeSimilarContent = function(){
 			$("div").remove(".fake-img");
-			
+
 			var count = rowCount - (similarList.length % rowCount);
 			
 			if(count == rowCount)
