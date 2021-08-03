@@ -99,9 +99,9 @@
 								<div class="account-section collapsable-panel clearfix membership-section-wrapper membership-section-with-button">
 									<header class="account-section-header collapsable-section-toggle">
 										<h2 class="account-section-heading">멤버십 정보
-											<button class="btn account-cancel-button btn-plain btn-small">
-												<span>멤버십 해지</span>
-											</button>
+<!-- 											<button class="btn account-cancel-button btn-plain btn-small"> -->
+<!-- 												<span>멤버십 해지</span> -->
+<!-- 											</button> -->
 											<a href="${pageContext.request.contextPath }/memberShipdrop" class="btn account-cancel-button btn-small btn-drop">
 												<span>회원 탈퇴</span>
 											</a>

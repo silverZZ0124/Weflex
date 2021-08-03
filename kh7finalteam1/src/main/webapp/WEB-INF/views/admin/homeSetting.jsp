@@ -25,6 +25,14 @@
 		width: 100%;
 		bottom: 0px;
 	}
+	
+	.modal-content{
+		background-color: #f3f3f3 !important;
+	}
+	
+	.modal-content input{
+		border: 1px solid;
+	}
 </style>
 
 <script>
@@ -197,7 +205,6 @@ $(function(){
 	 			keyword : keyword
 			},
 			success:function(resp){
-				console.log(resp);
 				$("#modal5-body").empty();
 				
 				var template = $("#slider-template-header").html();
@@ -392,7 +399,7 @@ $(function(){
 </script>
 
 <script id="slider-template-body" type="text/template">
-	<div><img class="slider-img" src="{{contentThumbnail}}"></div>
+		<div><img class="slider-img" src="{{contentThumbnail}}"></div>
 </script>
 			
 <script id="slider-template-footer" type="text/template">				  

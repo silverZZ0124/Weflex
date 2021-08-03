@@ -4,6 +4,9 @@ $(function(){
 	var seriesArray = new Array();
 	var contentThumbnail;
 	var curContentNo;
+	var similarList;
+	var rowCount = 0;
+	var initFlag = false;
 	
 	$(document).on("hover",".search-page-card-img",function(){
 		$(this).css("cursor","pointer");
@@ -351,7 +354,7 @@ $(function(){
 						$(".modal-series").css("display", "block");
 					}
 				
-					$("#similar-content-wrapper").empty();
+				$("#similar-content-wrapper").empty();
 				for(var i in resp.similarList){
 					var correct = resp.similarList[i].matchingCount / resp.genreList.length * 100;
 					var template = $("#detail-modal-similar-template").html();
@@ -360,7 +363,7 @@ $(function(){
 					template = template.replace("{{contentRelease}}", resp.similarList[i].contentRelease);
 					template = template.replace("{{contentInfo}}", resp.similarList[i].contentInfo);
 					template = template.replace("{{contentLimit}}", resp.similarList[i].contentLimit);
-					
+				
 					if(resp.similarList[i].clientNo === 0){
 						template = template.replace("{{plusStyle}}", "block");
 						template = template.replace("{{checkStyle}}", "none");
@@ -375,6 +378,9 @@ $(function(){
 					$("#similar-content-wrapper").append(template);
 				} 
 				
+				similarList = resp.similarList;
+				initFlag = true;
+				$.fn.initFakeSimilarContent();
 				$.fn.initSimilarContent();
 			}		
 				
@@ -505,7 +511,7 @@ $(function(){
 				template += "</div>";
 				$(".trailer-series-section-box-wrapper").append(template);
 			}
-			
+						
 			$.fn.initEvent();
 		}
 		
@@ -560,4 +566,37 @@ $(function(){
 				$(this).css("cursor","default");
 			});			
 		};
+		
+		$.fn.initFakeSimilarContent = function(){
+			$("div").remove(".fake-img");
+			
+			var count = rowCount - (similarList.length % rowCount);
+			
+			if(count == rowCount)
+				return;
+			
+			for(var i=0; i<count; i++){
+				var template = $("#detail-modal-similar-fake-template").html();
+				$("#similar-content-wrapper").append(template);
+			}
+		};
+		
+		$(window).resize(function(){
+			var width = $(window).width();
+  			var tempCount = 0;
+  			
+  			if(width > 991)
+  				tempCount = 3;
+  			else 
+  				tempCount = 2;
+  			
+  			if(tempCount != rowCount){
+  				rowCount = tempCount; 
+  				if(initFlag)
+  					$.fn.initFakeSimilarContent();
+  			}  			
+		});
+		
+		$(window).resize();
 });
+

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,7 @@
 		<div class="position-relative custom-inner-container">
 			<div class="d-flex align-items-center" >
 				<div class="me-auto">
-					<a href="${pageContext.request.contextPath }">
+					<a href="${pageContext.request.contextPath }/home">
 						<img class="mainLogo" src="res/img/weflex_logo.png" >
 						<img class="subLogo" src="res/img/n_logo.png" width="36px" height="32px">
 					</a>
