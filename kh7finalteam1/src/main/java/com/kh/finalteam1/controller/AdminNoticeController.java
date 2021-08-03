@@ -2,6 +2,8 @@ package com.kh.finalteam1.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class AdminNoticeController {
 	
 	@Autowired
 	NoticeDao noticeDao;
+	
+	@Autowired
+	HttpSession session;
 	
 	@RequestMapping("/list")
 	public String notice2(Model model) {
@@ -47,7 +52,7 @@ public class AdminNoticeController {
 	
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(@ModelAttribute NoticeDto noticeDto) {
-		int clientNo = 53;
+		int clientNo = (Integer)session.getAttribute("clientNo");
 		noticeDto.setClientNo(clientNo);
 		noticeDao.noticeInsert(noticeDto);
 		return "admin/notice";
@@ -55,7 +60,7 @@ public class AdminNoticeController {
 	
 	@PostMapping("/noticeEdit")
 	public String noticeEdit(@ModelAttribute NoticeDto noticeDto) {
-		int clientNo = 53;
+		int clientNo = (Integer)session.getAttribute("clientNo");
 		noticeDto.setClientNo(clientNo);
 		noticeDao.noticeUpdate(noticeDto);
 		return "admin/notice";
