@@ -17,7 +17,7 @@
 	</insert>
 	
 	<select id="update" parameterType="NoticeDto">
-		update notice set noticeName = #{noticeName}, noticeWrite = #{noticeWrite}
+		update notice set notice_name = #{noticeName}, notice_write = #{noticeWrite}
 		where notice_no  = #{noticeNo}
 	</select>
 	
