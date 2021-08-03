@@ -16,6 +16,7 @@
     background-color: #141414;
     border-radius: 10px;
   }
+  
 </style>
 <script src="${pageContext.request.contextPath }/res/js/main-event.js"></script>
 <script>

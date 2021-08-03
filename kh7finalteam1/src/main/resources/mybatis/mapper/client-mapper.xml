@@ -46,7 +46,7 @@
 			C.*, G.grade_name 
 		from 
 			client C
-				left outer join client_grade G on C.grade_no = G.grade_no
+				left outer join client_grade G on C.grade_no = G.grade_no where C.grade_no between 1 and 3
 	</select>
 	
 	<!-- 이번달 회원 증가 수 -->
