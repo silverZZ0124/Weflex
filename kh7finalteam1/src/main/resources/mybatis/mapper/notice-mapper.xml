@@ -41,8 +41,10 @@
 		where notice_no = #{noticeNo}
 	</select>
 	 
-	<select id="count" parameterType="int">
+	<update id="count" parameterType="int">
 		update notice set notice_view_count = notice_view_count + 1 
 		where notice_no  = #{noticeNo}
-	</select>
+	</update>
+	
+	
 </mapper>

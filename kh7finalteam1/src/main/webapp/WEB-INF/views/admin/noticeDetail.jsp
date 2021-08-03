@@ -28,9 +28,9 @@
 		<div class="col-md-10 offset-md-1">
 		<div class="card">
 			<div class="card-body">
-				<table class="table table-active">
-					<thead>
-						<tr class="table-active border-bottom">
+				<table class="table">
+					<thead style="color:#141414">
+						<tr class="border-bottom">
 							<th class="col-md-8">${noticeVo.noticeName}<br>
 								${noticeVo.clientName}</th>
 							<th class="col-md-4" class="text-right">조회수 ${noticeVo.noticeViewCount}
@@ -39,8 +39,8 @@
 					</thead>
 					
 					<tbody>
-						<tr class="table table-active">
-							<td colspan="2" class="col-md-12 pt-5 content"><pre><br>${noticeVo.noticeWrite}<br><br></pre></td>
+						<tr class="table">
+							<td colspan="2" class="col-md-12 pt-5" id="content"><pre><br>${noticeVo.noticeWrite}<br><br></pre></td>
 						</tr>
 					</tbody>
 					
@@ -61,13 +61,4 @@
 	
 </div>
 </section>
-<script>
-	$(function(){
-		var clientNo = "<c:out value='${sessionScope.clientNo}'/>";
-		var noticeVo = "<c:out value='${noticeVo.clientNo}'/>";
-		console.log("세션"+clientNo);
-		console.log("작성자"+noticeVo);
-		
-	});
-</script>
 <jsp:include page="/WEB-INF/views/template/adminFooter.jsp"></jsp:include>

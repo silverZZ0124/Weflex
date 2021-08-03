@@ -36,8 +36,12 @@ public class AdminNoticeController {
 	
 	@RequestMapping("/noticeDetail")
 	public String noticeDetail(@RequestParam int noticeNo, Model model) {
+		//조회수 증가
+		noticeDao.noticeCount(noticeNo);
+		
 		NoticeVo noticeVo = noticeDao.noticeGet(noticeNo);
 		model.addAttribute("noticeVo", noticeVo);
+		
 		return "admin/noticeDetail";
 	}
 	
