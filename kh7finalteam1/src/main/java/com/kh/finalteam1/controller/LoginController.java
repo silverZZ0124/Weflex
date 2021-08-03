@@ -92,6 +92,7 @@ public class LoginController {
 			@RequestParam(required = false) boolean loginInfo, 
 			HttpSession session,
 			HttpServletResponse response) throws UnsupportedEncodingException {
+		System.out.println("로그인 시도 = " + clientDto.getClientId() + "," + clientDto.getClientPw() );
 		ClientDto client = clientDao.loginCheck(clientDto);
 
 		Cookie checkCookie = new Cookie("loginInfo", "true");
@@ -118,6 +119,7 @@ public class LoginController {
 			session.setAttribute("clientNo", client.getClientNo());
 			session.setAttribute("gradeNo", client.getGradeNo());
 			System.out.println(session.getAttribute("gradeNo"));
+			
 			return "redirect:/home";
 		}
 	}
