@@ -990,7 +990,7 @@ $(function(){
 							<input type="hidden" id="input-content-no" name="contentNo">
 							<input type="hidden" name="contentSeason" value="-1">
 							<input type="hidden" name="contentEpisode" value="-1">
-							<button class="btn btn-light modal-play-btn" ><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
+							<button class="btn btn-light modal-play-btn" style="width:100%;"><i class="fas fa-play"></i>&ensp;&ensp;재생</button>
 						</form>										
 						<button class="btn btn-outline-light modal-etc-btn wish-delete-btn" id="check-btn" style="display:none;"><i class="fas fa-check"></i></button>
 						<button class="btn btn-outline-light modal-etc-btn wish-insert-btn" id="plus-btn"><i class="fas fa-plus"></i></button>
