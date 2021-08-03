@@ -64,6 +64,7 @@
 			<exclude-mapping path="/admin/"/>
 			<exclude-mapping path="/admin/**"/>
 			<exclude-mapping path="/data/admin/**"/>
+			<exclude-mapping path="/data/member/emailCheck"/>
 			<beans:bean class="com.kh.finalteam1.interceptor.ClientLoginInterceptor"></beans:bean>
 		</interceptor>
 		

@@ -58,10 +58,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/home")
-	public ModelAndView home(HttpSession session){	
+	public ModelAndView home(HttpSession session, @RequestParam(required = false) Integer no){	
 		ModelAndView mv = new ModelAndView();
-		
-		mv.addObject("mainTrailerList", homeService.getMainTrailer());
+
+		mv.addObject("mainTrailerList", homeService.getMainTrailer(no));
 		mv.addObject("sliderList", homeService.getSliderList());
 		mv.setViewName("main/home");
 				

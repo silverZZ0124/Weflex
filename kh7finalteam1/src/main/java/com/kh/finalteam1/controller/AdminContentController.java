@@ -211,7 +211,19 @@ public class AdminContentController {
 	//contentRegist.jsp 이동
 	@GetMapping("/contentRegist")
 	public String contentRegist() {
-		return "admin/contentRegist";
+		return "admin/contentRegist";		
+	}
+	
+	//시연용 영화 추가
+	@GetMapping("/contentRegist2")
+	public String contentRegist2() {
+		return "admin/contentRegist2";		
+	}
+	
+	//시연용 드라마 추가
+	@GetMapping("/contentRegist3")
+	public String contentRegist3() {
+		return "admin/contentRegist3";		
 	}
 		
 	//컨텐츠 등록 및 연작 여부에 따라서 연작 테이블 등록

@@ -23,9 +23,8 @@ public class ClientLoginInterceptor implements HandlerInterceptor {
 		}
 
 		Integer clientNo = (Integer)request.getSession().getAttribute("clientNo");
-		System.out.println(clientNo);
+
 		if(clientNo == null) {
-			System.out.println("회원 정보 없음");
 			response.sendRedirect(request.getContextPath()+"/login");
 			return false;
 		}

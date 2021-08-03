@@ -7,7 +7,7 @@ import com.kh.finalteam1.entity.MainTrailerDto;
 import com.kh.finalteam1.vo.SliderListVO;
 
 public interface HomeService {
-	MainTrailerDto getMainTrailer();
+	MainTrailerDto getMainTrailer(Integer no);
 	SliderListVO getSlider(String sliderTitle, String contentType, String condition, String keyword);
 	List<SliderListVO> getSliderList() ;
 }
