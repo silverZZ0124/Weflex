@@ -27,7 +27,7 @@ $(document).ready(function() {
 		},
 	 
 		ajax:{
-	  		url : "http://localhost:8080/finalteam1/data/notice/list",
+	  		url : "../../data/admin/notice/list",
 	  		type : "get",
 	  		dataType : "json",
 	  		dataSrc : '',

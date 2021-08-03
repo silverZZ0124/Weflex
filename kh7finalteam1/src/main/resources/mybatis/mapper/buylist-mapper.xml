@@ -42,11 +42,7 @@
 		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-05') and buy_payment_status ='승인') may,
 		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-06') and buy_payment_status ='승인') jun,
 		    (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-07') and buy_payment_status ='승인') jul,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-08') and buy_payment_status ='승인') aug,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-09') and buy_payment_status ='승인') sep,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-10') and buy_payment_status ='승인') oct,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-11') and buy_payment_status ='승인') nov,
-            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-12') and buy_payment_status ='승인') dec
+            (select count(*) from buy_list where to_char(buy_payment_date, 'YY-MM') in ('21-08') and buy_payment_status ='승인') aug
 		from dual 
 </select>
 

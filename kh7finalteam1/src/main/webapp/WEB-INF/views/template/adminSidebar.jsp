@@ -72,16 +72,10 @@
              <li class="nav-item active">	
              <a class="nav-link" href="${pageContext.request.contextPath}/home">
                    <i class="fas fa-fw fa-home"></i>
-                    <span>메인 페이지</span></a>
-
-            <li class="nav-item active">	
-                <a class="nav-link" href="${pageContext.request.contextPath}/admin/">
-                    <i class="fas fa-fw fa-user-cog"></i>
-                    <span>관리자</span></a>
-            
+                    <span>메인 페이지</span></a>            
             
             <li class="nav-item active">	
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/list">
                     <i class="fas fa-fw fa-bullhorn"></i>
                     <span>공지사항</span></a>
                     
@@ -104,9 +98,6 @@
                    <i class="fas fa-fw fa-user-cog"></i>
                     <span>회원 관리</span></a>
                     
-                      <a class="nav-link" href="#">
-                   <i class="fas fa-fw fa-user"></i>
-                    <span>고객센터 관리</span></a>       
                     
                      <a class="nav-link" href="${pageContext.request.contextPath}/admin/homeSetting">
                    <i class="fas fa-fw fa-desktop"></i>

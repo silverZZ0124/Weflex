@@ -2,9 +2,12 @@ package com.kh.finalteam1.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,9 @@ public class AdminNoticeController {
 	@Autowired
 	NoticeDao noticeDao;
 	
+	@Autowired
+	HttpSession session;
+	
 	@RequestMapping("/list")
 	public String notice2(Model model) {
 		List<NoticeVo> noticeList = noticeDao.noticeList();
@@ -30,8 +36,12 @@ public class AdminNoticeController {
 	
 	@RequestMapping("/noticeDetail")
 	public String noticeDetail(@RequestParam int noticeNo, Model model) {
+		//조회수 증가
+		noticeDao.noticeCount(noticeNo);
+		
 		NoticeVo noticeVo = noticeDao.noticeGet(noticeNo);
 		model.addAttribute("noticeVo", noticeVo);
+		
 		return "admin/noticeDetail";
 	}
 	
@@ -47,18 +57,25 @@ public class AdminNoticeController {
 	
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(@ModelAttribute NoticeDto noticeDto) {
-		int clientNo = 53;
+		int clientNo = (Integer)session.getAttribute("clientNo");
 		noticeDto.setClientNo(clientNo);
 		noticeDao.noticeInsert(noticeDto);
 		return "admin/notice";
 	}
 	
+	@GetMapping("/noticeEdit")
+	public String noticeEdit(@RequestParam int noticeNo, Model model) {
+		NoticeVo noticeVo = noticeDao.noticeGet(noticeNo);
+		model.addAttribute("noticeVo", noticeVo);
+		return "admin/noticeEdit";
+	}
+	
 	@PostMapping("/noticeEdit")
 	public String noticeEdit(@ModelAttribute NoticeDto noticeDto) {
-		int clientNo = 53;
+		int clientNo = (Integer)session.getAttribute("clientNo");
 		noticeDto.setClientNo(clientNo);
 		noticeDao.noticeUpdate(noticeDto);
-		return "admin/notice";
+		return "redirect:noticeDetail?noticeNo="+noticeDto.getNoticeNo();
 	}
 	
 	@RequestMapping("/noticeDelete")
