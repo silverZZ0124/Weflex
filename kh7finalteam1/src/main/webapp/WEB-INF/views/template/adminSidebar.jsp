@@ -81,7 +81,7 @@
             
             
             <li class="nav-item active">	
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="${pageContext.request.contextPath}/admin/notice/list">
                     <i class="fas fa-fw fa-bullhorn"></i>
                     <span>공지사항</span></a>
                     
