@@ -60,9 +60,9 @@ public class KakaoPayService implements PayService{
 		body.add("total_amount", String.valueOf(kakaoPayReadyPrepareVO.getTotal_amount()));//총 구매금액
 		body.add("tax_free_amount", String.valueOf(kakaoPayReadyPrepareVO.getTax_free_amount()));//면세금액(없으면 0)
 		
-		body.add("approval_url", "http://localhost:8080/finalteam1/pay/success");//사용자 결제 성공시 신호를 받을 주소
-		body.add("cancel_url", "http://localhost:8080/finalteam1/pay/cancel");//사용자 결제 취소시 신호를 받을 주소
-		body.add("fail_url", "http://localhost:8080/finalteam1/pay/fail");//사용자 결제 실패시 신호를 받을 주소
+		body.add("approval_url", "http://www.sysout.co.kr/finalteam1/pay/success");//사용자 결제 성공시 신호를 받을 주소
+		body.add("cancel_url", "http://www.sysout.co.kr/finalteam1/pay/cancel");//사용자 결제 취소시 신호를 받을 주소
+		body.add("fail_url", "http://www.sysout.co.kr/finalteam1/pay/fail");//사용자 결제 실패시 신호를 받을 주소
 		
 		//[4] Http Header / Body 합성
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);

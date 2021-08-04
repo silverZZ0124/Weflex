@@ -54,15 +54,15 @@
 			}
 		});
 		
-		if(location.href==="http://localhost:8080/finalteam1/tv"){
+		if(location.href==="http://www.sysout.co.kr/finalteam1/tv"){
 
 			$(".tv-nav-style").css("display","block");
 		}
-		else if(location.href==="http://localhost:8080/finalteam1/movie"){
+		else if(location.href==="http://www.sysout.co.kr/finalteam1/movie"){
 			$(".movie-nav-style").css("display","block");
 
 		}
-		else if(location.href==="http://localhost:8080/finalteam1/wishlist"){
+		else if(location.href==="http://www.sysout.co.kr/finalteam1/wishlist"){
 			$(".wishlist-nav-style").css("display","block");
 		}
 		

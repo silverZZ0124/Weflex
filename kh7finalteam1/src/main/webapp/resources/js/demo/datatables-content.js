@@ -27,7 +27,7 @@ $(document).ready(function() {
 		},
 	 
 		ajax:{
-	  		url : "http://localhost:8080/finalteam1/data/admin/content/list",
+	  		url : "http://www.sysout.co.kr/finalteam1/data/admin/content/list",
 	  		type : "get",
 	  		dataType : "json",
 	  		dataSrc : '',
