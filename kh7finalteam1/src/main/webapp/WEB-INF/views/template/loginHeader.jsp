@@ -29,7 +29,7 @@
 
 <script>
 	$(function(){
-		if(location.href==="http://localhost:8080/finalteam1/join1"){
+		if(location.href==="http://www.sysout.co.kr/finalteam1/join1"){
 			
 		}
 		else {
