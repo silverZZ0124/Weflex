@@ -36,16 +36,17 @@
 			$("#id_email").blur(function(){
 				if(!emailFlag)
 					return;
-				
+
 				$.ajax({
 					url: "${pageContext.request.contextPath}/data/member/emailCheck",
 					type: "post",
 					dataType: "json",
 					data: {
-						email: $(this).val()	
+						email: $("#id_email").val()	
 					},
 					success:function(resp){		
 						//null 이면 true  email 사용 가능 , false면 email 사용 불가능
+
 						if(!resp){
 							$("#id_email").css("border-color", "#b92d2b");
 							$("#email-input-error").text("이미 사용중인 이메일 입니다");

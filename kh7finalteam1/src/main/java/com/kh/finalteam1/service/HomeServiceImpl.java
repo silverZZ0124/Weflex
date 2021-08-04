@@ -51,11 +51,18 @@ public class HomeServiceImpl implements HomeService {
 	private HomeSliderDao homeSliderDao;
 	
 	@Override
-	public MainTrailerDto getMainTrailer() {
+	public MainTrailerDto getMainTrailer(Integer no) {
 		List<MainTrailerDto> mainTrailerList = mainTrailerDao.list();
 		
-		Random ran = new Random();
-		int trailerIndex = ran.nextInt(mainTrailerList.size());
+		int trailerIndex;
+		if(no != null) {
+			trailerIndex = no;
+		}
+		else {
+			Random ran = new Random();
+			trailerIndex = ran.nextInt(mainTrailerList.size());			
+		}
+		
 		return mainTrailerList.get(trailerIndex);
 	}
 
