@@ -54,15 +54,15 @@
 			}
 		});
 		
-		if(location.href==="http://www.sysout.co.kr/finalteam1/tv"){
+		if(location.href==="http://www.sysout.co.kr/weflex/tv"){
 
 			$(".tv-nav-style").css("display","block");
 		}
-		else if(location.href==="http://www.sysout.co.kr/finalteam1/movie"){
+		else if(location.href==="http://www.sysout.co.kr/weflex/movie"){
 			$(".movie-nav-style").css("display","block");
 
 		}
-		else if(location.href==="http://www.sysout.co.kr/finalteam1/wishlist"){
+		else if(location.href==="http://www.sysout.co.kr/weflex/wishlist"){
 			$(".wishlist-nav-style").css("display","block");
 		}
 		
