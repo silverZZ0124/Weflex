@@ -7,7 +7,7 @@ $(function(){
 	var ctx = $("#myPieChart");
 	
 	$.ajax({
-		url : "http://www.sysout.co.kr/finalteam1/data/admin/client/age",
+		url : "http://www.sysout.co.kr/weflex/data/admin/client/age",
 		type:"get",
 		dataType:"json",
 		success:function(count){
