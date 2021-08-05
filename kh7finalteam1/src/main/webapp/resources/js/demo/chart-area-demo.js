@@ -32,7 +32,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 		var ctx = $("#myAreaChart");
 		
 		$.ajax({
-			url : "../data/admin/client/join",
+			url : "http://www.sysout.co.kr/finalteam1/data/admin/client/join",
 			type:"get",
 			dataType:"json",
 			success:function(count){
