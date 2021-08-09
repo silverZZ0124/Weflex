@@ -60,7 +60,7 @@
                     </div>                    
                 </div>
 
-                <div class="modal-footer row">                        
+                <div class="modal-footer">                        
                     <div class="col-md-3 offset-md-9">   
                     	<button class="btn btn-secondary btn-block" data-dismiss="modal">확인</button>
                     </div>
@@ -72,9 +72,6 @@
      </div>
      <!-- /.container-fluid -->
      
-     
-     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    
      <script>
         $(function(){
         	

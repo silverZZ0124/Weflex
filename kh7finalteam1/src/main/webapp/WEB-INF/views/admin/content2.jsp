@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/res/css/style.css">
 
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 
 <div class="container-fluid">
 

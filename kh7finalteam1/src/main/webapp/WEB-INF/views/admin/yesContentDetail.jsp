@@ -530,10 +530,10 @@
 	    <td>
 	        <div class="row">
 	            <div class="col-md-6 p-1">
-	                <button class="btn btn-block btn-outline-primary" id="episode-modal-btn" data-toggle="modal" data-target="#edit-series-modal">수정</button>
+	                <button class="btn btn-block btn-outline-danger" id="episode-modal-btn" data-toggle="modal" data-target="#edit-series-modal">수정</button>
 	            </div>
 	            <div class="col-md-6 p-1">
-	                <a href="episodeDelete?contentNo=#no&contentSeason=#season&contentEpisode=#episode" class="btn btn-block btn-outline-danger delete-btn">삭제</a>
+	                <a href="episodeDelete?contentNo=#no&contentSeason=#season&contentEpisode=#episode" class="btn btn-block btn-outline-secondary delete-btn">삭제</a>
 	            </div>
 	        </div>
 	    </td>
