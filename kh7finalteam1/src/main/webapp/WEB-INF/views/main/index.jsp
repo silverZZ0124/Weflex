@@ -54,7 +54,7 @@
 						</div>
 					</div>	
 					
-					<a href="/finalteam1/login" class="custom-a-tag login-red-btn">로그인</a>
+					<a href="${pageContext.request.contextPath}/login" class="custom-a-tag login-red-btn">로그인</a>
 				</div>
 			</div>
 			

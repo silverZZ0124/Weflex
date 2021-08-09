@@ -27,7 +27,7 @@ $(document).ready(function() {
 		},
 	 
 		ajax:{
-	  		url : "../data/admin/client/list",
+	  		url : "http://www.sysout.co.kr/weflex/data/admin/client/list",
 	  		type : "get",
 	  		dataType : "json",
 	  		dataSrc : '',
